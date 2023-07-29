@@ -1,12 +1,18 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+<div class="container">
+
+
+
+<!--  <router-link to="/game/main">-->
+<!--    <button type="button">进入游戏</button>-->
+<!--  </router-link>-->
+
+</div>
 </template>
 
 <style lang="scss">
 @media (min-width: 1024px) {
-  .about {
+  .container {
     min-height: 100vh;
     display: flex;
     align-items: center;

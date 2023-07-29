@@ -7,15 +7,12 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Bottom: typeof import('./src/components/bottom.vue')['default']
+    Chat: typeof import('./src/components/chat.vue')['default']
+    Chat2: typeof import('./src/components/chat2.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
-    IconDocumentation: typeof import('./src/components/icons/IconDocumentation.vue')['default']
-    IconEcosystem: typeof import('./src/components/icons/IconEcosystem.vue')['default']
-    IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
-    IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
-    WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
+    Top: typeof import('./src/components/top.vue')['default']
   }
 }
