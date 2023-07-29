@@ -8,20 +8,23 @@
       <div class="header-item">
         <p>首页</p>
       </div>
+
       <div class="header-item item1" @mouseenter="showHoverItem1=true" @mouseleave="showHoverItem1=false">
-        <p>课程</p>
+        <p>编程</p>
         <div class="underline" v-if="showHoverItem1"></div>
       </div>
-
-      <template>
-        <div class="header-item">
-          <p v-for="item in categories">{{ item }}</p>
-        </div>
-      </template>
-
-      <div class="header-item item2" @mouseenter="showHoverItem2=true" @mouseleave="showHoverItem2=false">
-        <p>游戏</p>
+      <div class="header-item item1" @mouseenter="showHoverItem2=true" @mouseleave="showHoverItem2=false">
+        <p>材料</p>
         <div class="underline" v-if="showHoverItem2"></div>
+      </div>
+      <div class="header-item item1" @mouseenter="showHoverItem3=true" @mouseleave="showHoverItem3=false">
+        <p>物理</p>
+        <div class="underline" v-if="showHoverItem3"></div>
+      </div>
+
+      <div class="header-item item2" @mouseenter="showHoverItem4=true" @mouseleave="showHoverItem4=false">
+        <p>化学</p>
+        <div class="underline" v-if="showHoverItem4"></div>
       </div>
 
       <template v-if="isLogged">
@@ -51,6 +54,12 @@
       <div class="hover-content item2" v-if="showHoverItem2">
 
       </div>
+      <div class="hover-content item3" v-if="showHoverItem3">
+
+      </div>
+      <div class="hover-content item4" v-if="showHoverItem4">
+
+      </div>
     </div>
   </div>
 
@@ -66,7 +75,9 @@ export default {
       username: "蛄蛹者",
       showHoverItem1: false,
       showHoverItem2: false,
-      categories: ['编程', '材料', '物理', '化学'],
+      showHoverItem3: false,
+      showHoverItem4: false,
+      // categories: ['编程', '材料', '物理', '化学'],
       knowledgeList: ['数组', '算式', '排序', '追及',
         '电路', '太空', '力', '电磁',
         '法律', '品德', '生活', '相处',
@@ -104,6 +115,7 @@ $top_color: rgb(24, 26, 32);
       text-align: center;
       display: flex;
       flex-direction: column;
+      cursor:pointer;
 
       .underline {
         width: 100px;
@@ -147,6 +159,7 @@ $top_color: rgb(24, 26, 32);
         p {
           width: 100px;
           color: $top_color;
+          cursor: pointer;
         }
       }
 
@@ -158,11 +171,19 @@ $top_color: rgb(24, 26, 32);
     }
 
     .hover-content.item1 {
-      left: 590px;
+      left: 400px;
     }
 
     .hover-content.item2 {
-      left: 800px
+      left: 500px
+    }
+
+    .hover-content.item3 {
+      left: 600px
+    }
+
+    .hover-content.item4 {
+      left: 700px
     }
   }
 }
