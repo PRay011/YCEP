@@ -10,6 +10,8 @@ declare module 'vue' {
     Bottom: typeof import('./src/components/bottom.vue')['default']
     Chat: typeof import('./src/components/chat.vue')['default']
     Chat2: typeof import('./src/components/chat2.vue')['default']
+    ElCarousel: typeof import('element-plus/es')['ElCarousel']
+    ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

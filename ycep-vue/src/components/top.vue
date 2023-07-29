@@ -5,26 +5,30 @@
       <div class="header-item" style="width: 400px;text-align: left">
         <p>YCEP网站</p>
       </div>
-      <div class="header-item">
+      <div class="header-item" @click="titleItemClick(0)">
         <p>首页</p>
+        <div class="underline" v-if="currentItem===0"></div>
       </div>
 
-      <div class="header-item item1" @mouseenter="showHoverItem1=true" @mouseleave="showHoverItem1=false">
+      <div class="header-item item1" @mouseenter="showHoverItem1=true" @mouseleave="showHoverItem1=false"
+           @click="titleItemClick(1)">
         <p>编程</p>
-        <div class="underline" v-if="showHoverItem1"></div>
+        <div class="underline" v-if="showHoverItem1 || currentItem===1"></div>
       </div>
-      <div class="header-item item1" @mouseenter="showHoverItem2=true" @mouseleave="showHoverItem2=false">
+      <div class="header-item item2" @mouseenter="showHoverItem2=true" @mouseleave="showHoverItem2=false"
+           @click="titleItemClick(2)">
         <p>材料</p>
-        <div class="underline" v-if="showHoverItem2"></div>
+        <div class="underline" v-if="showHoverItem2 || currentItem===2"></div>
       </div>
-      <div class="header-item item1" @mouseenter="showHoverItem3=true" @mouseleave="showHoverItem3=false">
+      <div class="header-item item3" @mouseenter="showHoverItem3=true" @mouseleave="showHoverItem3=false"
+           @click="titleItemClick(3)">
         <p>物理</p>
-        <div class="underline" v-if="showHoverItem3"></div>
+        <div class="underline" v-if="showHoverItem3 || currentItem===3"></div>
       </div>
-
-      <div class="header-item item2" @mouseenter="showHoverItem4=true" @mouseleave="showHoverItem4=false">
+      <div class="header-item item4" @mouseenter="showHoverItem4=true" @mouseleave="showHoverItem4=false"
+           @click="titleItemClick(4)">
         <p>化学</p>
-        <div class="underline" v-if="showHoverItem4"></div>
+        <div class="underline" v-if="showHoverItem4 || currentItem===4"></div>
       </div>
 
       <template v-if="isLogged">
@@ -73,17 +77,46 @@ export default {
     return {
       isLogged: true,
       username: "蛄蛹者",
+      currentItem: 0,
       showHoverItem1: false,
       showHoverItem2: false,
       showHoverItem3: false,
       showHoverItem4: false,
-      // categories: ['编程', '材料', '物理', '化学'],
       knowledgeList: ['数组', '算式', '排序', '追及',
         '电路', '太空', '力', '电磁',
         '法律', '品德', '生活', '相处',
         '语法', '口语', '情景', '对话'],
     }
-  }
+  },
+  mounted() {
+    this.ready();
+  },
+  // 监听,当路由发生变化的时候执行
+  watch: {
+    // $route(to, from) {
+    //   this.currentItem = to.params.kind
+    //   console.log('watch:'+this.currentItem)
+    // },
+  },
+  methods: {
+    ready() {
+      this.currentItem = this.$route.params.kind
+      console.log(this.currentItem)
+    },
+    titleItemClick(index) {
+      this.currentItem = index
+      switch (index) {
+        case 0:
+          this.currentItem = 0;
+          this.$router.push('/knowledge/index');
+          break;
+        default:
+          this.$router.push('/knowledge/kind/'+index);
+          break;
+      }
+    },
+
+  },
 }
 
 </script>
@@ -115,7 +148,7 @@ $top_color: rgb(24, 26, 32);
       text-align: center;
       display: flex;
       flex-direction: column;
-      cursor:pointer;
+      cursor: pointer;
 
       .underline {
         width: 100px;

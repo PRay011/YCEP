@@ -1,4 +1,7 @@
 <template>
+  <!--  顶部导航栏-->
+  <Top/>
+
   <div class="container">
     <div class="main">
       <!--左侧公告list-->
@@ -53,9 +56,9 @@
       <div class="details">
         <div class="check1" v-if="checkedItem===1">
           <h2>系统描述</h2>
-<!--          <div class="card">-->
-<!--            <h2>CARD</h2>-->
-<!--          </div>-->
+          <!--          <div class="card">-->
+          <!--            <h2>CARD</h2>-->
+          <!--          </div>-->
         </div>
 
         <div class="check2" v-if="checkedItem===2">
@@ -78,8 +81,12 @@
       </div>
 
       <div class="pretty-button-div">
-        <router-link to="/knowledge/index"><button>进入首页</button></router-link>
-        <router-link to="/user/login"><button>登录/注册</button></router-link>
+        <router-link to="/knowledge/index">
+          <button>进入首页</button>
+        </router-link>
+        <router-link to="/user/login">
+          <button>登录/注册</button>
+        </router-link>
       </div>
 
 
@@ -88,11 +95,15 @@
 </template>
 
 <script lang="ts">
-export default{
+
+import Top from "../components/top.vue";
+
+export default {
   name: "HomeView",
-  data(){
-    return{
-      checkedItem:1,
+  components: {Top},
+  data() {
+    return {
+      checkedItem: 1,
 
     }
   }
@@ -152,8 +163,7 @@ $font_color_selected: limegreen;
   .card::after {
     content: '';
     position: absolute;
-    background: #07182E;
-  ;
+    background: #07182E;;
     inset: 5px;
     border-radius: 15px;
   }
@@ -187,20 +197,21 @@ $font_color_selected: limegreen;
     .desc {
       display: flex;
       text-align: left;
-      margin:30px;
+      margin: 30px;
       cursor: pointer;
 
-      .pretty-radio-div{
+      .pretty-radio-div {
         @include pretty-radio-div;
-        margin-right:80px;
+        margin-right: 80px;
       }
 
       label {
-        color:$font_color;
+        color: $font_color;
         font-family: "Microsoft YaHei", sans-serif;
         font-size: 22px;
         line-height: 46px;
-        &.checked,&:hover{
+
+        &.checked, &:hover {
           font-size: 30px;
           color: $font_color_selected;
         }
@@ -208,11 +219,11 @@ $font_color_selected: limegreen;
     }
   }
 
-  .details{
+  .details {
     //@include pretty-card-div;
-    width:40%;
-    height:60%;
-    margin-top:250px;
+    width: 40%;
+    height: 60%;
+    margin-top: 250px;
     background-color: #a1a1a1;
   }
 
@@ -223,12 +234,12 @@ $font_color_selected: limegreen;
     display: flex;
     flex-direction: column;
     @include pretty-button-div;
-    button{
+
+    button {
       margin: 30px;
     }
   }
 }
-
 
 
 </style>

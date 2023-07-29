@@ -1,15 +1,13 @@
 <template>
-  <!--  顶部导航栏-->
-  <Top/>
 
   <RouterView/>
 
-
+  <Bottom/>
 </template>
 
 <script lang="ts">
 import {RouterLink, RouterView} from "vue-router";
-import Top from "./components/top.vue";
+import Bottom from "./components/bottom.vue";
 
 
 export default {
@@ -18,7 +16,11 @@ export default {
       data: "",
     };
   },
-  components: {Top},
+  components: {Bottom},
+  mounted() {
+  },
+
+  methods: {}
 };
 </script>
 
