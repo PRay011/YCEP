@@ -34,7 +34,7 @@ const router = createRouter({
       component: () => import('../views/game/room.vue')
     },
     {
-      path: '/knowledge/detail',
+      path: '/knowledge/detail/:id',
       name: '/knowledge/detail',
       component: () => import('../views/knowledge/detail.vue')
     },
