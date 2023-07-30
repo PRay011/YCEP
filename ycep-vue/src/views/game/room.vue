@@ -1,7 +1,11 @@
-<template>room</template>
+<template>
+  <!--  顶部导航栏-->
+  <Top/>
+</template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Top from "../../components/top.vue";
 
 export default defineComponent({
   name: "room",
@@ -10,7 +14,7 @@ export default defineComponent({
       data: "",
     };
   },
-  components: {},
+  components: {Top},
   mounted() {},
   methods: {
     ready() {},
