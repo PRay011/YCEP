@@ -109,5 +109,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/style/css/gameMain.scss";
+@import "../../assets/style/css/game/main.scss";
 </style>
