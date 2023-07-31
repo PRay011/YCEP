@@ -189,7 +189,7 @@ export default defineComponent({
         display: flex;
 
         .title p {
-          font-size: 28px;
+          font-size: 25px;
           word-wrap: break-word;
           color: #222226;
           font-weight: 600;
@@ -209,18 +209,18 @@ export default defineComponent({
 
       .title-tip{
         margin-top: 20px;
-        font-size: 25px;
+        font-size: 23px;
         word-wrap: break-word;
         color: #222226;
         font-weight: 600;
       }
 
       .desc{
-        font-size: 20px;
+        font-size: 15px;
       }
 
       .content{
-        font-size: 20px;
+        font-size: 15px;
       }
 
       .buttons{
@@ -264,7 +264,7 @@ export default defineComponent({
 
     .game{
       .title-tip{
-        font-size: 28px;
+        font-size: 25px;
         font-weight: 600;
       }
       .game-items{
@@ -274,9 +274,9 @@ export default defineComponent({
           width: 100%;
 
           .card {
-            width: 220px;
-            height: 300px;
-            margin-left: 30px;
+            width: 160px;
+            height: 210px;
+            margin-left: 20px;
             margin-top: 30px;
             border-radius: 20px;
             background: #f5f5f5;
@@ -284,7 +284,7 @@ export default defineComponent({
             //background-size: cover;
             //background-repeat: no-repeat;
             position: relative;
-            padding: 1.5rem;
+            padding: 1.0rem;
             border: 2px solid #c3c6ce;
             transition: 0.5s ease-out;
             overflow: visible;
@@ -307,11 +307,12 @@ export default defineComponent({
 
               .text-body {
                 color: rgb(134, 134, 134);
+                font-size: 12px;
               }
 
               /*Text*/
               .text-title {
-                font-size: 1.5em;
+                font-size: 15px;
                 font-weight: bold;
               }
             }
@@ -323,7 +324,7 @@ export default defineComponent({
               border: none;
               background-color: #008bf8;
               color: #fff;
-              font-size: 1rem;
+              font-size: 9px;
               padding: .5rem 1rem;
               position: absolute;
               left: 50%;

@@ -6,7 +6,7 @@
     <div class="main">
       <!-- 顶部轮播图 -->
       <div class="title-block">
-        <el-carousel height="300px" type="card" indicator-position="outside" interval="10000">
+        <el-carousel height="250px" type="card" indicator-position="outside" interval="10000">
           <el-carousel-item v-for="item in imageList" :key="item">
             <img :src="item" alt="轮播图">
 <!--            <h3 class="small">{{ item }}</h3>-->
@@ -22,7 +22,7 @@
 
           <!--知识点推荐（可左右翻页）-->
           <template class="block">
-            <h3 class="block-title">您可能感兴趣的知识</h3>
+            <div class="block-title">您可能 感兴趣的知识</div>
             <div class="block-main">
               <div class="item1">
                 <div class="image">
@@ -123,7 +123,8 @@ export default defineComponent({
           title: '电路排查',
           kind: 3,
           body: '家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！',
-        },
+        }
+        ,
         {
           imgSrc: '../../assets/images/灯泡.jpg',
           title: '电路排查',
@@ -163,15 +164,7 @@ export default defineComponent({
 
   .title-block {
     width: 80%;
-    margin: 50px auto 0;
-
-    .el-carousel__item h3 {
-      color: #475669;
-      font-size: 14px;
-      opacity: 0.75;
-      line-height: 150px;
-      margin: 0;
-    }
+    margin: 40px auto 0;
 
     .el-carousel__item:nth-child(2n) {
       background-color: #99a9bf;
@@ -183,48 +176,51 @@ export default defineComponent({
   }
 
   .body {
+    width: 80%;
+    margin:40px auto 100px;
     display: flex;
+    justify-content: space-between;
     height: auto;
-    margin-top: 50px;
-    margin-bottom: 100px;
 
     .left {
-      width: 15%;
+      width: 20%;
       height: 800px;
-      margin-left: 150px;
+      //margin-left: 150px;
       background-color: #a1a1a1;
     }
 
     .right {
-      width: 65%;
+      width: 75%;
       height: auto;
-      margin-left: auto;
-      margin-right: 150px;
+      //margin-left: auto;
+      //margin-right: 150px;
       padding-bottom: 50px;
       background-color: #e2e2e2;
 
       .block {
         display: grid;
+        width: 100%;
 
         .block-title {
+          width: 100%;
           margin-left: 30px;
-          font-size: 28px;
+          font-size: 20px;
+          font-weight: bold;
           color: #181818;
           font-family: "Microsoft YaHei", sans-serif;
-          margin-bottom: 30px;
+          margin-bottom: 20px;
         }
 
         .block-main {
           display: flex;
-          flex-wrap: wrap;
           width: 100%;
 
           .item1 {
             display: flex;
             flex-direction: column;
-            width: 46%;
+            width: 45%;
             margin-left: 30px;
-            height: 340px;
+            height: 270px;
             //background-color: #4f7df0;
             //overflow: hidden;
 
@@ -245,15 +241,16 @@ export default defineComponent({
 
               p {
                 margin-left: 10px;
-                font-size: 18px;
+                font-size: 15px;
 
                 &.p1 {
                   font-weight: bold;
-                  font-size: 20px;
+                  font-size: 16px;
                 }
 
                 &.p2 {
                   margin-bottom: 5px;
+                  font-size: 15px;
                 }
 
               }
@@ -288,9 +285,9 @@ export default defineComponent({
           width: 100%;
 
           .card {
-            width: 220px;
-            height: 300px;
-            margin-left: 30px;
+            width: 160px;
+            height: 210px;
+            margin-left: 20px;
             margin-top: 30px;
             border-radius: 20px;
             background: #f5f5f5;
@@ -298,7 +295,7 @@ export default defineComponent({
             //background-size: cover;
             //background-repeat: no-repeat;
             position: relative;
-            padding: 1.5rem;
+            padding: 1.0rem;
             border: 2px solid #c3c6ce;
             transition: 0.5s ease-out;
             overflow: visible;
@@ -315,17 +312,17 @@ export default defineComponent({
 
                 img {
                   width: 100%;
-                  //height: 100px;
                 }
               }
 
               .text-body {
                 color: rgb(134, 134, 134);
+                font-size: 12px;
               }
 
               /*Text*/
               .text-title {
-                font-size: 1.5em;
+                font-size: 15px;
                 font-weight: bold;
               }
             }
@@ -337,7 +334,7 @@ export default defineComponent({
               border: none;
               background-color: #008bf8;
               color: #fff;
-              font-size: 1rem;
+              font-size: 9px;
               padding: .5rem 1rem;
               position: absolute;
               left: 50%;

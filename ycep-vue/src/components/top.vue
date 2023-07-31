@@ -90,18 +90,20 @@ export default {
   },
   mounted() {
     this.ready();
+
   },
   // 监听,当路由发生变化的时候执行
   watch: {
-    // $route(to, from) {
-    //   this.currentItem = to.params.kind
-    //   console.log('watch:'+this.currentItem)
-    // },
+    $route(to, from) {
+      this.currentItem = to.params.kind
+      console.log('watch:'+this.currentItem)
+    },
+    deep:true,
   },
   methods: {
     ready() {
-      this.currentItem = this.$route.params.kind
-      console.log(this.currentItem)
+      // this.currentItem = this.$route.params.kind
+      // console.log(this.currentItem)
     },
     titleItemClick(index) {
       this.currentItem = index
@@ -130,7 +132,7 @@ $top_color: rgb(24, 26, 32);
   top: 0;
   width: 100%;
   z-index: 3;
-  height: 90px;
+  height: 70px;
   background-color: $top_color;
 
   .header-content {
@@ -161,7 +163,7 @@ $top_color: rgb(24, 26, 32);
   }
 
   p {
-    font-size: 20px;
+    font-size: 17px;
     font-family: "Helvetica", sans-serif;
     color: #e2e2e2;
   }
@@ -170,8 +172,8 @@ $top_color: rgb(24, 26, 32);
 
     .hover-content {
       position: absolute;
-      top: 100px;
-      width: 858px;
+      top: 60px;
+      width: 800px;
       height: auto !important;
       //background: url(../images/navbg2.jpg)no-repeat center;
       //background-size: cover;
@@ -185,7 +187,7 @@ $top_color: rgb(24, 26, 32);
       .left {
         width: 60%;
         background-color: #ffffff;
-        height: 300px;
+        height: 200px;
         display: flex;
         flex-wrap: wrap;
 
@@ -199,7 +201,7 @@ $top_color: rgb(24, 26, 32);
       .right {
         width: 40%;
         background-color: #4f7df0;
-        height: 300px
+        height: 200px
       }
     }
 

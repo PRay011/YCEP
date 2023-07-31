@@ -16,16 +16,15 @@
           </div>
         </div>
 
-
-
-      </div>
-      <div class="game-info">
-
       </div>
       <div class="game-actions">
         <button class="button">重新开始</button>
         <button class="button">结束游戏</button>
       </div>
+      <div class="game-info">
+
+      </div>
+
     </div>
   </div>
 </template>
@@ -58,6 +57,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/style/css/game/main.scss";
 @media (min-width: 1024px) {
   .container {
     min-height: 100vh;
@@ -75,13 +75,13 @@ export default defineComponent({
     width: $width;
     height: $height;
     display: inline-block;
-    padding: 12px 24px;
+    padding: 5px 10px;
     border: 1px solid #4f4f4f;
     border-radius: 4px;
     transition: all 0.2s ease-in;
     position: relative;
     overflow: hidden;
-    font-size: 19px;
+    font-size: 15px;
     color: black;
     z-index: 1;
   }
@@ -139,12 +139,12 @@ export default defineComponent({
   height: auto;
   display: flex;
   flex-direction: column;
-  margin: 50px auto;
+  margin: 20px auto;
   .game-main{
     width:80%;
-    height:700px;
+    height:600px;
     background-color: white;
-    margin:50px auto 0;
+    margin:30px auto 0;
 
     .play-btn{
       width:150px;
@@ -169,7 +169,7 @@ export default defineComponent({
       .choose-title{
         height: 100px;
         line-height: 100px;
-        font-size: 28px;
+        font-size: 25px;
       }
       .choose-buttons{
         width:50%;
@@ -177,26 +177,28 @@ export default defineComponent({
         display:flex;
         justify-content: space-between;
         margin: 0 auto;
-        @include pretty_button(150px,50px)
+        @include pretty_button(150px,30px);
+        .button{
+          margin:10px;
+        }
       }
     }
 
   }
-  .game-info{
-    width:80%;
-    height:100px;
-    background-color: #a1a1a1;
-    margin:20px auto;
-  }
   .game-actions{
     width: 80%;
-    height:100px;
+    height:50px;
     display:flex;
     justify-content: space-between;
-    margin: 0 auto;
-    @include pretty_button(600px,60px);
+    margin: 5px auto;
+    @include pretty_button(600px,50px);
   }
-
+  .game-info{
+    width:80%;
+    height:60px;
+    background-color: #a1a1a1;
+    margin:5px auto;
+  }
 }
 
 </style>

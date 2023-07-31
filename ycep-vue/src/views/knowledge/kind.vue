@@ -10,7 +10,7 @@
           <div class="input-container">
             <input type="text" name="text" class="input" placeholder="搜索...">
             <span class="icon">
-            <svg width="23px" height="23px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
               <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
               <g id="SVGRepo_iconCarrier">
@@ -104,7 +104,7 @@ export default defineComponent({
   methods: {
     ready() {
       let kind = this.$route.query.kind;
-      console.log("kind:" + kind)
+      // console.log("kind:" + kind)
       this.kind = kind
     },
     toDetails(id) {
@@ -122,33 +122,34 @@ export default defineComponent({
     min-height: 100vh;
     display: flex;
     align-items: center;
+    padding-bottom: 100px;
   }
 }
 
 .main {
   width: 100%;
+  height: auto;
 
   .title {
     display: flex;
-    width: 85%;
-    height: 80px;
+    width: 80%;
+    height: 60px;
     background-color: #e2e2e2;
-    margin: 20px auto;
+    margin: 120px auto 0;
 
     p {
-      font-size: 20px;
+      font-size: 15px;
       color: #181818;
-      margin-left: 50px;
+      margin-left: 30px;
       margin-right: 30px;
-      line-height: 80px;
+      line-height: 60px;
     }
 
     .search {
-      margin-left: auto;
-      margin-right: 50px;
+      margin:auto 50px auto auto;
 
       .input-container {
-        line-height: 80px;
+        line-height: 50px;
         width: 350px;
         position: relative;
       }
@@ -162,11 +163,11 @@ export default defineComponent({
 
       .input {
         width: 100%;
-        height: 50px;
+        height: 40px;
         padding: 10px;
         transition: .2s linear;
         border: 2.5px solid black;
-        font-size: 18px;
+        font-size: 15px;
         text-transform: uppercase;
         letter-spacing: 2px;
       }
@@ -196,19 +197,20 @@ export default defineComponent({
   }
 
   .body {
+    width: 80%;
     display: flex;
-    margin-top: 80px;
+    justify-content: space-between;
+    margin: 40px auto 0 auto;
 
     .left {
-      width: 65%;
-      margin-left: 150px;
+      width: 76%;
       height: 700px;
       background-color: #e2e2e2;
 
       .item {
         display: flex;
         width: 100%;
-        height: 180px;
+        height: 150px;
         margin: 20px 0;
         border-bottom: 1px solid #f0f0f2;
         background-color: white;
@@ -231,8 +233,8 @@ export default defineComponent({
           flex-direction: column;
           //background-color: #4f7df0;
           .title-tag {
-            margin-top: 20px;
-            font-size: 25px;
+            margin-top: 10px;
+            font-size: 20px;
             font-weight: 500;
             color: #222226;
             overflow: hidden;
@@ -243,7 +245,7 @@ export default defineComponent({
           }
 
           .desc {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 400;
             color: #555666;
             overflow: hidden;
@@ -257,7 +259,7 @@ export default defineComponent({
           .author {
             margin-top: auto;
             margin-bottom: 20px;
-            font-size: 17px;
+            font-size: 14px;
             font-weight: 400;
             color: #555666;
           }
@@ -267,9 +269,7 @@ export default defineComponent({
     }
 
     .right {
-      margin-left: auto;
-      margin-right: 150px;
-      width: 17%;
+      width: 20%;
       height: 700px;
       background-color: #a1a1a1;
 

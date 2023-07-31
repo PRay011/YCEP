@@ -188,8 +188,8 @@ $font_color_selected: limegreen;
   .descriptionList {
     width: 20%;
     height: 80%;
-    margin-top: 250px;
-    margin-left: 250px;
+    margin-top: 220px;
+    margin-left: 150px;
     //background-color: #a1a1a1;
     display: flex;
     flex-direction: column;
@@ -202,17 +202,17 @@ $font_color_selected: limegreen;
 
       .pretty-radio-div {
         @include pretty-radio-div;
-        margin-right: 80px;
+        margin-right: 50px;
       }
 
       label {
         color: $font_color;
         font-family: "Microsoft YaHei", sans-serif;
-        font-size: 22px;
-        line-height: 46px;
+        font-size: 18px;
+        line-height: 38px;
 
         &.checked, &:hover {
-          font-size: 30px;
+          font-size: 23px;
           color: $font_color_selected;
         }
       }
@@ -223,13 +223,13 @@ $font_color_selected: limegreen;
     //@include pretty-card-div;
     width: 40%;
     height: 60%;
-    margin-top: 250px;
+    margin-top: 220px;
     background-color: #a1a1a1;
   }
 
   .pretty-button-div {
     position: relative;
-    top: 400px;
+    top: 350px;
     left: 100px;
     display: flex;
     flex-direction: column;
