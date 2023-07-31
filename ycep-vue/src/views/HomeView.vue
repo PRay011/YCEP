@@ -87,6 +87,9 @@
         <router-link to="/user/login">
           <button>登录/注册</button>
         </router-link>
+        <router-link to="/game/main">
+          <button>游戏界面</button>
+        </router-link>
       </div>
 
 

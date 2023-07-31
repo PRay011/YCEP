@@ -1,6 +1,7 @@
 import { request } from '../../utils/request';
 
-//导出login方法，供其它地方使用
+//注册
+// p.s. 注册的验证码用登录的
 export function register(data: any) {
     return request({
         url: '/user/register',
