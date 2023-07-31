@@ -53,7 +53,7 @@
                   <p class="text-title">{{ item.title }}</p>
                   <p class="text-body">{{ item.body }}</p>
                 </div>
-                <button class="card-button">进入游戏</button>
+                <button class="card-button" @click="toGame(item.id)">进入游戏</button>
               </div>
             </template>
           </div>
@@ -66,10 +66,7 @@
 
       </div>
     </div>
-
-
   </div>
-
 
 </template>
 
@@ -97,24 +94,28 @@ export default defineComponent({
       },
       gameList: [
         {
+          id:1,
           imgSrc: '../../assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
           body: '家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！',
         },
         {
+          id:1,
           imgSrc: '../../assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
           body: '家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！',
         },
         {
+          id:1,
           imgSrc: '../../assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
           body: '家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！',
         },
         {
+          id:1,
           imgSrc: '../../assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
@@ -133,6 +134,10 @@ export default defineComponent({
       this.id = id;
       console.log("id: " + id);
     },
+    //进入游戏
+    toGame(id) {
+      this.$router.push('/game/main/' + id);
+    }
   },
 });
 </script>
