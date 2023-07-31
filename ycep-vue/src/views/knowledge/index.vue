@@ -6,7 +6,7 @@
     <div class="main">
       <!-- 顶部轮播图 -->
       <div class="title-block">
-        <el-carousel height="250px" type="card" indicator-position="outside" interval="10000">
+        <el-carousel height="250px" type="card" indicator-position="outside" :interval="10000">
           <el-carousel-item v-for="item in imageList" :key="item">
             <img :src="item" alt="轮播图">
 <!--            <h3 class="small">{{ item }}</h3>-->
@@ -15,9 +15,9 @@
       </div>
 
       <div class="body">
-        <div class="left">
+<!--        <div class="left">-->
 
-        </div>
+<!--        </div>-->
         <div class="right">
 
           <!--知识点推荐（可左右翻页）-->
@@ -63,7 +63,7 @@
             <h3 class="block-title" style="margin-top: 30px;">您可能感兴趣的游戏</h3>
             <div class="block-main">
               <div class="item2">
-                <el-carousel height="200px" interval="5000">
+                <el-carousel height="200px" :interval="10000">
                   <el-carousel-item v-for="item in 4" :key="item">
                     <h3 class="small">{{ item }}</h3>
                   </el-carousel-item>

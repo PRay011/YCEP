@@ -1,6 +1,16 @@
 <template>
   <!--  顶部导航栏-->
   <Top/>
+  <div class="container">
+    <div class="main">
+      <div class="left">
+
+      </div>
+      <div class="right">
+
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -22,4 +32,6 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import "../../assets/style/css/user/selfCenter.scss";
+</style>

@@ -11,7 +11,7 @@
         ></el-button>
 
         <div class="play-btn" v-if="!playing" @click="startGame()">
-          <img src="../../assets/images/bgi.jpg" alt="播放按钮" />
+          <img src="../../assets/images/play_btn.png" alt="播放按钮" />
           <div class="mask"></div>
         </div>
         <div class="choose-mode" v-if="isPlayed">
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="game-actions">
-        <button class="button">重新开始</button>
+        <button class="button" @click="again()">重新开始</button>
         <button class="button">结束游戏</button>
       </div>
       <div class="game-info">
@@ -84,13 +84,17 @@ export default defineComponent({
       this.playing = true;
       this.isPlayed = true;
     },
+    again() {
+      this.playing = false;
+      this.isPlayed= false;
+    },
     singerMode() {
       this.chosenMode = 0;
       this.isPlayed = false;
       this.isCharacter = true;
     },
     onLineMode() {
-      this.chosenMode = 0;
+      this.chosenMode = 1;
       this.isPlayed = false;
       this.isCharacter = true;
     },

@@ -22,4 +22,6 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import "../../assets/style/css/user/thesis.scss";
+</style>

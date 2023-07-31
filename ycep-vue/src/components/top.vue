@@ -2,7 +2,7 @@
 
   <div class="header">
     <div class="header-content">
-      <div class="header-item" style="width: 400px;text-align: left">
+      <div class="header-item" @click="titleItemClick(-1)" style="width: 400px;text-align: left">
         <p>YCEP网站</p>
       </div>
       <div class="header-item" @click="titleItemClick(0)">
@@ -32,18 +32,24 @@
       </div>
 
       <template v-if="isLogged">
-        <div>
-          <p>欢迎您：{{ username }}</p>
+        <el-avatar alt="用户头像" @click="selfCenterClick" class="self"
+                   src="https://i03piccdn.sogoucdn.com/5cf35c1052b8f21d"></el-avatar>
+        <div class="self" @click="selfCenterClick">
+          <p class="username">{{ username }}</p>
+        </div>
+        <div class="header-item" @click="logout">
+          <p>退出账号</p>
         </div>
       </template>
       <template v-else>
-        <div class="header-item"><p>登录</p></div>
-        <div class="header-item"><p>注册</p></div>
+        <div class="header-item login">
+          <button @click="loginBtnClick">登录
+            <div class="arrow-wrapper">
+              <div class="arrow"></div>
+            </div>
+          </button>
+        </div>
       </template>
-
-      <div class="header-item">
-        <p>关于</p>
-      </div>
     </div>
     <!--hover弹出框-->
     <div class="hover-div">
@@ -75,7 +81,7 @@ export default {
   name: "top",
   data() {
     return {
-      isLogged: true,
+      isLogged: false,
       username: "蛄蛹者",
       currentItem: 0,
       showHoverItem1: false,
@@ -95,29 +101,78 @@ export default {
   // 监听,当路由发生变化的时候执行
   watch: {
     $route(to, from) {
-      this.currentItem = to.params.kind
-      console.log('watch:'+this.currentItem)
+      console.log('当前路由：' + to.path)
+      let path = to.path
+      if (path === '/knowledge/kind/1') {
+        this.currentItem = 1;
+      } else if (path === '/knowledge/kind/2') {
+        this.currentItem = 2;
+      } else if (path === '/knowledge/kind/3') {
+        this.currentItem = 3;
+      } else if (path === '/knowledge/kind/4') {
+        this.currentItem = 4;
+      } else if (path === '/knowledge/index') {
+        this.currentItem = 0;
+      } else if (path === '/') {
+        this.currentItem = -1;
+      }
     },
-    deep:true,
   },
   methods: {
     ready() {
-      // this.currentItem = this.$route.params.kind
-      // console.log(this.currentItem)
+      //刷新后保持选中值不变
+      this.currentItem = this.$route.params.kind
+      console.log('当前路由：' + this.$route.path)
+      let path = this.$route.path
+      if (path === '/knowledge/kind/1') {
+        this.currentItem = 1;
+      } else if (path === '/knowledge/kind/2') {
+        this.currentItem = 2;
+      } else if (path === '/knowledge/kind/3') {
+        this.currentItem = 3;
+      } else if (path === '/knowledge/kind/4') {
+        this.currentItem = 4;
+      } else if (path === '/knowledge/index') {
+        this.currentItem = 0;
+      } else if (path === '/') {
+        this.currentItem = -1;
+      }
+
+      //判断用户登录
+      let username = localStorage.getItem('username')
+      console.log('username:'+username)
+      if (username !== '' && username) {
+        this.isLogged = true;
+        this.username = username;
+      }
+
     },
     titleItemClick(index) {
       this.currentItem = index
       switch (index) {
+        case -1:
+          this.$router.push('/');
+          break;
         case 0:
           this.currentItem = 0;
           this.$router.push('/knowledge/index');
           break;
         default:
-          this.$router.push('/knowledge/kind/'+index);
+          this.$router.push('/knowledge/kind/' + index);
           break;
       }
     },
-
+    selfCenterClick() {
+      this.$router.push('/user/selfCenter')
+    },
+    loginBtnClick() {
+      this.$router.push('/user/login')
+    },
+    logout() {
+      localStorage.removeItem('username')
+      this.$router.push('/')
+      this.$router.push('/knowledge/index')
+    }
   },
 }
 
@@ -157,6 +212,75 @@ $top_color: rgb(24, 26, 32);
         height: 3px;
         margin-top: 10px;
         background-color: #c2c2c2;
+      }
+    }
+
+    .self {
+      cursor: pointer;
+    }
+
+    .login {
+      height: 45px;
+
+      button {
+        --primary-color: #645bff;
+        --secondary-color: #fff;
+        --hover-color: #645bff;
+        --arrow-width: 10px;
+        --arrow-stroke: 2px;
+        box-sizing: border-box;
+        border: 0;
+        border-radius: 20px;
+        color: var(--secondary-color);
+        padding: 1em 1.8em;
+        background: var(--primary-color);
+        display: flex;
+        transition: 0.2s background;
+        align-items: center;
+        gap: 0.6em;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button .arrow-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      button .arrow {
+        margin-top: 1px;
+        width: var(--arrow-width);
+        background: var(--primary-color);
+        height: var(--arrow-stroke);
+        position: relative;
+        transition: 0.2s;
+      }
+
+      button .arrow::before {
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        border: solid var(--secondary-color);
+        border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+        display: inline-block;
+        top: -3px;
+        right: 3px;
+        transition: 0.2s;
+        padding: 3px;
+        transform: rotate(-45deg);
+      }
+
+      button:hover {
+        background-color: var(--hover-color);
+      }
+
+      button:hover .arrow {
+        background: var(--secondary-color);
+      }
+
+      button:hover .arrow:before {
+        right: 0;
       }
     }
 
