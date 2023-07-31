@@ -1,9 +1,18 @@
 import { request } from '../../utils/request';
 
-//导出login方法，供其它地方使用
-export function test1() {
+//登录
+export function login(data: any) {
     return request({
-        url: 'fleet/team',
-        method: 'get',
+        url: '/user/login',
+        method: 'post',
+        data: data
     })
+}
+
+// 验证码
+export function vertify() {
+    return request({
+        url: '/auth/code',
+        method: 'get',
+    })  
 }

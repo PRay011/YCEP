@@ -2,9 +2,9 @@
 import { request } from '../../utils/request';
 
 //导出login方法，供其它地方使用
-export function test1() {
+export function getNotice() {
     return request({
-        url: 'fleet/team',
+        url: '/main/notices',
         method: 'get',
     })
 }
