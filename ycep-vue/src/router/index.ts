@@ -15,62 +15,62 @@ const router = createRouter({
     },
     {
       path: '/game/interaction',
-      name: '/game/interaction',
+      name: 'interaction',
       component: () => import('../views/game/interaction.vue')
     },
     {
       path: '/game/main/:id',
-      name: '/game/main',
+      name: 'gameMain',
       component: () => import('../views/game/main.vue')
     },
     {
       path: '/game/review',
-      name: '/game/review',
+      name: 'review',
       component: () => import('../views/game/review.vue')
     },
     {
       path: '/game/room',
-      name: '/game/room',
+      name: 'room',
       component: () => import('../views/game/room.vue')
     },
     {
       path: '/knowledge/detail/:id',
-      name: '/knowledge/detail',
+      name: 'knowledgeDetail',
       component: () => import('../views/knowledge/detail.vue')
     },
     {
       path: '/knowledge/index',
-      name: '/knowledge/index',
+      name: 'knowledgeIndex',
       component: () => import('../views/knowledge/index.vue')
     },
     {
       path: '/knowledge/kind/:kind',
-      name: '/knowledge/kind',
+      name: 'knowledgekKind',
       component: () => import('../views/knowledge/kind.vue')
     },
     {
       path: '/managenent/statistics',
-      name: '/managenent/statistics',
+      name: 'statistics',
       component: () => import('../views/management/statistics.vue')
     },
     {
       path: '/user/login',
-      name: '/user/login',
+      name: 'login',
       component: () => import('../views/user/login.vue')
     },
     {
       path: '/user/register',
-      name: '/user/register',
+      name: 'register',
       component: () => import('../views/user/register.vue')
     },
     {
       path: '/user/selfCenter',
-      name: '/user/selfCenter',
+      name: 'selfCenter',
       component: () => import('../views/user/selfCenter.vue')
     },
     {
       path: '/user/thesis',
-      name: '/user/thesis',
+      name: 'thesis',
       component: () => import('../views/user/thesis.vue')
     }
 
