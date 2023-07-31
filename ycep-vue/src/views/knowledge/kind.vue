@@ -31,11 +31,22 @@
 
       <div class="body">
         <div class="left">
-
-
+          <div class="item" v-for="item in knowledgeInfoList" @click="toDetails(item.id)">
+            <div class="image">
+              <img :src="item.imgSrc" alt="知识点图片">
+            </div>
+            <div class="info">
+              <p class="title-tag">{{ item.title }}</p>
+              <p class="desc">{{ item.content }}</p>
+              <p class="author">作者：{{ item.author }}</p>
+            </div>
+          </div>
         </div>
         <div class="right">
+          <p>您可能感兴趣的：</p>
+          <div class="item">
 
+          </div>
 
         </div>
 
@@ -61,20 +72,29 @@ export default defineComponent({
       dataList: [
         {
           kind: 1,
-          knowledge: ['全部','数组', '算式', '排序', '追及']
+          knowledge: ['全部', '数组', '算式', '排序', '追及']
         },
         {
           kind: 2,
-          knowledge: ['全部','木材', '钢材', '芯片', '物联网']
+          knowledge: ['全部', '木材', '钢材', '芯片', '物联网']
         },
         {
           kind: 3,
-          knowledge: ['全部','电路', '太空', '力', '电磁']
+          knowledge: ['全部', '电路', '太空', '力', '电磁']
         },
         {
           kind: 4,
-          knowledge: ['全部','液体', '固体', '气体', '合成']
+          knowledge: ['全部', '液体', '固体', '气体', '合成']
         }
+      ],
+      knowledgeInfoList: [
+        {
+          id: 1,
+          imgSrc: '/src/assets/images/灯泡.jpg',
+          title: 'Spring Boot 单元测试',
+          content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
+          author: '冷雪兮',
+        },
       ]
     }
   },
@@ -84,9 +104,13 @@ export default defineComponent({
   methods: {
     ready() {
       let kind = this.$route.query.kind;
-      console.log(kind)
+      console.log("kind:" + kind)
       this.kind = kind
-    }
+    },
+    toDetails(id) {
+      // console.log(id)
+      this.$router.push('/knowledge/detail/' + id)
+    },
   }
 
 })
@@ -171,24 +195,97 @@ export default defineComponent({
 
   }
 
-  .body{
+  .body {
     display: flex;
     margin-top: 80px;
 
-    .left{
-      width:65%;
+    .left {
+      width: 65%;
       margin-left: 150px;
       height: 700px;
       background-color: #e2e2e2;
 
+      .item {
+        display: flex;
+        width: 100%;
+        height: 180px;
+        margin: 20px 0;
+        border-bottom: 1px solid #f0f0f2;
+        background-color: white;
+        cursor: pointer;
+
+        .image {
+          height: 80%;
+          width: 20%;
+          margin: auto 10px;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .info {
+          width: 80%;
+          display: flex;
+          flex-direction: column;
+          //background-color: #4f7df0;
+          .title-tag {
+            margin-top: 20px;
+            font-size: 25px;
+            font-weight: 500;
+            color: #222226;
+            overflow: hidden;
+            white-space: normal;
+            word-break: break-word;
+            line-height: 40px;
+            margin-bottom: 4px;
+          }
+
+          .desc {
+            font-size: 18px;
+            font-weight: 400;
+            color: #555666;
+            overflow: hidden;
+            white-space: normal;
+            word-break: break-word;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+          }
+
+          .author {
+            margin-top: auto;
+            margin-bottom: 20px;
+            font-size: 17px;
+            font-weight: 400;
+            color: #555666;
+          }
+        }
+      }
+
     }
 
-    .right{
+    .right {
       margin-left: auto;
       margin-right: 150px;
-      width:17%;
-      height:700px;
+      width: 17%;
+      height: 700px;
       background-color: #a1a1a1;
+
+      p {
+        width: 90%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .item {
+        width: 90%;
+        height: 80px;
+        margin: 0 auto;
+        background-color: #4f7df0;
+      }
     }
   }
 }
