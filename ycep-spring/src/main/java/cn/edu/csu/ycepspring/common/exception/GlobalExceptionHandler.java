@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
     public CommonResponse handleNotPermissionException(NotPermissionException e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',权限码校验失败'{}'", requestURI, e.getMessage());
-        return CommonResponse.error(HttpStatus.FORBIDDEN, "没有访问权限，请联系管理员授权");
+        return CommonResponse.error(HttpStatus.FORBIDDEN, "没有访问权限");
     }
 
     /**

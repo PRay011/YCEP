@@ -2,10 +2,6 @@ server:
   port: 8081
 
 spring:
-  devtools:
-    restart:
-      enabled: true  # 设置开启热部署
-      additional-paths: src/main/java # 重启目录
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver

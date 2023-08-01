@@ -19,6 +19,14 @@ public class UserController {
     private CaptchaService captchaService;
 
     /**
+     * 获取验证码
+     */
+    @GetMapping("/code")
+    public Object getCaptcha() {
+        return captchaService.createCaptcha();
+    }
+
+    /**
      * 登录
      */
     @PostMapping("/login")
@@ -29,15 +37,6 @@ public class UserController {
         StpUtil.login(userInfo.getAccount());
         userInfo.setToken(StpUtil.getTokenInfo().getTokenValue());
         return CommonResponse.success("登陆成功", userInfo);
-    }
-
-    /**
-     * 退出登录
-     */
-    @DeleteMapping("/logout")
-    public CommonResponse logout() {
-        StpUtil.logout();
-        return CommonResponse.success("注销成功");
     }
 
     /**
@@ -56,10 +55,11 @@ public class UserController {
     }
 
     /**
-     * 获取验证码
+     * 退出登录
      */
-    @GetMapping("/code")
-    public Object getCaptcha() {
-        return captchaService.createCaptcha();
+    @DeleteMapping("/logout")
+    public CommonResponse logout() {
+        StpUtil.logout();
+        return CommonResponse.success("注销成功");
     }
 }
