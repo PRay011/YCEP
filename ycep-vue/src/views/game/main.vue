@@ -77,9 +77,8 @@
 import { defineComponent } from "vue";
 import screenfull from "screenfull";
 import Top from "../../components/top.vue";
-import image1 from '../../assets/images/demo/氧气.jpg'
-import image1 from "../../assets/images/demo/氧气.jpg";
-import image2 from "../../assets/images/demo/宇宙.jpg";
+import image1 from "../../assets/images/氧气.jpg";
+import image2 from "../../assets/images/宇宙.jpg";
 import backImage1 from "../../assets/images/gameBack.jpg";
 
 export default defineComponent({

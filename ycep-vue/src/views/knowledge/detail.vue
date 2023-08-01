@@ -48,7 +48,7 @@
               <div class="card" v-for="item in gameList">
                 <div class="card-details">
                   <div class="card-image">
-                    <img src="src/assets/images/demo/灯泡.jpg" alt="背景图片">
+                    <img src="src/assets/images/灯泡.jpg" alt="背景图片">
                   </div>
                   <p class="text-title">{{ item.title }}</p>
                   <p class="text-body">{{ item.body }}</p>

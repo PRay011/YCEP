@@ -53,7 +53,7 @@
             <div class="block-main">
               <div class="item1">
                 <div class="image">
-                  <img src="../../assets/images/demo/宇宙.jpg" alt="知识点图片">
+                  <img src="../../assets/images/宇宙.jpg" alt="知识点图片">
                 </div>
                 <div class="cover">
                   <p class="p1">趣味物理</p>
@@ -62,7 +62,7 @@
               </div>
               <div class="item1">
                 <div class="image">
-                  <img src="../../assets/images/demo/氧气.jpg" alt="知识点图片">
+                  <img src="../../assets/images/氧气.jpg" alt="知识点图片">
                 </div>
                 <div class="cover">
                   <p class="p1">微观化学</p>
@@ -131,28 +131,28 @@ export default defineComponent({
       imageList: ['/src/assets/images/demo/item1.jpg','/src/assets/images/demo/item2.jpg','/src/assets/images/demo/item3.jpg'],
       knowledgeList: [
         {
-          imgSrc: '/src/assets/images/demo/灯泡.jpg',
+          imgSrc: '/src/assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
           body: '家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！',
           author: '冷月汐'
         },
         {
-          imgSrc: '/src/assets/images/demo/灯泡.jpg',
+          imgSrc: '/src/assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
           body: '家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！',
           author: '冷月汐'
         },
         {
-          imgSrc: '/src/assets/images/demo/灯泡.jpg',
+          imgSrc: '/src/assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
           body: '家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！',
           author: '冷月汐'
         },
         {
-          imgSrc: '/src/assets/images/demo/灯泡.jpg',
+          imgSrc: '/src/assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
           body: '家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！',
@@ -160,7 +160,7 @@ export default defineComponent({
         }
         ,
         {
-          imgSrc: '/src/assets/images/demo/氧气.jpg',
+          imgSrc: '/src/assets/images/氧气.jpg',
           title: '氧气制取',
           kind: 3,
           body: '氧气瓶中的氧气是怎么制造出来呢？',
