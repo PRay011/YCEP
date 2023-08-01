@@ -59,7 +59,7 @@
 
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
 import Top from "../../components/top.vue";
 
@@ -68,7 +68,7 @@ export default defineComponent({
   components: {Top},
   data() {
     return {
-      kind: 0,
+      kind: '',
       dataList: [
         {
           kind: 1,
@@ -107,7 +107,7 @@ export default defineComponent({
       // console.log("kind:" + kind)
       this.kind = kind
     },
-    toDetails(id) {
+    toDetails(id:any) {
       // console.log(id)
       this.$router.push('/knowledge/detail/' + id)
     },

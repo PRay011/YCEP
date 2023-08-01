@@ -10,11 +10,13 @@ declare module 'vue' {
     Bottom: typeof import('./src/components/bottom.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCarousel: typeof import('element-plus/es')['ElCarousel']
-    ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
+    ElIcon: typeof import('element-plus/es')['ElIcon']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Top: typeof import('./src/components/top.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

@@ -15,13 +15,13 @@
     width: $width;
     height: $height;
     display: inline-block;
-    padding: 5px 10px;
+    padding: 12px 24px;
     border: 1px solid #4f4f4f;
     border-radius: 4px;
     transition: all 0.2s ease-in;
     position: relative;
     overflow: hidden;
-    font-size: 15px;
+    font-size: 19px;
     color: black;
     z-index: 1;
   }
@@ -74,22 +74,45 @@
   }
 }
 
+//动画
+@keyframes cardEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonEnter {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
 .main {
   width: 80%;
-  height: auto;
+  height: 800px;
   display: flex;
   flex-direction: column;
-  margin: 20px auto;
+  margin: 50px auto;
+  overflow: hidden;
   .game-main {
     width: 80%;
-    height: 600px;
+    height:70%;
     background-color: white;
     margin: 10px auto 0;
-
+    overflow: hidden;
     .play-btn {
       width: 150px;
       height: 120px;
-      margin: 200px auto 0;
+      margin: 250px auto 0;
       cursor: pointer;
       img {
         width: 150px;
@@ -100,7 +123,7 @@
     .choose-mode {
       width: 50%;
       height: 200px;
-      margin: 180px auto;
+      margin: 200px auto;
       background-color: #e2e2e2;
       border-radius: 10px;
       display: flex;
@@ -109,8 +132,7 @@
       .choose-title {
         height: 100px;
         line-height: 100px;
-        font-size: 23px;
-        font-weight: bold;
+        font-size: 28px;
       }
       .choose-buttons {
         width: 50%;
@@ -118,15 +140,37 @@
         display: flex;
         justify-content: space-between;
         margin: 0 auto;
-        @include pretty_button(150px, 35px);
-        .button{
-          margin:10px;
-        }
+        @include pretty_button(150px, 50px);
       }
     }
 
     .fullScreen {
       top: 0px;
+      float: left;
+      width: 3%;
+      height: 5%;
+      font-size: 30px;
+      position: relative;
+    }
+
+    .chatRoom {
+      top: 0px;
+      left: 90%;
+      width: 3%;
+      height: 5%;
+      font-size: 30px;
+      position: relative;
+    }
+
+    .exitGame {
+      top: 0px;
+      float: right;
+      color: red;
+      background-color: transparent;
+      border: 1px solid transparent;
+      font-size: 30px;
+      width: 3%;
+      height: 5%;
       position: relative;
     }
 
@@ -137,38 +181,118 @@
       width: 80%;
       //   background-color: aqua;
       .character {
-        height:100%;
-        width:30%;
-        border:1px solid black;
+        background-color: white;
+        height: 100%;
+        width: 30%;
+        border: 1px solid black;
         float: left;
         margin-left: 10%;
-        margin-right:10%;
-        .character-image{
-          height:70%;
-          width:100%;
+        margin-right: 10%;
+        opacity: 0;
+        transform: translateX(0);
+        // 动画效果
+        animation: cardEnter 1s forwards;
+        position: relative;
+        left: 0;
+        &.active {
+          transition: 0.5s;
+          height: 110%;
+          width: 40%;
+          position: sticky;
+          // margin-top:-50%;
+          margin-left: 30%;
+          // z-index: 100;
+        }
+        &.hide {
+          transition: 0.5s;
+          display: none;
+        }
+        .character-image {
+          height: 70%;
+          width: 100%;
           background-size: contain;
         }
-        .character-name{
-          height:10%;
-          width:100%;
-          font-size:25px;
-          font-family: coca_cola, serif
+        .character-name {
+          height: 10%;
+          width: 100%;
+          font-size: 25px;
+          font-family: coca_cola;
+        }
+        .character-confirm {
+          z-index: 100;
+          animation: buttonEnter 0.5s forwards;
+          margin-top: 6%;
+          width: 100%;
+          height: 13%;
+          // background-color: aqua;
+          .selectButton {
+            margin-top: 2%;
+            margin-left: 5%;
+            margin-right: 5%;
+            height: 80%;
+            width: 40%;
+            font-family: coca_cola;
+            font-size: 20px;
+            color: white;
+            background-color: black;
+            &:hover {
+              background-color: white;
+              color: black;
+              border: 1px solid black;
+              transition: 0.5s;
+            }
+          }
         }
       }
     }
+    .chatCharacter{
+      // position: absolute;
+      width:17%;
+      height:60%;
+      // background-color: #39bda7;
+    }
+    .chatBox {
+      // margin-top: -34%;
+      width: 100%;
+      height: 35%;
+      background-color: rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      z-index: 10000;
+      .chat-content{
+        margin-top: 1.5%;
+        margin-bottom: 1%;
+        margin-left: 5%;
+        width:90%;
+        height:65%;
+        font-size:25px;
+        word-break: break-all;
+        color: white;
+      }
+      .chat-page-previous{
+        margin-left: 75%;
+        width:10%;
+        height:17%;
+      }
+      .chat-page-next{
+        margin-left: 2%;
+        width:10%;
+        height:17%;
+      }
+    }
+    
+  }
+  .game-info {
+    width: 80%;
+    height: 100px;
+    background-color: #a1a1a1;
+    margin: 20px auto;
   }
   .game-actions {
     width: 80%;
-    height: 50px;
+    height: 100px;
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
-    @include pretty_button(600px, 50px);
+    @include pretty_button(600px, 60px);
   }
-  .game-info {
-     width: 80%;
-     height: 80px;
-     background-color: #a1a1a1;
-     margin: 10px auto;
-   }
 }
