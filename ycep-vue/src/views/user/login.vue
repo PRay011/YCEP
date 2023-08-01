@@ -43,7 +43,7 @@
           </button>
         </div>
         <p class="signup">没有账户?
-          <a rel="noopener noreferrer" @click="registerBtnClick" class="" style="cursor: pointer">注册</a>
+          <a @click="registerBtnClick" class="" style="cursor: pointer">注册</a>
         </p>
       </div>
     </div>

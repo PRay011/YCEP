@@ -26,7 +26,7 @@
             </div>
           </div>
           <button class="sign">注册</button>
-        </d>
+        </div>
         <div class="social-message">
           <div class="line"></div>
           <p class="message">第三方账号</p>

@@ -4,6 +4,7 @@
     padding-top: 80px;
     display: flex;
     align-items: center;
+    background-color: #f5f5f5;
   }
 }
 
@@ -11,21 +12,58 @@
   width: 100%;
 
   .title-block {
-    width: 80%;
-    margin: 40px auto 0;
+    width: 70%;
+    margin: 30px auto 0;
 
-    .el-carousel__item:nth-child(2n) {
-      background-color: #99a9bf;
+    .el-carousel__item {
+      border-radius: 10px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
     }
 
-    .el-carousel__item:nth-child(2n+1) {
-      background-color: #d3dce6;
+    //.el-carousel__item:nth-child(2n) {
+    //  background-color: #99a9bf;
+    //}
+    //
+    //.el-carousel__item:nth-child(2n+1) {
+    //  background-color: #d3dce6;
+    //}
+  }
+
+  .tags {
+    width: 70%;
+    height: 60px;
+    background-color: #fff;
+    margin: 10px auto;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+
+    .tag-item {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+      height: 100%;
+
+      .el-icon {
+        line-height: 60px;
+        margin-top: 10px;
+      }
+
+      .tag-text {
+        font-size: 15px;
+        line-height: 60px;
+        color: #646464;
+      }
     }
   }
 
   .body {
     width: 80%;
-    margin:40px auto 100px;
+    margin: 40px auto 100px;
     display: flex;
     justify-content: space-between;
     height: auto;
@@ -38,38 +76,56 @@
     }
 
     .right {
-      margin:0 auto;
-      width: 75%;
+      margin: 0 auto;
+      width: 100%;
       height: auto;
       padding-bottom: 50px;
-      background-color: #e2e2e2;
+      //background-color: #e2e2e2;
 
       .block {
         display: grid;
         width: 100%;
+        margin-top: 20px;
 
         .block-title {
           width: 100%;
-          margin-left: 30px;
-          font-size: 20px;
-          font-weight: bold;
-          color: #181818;
-          font-family: "Microsoft YaHei", sans-serif;
-          margin-bottom: 20px;
+          text-align: center;
+          margin:10px;
+          @include basic_font;
+
+          p {
+            font-size: 25px;
+            font-weight: 400;
+            color: #34495e;
+          }
+
+          &.eng p {
+            height: 18px;
+            font-size: 20px;
+            font-weight: 200;
+            color: #686f9a;
+            margin-bottom: 60px;
+          }
         }
 
         .block-main {
           display: flex;
+          justify-content: center;
           width: 100%;
 
           .item1 {
             display: flex;
             flex-direction: column;
-            width: 45%;
+            width: 550px;
             margin-left: 30px;
             height: 270px;
-            //background-color: #4f7df0;
-            //overflow: hidden;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.5s ease-out;
+
+            &:hover {
+              box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+            }
 
             .image {
               height: 90%;
@@ -128,39 +184,42 @@
         }
 
         .block-cards {
+          margin-top: 20px;
           display: flex;
+          justify-content: center;
           width: 100%;
 
           .card {
-            width: 160px;
-            height: 210px;
+            width: 210px;
+            height: 270px;
             margin-left: 20px;
             margin-top: 30px;
-            border-radius: 20px;
-            background: #f5f5f5;
-            //background-image: url("../../assets/images/灯泡.jpg");
-            //background-size: cover;
-            //background-repeat: no-repeat;
+            border-radius: 10px;
+            background: #ffffff;
             position: relative;
-            padding: 1.0rem;
-            border: 2px solid #c3c6ce;
             transition: 0.5s ease-out;
             overflow: visible;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .card-image {
+              height: 50%;
+              border-radius: 10px 10px 0 0;
+              overflow: hidden;
+
+              img {
+                width: 100%;
+              }
+            }
 
             .card-details {
+              padding: 1.0rem;
               color: black;
-              height: 100%;
+              height: 50%;
               gap: .5em;
               display: grid;
               place-content: center;
-
-              .card-image {
-                overflow: hidden;
-
-                img {
-                  width: 100%;
-                }
-              }
 
               .text-body {
                 color: rgb(134, 134, 134);
@@ -176,16 +235,16 @@
 
             .card-button {
               transform: translate(-50%, 125%);
-              width: 60%;
-              border-radius: 1rem;
+              width: 30%;
+              border-radius: 0 1rem 1rem 0;
               border: none;
               background-color: #008bf8;
               color: #fff;
               font-size: 9px;
               padding: .5rem 1rem;
               position: absolute;
-              left: 50%;
-              bottom: 0;
+              left: 15%;
+              top: 0;
               opacity: 0;
               transition: 0.3s ease-out;
               cursor: pointer;

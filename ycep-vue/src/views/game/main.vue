@@ -44,7 +44,7 @@
 import { defineComponent } from "vue";
 import screenfull from "screenfull";
 import Top from "../../components/top.vue";
-import image1 from '../../assets/images/氧气.jpg'
+import image1 from '../../assets/images/demo/氧气.jpg'
 
 export default defineComponent({
   name: "main",
