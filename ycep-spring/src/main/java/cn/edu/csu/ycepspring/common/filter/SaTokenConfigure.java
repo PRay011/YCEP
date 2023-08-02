@@ -30,7 +30,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
             String path = SaHolder.getRequest().getRequestPath();
             logService.saveLog(account, path);
             // 鉴权
-            SaRouter.match("/**").notMatch("/user/login", "/user/register", "/user/code").check(r -> StpUtil.checkLogin());
+            SaRouter.match("/**").notMatch("/ai/**", "/user/login", "/user/register", "/user/code").check(r -> StpUtil.checkLogin());
             SaRouter.match("/notice/**").notMatch(SaHttpMethod.GET).check(r -> StpUtil.checkRole("admin"));
         })).addPathPatterns("/**");
     }

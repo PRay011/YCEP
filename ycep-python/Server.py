@@ -2,8 +2,12 @@ import json
 import uuid
 
 import redis as redis
+from thrift.protocol import TBinaryProtocol
+from thrift.server import TServer
+from thrift.transport import TSocket, TTransport
 
 from main import send
+from rpc import AIService
 
 
 class RpcHandler:
@@ -48,27 +52,26 @@ class RpcHandler:
 
 
 # 启动服务
-# if __name__ == '__main__':
-#     handler = RpcHandler()
-#     processor = AIService.Processor(handler)
-#     transport = TSocket.TServerSocket(host='localhost', port=9090)
-#     tfactory = TTransport.TBufferedTransportFactory()
-#     pfactory = TBinaryProtocol.TBinaryProtocolFactory()
-#
-#     server = TServer.TSimpleServer(processor, transport, tfactory, pfactory)
-#     print('Starting the Python server...')
-#     server.serve()
-
-
-# 本地开发测试
 if __name__ == '__main__':
     handler = RpcHandler()
-    sessionKey = handler.newSession()
-    while True:
-        # 模拟用户输入
-        content = input("user: ")
-        # 分章节
-        sessionType = 0
-        # 调用接口
-        response = handler.chat(content, sessionKey, sessionType)
-        print(f"AI: {response}")
+    processor = AIService.Processor(handler)
+    transport = TSocket.TServerSocket(host='localhost', port=9090)
+    tfactory = TTransport.TBufferedTransportFactory()
+    pfactory = TBinaryProtocol.TBinaryProtocolFactory()
+
+    server = TServer.TSimpleServer(processor, transport, tfactory, pfactory)
+    print('Starting the Python server...')
+    server.serve()
+
+# 本地开发测试
+# if __name__ == '__main__':
+#     handler = RpcHandler()
+#     sessionKey = handler.newSession()
+#     while True:
+#         # 模拟用户输入
+#         content = input("user: ")
+#         # 分章节
+#         sessionType = 0
+#         # 调用接口
+#         response = handler.chat(content, sessionKey, sessionType)
+#         print(f"AI: {response}")
