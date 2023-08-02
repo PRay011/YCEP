@@ -2,6 +2,7 @@ package cn.edu.csu.ycepspring.common.filter;
 
 import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.interceptor.SaInterceptor;
+import cn.dev33.satoken.router.SaHttpMethod;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.edu.csu.ycepspring.common.log.LogService;
@@ -29,7 +30,8 @@ public class SaTokenConfigure implements WebMvcConfigurer {
             String path = SaHolder.getRequest().getRequestPath();
             logService.saveLog(account, path);
             // 鉴权
-            SaRouter.match("/**").notMatch("/user/login", "/user/register", "/user/code").check(r -> StpUtil.checkLogin());
+            SaRouter.match("/**").notMatch("/notice/**", "/user/login", "/user/register", "/user/code").check(r -> StpUtil.checkLogin());
+            SaRouter.match("/notice/**").notMatch(SaHttpMethod.GET).check(r -> StpUtil.checkRole("admin"));
         })).addPathPatterns("/**");
     }
 }

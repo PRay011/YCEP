@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.csu.ycepspring.mapper.NoticeMapper">
+    <insert id="insertNotice">
+        insert into notice(content, release_time, is_delete)
+        values (#{content}, #{releaseTime}, #{isDelete});
+    </insert>
+    <update id="markNoticeDeleted">
+        update notice
+        set is_delete = true
+        where id = #{id};
+    </update>
+    <select id="selectNotice" resultType="cn.edu.csu.ycepspring.entity.Notice">
+        select *
+        from notice
+        where is_delete = false
+        order by id desc limit 3;
+    </select>
+</mapper>

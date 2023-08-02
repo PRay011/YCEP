@@ -11,7 +11,7 @@
  Target Server Version : 50742 (5.7.42)
  File Encoding         : 65001
 
- Date: 01/08/2023 09:22:05
+ Date: 02/08/2023 08:13:14
 */
 
 SET NAMES utf8mb4;
@@ -61,6 +61,28 @@ CREATE TABLE `auth_oauth` (
 -- Records of auth_oauth
 -- ----------------------------
 BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for notice
+-- ----------------------------
+DROP TABLE IF EXISTS `notice`;
+CREATE TABLE `notice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(255) NOT NULL,
+  `release_time` datetime NOT NULL,
+  `is_delete` tinyint(1) NOT NULL COMMENT '0：未删除；1：已删除',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of notice
+-- ----------------------------
+BEGIN;
+INSERT INTO `notice` (`id`, `content`, `release_time`, `is_delete`) VALUES (1, '这是一条公告', '2023-08-02 07:58:51', 0);
+INSERT INTO `notice` (`id`, `content`, `release_time`, `is_delete`) VALUES (2, '这是另外一条公告', '2023-08-02 08:01:53', 0);
+INSERT INTO `notice` (`id`, `content`, `release_time`, `is_delete`) VALUES (3, '这又双叒叕是一条公告', '2023-08-02 08:02:47', 0);
+INSERT INTO `notice` (`id`, `content`, `release_time`, `is_delete`) VALUES (4, '这是一条新的公告', '2023-08-02 08:02:57', 1);
 COMMIT;
 
 -- ----------------------------

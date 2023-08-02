@@ -2,6 +2,7 @@ package cn.edu.csu.ycepspring.common.exception;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.exception.NotPermissionException;
+import cn.dev33.satoken.exception.NotRoleException;
 import cn.edu.csu.ycepspring.common.constants.HttpStatus;
 import cn.edu.csu.ycepspring.common.response.CommonResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +26,20 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 权限异常
+     * 权限异常：权限校验
      */
     @ExceptionHandler(NotPermissionException.class)
     public CommonResponse handleNotPermissionException(NotPermissionException e, HttpServletRequest request) {
+        String requestURI = request.getRequestURI();
+        log.error("请求地址'{}',权限码校验失败'{}'", requestURI, e.getMessage());
+        return CommonResponse.error(HttpStatus.FORBIDDEN, "没有访问权限");
+    }
+
+    /**
+     * 权限异常：角色校验
+     */
+    @ExceptionHandler(NotRoleException.class)
+    public CommonResponse handleNotRoleException(NotRoleException e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',权限码校验失败'{}'", requestURI, e.getMessage());
         return CommonResponse.error(HttpStatus.FORBIDDEN, "没有访问权限");

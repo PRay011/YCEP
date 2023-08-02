@@ -35,6 +35,8 @@ public class UserController {
         LoginResp userInfo = userService.checkAccount(loginBody.getUsername(), loginBody.getPassword());
         // 登录
         StpUtil.login(userInfo.getAccount());
+        StpUtil.getSession().set("roleId", userInfo.getRoleId());
+        // 返回token
         userInfo.setToken(StpUtil.getTokenInfo().getTokenValue());
         return CommonResponse.success("登陆成功", userInfo);
     }
