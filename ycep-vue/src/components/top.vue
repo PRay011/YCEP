@@ -10,35 +10,77 @@
         <div class="underline" v-if="currentItem===0"></div>
       </div>
 
-      <div class="header-item item1" @mouseenter="showHoverItem1=true" @mouseleave="showHoverItem1=false"
-           @click="titleItemClick(1)">
-        <p>编程</p>
-<!--        <el-dropdown @command="handleCommand">-->
-<!--          <span class="el-dropdown-link"><p>编程</p><i class="el-icon-arrow-down el-icon&#45;&#45;right"></i></span>-->
-<!--          <el-dropdown-menu slot="dropdown">-->
-<!--            <el-dropdown-item command="a">黄金糕</el-dropdown-item>-->
-<!--            <el-dropdown-item command="b">狮子头</el-dropdown-item>-->
-<!--            <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>-->
-<!--            <el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>-->
-<!--            <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>-->
-<!--          </el-dropdown-menu>-->
-<!--        </el-dropdown>-->
-        <div class="underline" v-if="showHoverItem1 || currentItem===1"></div>
+      <div class="header-item item1" @click="titleItemClick(1)">
+        <template class="dropdown">
+          <el-dropdown @command="commandItemClick1">
+            <span class="el-dropdown-link">
+              <p>编程</p><el-icon class="el-icon--right"><arrow-down/></el-icon>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command=1>排序算法</el-dropdown-item>
+                <el-dropdown-item command=2>数组</el-dropdown-item>
+                <el-dropdown-item command=3>链表</el-dropdown-item>
+                <el-dropdown-item command=4>对象</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </template>
+        <div class="underline" v-if="currentItem===1"></div>
       </div>
-      <div class="header-item item2" @mouseenter="showHoverItem2=true" @mouseleave="showHoverItem2=false"
-           @click="titleItemClick(2)">
-        <p>材料</p>
-        <div class="underline" v-if="showHoverItem2 || currentItem===2"></div>
+      <div class="header-item item2" @click="titleItemClick(2)">
+        <template class="dropdown">
+          <el-dropdown @command="commandItemClick2">
+            <span class="el-dropdown-link">
+              <p>材料</p><el-icon class="el-icon--right"><arrow-down/></el-icon>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command=1>木材</el-dropdown-item>
+                <el-dropdown-item command=2>钢材</el-dropdown-item>
+                <el-dropdown-item command=3>芯片</el-dropdown-item>
+                <el-dropdown-item command=4>物联网</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </template>
+        <div class="underline" v-if="currentItem===2"></div>
       </div>
-      <div class="header-item item3" @mouseenter="showHoverItem3=true" @mouseleave="showHoverItem3=false"
-           @click="titleItemClick(3)">
-        <p>物理</p>
-        <div class="underline" v-if="showHoverItem3 || currentItem===3"></div>
+      <div class="header-item item3" @click="titleItemClick(3)">
+        <template class="dropdown">
+          <el-dropdown @command="commandItemClick3">
+            <span class="el-dropdown-link">
+              <p>物理</p><el-icon class="el-icon--right"><arrow-down/></el-icon>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command=1>电路</el-dropdown-item>
+                <el-dropdown-item command=2>太空</el-dropdown-item>
+                <el-dropdown-item command=3>力</el-dropdown-item>
+                <el-dropdown-item command=4>电磁</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </template>
+        <div class="underline" v-if="currentItem===3"></div>
       </div>
-      <div class="header-item item4" @mouseenter="showHoverItem4=true" @mouseleave="showHoverItem4=false"
-           @click="titleItemClick(4)">
-        <p>化学</p>
-        <div class="underline" v-if="showHoverItem4 || currentItem===4"></div>
+      <div class="header-item item4" @click="titleItemClick(4)">
+        <template class="dropdown">
+          <el-dropdown @command="commandItemClick4">
+            <span class="el-dropdown-link">
+              <p>化学</p><el-icon class="el-icon--right"><arrow-down/></el-icon>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command=1>液体</el-dropdown-item>
+                <el-dropdown-item command=2>气体</el-dropdown-item>
+                <el-dropdown-item command=3>固体</el-dropdown-item>
+                <el-dropdown-item command=4>合成</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </template>
+        <div class="underline" v-if="currentItem===4"></div>
       </div>
 
       <template v-if="isLogged">
@@ -61,33 +103,14 @@
         </div>
       </template>
     </div>
-    <!--hover弹出框-->
-    <div class="hover-div">
-      <div class="hover-content item1" v-if="showHoverItem1">
-        <div class="left">
-          <p v-for="item in knowledgeList">{{ item }}</p>
-        </div>
-        <div class="right">
-
-        </div>
-      </div>
-      <div class="hover-content item2" v-if="showHoverItem2">
-
-      </div>
-      <div class="hover-content item3" v-if="showHoverItem3">
-
-      </div>
-      <div class="hover-content item4" v-if="showHoverItem4">
-
-      </div>
-    </div>
   </div>
 
 
 </template>
 
 <script>
-import { ArrowDown } from '@element-plus/icons-vue'
+import {ArrowDown} from '@element-plus/icons-vue'
+
 export default {
   name: "top",
   data() {
@@ -95,10 +118,6 @@ export default {
       isLogged: false,
       username: "蛄蛹者",
       currentItem: 0,
-      showHoverItem1: false,
-      showHoverItem2: false,
-      showHoverItem3: false,
-      showHoverItem4: false,
       knowledgeList: ['数组', '算式', '排序', '追及',
         '电路', '太空', '力', '电磁',
         '法律', '品德', '生活', '相处',
@@ -107,41 +126,18 @@ export default {
   },
   mounted() {
     this.ready();
-
-  },
-  // 监听,当路由发生变化的时候执行
-  watch: {
-    $route(to, from) {
-      console.log('当前路由：' + to.path)
-      let path = to.path
-      if (path === '/knowledge/kind/1') {
-        this.currentItem = 1;
-      } else if (path === '/knowledge/kind/2') {
-        this.currentItem = 2;
-      } else if (path === '/knowledge/kind/3') {
-        this.currentItem = 3;
-      } else if (path === '/knowledge/kind/4') {
-        this.currentItem = 4;
-      } else if (path === '/knowledge/index') {
-        this.currentItem = 0;
-      } else if (path === '/') {
-        this.currentItem = -1;
-      }
-    },
   },
   methods: {
     ready() {
       //刷新后保持选中值不变
-      this.currentItem = this.$route.params.kind
-      console.log('当前路由：' + this.$route.path)
       let path = this.$route.path
-      if (path === '/knowledge/kind/1') {
+      if (path === '/knowledge/kind1') {
         this.currentItem = 1;
-      } else if (path === '/knowledge/kind/2') {
+      } else if (path === '/knowledge/kind2') {
         this.currentItem = 2;
-      } else if (path === '/knowledge/kind/3') {
+      } else if (path === '/knowledge/kind3') {
         this.currentItem = 3;
-      } else if (path === '/knowledge/kind/4') {
+      } else if (path === '/knowledge/kind4') {
         this.currentItem = 4;
       } else if (path === '/knowledge/index') {
         this.currentItem = 0;
@@ -151,7 +147,7 @@ export default {
 
       //判断用户登录
       let username = localStorage.getItem('username')
-      console.log('username:'+username)
+      console.log('username:' + username)
       if (username !== '' && username) {
         this.isLogged = true;
         this.username = username;
@@ -169,9 +165,31 @@ export default {
           this.$router.push('/knowledge/index');
           break;
         default:
-          this.$router.push('/knowledge/kind/' + index);
+          this.$router.push('/knowledge/kind' + index);
           break;
       }
+    },
+    commandItemClick1(command) {
+      this.currentItem = 1;
+      // this.$parent.selectedItem = command;
+      this.$router.push('/knowledge/kind1?index=' + command);
+      // this.$parent.itemClick(command);
+      // console.log('click on command:' + command);
+    },
+    commandItemClick2(command) {
+      this.currentItem = 2;
+      this.$router.push('/knowledge/kind2');
+      // console.log('click on command:' + command);
+    },
+    commandItemClick3(command) {
+      this.currentItem = 3;
+      this.$router.push('/knowledge/kind3');
+      // console.log('click on command:' + command);
+    },
+    commandItemClick4(command) {
+      this.currentItem = 4;
+      this.$router.push('/knowledge/kind4');
+      // console.log('click on command:' + command);
     },
     selfCenterClick() {
       this.$router.push('/user/selfCenter')
@@ -184,9 +202,7 @@ export default {
       this.$router.push('/')
       this.$router.push('/knowledge/index')
     },
-    handleCommand(command){
-      this.$message('click on item ' + command);
-    }
+
   },
 }
 
@@ -214,6 +230,12 @@ $top_color: rgb(24, 26, 32);
     width: 75vw;
     margin: auto;
 
+    p {
+      font-size: 17px;
+      font-family: "Helvetica", sans-serif;
+      color: #e2e2e2;
+    }
+
     .header-item {
       width: 100px;
       text-align: center;
@@ -222,19 +244,38 @@ $top_color: rgb(24, 26, 32);
       cursor: pointer;
 
       .underline {
+        position: absolute;
         width: 100px;
         height: 3px;
-        margin-top: 10px;
+        margin-top: 35px;
         background-color: #c2c2c2;
       }
 
-      .el-dropdown-link {
-        cursor: pointer;
-        color: #409EFF;
+      .dropdown {
+        display: flex;
+        justify-content: center;
+
+        .el-dropdown-link {
+          cursor: pointer;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          //有个乱出现的边界线，终于找到这个b了！
+          &:focus-visible{
+            outline:none;
+          }
+        }
       }
-      .el-icon-arrow-down {
-        font-size: 12px;
+
+      &:hover {
+        outline: none;
+        & .dropdown .el-dropdown-link, & p {
+          color: #a1a1a1;
+          border: none;
+        }
+
       }
+
     }
 
     .self {
@@ -304,67 +345,6 @@ $top_color: rgb(24, 26, 32);
       button:hover .arrow:before {
         right: 0;
       }
-    }
-
-  }
-
-  p {
-    font-size: 17px;
-    font-family: "Helvetica", sans-serif;
-    color: #e2e2e2;
-  }
-
-  .hover-div {
-
-    .hover-content {
-      position: absolute;
-      top: 60px;
-      width: 800px;
-      height: auto !important;
-      //background: url(../images/navbg2.jpg)no-repeat center;
-      //background-size: cover;
-      background-color: #a1a1a1;
-      z-index: 10;
-      padding: 30px;
-      border-top: 3px solid #0099ff;
-      box-shadow: 0 0 10px rgb(0 0 0 / 20%);
-      display: flex;
-
-      .left {
-        width: 60%;
-        background-color: #ffffff;
-        height: 200px;
-        display: flex;
-        flex-wrap: wrap;
-
-        p {
-          width: 100px;
-          color: $top_color;
-          cursor: pointer;
-        }
-      }
-
-      .right {
-        width: 40%;
-        background-color: #4f7df0;
-        height: 200px
-      }
-    }
-
-    .hover-content.item1 {
-      left: 400px;
-    }
-
-    .hover-content.item2 {
-      left: 500px
-    }
-
-    .hover-content.item3 {
-      left: 600px
-    }
-
-    .hover-content.item4 {
-      left: 700px
     }
   }
 }
