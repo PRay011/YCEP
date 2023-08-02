@@ -121,6 +121,14 @@
             <version>3.8.1</version>
         </dependency>
 
+        <!-- RPC框架：thrift -->
+        <!-- https://mvnrepository.com/artifact/org.apache.thrift/libthrift -->
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>0.17.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

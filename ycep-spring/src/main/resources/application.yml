@@ -53,3 +53,8 @@ sa-token:
   # 是否输出操作日志
   is-log: true
 
+# thrift配置
+thrift:
+  server:
+    host: localhost
+    port: 9090
