@@ -80,6 +80,7 @@ import Top from "../../components/top.vue";
 import image1 from "../../assets/images/氧气.jpg";
 import image2 from "../../assets/images/宇宙.jpg";
 import backImage1 from "../../assets/images/gameBack.jpg";
+import defaultImage from "../../assets/images/default.jpg";
 
 export default defineComponent({
   name: "main",
@@ -88,7 +89,7 @@ export default defineComponent({
       data: "",
       isFullscreen: false,
       loading: false,
-      background: '',
+      background: defaultImage,
       myCharacter:'',
       game: {
         id: 1,
