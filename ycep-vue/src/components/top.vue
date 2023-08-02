@@ -141,7 +141,7 @@ export default {
         this.currentItem = 4;
       } else if (path === '/knowledge/index') {
         this.currentItem = 0;
-      } else if (path === '/') {
+      } else {
         this.currentItem = -1;
       }
 
@@ -166,14 +166,13 @@ export default {
           break;
         default:
           this.$router.push('/knowledge/kind' + index);
+          sessionStorage.setItem('index', 0)
           break;
       }
     },
     commandItemClick1(command) {
       this.currentItem = 1;
-      // this.$parent.selectedItem = command;
-      this.$router.push('/knowledge/kind1?index=' + command);
-      // this.$parent.itemClick(command);
+      this.$router.push('/knowledge/kind1');
       // console.log('click on command:' + command);
     },
     commandItemClick2(command) {

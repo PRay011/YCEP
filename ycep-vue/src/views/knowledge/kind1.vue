@@ -91,7 +91,6 @@ export default defineComponent({
   data() {
     return {
       update:true,
-      kind: 0,
       selectedItem: 0,
       itemList: ['全部', '排序算法', '数组', '链表', '对象'],
       knowledgeInfoList: [
@@ -129,7 +128,7 @@ export default defineComponent({
   // 监听,当路由发生变化的时候执行，检测路由变化刷新组件数据
   // watch: {
   //   $route(to, from) {
-  //     console.log('watch......')
+  //     console.log('watch......'+ to.query.index)
   //     this.selectedItem = this.$route.query.index
   //     this.ready();
   //   },
@@ -140,8 +139,6 @@ export default defineComponent({
   },
   methods: {
     ready() {
-      // this.selectedItem = this.$route.query.index
-      // console.log('selectedItem: '+this.selectedItem)
       if(this.selectedItem === 0){
         this.knowledgeInfoList = [
           {

@@ -89,7 +89,19 @@ const router = createRouter({
       component: () => import('../views/user/thesis.vue')
     }
 
-  ]
+  ],
+  scrollBehavior(to, from,savedPosition) {
+    //if判断可加可不加、根据自己需求
+    //savedPosition当且仅当通过浏览器的前进/后退按钮触发时才可用
+    if (savedPosition) {
+      return savedPosition
+    }
+    return {
+      x: 0,
+      y: 0
+    }
+  }
+
 })
 
 export default router
