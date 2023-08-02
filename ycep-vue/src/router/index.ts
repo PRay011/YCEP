@@ -44,9 +44,24 @@ const router = createRouter({
       component: () => import('../views/knowledge/index.vue')
     },
     {
-      path: '/knowledge/kind/:kind',
-      name: 'knowledgekKind',
-      component: () => import('../views/knowledge/kind.vue')
+      path: '/knowledge/kind1',
+      name: 'knowledgek/kind1',
+      component: () => import('../views/knowledge/kind1.vue')
+    },
+    {
+      path: '/knowledge/kind2',
+      name: 'knowledgek/kind2',
+      component: () => import('../views/knowledge/kind2.vue')
+    },
+    {
+      path: '/knowledge/kind3',
+      name: 'knowledgek/kind3',
+      component: () => import('../views/knowledge/kind3.vue')
+    },
+    {
+      path: '/knowledge/kind4',
+      name: 'knowledgek/kind4',
+      component: () => import('../views/knowledge/kind4.vue')
     },
     {
       path: '/managenent/statistics',
@@ -74,7 +89,19 @@ const router = createRouter({
       component: () => import('../views/user/thesis.vue')
     }
 
-  ]
+  ],
+  scrollBehavior(to, from,savedPosition) {
+    //if判断可加可不加、根据自己需求
+    //savedPosition当且仅当通过浏览器的前进/后退按钮触发时才可用
+    if (savedPosition) {
+      return savedPosition
+    }
+    return {
+      x: 0,
+      y: 0
+    }
+  }
+
 })
 
 export default router

@@ -71,7 +71,7 @@
               </div>
             </div>
             <template class="block-cards">
-              <div class="card" v-for="item in knowledgeList">
+              <div class="card" v-for="item in knowledgeList" @click="klgDetailBtnClick(item.kind)">
                 <div class="card-image">
                   <img :src="item.imgSrc" alt="背景图片">
                 </div>
@@ -80,7 +80,7 @@
                   <p class="text-body">{{ item.body }}</p>
                   <el-tag class="text-author">作者：{{ item.author }}</el-tag>
                 </div>
-                <button class="card-button" @click="klgDetailBtnClick(item.kind)">编程</button>
+                <button class="card-button">编程</button>
               </div>
             </template>
 
@@ -93,14 +93,15 @@
             <div class="block-main">
               <div class="item2">
                 <el-carousel height="200px" :interval="10000">
-                  <el-carousel-item v-for="item in 4" :key="item">
-                    <h3 class="small">{{ item }}</h3>
+                  <el-carousel-item v-for="item in imageList2" :key="item">
+                    <img :src="item" alt="轮播图">
+<!--                    <h3 class="small">{{ item }}</h3>-->
                   </el-carousel-item>
                 </el-carousel>
               </div>
             </div>
             <template class="block-cards">
-              <div class="card" v-for="item in knowledgeList">
+              <div class="card" v-for="item in gameList" @click="klgDetailBtnClick(item.id)">
                 <div class="card-image">
                   <img :src="item.imgSrc" alt="背景图片">
                 </div>
@@ -109,7 +110,7 @@
                   <p class="text-body">{{ item.body }}</p>
                   <el-tag class="text-author">作者：{{ item.author }}</el-tag>
                 </div>
-                <button class="card-button" @click="klgDetailBtnClick(item.kind)">编程</button>
+                <button class="card-button">{{ item.kindName }}</button>
               </div>
             </template>
           </template>
@@ -129,8 +130,10 @@ export default defineComponent({
     return {
       data: "",
       imageList: ['/src/assets/images/demo/item1.jpg','/src/assets/images/demo/item2.jpg','/src/assets/images/demo/item3.jpg'],
+      imageList2: ['/src/assets/images/demo/game1.jpg','/src/assets/images/demo/game2.jpg','/src/assets/images/demo/game3.jpg'],
       knowledgeList: [
         {
+          id:1,
           imgSrc: '/src/assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
@@ -138,6 +141,7 @@ export default defineComponent({
           author: '冷月汐'
         },
         {
+          id:2,
           imgSrc: '/src/assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
@@ -145,6 +149,7 @@ export default defineComponent({
           author: '冷月汐'
         },
         {
+          id:3,
           imgSrc: '/src/assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
@@ -152,19 +157,67 @@ export default defineComponent({
           author: '冷月汐'
         },
         {
+          id:4,
           imgSrc: '/src/assets/images/灯泡.jpg',
           title: '电路排查',
           kind: 3,
           body: '家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！',
           author: '冷月汐'
-        }
-        ,
+        },
         {
+          id:5,
           imgSrc: '/src/assets/images/氧气.jpg',
           title: '氧气制取',
           kind: 3,
           body: '氧气瓶中的氧气是怎么制造出来呢？',
           author: '冷月汐'
+        }
+      ],
+      gameList: [
+        {
+          id:1,
+          imgSrc: '/src/assets/images/demo/game1.jpg',
+          title: '法庭疑案',
+          kind: 2,
+          kindName:'材料',
+          body: '放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！',
+          author: '机智的皇冠'
+        },
+        {
+          id:2,
+          imgSrc: '/src/assets/images/demo/game2.jpg',
+          title: '电路排查',
+          kind: 3,
+          kindName:'物理',
+          body: '莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！',
+          author: '看手机东方红'
+        },
+        {
+          id:3,
+          imgSrc: '/src/assets/images/demo/game3.jpg',
+          title: '三态变化',
+          kind: 4,
+          kindName:'化学',
+          body: '空气里究竟都有些什么状态的物质呢？小白走在路上发出了这样的疑问。',
+          author: '梵蒂冈'
+        },
+        {
+          id:4,
+          imgSrc: '/src/assets/images/demo/game1.jpg',
+          title: '法庭疑案',
+          kind: 2,
+          kindName:'材料',
+          body: '放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！',
+          author: '机智的皇冠'
+        },
+        {
+          id:5,
+          imgSrc: '/src/assets/images/demo/game2.jpg',
+          title: '电路排查',
+          kind: 3,
+          kindName:'物理',
+          body: '莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！',
+          author: '看手机东方红'
         }
       ],
     };
@@ -177,8 +230,8 @@ export default defineComponent({
     },
 
     //点击进入知识点详情
-    klgDetailBtnClick(kind: number) {
-      this.$router.push("/knowledge/kind/" + kind)
+    klgDetailBtnClick(id: number) {
+      this.$router.push("/knowledge/detail/" + id)
     }
   },
 });
