@@ -172,21 +172,25 @@ export default {
     },
     commandItemClick1(command) {
       this.currentItem = 1;
+      this.$emit('getTopData1',command);
       this.$router.push('/knowledge/kind1');
       // console.log('click on command:' + command);
     },
     commandItemClick2(command) {
       this.currentItem = 2;
+      this.$emit('getTopData2',command);
       this.$router.push('/knowledge/kind2');
       // console.log('click on command:' + command);
     },
     commandItemClick3(command) {
       this.currentItem = 3;
+      this.$emit('getTopData3',command);
       this.$router.push('/knowledge/kind3');
       // console.log('click on command:' + command);
     },
     commandItemClick4(command) {
       this.currentItem = 4;
+      this.$emit('getTopData4',command);
       this.$router.push('/knowledge/kind4');
       // console.log('click on command:' + command);
     },

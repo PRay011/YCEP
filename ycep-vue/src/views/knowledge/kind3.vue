@@ -1,6 +1,6 @@
 <template>
   <!--  顶部导航栏-->
-  <Top/>
+  <Top  @getTopData3="changeTitleItem"/>
 
   <div class="container">
     <div class="main" v-if="update">
@@ -16,7 +16,7 @@
       </div>
 
       <div class="title">
-        <div v-for="(item,index) in itemList" class="title-item" :class="{'selected': selectedItem === index}"
+        <div v-for="(item,index) in itemList" class="title-item" :class="{'selected': selectedItem == index}"
              @click="itemClick(index)">
           <p class="text">{{ item }}</p>
         </div>
@@ -81,7 +81,7 @@
 
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
 import Top from "../../components/top.vue";
 
@@ -226,10 +226,15 @@ export default defineComponent({
         ]
       }
     },
-    toDetails(id) {
+    changeTitleItem(data:any) {
+      console.log(data)
+      this.itemClick(data)
+      console.log(this.selectedItem)
+    },
+    toDetails(id:any) {
       this.$router.push('/knowledge/detail/' + id)
     },
-    itemClick(index){
+    itemClick(index:any){
       this.selectedItem = index;
       console.log("selectedItem:"+this.selectedItem)
       this.ready();
