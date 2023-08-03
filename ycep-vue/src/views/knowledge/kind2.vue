@@ -15,6 +15,7 @@
       <div class="title">
         <div
           v-for="(item, index) in itemList"
+          :key="index"
           class="title-item"
           :class="{ selected: selectedItem == index }"
           @click="itemClick(index)"
@@ -89,29 +90,28 @@
             v-for="item in knowledgeInfoList"
             @click="toDetails(item.id)"
           >
-            <div class="image">
-              <img :src="item.imgSrc" alt="知识点图片" />
+            <!--知识点-->
+            <div class="knowledge">
+              <div class="image">
+                <img :src="item.imgSrc" alt="知识点图片" />
+              </div>
+              <div class="info">
+                <p class="title-tag">{{ item.title }}</p>
+                <p class="desc">{{ item.content }}</p>
+                <p class="author">作者：{{ item.author }}</p>
+              </div>
             </div>
-            <div class="info">
-              <p class="title-tag">{{ item.title }}</p>
-              <p class="desc">{{ item.content }}</p>
-              <p class="author">作者：{{ item.author }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="right">
-          <!--          <p>您可能感兴趣的：</p>-->
-          <div class="item">
-            <div class="card">
-              <a class="card1" href="#">
-                <p>智能垃圾桶</p>
-                <p class="small">
-                  可以感应手的智能垃圾桶的原理是怎么实现的呢？
-                </p>
-                <div class="go-corner">
-                  <div class="go-arrow">→</div>
+            <!--游戏-->
+            <div class="game">
+              <div class="card" @click="klgDetailBtnClick(item.id)">
+                <div class="card-image">
+                  <img :src="item.imgSrc" alt="背景图片" />
                 </div>
-              </a>
+                <div class="card-details">
+                  <p class="text-title">{{ item.title }}</p>
+                  <el-tag class="text-author">作者：{{ item.author }}</el-tag>
+                </div>
+              </div>
             </div>
           </div>
         </div>
