@@ -60,22 +60,22 @@
             <!--游戏-->
             <div class="game">
               <div class="card" @click="klgDetailBtnClick(item.id)">
-<!--                <div class="card-image">-->
-<!--                  <img :src=" item.gameList[0].imgSrc" alt="背景图片">-->
-<!--                </div>-->
-<!--                <div class="card-details">-->
-<!--                  <p class="text-title">{{ item.gameList[0].title }}</p>-->
-<!--                  <el-tag class="text-author">作者：{{ item.gameList[0].author }}</el-tag>-->
-<!--                </div>-->
+                <div class="card-image">
+                  <img :src=" item.imgSrc " alt="背景图片">
+                </div>
+                <div class="card-details">
+                  <p class="text-title">{{ item.title }}</p>
+                  <el-tag class="text-author">作者：{{ item.author }}</el-tag>
+                </div>
               </div>
             </div>
 
           </div>
 
 
-          <div class="right">
+<!--          <div class="right">-->
             <!--          <p>您可能感兴趣的：</p>-->
-            <div class="item">
+<!--            <div class="item">-->
               <!--            <div class="card">-->
               <!--              <a class="card1" href="#">-->
               <!--                <p>智能垃圾桶</p>-->
@@ -85,15 +85,12 @@
               <!--                </div>-->
               <!--              </a>-->
               <!--            </div>-->
-            </div>
-          </div>
+<!--            </div>-->
+<!--          </div>-->
 
         </div>
-
       </div>
-
     </div>
-
   </div>
 
 
