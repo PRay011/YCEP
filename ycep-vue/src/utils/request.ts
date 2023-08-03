@@ -73,7 +73,7 @@ export function request(config: any) {
           type: "warning",
         });
       }
-      return res ? res.data : res;
+      return res.data ? res : res.data;
     },
     (err: any) => {
       console.log("响应拦截=>", err.response);

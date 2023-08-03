@@ -14,6 +14,19 @@
           <div class="input-group">
             <label for="password">密码</label>
             <input type="password" name="password" id="password" v-model="user.password" placeholder="">
+            
+          </div>
+          <div class="input-group">
+            <label for="check">验证码</label>
+            <div class="check-code">
+              <input type="text" name="check" id="check" v-model="user.code" placeholder="">
+              <a  class="check-btn"><img
+                :src="codeUrl"
+                alt="验证码"
+                id="verificationCode"
+                @click="newVertification()"
+            /></a>
+            </div>
             <div class="forgot">
               <a rel="noopener noreferrer" href="#">忘记密码 ?</a>
             </div>
@@ -53,15 +66,18 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Top from "../../components/top.vue";
+import { login, vertify } from "../../api/user/login";
 
 export default defineComponent({
   name: "login",
   data() {
-    return {
-      data: "",
+    return { 
+      codeUrl: "",
       user:{
         username:'',
         password:'',
+        code: "",
+        codeID: "",
       }
     };
   },
@@ -69,10 +85,30 @@ export default defineComponent({
   mounted() {},
   methods: {
     ready() {},
+    newVertification() {
+      let that = this;
+      vertify()
+        .then((res: any) => {
+          console.log(res);
+          that.user.codeID = res.codeID;
+          that.codeUrl = "data:image/gif;base64," + res.img;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
     registerBtnClick() {
       this.$router.push('/user/register')
     },
     login() {
+      let that = this;
+      login(that.user)
+        .then((res: any) => {
+          console.log(res);
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
       localStorage.setItem('username',this.user.username)
       this.$router.push('/knowledge/index')
     }

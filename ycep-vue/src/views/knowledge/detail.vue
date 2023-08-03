@@ -48,7 +48,7 @@
               <div class="card" v-for="item in gameList">
                 <div class="card-details">
                   <div class="card-image">
-                    <img src="src/assets/images/灯泡.jpg" alt="背景图片">
+                    <img src="../../assets/images/灯泡.jpg" alt="背景图片">
                   </div>
                   <p class="text-title">{{ item.title }}</p>
                   <p class="text-body">{{ item.body }}</p>
@@ -70,7 +70,7 @@
 
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
 import Top from "../../components/top.vue";
 
@@ -135,7 +135,7 @@ export default defineComponent({
       console.log("id: " + id);
     },
     //进入游戏
-    toGame(id) {
+    toGame(id:any) {
       this.$router.push('/game/main/' + id);
     }
   },
