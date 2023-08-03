@@ -46,37 +46,46 @@
       <div class="body">
         <div class="left">
           <div class="item" v-for="item in knowledgeInfoList" @click="toDetails(item.id)">
-            <div class="image">
-              <img :src="item.imgSrc" alt="知识点图片">
-            </div>
-            <div class="info">
-              <p class="title-tag">{{ item.title }}</p>
-              <p class="desc">{{ item.content }}</p>
-              <p class="author">作者：{{ item.author }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="right">
-          <!--          <p>您可能感兴趣的：</p>-->
-          <div class="item">
-            <div class="card" v-for="item in gameList" @click="klgDetailBtnClick(item.id)">
-              <div class="card-image">
-                <img :src="item.imgSrc" alt="背景图片">
+            <!--知识点-->
+            <div class="knowledge">
+              <div class="image">
+                <img :src="item.imgSrc" alt="知识点图片">
               </div>
-              <div class="card-details">
-                <p class="text-title">{{ item.title }}</p>
-                <el-tag class="text-author">作者：{{ item.author }}</el-tag>
+              <div class="info">
+                <p class="title-tag">{{ item.title }}</p>
+                <p class="desc">{{ item.content }}</p>
+                <p class="author">作者：{{ item.author }}</p>
               </div>
             </div>
-<!--            <div class="card">-->
-<!--              <a class="card1" href="#">-->
-<!--                <p>智能垃圾桶</p>-->
-<!--                <p class="small">可以感应手的智能垃圾桶的原理是怎么实现的呢？</p>-->
-<!--                <div class="go-corner">-->
-<!--                  <div class="go-arrow">→</div>-->
+            <!--游戏-->
+            <div class="game">
+              <div class="card" @click="klgDetailBtnClick(item.id)">
+<!--                <div class="card-image">-->
+<!--                  <img :src=" item.gameList[0].imgSrc" alt="背景图片">-->
 <!--                </div>-->
-<!--              </a>-->
-<!--            </div>-->
+<!--                <div class="card-details">-->
+<!--                  <p class="text-title">{{ item.gameList[0].title }}</p>-->
+<!--                  <el-tag class="text-author">作者：{{ item.gameList[0].author }}</el-tag>-->
+<!--                </div>-->
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="right">
+            <!--          <p>您可能感兴趣的：</p>-->
+            <div class="item">
+              <!--            <div class="card">-->
+              <!--              <a class="card1" href="#">-->
+              <!--                <p>智能垃圾桶</p>-->
+              <!--                <p class="small">可以感应手的智能垃圾桶的原理是怎么实现的呢？</p>-->
+              <!--                <div class="go-corner">-->
+              <!--                  <div class="go-arrow">→</div>-->
+              <!--                </div>-->
+              <!--              </a>-->
+              <!--            </div>-->
+            </div>
           </div>
 
         </div>
@@ -99,7 +108,7 @@ export default defineComponent({
   components: {Top},
   data() {
     return {
-      update:true,
+      update: true,
       selectedItem: 0,
       itemList: ['全部', '排序算法', '数组', '链表', '对象'],
       knowledgeInfoList: [
@@ -111,20 +120,20 @@ export default defineComponent({
           author: '冷雪兮',
           gameList: [
             {
-              id:1,
+              id: 1,
               imgSrc: '/src/assets/images/demo/game1.jpg',
               title: '法庭疑案',
               kind: 2,
-              kindName:'材料',
+              kindName: '材料',
               body: '放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！',
               author: '机智的皇冠'
             },
             {
-              id:2,
+              id: 2,
               imgSrc: '/src/assets/images/demo/game2.jpg',
               title: '电路排查',
               kind: 3,
-              kindName:'物理',
+              kindName: '物理',
               body: '莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！',
               author: '看手机东方红'
             }
@@ -138,20 +147,20 @@ export default defineComponent({
           author: '冷雪兮',
           gameList: [
             {
-              id:1,
+              id: 1,
               imgSrc: '/src/assets/images/demo/game1.jpg',
               title: '法庭疑案',
               kind: 2,
-              kindName:'材料',
+              kindName: '材料',
               body: '放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！',
               author: '机智的皇冠'
             },
             {
-              id:2,
+              id: 2,
               imgSrc: '/src/assets/images/demo/game2.jpg',
               title: '电路排查',
               kind: 3,
-              kindName:'物理',
+              kindName: '物理',
               body: '莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！',
               author: '看手机东方红'
             }
@@ -165,20 +174,20 @@ export default defineComponent({
           author: '冷雪兮',
           gameList: [
             {
-              id:1,
+              id: 1,
               imgSrc: '/src/assets/images/demo/game1.jpg',
               title: '法庭疑案',
               kind: 2,
-              kindName:'材料',
+              kindName: '材料',
               body: '放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！',
               author: '机智的皇冠'
             },
             {
-              id:2,
+              id: 2,
               imgSrc: '/src/assets/images/demo/game2.jpg',
               title: '电路排查',
               kind: 3,
-              kindName:'物理',
+              kindName: '物理',
               body: '莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！',
               author: '看手机东方红'
             }
@@ -192,20 +201,20 @@ export default defineComponent({
           author: '冷雪兮',
           gameList: [
             {
-              id:1,
+              id: 1,
               imgSrc: '/src/assets/images/demo/game1.jpg',
               title: '法庭疑案',
               kind: 2,
-              kindName:'材料',
+              kindName: '材料',
               body: '放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！',
               author: '机智的皇冠'
             },
             {
-              id:2,
+              id: 2,
               imgSrc: '/src/assets/images/demo/game2.jpg',
               title: '电路排查',
               kind: 3,
-              kindName:'物理',
+              kindName: '物理',
               body: '莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！',
               author: '看手机东方红'
             }
@@ -228,7 +237,7 @@ export default defineComponent({
   },
   methods: {
     ready() {
-      if(this.selectedItem === 0){
+      if (this.selectedItem === 0) {
         this.knowledgeInfoList = [
           {
             id: 1,
@@ -327,9 +336,9 @@ export default defineComponent({
     toDetails(id) {
       this.$router.push('/knowledge/detail/' + id)
     },
-    itemClick(index){
+    itemClick(index) {
       this.selectedItem = index;
-      console.log("selectedItem:"+this.selectedItem)
+      console.log("selectedItem:" + this.selectedItem)
       this.ready();
     },
     //点击进入知识点详情
