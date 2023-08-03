@@ -57,6 +57,24 @@
     border-color: rgba(167, 139, 250);
   }
 
+  .check-code {
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      width: 60%;
+    }
+
+    .check-btn {
+      width: 38%;
+      border-radius: 0.375rem;
+      background-color: rgba(167, 139, 250, 1);
+      border:none;
+      color: rgba(17, 24, 39, 1);
+      font-weight: 600;
+      font-size: 12px;
+    }
+  }
   .forgot {
     display: flex;
     justify-content: flex-end;
