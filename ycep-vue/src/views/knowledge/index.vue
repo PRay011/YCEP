@@ -254,9 +254,14 @@ export default defineComponent({
     };
   },
   components: { Top },
-  mounted() {},
+  mounted() {
+    this.ready()
+  },
   methods: {
-    ready() {},
+    ready() {
+      this.showKnowledges();
+      this.showGames();
+    },
 
     showKnowledges() {
       let that = this;
@@ -264,7 +269,7 @@ export default defineComponent({
         .then((res: any) => {
           console.log(res);
           that.pageNum++;
-          that.knowledgeList = res.content;
+          that.knowledgeList = res.data.knowledge;
         })
         .catch((err: any) => {
           console.log(err);
@@ -277,7 +282,7 @@ export default defineComponent({
         .then((res: any) => {
           console.log(res);
           that.pageNum++;
-          that.gameList = res.content;
+          that.gameList = res.data.game;
         })
         .catch((err: any) => {
           console.log(err);

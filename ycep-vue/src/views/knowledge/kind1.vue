@@ -88,6 +88,7 @@
           <div
             class="item"
             v-for="item in knowledgeInfoList"
+            :key="item.id"
             @click="toDetails(item.id)"
           >
             <!--知识点-->
@@ -114,6 +115,15 @@
               </div>
             </div>
           </div>
+          <div class="pagination">
+            <el-pagination
+              v-model:currentPage="paginationConfig.currentPage"
+              layout="total, prev, pager, next"
+              :page-size="paginationConfig.pageSize"
+              :total="paginationConfig.total"
+              @current-change="handlePageChange"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -123,6 +133,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Top from "../../components/top.vue";
+import { getList } from "../../api/knowledge/kind";
 
 export default defineComponent({
   name: "kind1",
@@ -132,6 +143,12 @@ export default defineComponent({
       update: true,
       selectedItem: 0,
       itemList: ["全部", "排序算法", "数组", "链表", "对象"],
+      paginationConfig: {
+        currentPage: 1, // 当前页码
+        pageSize: 4, // 每页显示的条数
+        pageCount: 1, //总共有多少页
+        total: 10, // 总条数
+      },
       knowledgeInfoList: [
         {
           id: 1,
@@ -262,14 +279,7 @@ export default defineComponent({
   },
   methods: {
     ready() {
-      if (this.selectedItem === 0) {
-      } else if (this.selectedItem === 1) {
-      } else if (this.selectedItem === 2) {
-      } else if (this.selectedItem === 3) {
-      } else {
-      }
-      this.update = false;
-      this.$nextTick(() => (this.update = true));
+      this.getKnowledge();
     },
     //收到子组件信息
     changeTitleItem(data: any) {
@@ -277,10 +287,11 @@ export default defineComponent({
       this.selectedItem = data;
       console.log(this.selectedItem);
     },
+    //前往知识点详情界面
     toDetails(id: any) {
       this.$router.push("/knowledge/detail/" + id);
     },
-
+    // 页面中间
     itemClick(index: any) {
       this.selectedItem = index;
       console.log("selectedItem:" + this.selectedItem);
@@ -289,6 +300,28 @@ export default defineComponent({
     //点击进入知识点详情
     klgDetailBtnClick(id: any) {
       this.$router.push("/knowledge/detail/" + id);
+    },
+    // 翻页
+    handlePageChange(val: number) {
+      this.paginationConfig.currentPage = val;
+      console.log("当前页面数为：" + val);
+      this.getKnowledge();
+    },
+    getKnowledge() {
+      let that = this;
+      getList(
+        1,
+        this.selectedItem,
+        this.paginationConfig.currentPage,
+        this.paginationConfig.pageSize
+      )
+        .then((res: any) => {
+          console.log(res);
+          that.knowledgeInfoList = res.data.content;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
   },
 });
