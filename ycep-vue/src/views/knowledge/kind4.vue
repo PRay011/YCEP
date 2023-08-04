@@ -1,23 +1,25 @@
 <template>
   <!--  顶部导航栏-->
-  <Top/>
+  <Top @getTopData4="changeTitleItem" />
 
   <div class="container">
     <div class="main" v-if="update">
-
       <div class="kind">
         <div class="info">
           <p class="text1">化学</p>
           <p class="text2">微观视角/变化/培养兴趣</p>
-          <div class="tags">
-
-          </div>
+          <div class="tags"></div>
         </div>
       </div>
 
       <div class="title">
-        <div v-for="(item,index) in itemList" class="title-item" :class="{'selected': selectedItem === index}"
-             @click="itemClick(index)">
+        <div
+          v-for="(item, index) in itemList"
+          :key="index"
+          class="title-item"
+          :class="{ selected: selectedItem == index }"
+          @click="itemClick(index)"
+        >
           <p class="text">{{ item }}</p>
         </div>
         <div class="search">
@@ -49,7 +51,7 @@
             <!--知识点-->
             <div class="knowledge">
               <div class="image">
-                <img :src="item.imgSrc" alt="知识点图片">
+                <img :src="item.imgSrc" alt="知识点图片" />
               </div>
               <div class="info">
                 <p class="title-tag">{{ item.title }}</p>
@@ -61,7 +63,7 @@
             <div class="game">
               <div class="card" @click="klgDetailBtnClick(item.id)">
                 <div class="card-image">
-                  <img :src=" item.imgSrc " alt="背景图片">
+                  <img :src="item.imgSrc" alt="背景图片" />
                 </div>
                 <div class="card-details">
                   <p class="text-title">{{ item.title }}</p>
@@ -69,33 +71,26 @@
                 </div>
               </div>
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
-
   </div>
-
-
 </template>
 
-<script>
-import {defineComponent} from "vue";
+<script lang="ts">
+import { defineComponent } from "vue";
 import Top from "../../components/top.vue";
 
 export default defineComponent({
   name: "kind4",
-  components: {Top},
+  components: { Top },
   data() {
     return {
-      update:true,
+      update: true,
       kind: 0,
       selectedItem: 0,
-      itemList: ['全部', '液体', '固体', '气体', '合成'],
+      itemList: ["全部", "液体", "固体", "气体", "合成"],
       knowledgeInfoList: [
         {
           id: 1,
@@ -206,7 +201,7 @@ export default defineComponent({
           ],
         },
       ]
-    }
+    };
   },
 
   mounted() {
@@ -214,7 +209,7 @@ export default defineComponent({
   },
   methods: {
     ready() {
-      if(this.selectedItem === 0){
+      if (this.selectedItem === 0) {
         this.knowledgeInfoList = [
           {
             id: 1,
@@ -308,12 +303,17 @@ export default defineComponent({
         ]
       }
     },
-    toDetails(id) {
-      this.$router.push('/knowledge/detail/' + id)
+    changeTitleItem(data: any) {
+      console.log(data);
+      this.itemClick(data);
+      console.log(this.selectedItem);
     },
-    itemClick(index){
+    toDetails(id: any) {
+      this.$router.push("/knowledge/detail/" + id);
+    },
+    itemClick(index: any) {
       this.selectedItem = index;
-      console.log("selectedItem:"+this.selectedItem)
+      console.log("selectedItem:" + this.selectedItem);
       this.ready();
     },
     //点击进入知识点详情

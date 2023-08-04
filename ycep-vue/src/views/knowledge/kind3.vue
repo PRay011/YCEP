@@ -1,6 +1,6 @@
 <template>
   <!--  顶部导航栏-->
-  <Top/>
+  <Top  @getTopData3="changeTitleItem"/>
 
   <div class="container">
     <div class="main" v-if="update">
@@ -16,7 +16,7 @@
       </div>
 
       <div class="title">
-        <div v-for="(item,index) in itemList" class="title-item" :class="{'selected': selectedItem === index}"
+        <div v-for="(item,index) in itemList" class="title-item" :class="{'selected': selectedItem == index}"
              @click="itemClick(index)">
           <p class="text">{{ item }}</p>
         </div>
@@ -83,7 +83,7 @@
 
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
 import Top from "../../components/top.vue";
 
@@ -215,103 +215,26 @@ export default defineComponent({
   methods: {
     ready() {
       if(this.selectedItem === 0){
-        this.knowledgeInfoList = [
-          {
-            id: 1,
-            imgSrc: '/src/assets/images/灯泡.jpg',
-            title: 'Spring Boot 单元测试',
-            content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
-            author: '冷雪兮',
-          },
-          {
-            id: 2,
-            imgSrc: '/src/assets/images/灯泡.jpg',
-            title: 'Spring Boot 单元测试',
-            content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
-            author: '冷雪兮',
-          },
-          {
-            id: 3,
-            imgSrc: '/src/assets/images/灯泡.jpg',
-            title: 'Spring Boot 单元测试',
-            content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
-            author: '冷雪兮',
-          },
-          {
-            id: 4,
-            imgSrc: '/src/assets/images/灯泡.jpg',
-            title: 'Spring Boot 单元测试',
-            content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
-            author: '冷雪兮',
-          },
-        ]
+        
       } else if (this.selectedItem === 1) {
-        this.knowledgeInfoList = [
-          {
-            id: 1,
-            imgSrc: '/src/assets/images/灯泡.jpg',
-            title: 'Spring Boot 单元测试',
-            content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
-            author: '冷雪兮',
-          }
-        ]
+        
       } else if (this.selectedItem === 2) {
-        this.knowledgeInfoList = [
-          {
-            id: 1,
-            imgSrc: '/src/assets/images/灯泡.jpg',
-            title: 'Spring Boot 单元测试',
-            content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
-            author: '冷雪兮',
-          },
-          {
-            id: 2,
-            imgSrc: '/src/assets/images/灯泡.jpg',
-            title: 'Spring Boot 单元测试',
-            content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
-            author: '冷雪兮',
-          },
-          {
-            id: 3,
-            imgSrc: '/src/assets/images/灯泡.jpg',
-            title: 'Spring Boot 单元测试',
-            content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
-            author: '冷雪兮',
-          },
-        ]
+        
       } else if (this.selectedItem === 3) {
-        this.knowledgeInfoList = [
-          {
-            id: 1,
-            imgSrc: '/src/assets/images/灯泡.jpg',
-            title: 'Spring Boot 单元测试',
-            content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
-            author: '冷雪兮',
-          },
-          {
-            id: 2,
-            imgSrc: '/src/assets/images/灯泡.jpg',
-            title: 'Spring Boot 单元测试',
-            content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
-            author: '冷雪兮',
-          }
-        ]
+        
       } else {
-        this.knowledgeInfoList = [
-          {
-            id: 4,
-            imgSrc: '/src/assets/images/灯泡.jpg',
-            title: 'Spring Boot 单元测试',
-            content: 'Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。',
-            author: '冷雪兮',
-          }
-        ]
+        
       }
     },
-    toDetails(id) {
+    changeTitleItem(data:any) {
+      console.log(data)
+      this.itemClick(data)
+      console.log(this.selectedItem)
+    },
+    toDetails(id:any) {
       this.$router.push('/knowledge/detail/' + id)
     },
-    itemClick(index){
+    itemClick(index:any){
       this.selectedItem = index;
       console.log("selectedItem:"+this.selectedItem)
       this.ready();
