@@ -9,7 +9,6 @@
         <el-carousel height="300px" :interval="10000">
           <el-carousel-item v-for="item in imageList" :key="item">
             <img :src="item" alt="轮播图" />
-            <!--            <h3 class="small">{{ item }}</h3>-->
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -52,7 +51,7 @@
               <p>Knowledge That May Interest You</p>
             </div>
             <div class="block-main">
-              <div class="item1">
+              <div class="item1" @click="klgDetailBtnClick(1)">
                 <div class="image">
                   <img src="../../assets/images/宇宙.jpg" alt="知识点图片" />
                 </div>
@@ -61,7 +60,7 @@
                   <p class="p2">太阳系中有多少行星？</p>
                 </div>
               </div>
-              <div class="item1">
+              <div class="item1" @click="klgDetailBtnClick(1)">
                 <div class="image">
                   <img src="../../assets/images/氧气.jpg" alt="知识点图片" />
                 </div>
@@ -104,7 +103,6 @@
                 <el-carousel height="200px" :interval="10000">
                   <el-carousel-item v-for="item in imageList2" :key="item">
                     <img :src="item" alt="轮播图" />
-                    <!--                    <h3 class="small">{{ item }}</h3>-->
                   </el-carousel-item>
                 </el-carousel>
               </div>
