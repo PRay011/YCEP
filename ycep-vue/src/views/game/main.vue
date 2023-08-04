@@ -223,11 +223,9 @@ export default defineComponent({
       console.log("in");
       let page = this.currentPage;
       if (page < this.pageNumber) {
-        console.log("inin");
         page = ++this.currentPage;
         this.data = this.plot[page].content;
       } else {
-        alert("已经是最后一页了");
       }
     },
   },

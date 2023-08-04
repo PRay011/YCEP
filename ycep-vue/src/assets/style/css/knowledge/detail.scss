@@ -137,11 +137,17 @@
         .content-text {
           margin-top: 2%;
           margin-bottom: 2%;
-          height: 400px;
+          height: 550px;
           width: 100%;
           overflow: hidden;
-          // background-color: #008bf8;
+          .content-text-image{
+            height: 420px;
+            width: 100%;
+            margin-bottom: 10px;
+            background-color: #008bf8;
+          }
           .game {
+            margin-top: 10%;
             .title-tip {
               font-size: 25px;
               font-weight: 600;
