@@ -315,6 +315,10 @@ export default defineComponent({
       this.selectedItem = index;
       console.log("selectedItem:"+this.selectedItem)
       this.ready();
+    },
+    //点击进入知识点详情
+    klgDetailBtnClick(id) {
+      this.$router.push("/knowledge/detail/" + id)
     }
   }
 
