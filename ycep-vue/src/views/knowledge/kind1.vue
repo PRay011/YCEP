@@ -91,7 +91,6 @@
             :key="item.id"
             @click="toDetails(item.id)"
           >
-            <!--知识点-->
             <div class="knowledge">
               <div class="image">
                 <img :src="item.imgSrc" alt="知识点图片" />
@@ -106,11 +105,13 @@
             <div class="game">
               <div class="card" @click="klgDetailBtnClick(item.id)">
                 <div class="card-image">
-                  <img :src="item.imgSrc" alt="背景图片" />
+                  <img :src="item.game.imgSrc" alt="背景图片" />
                 </div>
                 <div class="card-details">
-                  <p class="text-title">{{ item.title }}</p>
-                  <el-tag class="text-author">作者：{{ item.author }}</el-tag>
+                  <p class="text-title">{{ item.game.title }}</p>
+                  <el-tag class="text-author"
+                    >作者：{{ item.game.author }}</el-tag
+                  >
                 </div>
               </div>
             </div>
@@ -157,122 +158,19 @@ export default defineComponent({
           content:
             "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
           author: "冷雪兮",
-          gameList: [
-            {
-              id: 1,
-              imgSrc: "/src/assets/images/demo/game1.jpg",
-              title: "法庭疑案",
-              kind: 2,
-              kindName: "材料",
-              body: "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
-              author: "机智的皇冠",
-            },
-            {
-              id: 2,
-              imgSrc: "/src/assets/images/demo/game2.jpg",
-              title: "电路排查",
-              kind: 3,
-              kindName: "物理",
-              body: "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
-              author: "看手机东方红",
-            },
-          ],
-        },
-        {
-          id: 2,
-          imgSrc: "/src/assets/images/灯泡.jpg",
-          title: "Spring Boot 单元测试",
-          content:
-            "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
-          author: "冷雪兮",
-          gameList: [
-            {
-              id: 1,
-              imgSrc: "/src/assets/images/demo/game1.jpg",
-              title: "法庭疑案",
-              kind: 2,
-              kindName: "材料",
-              body: "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
-              author: "机智的皇冠",
-            },
-            {
-              id: 2,
-              imgSrc: "/src/assets/images/demo/game2.jpg",
-              title: "电路排查",
-              kind: 3,
-              kindName: "物理",
-              body: "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
-              author: "看手机东方红",
-            },
-          ],
-        },
-        {
-          id: 3,
-          imgSrc: "/src/assets/images/灯泡.jpg",
-          title: "Spring Boot 单元测试",
-          content:
-            "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
-          author: "冷雪兮",
-          gameList: [
-            {
-              id: 1,
-              imgSrc: "/src/assets/images/demo/game1.jpg",
-              title: "法庭疑案",
-              kind: 2,
-              kindName: "材料",
-              body: "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
-              author: "机智的皇冠",
-            },
-            {
-              id: 2,
-              imgSrc: "/src/assets/images/demo/game2.jpg",
-              title: "电路排查",
-              kind: 3,
-              kindName: "物理",
-              body: "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
-              author: "看手机东方红",
-            },
-          ],
-        },
-        {
-          id: 4,
-          imgSrc: "/src/assets/images/灯泡.jpg",
-          title: "Spring Boot 单元测试",
-          content:
-            "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
-          author: "冷雪兮",
-          gameList: [
-            {
-              id: 1,
-              imgSrc: "/src/assets/images/demo/game1.jpg",
-              title: "法庭疑案",
-              kind: 2,
-              kindName: "材料",
-              body: "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
-              author: "机智的皇冠",
-            },
-            {
-              id: 2,
-              imgSrc: "/src/assets/images/demo/game2.jpg",
-              title: "电路排查",
-              kind: 3,
-              kindName: "物理",
-              body: "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
-              author: "看手机东方红",
-            },
-          ],
+          game: {
+            id: 1,
+            imgSrc: "/src/assets/images/demo/game1.jpg",
+            title: "法庭疑案",
+            kind: 2,
+            kindName: "材料",
+            body: "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
+            author: "机智的皇冠",
+          },
         },
       ],
     };
   },
-  // 监听,当路由发生变化的时候执行，检测路由变化刷新组件数据
-  // watch: {
-  //   $route(to, from) {
-  //     console.log('watch......'+ to.query.index)
-  //     this.selectedItem = this.$route.query.index
-  //     this.ready();
-  //   },
-  // },
 
   mounted() {
     this.ready();
@@ -285,6 +183,7 @@ export default defineComponent({
     changeTitleItem(data: any) {
       console.log(data);
       this.selectedItem = data;
+      this.getKnowledge();
       console.log(this.selectedItem);
     },
     //前往知识点详情界面
