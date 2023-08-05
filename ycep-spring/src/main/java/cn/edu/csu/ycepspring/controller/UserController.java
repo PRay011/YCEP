@@ -6,6 +6,8 @@ import cn.edu.csu.ycepspring.common.response.CommonResponse;
 import cn.edu.csu.ycepspring.common.utils.EncryptionUtils;
 import cn.edu.csu.ycepspring.entity.dto.LoginBody;
 import cn.edu.csu.ycepspring.entity.dto.LoginResp;
+import cn.edu.csu.ycepspring.entity.dto.PasswordBody;
+import cn.edu.csu.ycepspring.entity.dto.UserInfo;
 import cn.edu.csu.ycepspring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -63,5 +65,30 @@ public class UserController {
     public CommonResponse logout() {
         StpUtil.logout();
         return CommonResponse.success("注销成功");
+    }
+
+    @GetMapping("/info")
+    public CommonResponse getUserInfo() {
+        int account = StpUtil.getLoginIdAsInt();
+        return CommonResponse.success(userService.getUserInfo(account));
+    }
+
+    @PutMapping("/info")
+    public CommonResponse updateUserInfo(@RequestBody UserInfo userInfo) {
+        int account = StpUtil.getLoginIdAsInt();
+        userInfo.setAccount(account);
+        userService.updateUserInfo(userInfo);
+        return CommonResponse.success();
+    }
+
+    @PutMapping("/password")
+    public CommonResponse updatePassword(@RequestBody PasswordBody passwordBody) {
+        // 检查验证码
+        captchaService.checkCaptcha(passwordBody.getCode(), passwordBody.getCodeID());
+        // 改密码
+        int account = StpUtil.getLoginIdAsInt();
+        passwordBody.setAccount(account);
+        userService.updatePassword(passwordBody);
+        return CommonResponse.success();
     }
 }

@@ -11,7 +11,7 @@
  Target Server Version : 50742 (5.7.42)
  File Encoding         : 65001
 
- Date: 02/08/2023 08:13:14
+ Date: 03/08/2023 21:44:04
 */
 
 SET NAMES utf8mb4;
@@ -25,7 +25,7 @@ CREATE TABLE `auth_local` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `passwordBody` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `account` (`account`),
@@ -36,9 +36,9 @@ CREATE TABLE `auth_local` (
 -- Records of auth_local
 -- ----------------------------
 BEGIN;
-INSERT INTO `auth_local` (`id`, `account`, `username`, `password`) VALUES (1, 1, 'root', '$argon2id$v=19$m=4096,t=3,p=1$d5FLws7CQLfST/5CzkqS9w$bSrNnvhRyB5lT6/tSgVOiJ7uVSRQR1a5xd4qZbrLQEk');
-INSERT INTO `auth_local` (`id`, `account`, `username`, `password`) VALUES (2, 2, 'abc', '$argon2id$v=19$m=4096,t=3,p=1$gm87yiZJC94Sc7oeVI4YDQ$nDDky3perv9hmq4V13rPJCfgIQ5kNw1esmzPzvzVzkE');
-INSERT INTO `auth_local` (`id`, `account`, `username`, `password`) VALUES (3, 3, 'pr', '$argon2id$v=19$m=4096,t=3,p=1$NXLw2uEZLSifb8N+BouhCw$5rmu0gS7KL4UCLP5MybHTY+7os2jaHd0iu7AUvbekwI');
+INSERT INTO `auth_local` (`id`, `account`, `username`, `passwordBody`) VALUES (1, 1, 'root', '$argon2id$v=19$m=4096,t=3,p=1$d5FLws7CQLfST/5CzkqS9w$bSrNnvhRyB5lT6/tSgVOiJ7uVSRQR1a5xd4qZbrLQEk');
+INSERT INTO `auth_local` (`id`, `account`, `username`, `passwordBody`) VALUES (2, 2, 'abc', '$argon2id$v=19$m=4096,t=3,p=1$gm87yiZJC94Sc7oeVI4YDQ$nDDky3perv9hmq4V13rPJCfgIQ5kNw1esmzPzvzVzkE');
+INSERT INTO `auth_local` (`id`, `account`, `username`, `passwordBody`) VALUES (3, 3, 'pr', '$argon2id$v=19$m=4096,t=3,p=1$NXLw2uEZLSifb8N+BouhCw$5rmu0gS7KL4UCLP5MybHTY+7os2jaHd0iu7AUvbekwI');
 COMMIT;
 
 -- ----------------------------
@@ -64,6 +64,87 @@ BEGIN;
 COMMIT;
 
 -- ----------------------------
+-- Table structure for category
+-- ----------------------------
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of category
+-- ----------------------------
+BEGIN;
+INSERT INTO `category` (`id`, `category_name`) VALUES (1, '编程');
+INSERT INTO `category` (`id`, `category_name`) VALUES (2, '材料');
+INSERT INTO `category` (`id`, `category_name`) VALUES (3, '物理');
+INSERT INTO `category` (`id`, `category_name`) VALUES (4, '化学');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for game
+-- ----------------------------
+DROP TABLE IF EXISTS `game`;
+CREATE TABLE `game` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `knowledge_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `img_src` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `knowledge_id` (`knowledge_id`),
+  CONSTRAINT `game_ibfk_1` FOREIGN KEY (`knowledge_id`) REFERENCES `knowledge` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of game
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for item
+-- ----------------------------
+DROP TABLE IF EXISTS `item`;
+CREATE TABLE `item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
+  `kind_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of item
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for knowledge
+-- ----------------------------
+DROP TABLE IF EXISTS `knowledge`;
+CREATE TABLE `knowledge` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `img_src` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `kind_id` (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of knowledge
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for notice
 -- ----------------------------
 DROP TABLE IF EXISTS `notice`;
@@ -73,7 +154,7 @@ CREATE TABLE `notice` (
   `release_time` datetime NOT NULL,
   `is_delete` tinyint(1) NOT NULL COMMENT '0：未删除；1：已删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of notice
@@ -83,6 +164,7 @@ INSERT INTO `notice` (`id`, `content`, `release_time`, `is_delete`) VALUES (1, '
 INSERT INTO `notice` (`id`, `content`, `release_time`, `is_delete`) VALUES (2, '这是另外一条公告', '2023-08-02 08:01:53', 0);
 INSERT INTO `notice` (`id`, `content`, `release_time`, `is_delete`) VALUES (3, '这又双叒叕是一条公告', '2023-08-02 08:02:47', 0);
 INSERT INTO `notice` (`id`, `content`, `release_time`, `is_delete`) VALUES (4, '这是一条新的公告', '2023-08-02 08:02:57', 1);
+INSERT INTO `notice` (`id`, `content`, `release_time`, `is_delete`) VALUES (5, '公告xxx', '2023-08-02 08:33:52', 0);
 COMMIT;
 
 -- ----------------------------

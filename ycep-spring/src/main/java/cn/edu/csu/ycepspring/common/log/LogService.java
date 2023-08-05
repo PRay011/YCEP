@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class LogService {
-    public void saveLog(int account, String path) {
+    public void saveLog(int account, String path, String method) {
         String time = TimeUtils.getTimeNow();
         String ip = IpUtils.getIpAddr();
-        String s = String.format("时间：%s，源IP：%s，用户Account：%d，请求地址：%s", time, ip, account, path);
+        String s = String.format("时间：%s，源IP：%s，用户Account：%d，请求地址：%s，请求方法：%s", time, ip, account, path, method);
         log.info(s);
     }
 }

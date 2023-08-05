@@ -7,6 +7,8 @@ import cn.edu.csu.ycepspring.common.utils.EncryptionUtils;
 import cn.edu.csu.ycepspring.entity.AuthLocal;
 import cn.edu.csu.ycepspring.entity.User;
 import cn.edu.csu.ycepspring.entity.dto.LoginResp;
+import cn.edu.csu.ycepspring.entity.dto.PasswordBody;
+import cn.edu.csu.ycepspring.entity.dto.UserInfo;
 import cn.edu.csu.ycepspring.mapper.UserMapper;
 import cn.edu.csu.ycepspring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +48,27 @@ public class UserServiceImpl implements UserService {
         AuthLocal auth = new AuthLocal(user.getAccount(), username, password);
         userMapper.insertAuthLocal(auth);
         return new LoginResp(RoleConstants.USER, auth.getAccount(), auth.getUsername());
+    }
+
+    @Override
+    public UserInfo getUserInfo(int account) {
+        return userMapper.selectUserInfo(account);
+    }
+
+    @Override
+    public void updateUserInfo(UserInfo userInfo) {
+        userMapper.updateUserInfo(userInfo);
+    }
+
+    @Override
+    public void updatePassword(PasswordBody passwordBody) {
+        String oldPwdSecret = userMapper.selectPasswordByAccount(passwordBody.getAccount());
+        if (!EncryptionUtils.matches(passwordBody.getOldPassword(), oldPwdSecret)) {
+            throw new ServiceException("原密码错误");
+        }
+        // 改密码
+        String newPwdSecret = EncryptionUtils.encode(passwordBody.getNewPassword());
+        passwordBody.setNewPassword(newPwdSecret);
+        userMapper.updatePassword(passwordBody);
     }
 }

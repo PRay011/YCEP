@@ -9,12 +9,26 @@
         values (#{roleId});
     </insert>
     <insert id="insertAuthLocal">
-        insert into auth_local(account, username, password)
-        values (#{account}, #{username}, #{password});
+        insert into auth_local(account, username, passwordBody)
+        values (#{account}, #{username}, #{passwordBody});
     </insert>
+    <update id="updateUserInfo">
+        update user
+        set sex        = #{sex},
+            phone      = #{phone},
+            email      = #{email},
+            school     = #{school},
+            description=#{description}
+        where account = #{account};
+    </update>
+    <update id="updatePassword">
+        update auth_local
+        set password = #{newPassword}
+        where account = #{account};
+    </update>
 
     <select id="selectPasswordByUsername" resultType="cn.edu.csu.ycepspring.entity.AuthLocal">
-        select account, password
+        select account, passwordBody
         from auth_local
         where username = #{username};
     </select>
@@ -26,5 +40,16 @@
     <select id="selectAllUsername" resultType="java.lang.String">
         select username
         from auth_local;
+    </select>
+    <select id="selectUserInfo" resultType="cn.edu.csu.ycepspring.entity.dto.UserInfo">
+        select a.username, u.account, u.sex, u.phone, u.email, u.school, u.description
+        from user as u
+                 left join auth_local as a on u.account = a.account
+        where u.account = #{account};
+    </select>
+    <select id="selectPasswordByAccount" resultType="java.lang.String">
+        select password
+        from auth_local
+        where account = #{account};
     </select>
 </mapper>

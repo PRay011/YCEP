@@ -60,7 +60,6 @@ def main():
                  "content": get_prompt}]
 
     while True:
-
         payload = json.dumps({
             "messages": messages,
             "penalty_score": 1.5,

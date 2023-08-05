@@ -1,9 +1,8 @@
 package cn.edu.csu.ycepspring.common.filter;
 
 import cn.dev33.satoken.context.SaHolder;
+import cn.dev33.satoken.context.model.SaRequest;
 import cn.dev33.satoken.interceptor.SaInterceptor;
-import cn.dev33.satoken.router.SaHttpMethod;
-import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.edu.csu.ycepspring.common.log.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +26,11 @@ public class SaTokenConfigure implements WebMvcConfigurer {
         registry.addInterceptor(new SaInterceptor(handler -> {
             // 日志
             int account = StpUtil.getTokenValue() != null ? StpUtil.getLoginIdAsInt() : -1;
-            String path = SaHolder.getRequest().getRequestPath();
-            logService.saveLog(account, path);
-            // 鉴权
-            SaRouter.match("/**").notMatch("/ai/**", "/user/login", "/user/register", "/user/code").check(r -> StpUtil.checkLogin());
-            SaRouter.match("/notice/**").notMatch(SaHttpMethod.GET).check(r -> StpUtil.checkRole("admin"));
+            SaRequest request = SaHolder.getRequest();
+            logService.saveLog(account, request.getRequestPath(), request.getMethod());
+            // TODO 鉴权（临时关闭）
+            // SaRouter.match("/**").notMatch("/ai/**", "/user/login", "/user/register", "/user/code").check(r -> StpUtil.checkLogin());
+            // SaRouter.match("/notice/**").notMatch(SaHttpMethod.GET).check(r -> StpUtil.checkRole("admin"));
         })).addPathPatterns("/**");
     }
 }
