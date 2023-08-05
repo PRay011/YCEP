@@ -1,6 +1,12 @@
 <template>
   <!--  顶部导航栏-->
   <Top/>
+
+  <div class="container">
+    <div class="main">
+
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

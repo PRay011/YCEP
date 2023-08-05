@@ -268,5 +268,48 @@
       }
     }
   }
+
+  .interest {
+    .content {
+      .kind{
+        display: grid;
+        margin-bottom: 20px;
+        .kind-name{
+          font-size: 17px;
+          font-weight: 550;
+          margin-bottom: 10px;
+        }
+        .item{
+          display:flex;
+          flex-wrap: wrap;
+          .item-name {
+            width:80px;
+            height:30px;
+            line-height: 28px;
+            text-align: center;
+            border: #e2e2e2 1px solid;
+            border-radius:5px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-top: 7px;
+            &:active {
+              background-color: #008bf8;
+              color: #ffffff;
+              font-weight: 540;
+            }
+          }
+          .item-name.selected {
+            background-color: #008bf8;
+            color: #ffffff;
+            font-weight: 540;
+          }
+        }
+      }
+    }
+    .dialog-footer button:first-child {
+      margin-right: 10px;
+    }
+  }
+
 }
 

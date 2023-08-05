@@ -68,7 +68,7 @@
       </div>
       <div class="game-actions">
         <button class="button" @click="again()">重新开始</button>
-        <button class="button">结束游戏</button>
+        <button class="button" @click="end()">结束游戏</button>
       </div>
       <div class="game-info"></div>
     </div>
@@ -227,6 +227,9 @@ export default defineComponent({
         this.data = this.plot[page].content;
       } else {
       }
+    },
+    end() {
+      this.$router.push("/game/review")
     },
   },
 });
