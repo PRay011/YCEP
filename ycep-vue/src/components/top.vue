@@ -87,7 +87,7 @@
         <el-avatar alt="用户头像" @click="selfCenterClick" class="self"
                    src="https://i03piccdn.sogoucdn.com/5cf35c1052b8f21d"></el-avatar>
         <div class="self" @click="selfCenterClick">
-          <p class="username">{{ username }}</p>
+          <p class="username">{{ user.username }}</p>
         </div>
         <div class="header-item" @click="logout">
           <p>退出账号</p>
@@ -105,7 +105,6 @@
     </div>
   </div>
 
-
 </template>
 
 <script>
@@ -116,7 +115,11 @@ export default {
   data() {
     return {
       isLogged: false,
-      username: "蛄蛹者",
+      user: {
+        username: "蛄蛹者",
+        password: "123",
+        chosenInterests:false,
+      },
       currentItem: 0,
       knowledgeList: ['数组', '算式', '排序', '追及',
         '电路', '太空', '力', '电磁',
@@ -150,7 +153,7 @@ export default {
       console.log('username:' + username)
       if (username !== '' && username) {
         this.isLogged = true;
-        this.username = username;
+        this.user.username = username;
       }
 
     },
@@ -351,6 +354,5 @@ $top_color: rgb(24, 26, 32);
     }
   }
 }
-
 
 </style>

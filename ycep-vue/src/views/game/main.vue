@@ -93,7 +93,7 @@
       </div>
       <div class="game-actions">
         <button class="button" @click="again()">重新开始</button>
-        <button class="button">结束游戏</button>
+        <button class="button" @click="end()">结束游戏</button>
       </div>
       <div class="game-info"></div>
     </div>
@@ -242,6 +242,8 @@ export default defineComponent({
       this.isInteracted = false;
       this.isChoiceConfirm = false;
       this.background = defaultImage;
+      this.currentPage.page = 0;
+      this.currentPage.plot = 0;
       this.characters.forEach((character, i) => {
         character.active = false;
         character.hide = false;
@@ -345,8 +347,10 @@ export default defineComponent({
         this.background = this.plotRecord.slice(-1)[0].imgSrc;
         this.data = this.plotRecord.slice(-1)[0].content[0].text;
         //改变currentPage
-        this.currentPage.page=0;
+        this.currentPage.page = 0;
         this.currentPage.plot++;
+        //暂时作为测试
+        this.isFinished = true
         console.log(this.plotRecord);
       }, 1000);
     },
@@ -387,7 +391,7 @@ export default defineComponent({
           this.nextPage();
         } else {
           if (this.isFinished) {
-            console.log("已完成");
+            this.end();
           } else {
             this.getInteraction();
           }
@@ -398,6 +402,9 @@ export default defineComponent({
     getInteraction() {
       let that = this;
       that.isInteracted = true;
+    },
+    end() {
+      this.$router.push("/game/review");
     },
   },
 });

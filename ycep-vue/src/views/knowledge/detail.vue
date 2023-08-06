@@ -40,20 +40,22 @@
                   <hr /> -->
                   <div class="game-items">
                     <template class="block-cards">
-                      <div class="card" v-for="item in gameList" :key="item.gameId">
+
+                      <div
+                          class="card"
+                          v-for="item in gameList"
+                          :key="item.gameId"
+                          @click="toGame(item.gameId)"
+                      >
+                        <div class="card-image">
+                          <img :src="item.imgSrc" alt="背景图片" />
+                        </div>
                         <div class="card-details">
-                          <div class="card-image">
-                            <img
-                              src="../../assets/images/灯泡.jpg"
-                              alt="背景图片"
-                            />
-                          </div>
                           <p class="text-title">{{ item.title }}</p>
                           <p class="text-body">{{ item.description }}</p>
+                          <el-tag class="text-author">作者：{{ item.author }}</el-tag>
                         </div>
-                        <button class="card-button" @click="toGame(item.gameId)">
-                          进入游戏
-                        </button>
+                        <button class="card-button">游戏</button>
                       </div>
                     </template>
                   </div>
@@ -74,54 +76,22 @@
             >
           </div>
           <br />
-          <!-- <div class="buttons">
-            <button @click="hadRead = true">
-              <span>完成阅读</span>
-              <svg
-                width="34"
-                height="34"
-                viewBox="0 0 74 74"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle
-                  cx="37"
-                  cy="37"
-                  r="35.5"
-                  stroke="black"
-                  stroke-width="3"
-                ></circle>
-                <path
-                  d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
-                  fill="black"
-                ></path>
-              </svg>
-            </button>
-          </div> -->
         </div>
-        <div class="game" v-if="hadRead">
-          <p class="title-tip">相关游戏</p>
-          <br />
-          <hr />
-          <div class="game-items">
-            <template class="block-cards">
-              <div class="card" v-for="item in gameList">
-                <div class="card-details">
-                  <div class="card-image">
-                    <img src="../../assets/images/灯泡.jpg" alt="背景图片" />
-                  </div>
-                  <p class="text-title">{{ item.title }}</p>
-                  <p class="text-body">{{ item.body }}</p>
-                </div>
-                <button class="card-button" @click="toGame(item.id)">
-                  进入游戏
-                </button>
-              </div>
-            </template>
+      </div>
+      <div class="right">
+        <!--推荐游戏-->
+        <div class="recommend-game" v-for="item in recommendGameList" :key="item.id">
+          <div class="card" @click="klgDetailBtnClick(item.id)">
+            <div class="card-image">
+              <img :src="item.imgSrc" alt="背景图片"/>
+            </div>
+            <div class="card-details">
+              <p class="text-title">{{ item.title }}</p>
+              <el-tag class="text-author">作者：{{ item.author }}</el-tag>
+            </div>
           </div>
         </div>
       </div>
-      <div class="right"></div>
     </div>
   </div>
 </template>
@@ -163,11 +133,34 @@ export default defineComponent({
         {
           gameId: 1,
           imgSrc: "../../assets/images/灯泡.jpg",
+          kindName:'',
           title: "电路排查",
-          author: '',
+          author: 'da',
           description: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
         },
-       
+      ],
+      recommendGameList:[
+        {
+          id: 1,
+          imgSrc: "/src/assets/images/demo/game1.jpg",
+          title: "法庭疑案",
+          kind: 2,
+          kindName: "材料",
+          introduction:
+              "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
+          author: "机智的皇冠",
+        },
+        {
+          id: 2,
+          imgSrc: "/src/assets/images/demo/game2.jpg",
+          title: "电路排查",
+          kind: 3,
+          kindName: "物理",
+          introduction:
+              "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
+          author: "看手机东方红",
+        },
+        
       ],
     };
   },
@@ -214,6 +207,10 @@ export default defineComponent({
     //进入游戏
     toGame(id: any) {
       this.$router.push("/game/main/" + id);
+    },
+    //点击进入知识点详情
+    klgDetailBtnClick(id: any) {
+      this.$router.push("/knowledge/detail/" + id);
     },
   },
 });

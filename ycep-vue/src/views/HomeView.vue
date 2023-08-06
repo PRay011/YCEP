@@ -55,10 +55,39 @@
 
       <div class="details">
         <div class="check1" v-if="checkedItem===1">
-          <h2>系统描述</h2>
-          <!--          <div class="card">-->
-          <!--            <h2>CARD</h2>-->
-          <!--          </div>-->
+          <div class="cube-container">
+            <div class="cube">
+              <div class="face front">
+                <el-icon size="40px">
+                  <Cpu/>
+                </el-icon>
+                <p class="tag-text">AI协助</p>
+              </div>
+              <div class="face back">
+                <el-icon size="40px">
+                  <VideoPlay/>
+                </el-icon>
+                <p class="tag-text">配套游戏</p>
+              </div>
+              <div class="face right"><el-icon size="40px">
+                <ChromeFilled/>
+              </el-icon>
+                <p class="tag-text">支持联机</p></div>
+              <div class="face left"><el-icon size="40px">
+                <DocumentChecked/>
+              </el-icon>
+                <p class="tag-text">巩固练习</p></div>
+              <div class="face top"><el-icon size="40px">
+                <Document/>
+              </el-icon>
+                <p class="tag-text">生成论文</p></div>
+              <div class="face bottom"><el-icon size="40px">
+                <DataAnalysis/>
+              </el-icon>
+                <p class="tag-text">数据可视</p></div>
+            </div>
+          </div>
+
         </div>
 
         <div class="check2" v-if="checkedItem===2">
