@@ -1,8 +1,9 @@
 package cn.edu.csu.ycepspring.service;
 
-import cn.edu.csu.ycepspring.entity.Game;
-import cn.edu.csu.ycepspring.entity.Kind;
 import cn.edu.csu.ycepspring.entity.dto.KnowledgeAndGame;
+import cn.edu.csu.ycepspring.entity.po.mongo.KnowledgeDocument;
+import cn.edu.csu.ycepspring.entity.po.mysql.Game;
+import cn.edu.csu.ycepspring.entity.po.mysql.Kind;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface MainPageService {
     List<KnowledgeAndGame> getKnowledgeAndGame(int itemId);
 
     List<Game> getGameList(int knowledgeId);
+
+    KnowledgeDocument getKnowledgeInfo(int id);
 }

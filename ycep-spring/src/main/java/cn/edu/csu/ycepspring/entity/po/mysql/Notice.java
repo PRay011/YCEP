@@ -1,4 +1,4 @@
-package cn.edu.csu.ycepspring.entity;
+package cn.edu.csu.ycepspring.entity.po.mysql;
 
 import cn.edu.csu.ycepspring.common.utils.TimeUtils;
 import lombok.AllArgsConstructor;

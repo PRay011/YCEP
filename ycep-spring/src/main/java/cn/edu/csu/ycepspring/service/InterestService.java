@@ -1,8 +1,8 @@
 package cn.edu.csu.ycepspring.service;
 
-import cn.edu.csu.ycepspring.entity.Game;
-import cn.edu.csu.ycepspring.entity.Item;
-import cn.edu.csu.ycepspring.entity.Knowledge;
+import cn.edu.csu.ycepspring.entity.po.mysql.Game;
+import cn.edu.csu.ycepspring.entity.po.mysql.Item;
+import cn.edu.csu.ycepspring.entity.po.mysql.Knowledge;
 
 import java.util.List;
 

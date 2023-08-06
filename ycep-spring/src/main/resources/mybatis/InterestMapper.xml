@@ -10,20 +10,20 @@
         from interest
         where account = #{account};
     </delete>
-    <select id="selectMyInterest" resultType="cn.edu.csu.ycepspring.entity.Item">
+    <select id="selectMyInterest" resultType="cn.edu.csu.ycepspring.entity.po.mysql.Item">
         select item.item_id, item.item_name
         from interest
                  inner join item on interest.item_id = item.item_id
         where account = #{account};
     </select>
-    <select id="selectKnowledgeByInterest" resultType="cn.edu.csu.ycepspring.entity.Knowledge">
+    <select id="selectKnowledgeByInterest" resultType="cn.edu.csu.ycepspring.entity.po.mysql.Knowledge">
         select k.*
         from interest as i
                  inner join knowledge as k on i.item_id = k.item_id
         where i.account = #{account}
         order by rand() limit 10;
     </select>
-    <select id="selectGameByInterest" resultType="cn.edu.csu.ycepspring.entity.Game">
+    <select id="selectGameByInterest" resultType="cn.edu.csu.ycepspring.entity.po.mysql.Game">
         select g.*
         from (interest as i
             inner join knowledge as k on i.item_id = k.item_id)

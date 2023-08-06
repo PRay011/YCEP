@@ -1,12 +1,14 @@
 package cn.edu.csu.ycepspring.service.impl;
 
-import cn.edu.csu.ycepspring.entity.Game;
-import cn.edu.csu.ycepspring.entity.Kind;
 import cn.edu.csu.ycepspring.entity.dto.GameVO;
 import cn.edu.csu.ycepspring.entity.dto.KnowledgeAndGame;
+import cn.edu.csu.ycepspring.entity.po.mongo.KnowledgeDocument;
+import cn.edu.csu.ycepspring.entity.po.mysql.Game;
+import cn.edu.csu.ycepspring.entity.po.mysql.Kind;
 import cn.edu.csu.ycepspring.mapper.MainPageMapper;
 import cn.edu.csu.ycepspring.service.MainPageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,9 @@ import java.util.List;
 public class MainPageServiceImpl implements MainPageService {
     @Autowired
     private MainPageMapper mainPageMapper;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Override
     public List<Kind> getKindAndItem() {
@@ -38,5 +43,10 @@ public class MainPageServiceImpl implements MainPageService {
             }
         }
         return knowledgeAndGameList;
+    }
+
+    @Override
+    public KnowledgeDocument getKnowledgeInfo(int id) {
+        return mongoTemplate.findById(id, KnowledgeDocument.class);
     }
 }

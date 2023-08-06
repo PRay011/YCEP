@@ -1,9 +1,9 @@
 package cn.edu.csu.ycepspring.mapper;
 
-import cn.edu.csu.ycepspring.entity.Game;
-import cn.edu.csu.ycepspring.entity.Kind;
 import cn.edu.csu.ycepspring.entity.dto.GameVO;
 import cn.edu.csu.ycepspring.entity.dto.KnowledgeAndGame;
+import cn.edu.csu.ycepspring.entity.po.mysql.Game;
+import cn.edu.csu.ycepspring.entity.po.mysql.Kind;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

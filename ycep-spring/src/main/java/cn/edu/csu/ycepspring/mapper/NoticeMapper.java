@@ -1,6 +1,6 @@
 package cn.edu.csu.ycepspring.mapper;
 
-import cn.edu.csu.ycepspring.entity.Notice;
+import cn.edu.csu.ycepspring.entity.po.mysql.Notice;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

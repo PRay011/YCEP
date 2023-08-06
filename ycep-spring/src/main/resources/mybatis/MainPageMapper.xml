@@ -6,15 +6,15 @@
         from kind as k
                  left join item as i on k.kind_id = i.kind_id;
     </select>
-    <resultMap id="selectKindAndItemMap" type="cn.edu.csu.ycepspring.entity.Kind">
+    <resultMap id="selectKindAndItemMap" type="cn.edu.csu.ycepspring.entity.po.mysql.Kind">
         <id property="kindId" column="kind_id"/>
         <result property="kindName" column="kind_name"/>
-        <collection property="items" ofType="cn.edu.csu.ycepspring.entity.Item">
+        <collection property="items" ofType="cn.edu.csu.ycepspring.entity.po.mysql.Item">
             <id property="itemId" column="item_id"/>
             <result property="itemName" column="item_name"/>
         </collection>
     </resultMap>
-    <select id="selectGameByKnowledgeId" resultType="cn.edu.csu.ycepspring.entity.Game">
+    <select id="selectGameByKnowledgeId" resultType="cn.edu.csu.ycepspring.entity.po.mysql.Game">
         select *
         from game
         where knowledge_id = #{knowledgeId}

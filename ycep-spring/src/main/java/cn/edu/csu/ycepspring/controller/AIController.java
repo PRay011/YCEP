@@ -1,7 +1,7 @@
 package cn.edu.csu.ycepspring.controller;
 
 import cn.edu.csu.ycepspring.common.response.CommonResponse;
-import cn.edu.csu.ycepspring.entity.AiChat;
+import cn.edu.csu.ycepspring.entity.po.mysql.AiChat;
 import cn.edu.csu.ycepspring.rpc.ThriftClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,6 @@
 package cn.edu.csu.ycepspring.service.impl;
 
-import cn.edu.csu.ycepspring.entity.Notice;
+import cn.edu.csu.ycepspring.entity.po.mysql.Notice;
 import cn.edu.csu.ycepspring.mapper.NoticeMapper;
 import cn.edu.csu.ycepspring.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;

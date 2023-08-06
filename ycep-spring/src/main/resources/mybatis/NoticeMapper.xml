@@ -10,7 +10,7 @@
         set is_delete = true
         where id = #{id};
     </update>
-    <select id="selectNotice" resultType="cn.edu.csu.ycepspring.entity.Notice">
+    <select id="selectNotice" resultType="cn.edu.csu.ycepspring.entity.po.mysql.Notice">
         select *
         from notice
         where is_delete = false

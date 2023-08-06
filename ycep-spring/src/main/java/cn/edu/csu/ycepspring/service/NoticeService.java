@@ -1,6 +1,6 @@
 package cn.edu.csu.ycepspring.service;
 
-import cn.edu.csu.ycepspring.entity.Notice;
+import cn.edu.csu.ycepspring.entity.po.mysql.Notice;
 
 import java.util.List;
 

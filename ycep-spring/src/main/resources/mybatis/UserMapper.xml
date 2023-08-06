@@ -27,7 +27,7 @@
         where account = #{account};
     </update>
 
-    <select id="selectPasswordByUsername" resultType="cn.edu.csu.ycepspring.entity.AuthLocal">
+    <select id="selectPasswordByUsername" resultType="cn.edu.csu.ycepspring.entity.po.mysql.AuthLocal">
         select account, passwordBody
         from auth_local
         where username = #{username};

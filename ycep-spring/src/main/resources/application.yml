@@ -1,6 +1,12 @@
 server:
   port: 8081
 
+# thrift配置
+thrift:
+  server:
+    host: localhost
+    port: 9090
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -9,10 +15,10 @@ spring:
     username: Raymond
     password: 123456
   redis:
-    database: 5
     host: 127.0.0.1
     port: 6379
     password: 123456
+    database: 5
     timeout: 10s
     lettuce:
       pool:
@@ -22,7 +28,12 @@ spring:
         min-idle: 0
   data:
     mongodb:
-      uri: mongodb://127.0.0.1:27017/ycep
+      host: 127.0.0.1
+      port: 27017
+      username: Raymond
+      password: "123456"
+      database: ycep
+      authentication-database: admin
 
 logging:
   file:
@@ -52,9 +63,3 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: true
-
-# thrift配置
-thrift:
-  server:
-    host: localhost
-    port: 9090

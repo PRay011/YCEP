@@ -2,8 +2,8 @@ package cn.edu.csu.ycepspring.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.edu.csu.ycepspring.common.response.CommonResponse;
-import cn.edu.csu.ycepspring.entity.Game;
 import cn.edu.csu.ycepspring.entity.dto.KnowledgeAndGame;
+import cn.edu.csu.ycepspring.entity.po.mysql.Game;
 import cn.edu.csu.ycepspring.service.InterestService;
 import cn.edu.csu.ycepspring.service.MainPageService;
 import com.github.pagehelper.PageHelper;
@@ -51,5 +51,10 @@ public class MainPageController {
             mainPageService.getKnowledgeAndGame(itemId);
         });
         return CommonResponse.success(pageInfo);
+    }
+
+    @GetMapping("/knowledge/info/{id}")
+    public CommonResponse getKnowledgeInfo(@PathVariable("id") int id) {
+        return CommonResponse.success(mainPageService.getKnowledgeInfo(id));
     }
 }
