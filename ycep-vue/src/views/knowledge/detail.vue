@@ -40,21 +40,22 @@
                   <hr /> -->
                   <div class="game-items">
                     <template class="block-cards">
+
                       <div
                           class="card"
                           v-for="item in gameList"
-                          :key="item.id"
-                          @click="toGame(item.id)"
+                          :key="item.gameId"
+                          @click="toGame(item.gameId)"
                       >
                         <div class="card-image">
                           <img :src="item.imgSrc" alt="背景图片" />
                         </div>
                         <div class="card-details">
                           <p class="text-title">{{ item.title }}</p>
-                          <p class="text-body">{{ item.introduction }}</p>
+                          <p class="text-body">{{ item.description }}</p>
                           <el-tag class="text-author">作者：{{ item.author }}</el-tag>
                         </div>
-                        <button class="card-button">{{ item.kindName }}</button>
+                        <button class="card-button">游戏</button>
                       </div>
                     </template>
                   </div>
@@ -79,7 +80,7 @@
       </div>
       <div class="right">
         <!--推荐游戏-->
-        <div class="recommend-game" v-for="item in recommendGameList">
+        <div class="recommend-game" v-for="item in recommendGameList" :key="item.id">
           <div class="card" @click="klgDetailBtnClick(item.id)">
             <div class="card-image">
               <img :src="item.imgSrc" alt="背景图片"/>
@@ -130,35 +131,13 @@ export default defineComponent({
       },
       gameList: [
         {
-          id: 1,
-          imgSrc: "/src/assets/images/demo/game1.jpg",
-          title: "法庭疑案",
-          kind: 2,
-          kindName: "材料",
-          introduction:
-              "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
-          author: "机智的皇冠",
-        },
-        {
-          id: 2,
-          imgSrc: "/src/assets/images/demo/game2.jpg",
+          gameId: 1,
+          imgSrc: "../../assets/images/灯泡.jpg",
+          kindName:'',
           title: "电路排查",
-          kind: 3,
-          kindName: "物理",
-          introduction:
-              "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
-          author: "看手机东方红",
+          author: 'da',
+          description: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
         },
-        {
-          id: 3,
-          imgSrc: "/src/assets/images/demo/game3.jpg",
-          title: "三态变化",
-          kind: 4,
-          kindName: "化学",
-          introduction:
-              "空气里究竟都有些什么状态的物质呢？小白走在路上发出了这样的疑问。",
-          author: "梵蒂冈",
-        }
       ],
       recommendGameList:[
         {
@@ -181,46 +160,7 @@ export default defineComponent({
               "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
           author: "看手机东方红",
         },
-        {
-          id: 3,
-          imgSrc: "/src/assets/images/demo/game3.jpg",
-          title: "三态变化",
-          kind: 4,
-          kindName: "化学",
-          introduction:
-              "空气里究竟都有些什么状态的物质呢？小白走在路上发出了这样的疑问。",
-          author: "梵蒂冈",
-        },
-        {
-          id: 4,
-          imgSrc: "/src/assets/images/demo/game1.jpg",
-          title: "法庭疑案",
-          kind: 2,
-          kindName: "材料",
-          introduction:
-              "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
-          author: "机智的皇冠",
-        },
-        {
-          id: 5,
-          imgSrc: "/src/assets/images/demo/game2.jpg",
-          title: "电路排查",
-          kind: 3,
-          kindName: "物理",
-          introduction:
-              "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
-          author: "看手机东方红",
-        },
-        {
-          id: 6,
-          imgSrc: "/src/assets/images/demo/game3.jpg",
-          title: "三态变化",
-          kind: 4,
-          kindName: "化学",
-          introduction:
-              "空气里究竟都有些什么状态的物质呢？小白走在路上发出了这样的疑问。",
-          author: "梵蒂冈",
-        }
+        
       ],
     };
   },
@@ -240,7 +180,7 @@ export default defineComponent({
       getGame(this.id)
         .then((res: any) => {
           console.log(res);
-          that.gameList = res.data;
+          that.gameList = res.data.list;
         })
         .catch((err: any) => {
           console.log(err);

@@ -97,7 +97,7 @@
               </div>
               <div class="info">
                 <p class="title-tag">{{ item.title }}</p>
-                <p class="desc">{{ item.content }}</p>
+                <p class="desc">{{ item.desc }}</p>
                 <p class="author">作者：{{ item.author }}</p>
               </div>
             </div>
@@ -155,8 +155,7 @@ export default defineComponent({
           id: 1,
           imgSrc: "/src/assets/images/灯泡.jpg",
           title: "Spring Boot 单元测试",
-          content:
-            "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
+          desc: "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
           author: "冷雪兮",
           game: {
             id: 1,
@@ -184,7 +183,6 @@ export default defineComponent({
       console.log(data);
       this.selectedItem = data;
       this.getKnowledge();
-      console.log(this.selectedItem);
     },
     //前往知识点详情界面
     toDetails(id: any) {
@@ -193,7 +191,6 @@ export default defineComponent({
     // 页面中间
     itemClick(index: any) {
       this.selectedItem = index;
-      console.log("selectedItem:" + this.selectedItem);
       this.ready();
     },
     //点击进入知识点详情
@@ -209,14 +206,13 @@ export default defineComponent({
     getKnowledge() {
       let that = this;
       getList(
-        1,
         this.selectedItem,
         this.paginationConfig.currentPage,
         this.paginationConfig.pageSize
       )
         .then((res: any) => {
           console.log(res);
-          that.knowledgeInfoList = res.data.content;
+          that.knowledgeInfoList = res.data.list;
         })
         .catch((err: any) => {
           console.log(err);
