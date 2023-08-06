@@ -86,7 +86,7 @@
                   <p class="text-body">{{ item.introduction }}</p>
                   <el-tag class="text-author">作者：{{ item.author }}</el-tag>
                 </div>
-                <button class="card-button">编程</button>
+                <button class="card-button">{{ item.kindName }}</button>
               </div>
             </template>
           </template>
@@ -162,7 +162,7 @@ export default defineComponent({
           title: "string",
           id: 0,
           author: "string",
-          kind: 3,
+          kindName: 3,
           introduction: "string",
           image: "/src/assets/images/灯泡.jpg",
         },
@@ -170,7 +170,7 @@ export default defineComponent({
           id: 2,
           imgSrc: "/src/assets/images/灯泡.jpg",
           title: "电路排查",
-          kind: 3,
+          kindName: 3,
           introduction: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
           author: "冷月汐",
         },
@@ -178,7 +178,7 @@ export default defineComponent({
           id: 3,
           imgSrc: "/src/assets/images/灯泡.jpg",
           title: "电路排查",
-          kind: 3,
+          kindName: 3,
           introduction: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
           author: "冷月汐",
         },
@@ -186,7 +186,7 @@ export default defineComponent({
           id: 4,
           imgSrc: "/src/assets/images/灯泡.jpg",
           title: "电路排查",
-          kind: 3,
+          kindName: 3,
           introduction: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
           author: "冷月汐",
         },
@@ -194,7 +194,7 @@ export default defineComponent({
           id: 5,
           imgSrc: "/src/assets/images/氧气.jpg",
           title: "氧气制取",
-          kind: 3,
+          kindName: 3,
           introduction: "氧气瓶中的氧气是怎么制造出来呢？",
           author: "冷月汐",
         },

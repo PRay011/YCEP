@@ -95,7 +95,6 @@
   }
 }
 
-
 .main {
   width: 80%;
   height: 800px;
@@ -105,7 +104,7 @@
   overflow: hidden;
   .game-main {
     width: 80%;
-    height:70%;
+    height: 70%;
     background-color: white;
     margin: 10px auto 0;
     overflow: hidden;
@@ -150,7 +149,7 @@
       width: 3%;
       height: 5%;
       font-size: 30px;
-      color:black;
+      color: black;
       position: relative;
     }
 
@@ -160,7 +159,7 @@
       width: 3%;
       height: 5%;
       font-size: 30px;
-      color:black;
+      color: black;
       position: relative;
     }
 
@@ -247,10 +246,10 @@
         }
       }
     }
-    .chatCharacter{
+    .chatCharacter {
       // position: absolute;
-      width:17%;
-      height:60%;
+      width: 17%;
+      height: 60%;
       background-color: #39bda7;
     }
     .chatBox {
@@ -260,28 +259,97 @@
       background-color: rgba(0, 0, 0, 0.5);
       overflow: hidden;
       z-index: 10000;
-      .chat-content{
+      .chat-content {
         margin-top: 1.5%;
         margin-bottom: 1%;
         margin-left: 5%;
-        width:90%;
-        height:65%;
-        font-size:25px;
+        width: 90%;
+        height: 65%;
+        font-size: 25px;
         word-break: break-all;
         color: white;
       }
-      .chat-page-previous{
+      .chat-page-previous {
         margin-left: 75%;
-        width:10%;
-        height:17%;
+        width: 10%;
+        height: 17%;
       }
-      .chat-page-next{
+      .chat-page-next {
         margin-left: 2%;
-        width:10%;
-        height:17%;
+        width: 10%;
+        height: 17%;
       }
     }
-    
+    .interaction {
+      width: 100%;
+      margin-top: -58%;
+      height: 104%;
+      background-color: rgba(0, 0, 0, 0.5);
+      .choice {
+        background-color: rgb(11, 133, 82);
+        height: 40%;
+        width: 20%;
+        border: 1px solid black;
+        float: left;
+        margin-left:6%;
+        margin-top: 10%;
+        opacity: 0;
+        transform: translateX(0);
+        // 动画效果
+        animation: cardEnter 1s forwards;
+        position: relative;
+        left: 0;
+        &.active {
+          transition: 0.5s;
+          height: 50%;
+          width: 30%;
+          position: sticky;
+          // margin-top:-50%;
+          margin-left: 30%;
+          // z-index: 100;
+        }
+        &.hide {
+          transition: 0.5s;
+          display: none;
+        }
+        .character-image {
+          height: 70%;
+          width: 100%;
+          background-size: contain;
+        }
+        .character-name {
+          height: 10%;
+          width: 100%;
+          font-size: 25px;
+          font-family: coca_cola;
+        }
+        .character-confirm {
+          z-index: 100;
+          animation: buttonEnter 0.5s forwards;
+          margin-top: 6%;
+          width: 100%;
+          height: 13%;
+          // background-color: aqua;
+          .selectButton {
+            margin-top: 2%;
+            margin-left: 5%;
+            margin-right: 5%;
+            height: 80%;
+            width: 40%;
+            font-family: coca_cola;
+            font-size: 20px;
+            color: white;
+            background-color: black;
+            &:hover {
+              background-color: white;
+              color: black;
+              border: 1px solid black;
+              transition: 0.5s;
+            }
+          }
+        }
+      }
+    }
   }
   .game-info {
     width: 80%;
@@ -289,6 +357,7 @@
     background-color: #a1a1a1;
     margin: 20px auto;
   }
+
   .game-actions {
     width: 80%;
     height: 100px;

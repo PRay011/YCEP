@@ -40,7 +40,7 @@
                   <hr /> -->
                   <div class="game-items">
                     <template class="block-cards">
-                      <div class="card" v-for="item in gameList" :key="item.id">
+                      <div class="card" v-for="item in gameList" :key="item.gameId">
                         <div class="card-details">
                           <div class="card-image">
                             <img
@@ -49,9 +49,9 @@
                             />
                           </div>
                           <p class="text-title">{{ item.title }}</p>
-                          <p class="text-body">{{ item.introduction }}</p>
+                          <p class="text-body">{{ item.description }}</p>
                         </div>
-                        <button class="card-button" @click="toGame(item.id)">
+                        <button class="card-button" @click="toGame(item.gameId)">
                           进入游戏
                         </button>
                       </div>
@@ -161,33 +161,13 @@ export default defineComponent({
       },
       gameList: [
         {
-          id: 1,
+          gameId: 1,
           imgSrc: "../../assets/images/灯泡.jpg",
           title: "电路排查",
-          kind: 3,
-          introduction: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
+          author: '',
+          description: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
         },
-        {
-          id: 1,
-          imgSrc: "../../assets/images/灯泡.jpg",
-          title: "电路排查",
-          kind: 3,
-          introduction: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
-        },
-        {
-          id: 1,
-          imgSrc: "../../assets/images/灯泡.jpg",
-          title: "电路排查",
-          kind: 3,
-          introduction: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
-        },
-        {
-          id: 1,
-          imgSrc: "../../assets/images/灯泡.jpg",
-          title: "电路排查",
-          kind: 3,
-          introduction: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
-        },
+       
       ],
     };
   },
@@ -207,7 +187,7 @@ export default defineComponent({
       getGame(this.id)
         .then((res: any) => {
           console.log(res);
-          that.gameList = res.data;
+          that.gameList = res.data.list;
         })
         .catch((err: any) => {
           console.log(err);
