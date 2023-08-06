@@ -1,7 +1,7 @@
 
 import { request } from '../../utils/request';
 
-//选择角色
+//选择游戏模式
 export function postMode(data: any) {
     return request({
         url: '/game/mode',
@@ -9,10 +9,10 @@ export function postMode(data: any) {
         data: data
     })
 }
-//翻页
-export function getGamePage(id: any) {
+//获取下一章节剧情
+export function getGamePage(id: any, plot: any) {
     return request({
-        url: `/game/details/${id}`,
+        url: `/game/details/${id}?plot=${plot}`,
         method: 'get',
     })
 }

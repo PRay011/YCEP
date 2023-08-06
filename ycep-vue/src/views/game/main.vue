@@ -40,7 +40,7 @@
             :key="index"
             @click="characterChosen(index)"
           >
-            <img :src="character.image" class="character-image" /><br />
+            <img :src="character.imgSrc" class="character-image" /><br />
             <div class="character-name">{{ character.name }}</div>
             <div class="character-confirm" v-if="isCharacterConfirm">
               <button class="selectButton" @click.stop="reChooseCharacter">
@@ -78,7 +78,7 @@
             :key="index"
             @click="choiceChosen(index)"
           >
-            <img :src="choice.image" class="character-image" /><br />
+            <img :src="choice.imgSrc" class="character-image" /><br />
             <div class="character-name">{{ choice.name }}</div>
             <div class="character-confirm" v-if="isChoiceConfirm">
               <button class="selectButton" @click.stop="reChooseChoice">
@@ -183,14 +183,14 @@ export default defineComponent({
         {
           id: 0,
           name: "马越",
-          image: image1,
+          imgSrc: image1,
           active: false,
           hide: false,
         },
         {
           id: 1,
           name: "越越",
-          image: image2,
+          imgSrc: image2,
           active: false,
           hide: false,
         },
@@ -199,14 +199,14 @@ export default defineComponent({
         {
           id: 0,
           name: "马越",
-          image: image1,
+          imgSrc: image1,
           active: false,
           hide: false,
         },
         {
           id: 1,
           name: "越越",
-          image: image2,
+          imgSrc: image2,
           active: false,
           hide: false,
         },
