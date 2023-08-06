@@ -19,7 +19,37 @@
           </div>
         </div>
         <div class="middle">
-          <textarea class="paper-content" rows="5" placeholder="你编辑的论文..." onchange="updateUserMessage()"></textarea>
+          <el-scrollbar height="600px">
+            <div class="paper-content">
+              <div class="block1">
+                <p class="text1">2023/8/6</p>
+                <p class="text2">青少年创新教育平台</p>
+                <p class="text1">物理/电路</p>
+              </div>
+              <hr/>
+              <hr/>
+              <div class="block2">
+                <p class="text1">一般家庭电路的连接分析</p>
+                <p class="text2">蛄蛹者，张中</p>
+                <p class="text3">（1.优胜北路第三小学，湖南 长沙，410000）</p>
+                <p class="text3">（2.优胜北路第三小学，湖南 长沙，410000）</p>
+              </div>
+              <div class="block3">
+                <p class="text1">摘要：</p>
+                <p class="text2">针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提
+                  出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节
+                  点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传
+                  感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最
+                  后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。</p>
+                <p class="text1">关键词：</p>
+                <p class="text2">无线传感器；网络；电源电路；电源效率</p>
+              </div>
+              <div class="block4">
+                <p cl></p>
+              </div>
+            </div>
+          </el-scrollbar>
+          <!--          <textarea class="paper-content" rows="5" placeholder="你编辑的论文..." onchange="updateUserMessage()"></textarea>-->
           <div class="btn-container">
             <button class="modify-btn" onclick="clearUserInput()">修改</button>
             <button class="submit-btn" onclick="sendMessageToAI()">提交</button>
@@ -28,7 +58,9 @@
         <div class="right">
           <div class="chat-box" id="chatBox">
             <div class="title">
-              <el-icon size="30"><ChatLineSquare /></el-icon>
+              <el-icon size="30">
+                <ChatLineSquare/>
+              </el-icon>
               <p class="text">AI助手帮你写论文</p>
             </div>
             <!-- 这里将显示聊天消息 -->

@@ -76,22 +76,45 @@
       bottom: 0; /* 将底部对齐 */
       right: 0; /* 将右边对齐 */
       width: 900px; /* 设置一个固定宽度 */
-      height: 700px;
+      height: 705px;
       background-color: #ffffff;
       border-radius: 5px;
       padding: 20px;
       text-align: center;
       box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.2); /* 向左投影 */
-      //resize: vertical;
-      overflow: auto;
-      .paper-content {
-        margin: 20px auto;
-        display: flex;
-        align-items: center;
-        height: 500px;
-        width: 96%;
+      .el-scrollbar{
+        height:630px;
+        .paper-content {
+          margin: 20px auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          height: 700px;
+          width: 96%;
+          hr{
+            width: 100%;
+          }
+          //background-color: #a1a1a1;
+          .block1{
+            width:100%;
+            height:40px;
+            display: flex;
+            justify-content: space-between;
+            .text1{
 
+            }
+            .text2{
+              font-weight: 550;
+              font-size: 17px;
+            }
+          }
+          .block2{
+            width:100%;
+            background-color: #a1a1a1;
+          }
+        }
       }
+
       .btn-container{
         .modify-btn, .submit-btn {
           background-color: #1e90ff;
