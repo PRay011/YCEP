@@ -24,9 +24,10 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('Usage: ' + sys.argv[0] + ' [-h host[:port]] [-u url] [-f[ramed]] [-s[sl]] [-novalidate] [-ca_certs certs] [-keyfile keyfile] [-certfile certfile] function [arg1 [arg2...]]')
     print('')
     print('Functions:')
-    print('  string newSession()')
-    print('  string chat(string content, string sessionKey, i32 sessionType)')
-    print('  void closeSession(string sessionKey)')
+    print('  string newSession(string theme, string part)')
+    print('  string chat(string content, string sessionKey)')
+    print('  bool resetSession(string sessionKey)')
+    print('  bool closeSession(string sessionKey)')
     print('')
     sys.exit(0)
 
@@ -107,16 +108,22 @@ client = AIService.Client(protocol)
 transport.open()
 
 if cmd == 'newSession':
-    if len(args) != 0:
-        print('newSession requires 0 args')
+    if len(args) != 2:
+        print('newSession requires 2 args')
         sys.exit(1)
-    pp.pprint(client.newSession())
+    pp.pprint(client.newSession(args[0], args[1],))
 
 elif cmd == 'chat':
-    if len(args) != 3:
-        print('chat requires 3 args')
+    if len(args) != 2:
+        print('chat requires 2 args')
         sys.exit(1)
-    pp.pprint(client.chat(args[0], args[1], eval(args[2]),))
+    pp.pprint(client.chat(args[0], args[1],))
+
+elif cmd == 'resetSession':
+    if len(args) != 1:
+        print('resetSession requires 1 args')
+        sys.exit(1)
+    pp.pprint(client.resetSession(args[0],))
 
 elif cmd == 'closeSession':
     if len(args) != 1:

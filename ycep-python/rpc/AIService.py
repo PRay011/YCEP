@@ -19,15 +19,28 @@ all_structs = []
 
 
 class Iface(object):
-    def newSession(self):
+    def newSession(self, theme, part):
+        """
+        Parameters:
+         - theme
+         - part
+
+        """
         pass
 
-    def chat(self, content, sessionKey, sessionType):
+    def chat(self, content, sessionKey):
         """
         Parameters:
          - content
          - sessionKey
-         - sessionType
+
+        """
+        pass
+
+    def resetSession(self, sessionKey):
+        """
+        Parameters:
+         - sessionKey
 
         """
         pass
@@ -48,13 +61,21 @@ class Client(Iface):
             self._oprot = oprot
         self._seqid = 0
 
-    def newSession(self):
-        self.send_newSession()
+    def newSession(self, theme, part):
+        """
+        Parameters:
+         - theme
+         - part
+
+        """
+        self.send_newSession(theme, part)
         return self.recv_newSession()
 
-    def send_newSession(self):
+    def send_newSession(self, theme, part):
         self._oprot.writeMessageBegin('newSession', TMessageType.CALL, self._seqid)
         args = newSession_args()
+        args.theme = theme
+        args.part = part
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -74,23 +95,21 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "newSession failed: unknown result")
 
-    def chat(self, content, sessionKey, sessionType):
+    def chat(self, content, sessionKey):
         """
         Parameters:
          - content
          - sessionKey
-         - sessionType
 
         """
-        self.send_chat(content, sessionKey, sessionType)
+        self.send_chat(content, sessionKey)
         return self.recv_chat()
 
-    def send_chat(self, content, sessionKey, sessionType):
+    def send_chat(self, content, sessionKey):
         self._oprot.writeMessageBegin('chat', TMessageType.CALL, self._seqid)
         args = chat_args()
         args.content = content
         args.sessionKey = sessionKey
-        args.sessionType = sessionType
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -110,6 +129,38 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "chat failed: unknown result")
 
+    def resetSession(self, sessionKey):
+        """
+        Parameters:
+         - sessionKey
+
+        """
+        self.send_resetSession(sessionKey)
+        return self.recv_resetSession()
+
+    def send_resetSession(self, sessionKey):
+        self._oprot.writeMessageBegin('resetSession', TMessageType.CALL, self._seqid)
+        args = resetSession_args()
+        args.sessionKey = sessionKey
+        args.write(self._oprot)
+        self._oprot.writeMessageEnd()
+        self._oprot.trans.flush()
+
+    def recv_resetSession(self):
+        iprot = self._iprot
+        (fname, mtype, rseqid) = iprot.readMessageBegin()
+        if mtype == TMessageType.EXCEPTION:
+            x = TApplicationException()
+            x.read(iprot)
+            iprot.readMessageEnd()
+            raise x
+        result = resetSession_result()
+        result.read(iprot)
+        iprot.readMessageEnd()
+        if result.success is not None:
+            return result.success
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "resetSession failed: unknown result")
+
     def closeSession(self, sessionKey):
         """
         Parameters:
@@ -117,14 +168,30 @@ class Client(Iface):
 
         """
         self.send_closeSession(sessionKey)
+        return self.recv_closeSession()
 
     def send_closeSession(self, sessionKey):
-        self._oprot.writeMessageBegin('closeSession', TMessageType.ONEWAY, self._seqid)
+        self._oprot.writeMessageBegin('closeSession', TMessageType.CALL, self._seqid)
         args = closeSession_args()
         args.sessionKey = sessionKey
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
+
+    def recv_closeSession(self):
+        iprot = self._iprot
+        (fname, mtype, rseqid) = iprot.readMessageBegin()
+        if mtype == TMessageType.EXCEPTION:
+            x = TApplicationException()
+            x.read(iprot)
+            iprot.readMessageEnd()
+            raise x
+        result = closeSession_result()
+        result.read(iprot)
+        iprot.readMessageEnd()
+        if result.success is not None:
+            return result.success
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "closeSession failed: unknown result")
 
 
 class Processor(Iface, TProcessor):
@@ -133,6 +200,7 @@ class Processor(Iface, TProcessor):
         self._processMap = {}
         self._processMap["newSession"] = Processor.process_newSession
         self._processMap["chat"] = Processor.process_chat
+        self._processMap["resetSession"] = Processor.process_resetSession
         self._processMap["closeSession"] = Processor.process_closeSession
         self._on_message_begin = None
 
@@ -162,7 +230,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = newSession_result()
         try:
-            result.success = self._handler.newSession()
+            result.success = self._handler.newSession(args.theme, args.part)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -185,7 +253,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = chat_result()
         try:
-            result.success = self._handler.chat(args.content, args.sessionKey, args.sessionType)
+            result.success = self._handler.chat(args.content, args.sessionKey)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -202,22 +270,67 @@ class Processor(Iface, TProcessor):
         oprot.writeMessageEnd()
         oprot.trans.flush()
 
+    def process_resetSession(self, seqid, iprot, oprot):
+        args = resetSession_args()
+        args.read(iprot)
+        iprot.readMessageEnd()
+        result = resetSession_result()
+        try:
+            result.success = self._handler.resetSession(args.sessionKey)
+            msg_type = TMessageType.REPLY
+        except TTransport.TTransportException:
+            raise
+        except TApplicationException as ex:
+            logging.exception('TApplication exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = ex
+        except Exception:
+            logging.exception('Unexpected exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
+        oprot.writeMessageBegin("resetSession", msg_type, seqid)
+        result.write(oprot)
+        oprot.writeMessageEnd()
+        oprot.trans.flush()
+
     def process_closeSession(self, seqid, iprot, oprot):
         args = closeSession_args()
         args.read(iprot)
         iprot.readMessageEnd()
+        result = closeSession_result()
         try:
-            self._handler.closeSession(args.sessionKey)
+            result.success = self._handler.closeSession(args.sessionKey)
+            msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
+        except TApplicationException as ex:
+            logging.exception('TApplication exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = ex
         except Exception:
-            logging.exception('Exception in oneway handler')
+            logging.exception('Unexpected exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
+        oprot.writeMessageBegin("closeSession", msg_type, seqid)
+        result.write(oprot)
+        oprot.writeMessageEnd()
+        oprot.trans.flush()
 
 # HELPER FUNCTIONS AND STRUCTURES
 
 
 class newSession_args(object):
+    """
+    Attributes:
+     - theme
+     - part
 
+    """
+
+
+    def __init__(self, theme=None, part=None,):
+        self.theme = theme
+        self.part = part
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -228,6 +341,16 @@ class newSession_args(object):
             (fname, ftype, fid) = iprot.readFieldBegin()
             if ftype == TType.STOP:
                 break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.theme = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 2:
+                if ftype == TType.STRING:
+                    self.part = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -238,6 +361,14 @@ class newSession_args(object):
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
         oprot.writeStructBegin('newSession_args')
+        if self.theme is not None:
+            oprot.writeFieldBegin('theme', TType.STRING, 1)
+            oprot.writeString(self.theme.encode('utf-8') if sys.version_info[0] == 2 else self.theme)
+            oprot.writeFieldEnd()
+        if self.part is not None:
+            oprot.writeFieldBegin('part', TType.STRING, 2)
+            oprot.writeString(self.part.encode('utf-8') if sys.version_info[0] == 2 else self.part)
+            oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -256,6 +387,9 @@ class newSession_args(object):
         return not (self == other)
 all_structs.append(newSession_args)
 newSession_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'theme', 'UTF8', None, ),  # 1
+    (2, TType.STRING, 'part', 'UTF8', None, ),  # 2
 )
 
 
@@ -325,15 +459,13 @@ class chat_args(object):
     Attributes:
      - content
      - sessionKey
-     - sessionType
 
     """
 
 
-    def __init__(self, content=None, sessionKey=None, sessionType=None,):
+    def __init__(self, content=None, sessionKey=None,):
         self.content = content
         self.sessionKey = sessionKey
-        self.sessionType = sessionType
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -354,11 +486,6 @@ class chat_args(object):
                     self.sessionKey = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
-            elif fid == 3:
-                if ftype == TType.I32:
-                    self.sessionType = iprot.readI32()
-                else:
-                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -376,10 +503,6 @@ class chat_args(object):
         if self.sessionKey is not None:
             oprot.writeFieldBegin('sessionKey', TType.STRING, 2)
             oprot.writeString(self.sessionKey.encode('utf-8') if sys.version_info[0] == 2 else self.sessionKey)
-            oprot.writeFieldEnd()
-        if self.sessionType is not None:
-            oprot.writeFieldBegin('sessionType', TType.I32, 3)
-            oprot.writeI32(self.sessionType)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -402,7 +525,6 @@ chat_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'content', 'UTF8', None, ),  # 1
     (2, TType.STRING, 'sessionKey', 'UTF8', None, ),  # 2
-    (3, TType.I32, 'sessionType', None, None, ),  # 3
 )
 
 
@@ -467,6 +589,129 @@ chat_result.thrift_spec = (
 )
 
 
+class resetSession_args(object):
+    """
+    Attributes:
+     - sessionKey
+
+    """
+
+
+    def __init__(self, sessionKey=None,):
+        self.sessionKey = sessionKey
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.sessionKey = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('resetSession_args')
+        if self.sessionKey is not None:
+            oprot.writeFieldBegin('sessionKey', TType.STRING, 1)
+            oprot.writeString(self.sessionKey.encode('utf-8') if sys.version_info[0] == 2 else self.sessionKey)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(resetSession_args)
+resetSession_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'sessionKey', 'UTF8', None, ),  # 1
+)
+
+
+class resetSession_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.BOOL:
+                    self.success = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('resetSession_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.BOOL, 0)
+            oprot.writeBool(self.success)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(resetSession_result)
+resetSession_result.thrift_spec = (
+    (0, TType.BOOL, 'success', None, None, ),  # 0
+)
+
+
 class closeSession_args(object):
     """
     Attributes:
@@ -526,6 +771,67 @@ all_structs.append(closeSession_args)
 closeSession_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'sessionKey', 'UTF8', None, ),  # 1
+)
+
+
+class closeSession_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.BOOL:
+                    self.success = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('closeSession_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.BOOL, 0)
+            oprot.writeBool(self.success)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(closeSession_result)
+closeSession_result.thrift_spec = (
+    (0, TType.BOOL, 'success', None, None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

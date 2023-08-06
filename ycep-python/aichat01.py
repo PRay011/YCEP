@@ -1,5 +1,4 @@
 import json
-import sys
 
 import requests
 
@@ -21,7 +20,7 @@ def get_access_token():
     return response.json().get("access_token")
 
 
-def prompt(theme, part):
+def get_prompt(theme, part):
     # 在模型上请求prompt模板，theme和part是可以更改的变量，这个函数返回请求到的prompt
     url = "https://aip.baidubce.com/rest/2.0/wenxinworkshop/api/v1/template/info?id=2429&" \
           "theme=" + theme + "&part=" + part + "&access_token=" + get_access_token()
@@ -43,56 +42,32 @@ def prompt(theme, part):
     return response
 
 
-def main():
+def send(messages, content):
     url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token=" + get_access_token()
+    chat_user = {
+        "role": "user",
+        "content": content
+    }
+    messages.append(chat_user)
+    payload = json.dumps({
+        "messages": messages,
+        "penalty_score": 1.5,
+        "temperature": 0.70
+    })
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    response = requests.request("POST", url, headers=headers, data=payload)
+    response = response.text
 
-    # 测试用，用户输入文章主题和要写的章节部分
-    # 应该在后端自动生成改论文的主题和正在写的章节，主题：用户自己填，章节：根据分章节的按钮响应
-
-    theme = input("主题：")
-    part = input("章节部分：")
-
-    get_prompt = prompt(theme, part)
-    # print(get_prompt)
-
-    # message初始自带prompt
-    messages = [{"role": "user",
-                 "content": get_prompt}]
-
-    while True:
-        payload = json.dumps({
-            "messages": messages,
-            "penalty_score": 1.5,
-            "temperature": 0.70
-        })
-        headers = {
-            'Content-Type': 'application/json'
-        }
-
-        response = requests.request("POST", url, headers=headers, data=payload)
-        response = response.text
-
-        # 截取result
-        start_str = '"result":"'
-        start_idx = response.index(start_str) + len(start_str)
-        end_idx = response[start_idx:].index('"is_truncated"')
-        response = response[start_idx:start_idx + end_idx - 2]
-
-        print("AI: " + response)  # 后端自行管理输出
-
-        chat_ai = {"role": "assistant",
-                   "content": response}
-        messages.append(chat_ai)
-
-        content = input("user: ")
-        chat_user = {"role": "user",
-                     "content": content}
-        messages.append(chat_user)
-
-        # 用户输入end退出程序
-        if content == "end":
-            sys.exit(0)
-
-
-if __name__ == '__main__':
-    main()
+    # 截取result
+    start_str = '"result":"'
+    start_idx = response.index(start_str) + len(start_str)
+    end_idx = response[start_idx:].index('"is_truncated"')
+    response = response[start_idx:start_idx + end_idx - 2]
+    chat_ai = {
+        "role": "assistant",
+        "content": response
+    }
+    messages.append(chat_ai)
+    return messages, response

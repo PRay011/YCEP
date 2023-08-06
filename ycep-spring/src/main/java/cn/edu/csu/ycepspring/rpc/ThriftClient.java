@@ -21,14 +21,14 @@ public class ThriftClient {
     /**
      * 创建一个新的对话
      */
-    public String newSession() {
+    public String newSession(String theme, String part) {
         try {
             TTransport transport = new TSocket(serverHost, serverPort);
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             AIService.Client client = new AIService.Client(protocol);
             // 返回结果
-            String result = client.newSession();
+            String result = client.newSession(theme, part);
             transport.close();
             return result;
         } catch (Exception e) {
@@ -40,14 +40,14 @@ public class ThriftClient {
     /**
      * 多轮对话
      */
-    public String chat(String content, String sessionKey, int sessionType) {
+    public String chat(String content, String sessionKey) {
         try {
             TTransport transport = new TSocket(serverHost, serverPort);
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             AIService.Client client = new AIService.Client(protocol);
             // 返回结果
-            String result = client.chat(content, sessionKey, sessionType);
+            String result = client.chat(content, sessionKey);
             transport.close();
             return result;
         } catch (Exception e) {
@@ -57,19 +57,40 @@ public class ThriftClient {
     }
 
     /**
-     * 关闭会话
+     * 重置会话
      */
-    public void closeSession(String sessionKey) {
+    public boolean resetSession(String sessionKey) {
         try {
             TTransport transport = new TSocket(serverHost, serverPort);
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             AIService.Client client = new AIService.Client(protocol);
-            // 远程调用
-            client.closeSession(sessionKey);
+            // 返回结果
+            boolean result = client.resetSession(sessionKey);
             transport.close();
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 关闭会话
+     */
+    public boolean closeSession(String sessionKey) {
+        try {
+            TTransport transport = new TSocket(serverHost, serverPort);
+            transport.open();
+            TProtocol protocol = new TBinaryProtocol(transport);
+            AIService.Client client = new AIService.Client(protocol);
+            // 返回结果
+            boolean result = client.closeSession(sessionKey);
+            transport.close();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
