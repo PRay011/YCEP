@@ -8,6 +8,16 @@
   }
 }
 
+@mixin main-button{
+  margin-right: 20px;
+  width:100px;
+  height:30px;
+  border-radius: 10px;
+  border: none;
+  color: #ffffff;
+  background-color: #446dde;
+}
+
 .main{
   width: 90%;
   margin: 30px auto;
@@ -16,16 +26,19 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-    background-color: #1eceff;
-    color: #fff;
+    color: #250c0c;
     padding: 10px 0;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-    justify-content: space-around;
+    //box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    justify-content: space-between;
     width: 100%;
-    h1 {
-      font-size: 24px;
-      margin: 0;
-      padding: 0;
+    .title {
+      font-size: 18px;
+      margin-left: 20px;
+    }
+    .actions {
+      button{
+        @include main-button;
+      }
     }
   }
 
@@ -36,41 +49,21 @@
     margin: 0 auto;
     .left {
       flex: 0 0 150px; /* 设置固定宽度为150px，不伸缩 */
-      background-color: #f8f8f8;
-      padding: 10px;
-      .box {
-        background-color: #f3f3f3;
-        padding: 10px;
-        margin-bottom: 10px;
-        cursor: pointer;
-        border: 2px solid #1e90ff;
-        border-radius: 8px;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
-        &:hover {
-          background-color: #1e90ff;
-          color: #fff;
-        }
-      }
-      .btn-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        .box2 {
-          background-color: #f3f3f3;
-          padding: 30px;
-          margin-bottom: 10px;
-          cursor: pointer;
-          border: 2px solid #1e90ff;
-          border-radius: 8px;
-          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-          transition: all 0.3s ease;
-          &:hover {
-            background-color: #1e90ff;
-            color: #fff;
+      background-color: #ffffff;
+      padding: 20px 10px;
+      width:150px;
+      .tac{
+        width: 100%;
+        .el-menu{
+          border: none;
+          .el-menu-item {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 10px;
           }
         }
       }
+
     }
     .middle {
       bottom: 0; /* 将底部对齐 */
@@ -81,9 +74,40 @@
       border-radius: 5px;
       padding: 20px;
       text-align: center;
-      box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.2); /* 向左投影 */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       .el-scrollbar{
         height:630px;
+        .title{
+          text-align: left;
+          margin-top: 18px;
+          margin-bottom: 20px;
+        }
+        .paper{
+          width: 96%;
+          margin: 0 auto;
+          .el-form{
+            margin: 50px auto;
+            max-width: 600px;
+            .el-form-item{
+              margin-top: 20px;
+              .el-tag,button{
+                margin-right: 10px;
+                margin-bottom: 10px;
+                margin-top: 5px;
+              }
+            }
+            .el-input--small{
+              width: 70px;
+            }
+            .chapter-name{
+              display: block;
+              width: 100%;
+              font-weight: 550;
+              text-align: left;
+              margin-bottom: 10px;
+            }
+          }
+        }
         .paper-content {
           margin: 20px auto;
           display: flex;
@@ -145,18 +169,9 @@
           }
         }
       }
-
       .btn-container{
-        .modify-btn, .submit-btn {
-          background-color: #1e90ff;
-          color: #fff;
-          border: none;
-          padding: 8px 16px;
-          cursor: pointer;
-          margin: 5px;
-          border-radius: 8px;
-          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-          transition: all 0.3s ease;
+        button {
+          @include main-button;
           &:hover {
             background-color: #007bff;
           }
@@ -165,7 +180,7 @@
     }
     .right {
       /* 让右侧区域填充剩余的可用空间 */
-      margin-left: 20px;
+      margin-left: 10px;
       width: 350px;
       .title{
         display: flex;
@@ -179,7 +194,6 @@
         min-height: 660px;
         padding: 10px;
         background-color: #fff;
-        border: 1px solid #ccc;
         border-radius: 5px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         overflow-y: auto;
@@ -215,6 +229,11 @@
           cursor: pointer;
         }
       }
+    }
+  }
+  .el-dialog {
+    img{
+      margin: 0 auto;
     }
   }
 }

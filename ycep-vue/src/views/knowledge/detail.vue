@@ -228,6 +228,7 @@ export default defineComponent({
     },
     //进入游戏
     toGame(id: any) {
+      sessionStorage.setItem("gameID", id);
       this.$router.push("/game/main/" + id);
     },
     //点击进入知识点详情

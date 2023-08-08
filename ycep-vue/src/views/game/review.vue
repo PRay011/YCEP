@@ -80,7 +80,7 @@
     </div>
     <div class="mask" v-if="scoreVisible"></div>
     <div class="score" v-if="scoreVisible">
-      <el-icon class="close" size="30"><Close /></el-icon>
+      <!-- <el-icon class="close" size="30"><Close /></el-icon> -->
       <div class="content">
         <div class="results-summary-container">
           <div class="confetti">
@@ -130,8 +130,14 @@
                 Good
               </div>
               <div class="heading-secondary" v-else>Sorry</div>
-              <p class="paragraph">
-                在这次考试中，您的得分超过78%的同学！真棒，希望你在接下来的学习中继续加油！
+              <p class="paragraph" v-if="fullScore / userScore >= 0.9">
+                在这次考试中，您的得分超过大部分同学！真棒，希望你在接下来的学习中再接再厉！
+              </p>
+              <p class="paragraph" v-else-if="fullScore / userScore < 0.6">
+                在这次考试中，您还有所欠缺！在接下来的学习中要加油哦！
+              </p>
+              <p class="paragraph" v-else-if="fullScore / userScore >= 0.6">
+                在这次考试中，您已掌握大部分知识！真棒，在接下来的学习中继续努力，更上一层楼！
               </p>
             </div>
             <div class="summary__cta">
@@ -152,12 +158,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Top from "../../components/top.vue";
+import { getTest } from "../../api/game/review";
 
 export default defineComponent({
   name: "review",
   data() {
     return {
-      data: "",
+      id: "",
       scoreVisible: false,
       test: [
         {
@@ -202,16 +209,22 @@ export default defineComponent({
           selected: 0,
         },
       ],
-      fullScore: 100,
+      fullScore: 0,
       userScore: 90,
       testVisible: true,
       reviewVisible: false,
     };
   },
   components: { Top },
-  mounted() {},
+  mounted() {
+    this.ready();
+  },
   methods: {
-    ready() {},
+    ready() {
+      let gameID = sessionStorage.getItem("gameID")!;
+      this.id = gameID;
+      this.testContent();
+    },
     backToKlg() {
       this.$router.go(-2);
     },
@@ -225,6 +238,23 @@ export default defineComponent({
       this.scoreVisible = true;
       //返回顶部
       document.documentElement.scrollTop = 0;
+    },
+    testContent() {
+      let that = this;
+      getTest(this.id)
+        .then((res: any) => {
+          console.log("getGame" + res);
+          that.test = res.data;
+          let score = 0;
+          that.test.forEach((item, i) => {
+            score+=item.score;
+            item.selected = 0;
+          });
+          that.fullScore = score;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     testReview() {
       this.testVisible = false;

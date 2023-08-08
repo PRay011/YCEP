@@ -24,3 +24,10 @@ export function getGame() {
     })
 }
 
+export function postInterest(data:any) {
+    return request({
+        url: `/interest/knowledge`,
+        method: 'post',
+        data:data
+    })
+}

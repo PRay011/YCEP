@@ -1,11 +1,10 @@
 import { request } from '../../utils/request';
 
 //导出login方法，供其它地方使用
-export function getTest(data: any) {
+export function getTest(gameId: any) {
     return request({
-        url: '/reinforce/tests',
-        method: 'post',
-        data: data
+        url: `/reinforce/test/${gameId}`,
+        method: 'get',
     })
 }
 

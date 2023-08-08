@@ -143,7 +143,7 @@ export default defineComponent({
     return {
       kindID: 1,
       update: true,
-      selectedItem: 1,
+      selectedItem: -1,
       itemList: [{ itemId: 1, itemName: "电路", knowledges: null }],
       paginationConfig: {
         currentPage: 1, // 当前页码
@@ -218,6 +218,7 @@ export default defineComponent({
               console.log(kind.items);
             }
           });
+          if(that.selectedItem == -1)
           that.selectedItem = that.itemList[0].itemId
         that.getKnowledge();
         })
@@ -234,7 +235,6 @@ export default defineComponent({
       )
         .then((res: any) => {
           console.log(res);
-
           that.knowledgeInfoList = res.data.list;
           that.paginationConfig.total = res.data.total;
         })
