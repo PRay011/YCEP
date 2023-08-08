@@ -12,7 +12,7 @@ export function login(data: any) {
 // 验证码
 export function vertify() {
     return request({
-        url: '/auth/code',
+        url: '/user/code',
         method: 'get',
     })  
 }

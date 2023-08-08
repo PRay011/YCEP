@@ -172,7 +172,7 @@
           <template #footer>
             <span class="dialog-footer">
               <el-button @click="chooseInterestVisible = false">取消</el-button>
-              <el-button type="primary" @click="chooseInterestVisible = false">
+              <el-button type="primary" @click="postInterest()">
                 确认
               </el-button>
             </span>
@@ -187,6 +187,8 @@
 import { defineComponent } from "vue";
 import Top from "../../components/top.vue";
 import { getKnowledge, getGame } from "../../api/knowledge/index";
+import { getCategory } from "../../api/knowledge/kind";
+import { postInterest } from "../../api/knowledge/index";
 
 export default defineComponent({
   name: "index",
@@ -316,6 +318,7 @@ export default defineComponent({
         },
       ],
 
+      interest: [],
       //当前页
       pageNum: 1,
       //一页的个数
@@ -434,11 +437,12 @@ export default defineComponent({
     ready() {
       this.showKnowledges();
       this.showGames();
+      this.category();
     },
 
     showKnowledges() {
       let that = this;
-      getKnowledge(that.pageNum, that.pageSize)
+      getKnowledge()
         .then((res: any) => {
           console.log(res);
           that.pageNum++;
@@ -451,11 +455,47 @@ export default defineComponent({
 
     showGames() {
       let that = this;
-      getGame(that.pageNum, that.pageSize)
+      getGame()
         .then((res: any) => {
           console.log(res);
-          that.pageNum++;
           that.gameList = res.data;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
+
+    postInterest() {
+      let that = this;
+      this.kindItemList.forEach((kind: any, i: any) => {
+        kind.items.forEach((item: any, i: any) => {
+          if (item.isSelected) {
+            this.interest.push(item.itemId);
+          }
+        });
+      });
+      postInterest(this.interest)
+        .then((res: any) => {
+          console.log(res);
+          this.chooseInterestVisible = false;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
+
+    category() {
+      let that = this;
+      getCategory()
+        .then((res: any) => {
+          console.log("interest");
+          console.log(res);
+          that.kindItemList = res.data;
+          that.kindItemList.forEach((kind: any, i: any) => {
+            kind.items.forEach((item: any, i: any) => {
+              item.isSelected = false;
+            });
+          });
         })
         .catch((err: any) => {
           console.log(err);

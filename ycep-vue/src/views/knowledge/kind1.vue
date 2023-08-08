@@ -87,30 +87,30 @@
         <div class="left">
           <div
             class="item"
-            v-for="item in knowledgeInfoList"
-            :key="item.id"
-            @click="toDetails(item.id)"
+            v-for="knowledge in knowledgeInfoList"
+            :key="knowledge.id"
+            @click="toDetails(knowledge.id)"
           >
             <div class="knowledge">
               <div class="image">
-                <img :src="item.imgSrc" alt="知识点图片" />
+                <img :src="knowledge.imgSrc" alt="知识点图片" />
               </div>
               <div class="info">
-                <p class="title-tag">{{ item.title }}</p>
-                <p class="desc">{{ item.desc }}</p>
-                <p class="author">作者：{{ item.author }}</p>
+                <p class="title-tag">{{ knowledge.title }}</p>
+                <p class="desc">{{ knowledge.desc }}</p>
+                <p class="author">作者：{{ knowledge.author }}</p>
               </div>
             </div>
             <!--游戏-->
-            <div class="game">
-              <div class="card" @click="klgDetailBtnClick(item.id)">
+            <div class="game" v-if="knowledge.game">
+              <div class="card" @click="klgDetailBtnClick(knowledge.id)">
                 <div class="card-image">
-                  <img :src="item.game.imgSrc" alt="背景图片" />
+                  <img :src="knowledge.game.imgSrc" alt="背景图片" />
                 </div>
                 <div class="card-details">
-                  <p class="text-title">{{ item.game.title }}</p>
+                  <p class="text-title">{{ knowledge.game.title }}</p>
                   <el-tag class="text-author"
-                    >作者：{{ item.game.author }}</el-tag
+                    >作者：{{ knowledge.game.author }}</el-tag
                   >
                 </div>
               </div>
@@ -213,6 +213,7 @@ export default defineComponent({
         .then((res: any) => {
           console.log(res);
           that.knowledgeInfoList = res.data.list;
+          that.paginationConfig.total = res.data.total;
         })
         .catch((err: any) => {
           console.log(err);

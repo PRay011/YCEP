@@ -1,13 +1,13 @@
 <template>
   <!--  顶部导航栏-->
-  <Top @getTopData4="changeTitleItem" />
+  <Top @getTopData1="changeTitleItem" />
 
   <div class="container">
     <div class="main" v-if="update">
       <div class="kind">
         <div class="info">
-          <p class="text1">化学</p>
-          <p class="text2">微观视角/变化/培养兴趣</p>
+          <p class="text1">编程</p>
+          <p class="text2">锻炼思维/加强动手能力/培养兴趣</p>
           <div class="tags"></div>
         </div>
       </div>
@@ -17,10 +17,10 @@
           v-for="(item, index) in itemList"
           :key="index"
           class="title-item"
-          :class="{ selected: selectedItem == index }"
-          @click="itemClick(index)"
+          :class="{ selected: selectedItem == item.itemId }"
+          @click="itemClick(item.itemId)"
         >
-          <p class="text">{{ item }}</p>
+          <p class="text">{{ item.itemName }}</p>
         </div>
         <div class="search">
           <div class="input-container">
@@ -91,7 +91,6 @@
             :key="knowledge.id"
             @click="toDetails(knowledge.id)"
           >
-            <!--知识点-->
             <div class="knowledge">
               <div class="image">
                 <img :src="knowledge.imgSrc" alt="知识点图片" />
@@ -135,16 +134,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Top from "../../components/top.vue";
-import { getList } from "../../api/knowledge/kind";
+import { getCategory, getList } from "../../api/knowledge/kind";
 
 export default defineComponent({
-  name: "kind4",
+  name: "kind1",
   components: { Top },
   data() {
     return {
+      kindID: 1,
       update: true,
-      selectedItem: 0,
-      itemList: ["全部", "排序算法", "数组", "链表", "对象"],
+      selectedItem: -1,
+      itemList: [{ itemId: 1, itemName: "电路", knowledges: null }],
       paginationConfig: {
         currentPage: 1, // 当前页码
         pageSize: 4, // 每页显示的条数
@@ -156,8 +156,7 @@ export default defineComponent({
           id: 1,
           imgSrc: "/src/assets/images/灯泡.jpg",
           title: "Spring Boot 单元测试",
-          desc:
-            "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
+          desc: "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
           author: "冷雪兮",
           game: {
             id: 1,
@@ -178,10 +177,13 @@ export default defineComponent({
   },
   methods: {
     ready() {
-      this.getKnowledge();
+      let id = this.$route.params.kindID;
+      this.kindID = Number(id);
+      this.category();
     },
     //收到子组件信息
     changeTitleItem(data: any) {
+      console.log(data);
       this.selectedItem = data;
       this.getKnowledge();
     },
@@ -203,6 +205,26 @@ export default defineComponent({
       this.paginationConfig.currentPage = val;
       console.log("当前页面数为：" + val);
       this.getKnowledge();
+    },
+    category() {
+      let that = this;
+      getCategory()
+        .then((res: any) => {
+          console.log("catagory");
+          console.log(res);
+          res.data.forEach((kind: any, i: any) => {
+            if (kind.kindId == this.kindID) {
+              that.itemList = kind.items;
+              console.log(kind.items);
+            }
+          });
+          if(that.selectedItem == -1)
+          that.selectedItem = that.itemList[0].itemId
+        that.getKnowledge();
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     getKnowledge() {
       let that = this;
