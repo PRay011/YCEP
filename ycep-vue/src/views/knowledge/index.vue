@@ -144,7 +144,7 @@
       <div class="interest">
         <el-dialog
           v-model="chooseInterestVisible"
-          title="选择你感兴  趣的知识点"
+          title="选择你感兴趣的知识点"
           width="32%"
           center
           top="130px"
