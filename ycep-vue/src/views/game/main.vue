@@ -56,7 +56,7 @@
           class="chatCharacter"
           v-if="isGame"
           :style="{
-            background: `url(${myCharacter})`,
+            background: `url(${myCharacter.imgSrc})`,
             'background-size': 'cover',
           }"
         ></div>
@@ -110,11 +110,22 @@ import backImage1 from "../../assets/images/gameBack.jpg";
 import defaultImage from "../../assets/images/default.jpg";
 import { fa } from "element-plus/es/locale/index.js";
 import type interactionVue from "./interaction.vue";
+import {
+  getStartPlot,
+  getCharacter,
+  getInteraction,
+  postInteraction,
+} from "../../api/game/main";
 
 export default defineComponent({
   name: "main",
   data() {
     return {
+      gameID: 0,
+      myCharacter: {
+        id: 0,
+        imgSrc: image1,
+      },
       //单页剧情
       data: "",
       // 用于存放剧情
@@ -173,7 +184,6 @@ export default defineComponent({
       isFullscreen: false,
       loading: false,
       background: defaultImage,
-      myCharacter: "",
       game: {
         id: 1,
         title: "",
@@ -200,6 +210,7 @@ export default defineComponent({
           id: 0,
           name: "马越",
           imgSrc: image1,
+          description: "",
           active: false,
           hide: false,
         },
@@ -207,6 +218,7 @@ export default defineComponent({
           id: 1,
           name: "越越",
           imgSrc: image2,
+          description: "",
           active: false,
           hide: false,
         },
@@ -221,17 +233,26 @@ export default defineComponent({
       isCharacterConfirm: false,
       isGame: false,
       //交互
+      interactionNumber: 1,
+      interactionID: 0,
+      isInteracting: false,
       isInteracted: false,
       isChoiceConfirm: false,
     };
   },
   components: { Top },
-  mounted() {},
+  mounted() {
+    this.ready();
+  },
   methods: {
-    ready() {},
+    ready() {
+      let gameID = sessionStorage.getItem("gameID");
+      this.gameID = Number(gameID);
+    },
     startGame() {
       this.playing = true;
       this.isPlayed = true;
+      this.character();
     },
     again() {
       this.playing = false;
@@ -255,13 +276,11 @@ export default defineComponent({
     },
     singerMode() {
       this.chosenMode = 0;
-      this.myCharacter = image1;
       this.isPlayed = false;
       this.isCharacter = true;
     },
     onLineMode() {
       this.chosenMode = 1;
-      this.myCharacter = image1;
       this.isPlayed = false;
       this.isCharacter = true;
     },
@@ -281,6 +300,9 @@ export default defineComponent({
         character.active = i === index;
         if (!character.active) {
           character.hide = true;
+        } else {
+          this.myCharacter.id = character.id;
+          this.myCharacter.imgSrc = character.imgSrc;
         }
       });
     },
@@ -290,9 +312,10 @@ export default defineComponent({
       this.isChoiceConfirm = true;
       this.choices.forEach((choice, i) => {
         choice.active = i === index;
-        console.log("asdf");
         if (!choice.active) {
           choice.hide = true;
+        } else {
+          this.interactionID = choice.id;
         }
       });
     },
@@ -319,39 +342,20 @@ export default defineComponent({
     //角色
     confirmChooseCharacter(event: any) {
       event.stopPropagation();
+      //选完人物之后就获取剧情
       this.loading = true;
+      this.startPlot();
       setTimeout(() => {
         this.loading = false;
-        //获取背景图片和剧情
-        this.background = this.plotRecord[0].imgSrc;
-        this.data = this.plot.content[0].text;
-        this.isCharacter = false;
-        this.isGame = true;
       }, 1000);
     },
     //交互
     confirmChooseChoice(event: any) {
       event.stopPropagation();
       this.loading = true;
+      this.finishInteraction();
       setTimeout(() => {
         this.loading = false;
-        this.isInteracted = false;
-        this.isChoiceConfirm = false;
-        this.choices.forEach((choice, i) => {
-          choice.active = false;
-          choice.hide = false;
-        });
-        //获取后续背景图片和剧情
-        this.plotRecord.push(this.plot);
-        //获取新添加的部分
-        this.background = this.plotRecord.slice(-1)[0].imgSrc;
-        this.data = this.plotRecord.slice(-1)[0].content[0].text;
-        //改变currentPage
-        this.currentPage.page = 0;
-        this.currentPage.plot++;
-        //暂时作为测试
-        this.isFinished = true
-        console.log(this.plotRecord);
       }, 1000);
     },
     chatRoom() {
@@ -390,18 +394,101 @@ export default defineComponent({
           this.currentPage.page = -1;
           this.nextPage();
         } else {
-          if (this.isFinished) {
+          if(this.isFinished) {
             this.end();
           } else {
-            this.getInteraction();
+            if (!this.isInteracting) {
+              //避免连续点击两次交互
+              this.isInteracting = true;
+              this.getInteraction();
+            }else{
+              console.log('交互中')
+            }
           }
         }
       }
     },
-
-    getInteraction() {
+    character() {
       let that = this;
-      that.isInteracted = true;
+      getCharacter(that.gameID)
+        .then((res: any) => {
+          console.log(res);
+          that.characters = res.data;
+          that.characters.forEach((character, i) => {
+            character.active = false;
+            character.hide = false;
+          });
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
+    startPlot() {
+      let that = this;
+      getStartPlot(that.gameID, that.myCharacter.id)
+        .then((res: any) => {
+          console.log(res);
+          that.isFinished = res.data.isFinished;
+          let plot = res.data.plot;
+          that.plotRecord = [];
+          that.plotRecord.push(plot);
+          //获取背景图片和剧情
+          that.background = this.plotRecord[0].imgSrc;
+          that.data = this.plotRecord[0].content[0].text;
+          that.isCharacter = false;
+          that.isGame = true;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
+    interaction() {
+      let that = this;
+      getInteraction(that.gameID, that.interactionNumber)
+        .then((res: any) => {
+          console.log(res);
+          that.isInteracted = true;
+          that.choices = [];
+          that.choices = res.data.choices;
+          that.choices.forEach((choice, i) => {
+            choice.active = false;
+            choice.hide = false;
+          });
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
+    finishInteraction() {
+      let that = this;
+      postInteraction(that.gameID, that.myCharacter.id, that.interactionID)
+        .then((res: any) => {
+          console.log("finish");
+          console.log(res);
+          let plot = res.data.plot;
+          that.isFinished = res.data.isFinished;
+          //获取后续背景图片和剧情
+          that.plotRecord.push(plot);
+          that.isInteracted = false;
+          that.isChoiceConfirm = false;
+          that.isInteracting = false;
+          that.choices.forEach((choice, i) => {
+            choice.active = false;
+            choice.hide = false;
+          });
+          //获取新添加的部分
+          that.background = this.plotRecord.slice(-1)[0].imgSrc;
+          that.data = this.plotRecord.slice(-1)[0].content[0].text;
+          //改变currentPage
+          that.currentPage.page = 0;
+          that.currentPage.plot++;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
+    getInteraction() {
+      this.interaction();
     },
     end() {
       this.$router.push("/game/review");

@@ -9,13 +9,38 @@ export function postMode(data: any) {
         data: data
     })
 }
-//获取下一章节剧情
-export function getGamePage(id: any, plot: any) {
+//获取人物
+export function getCharacter(gameID: any) {
     return request({
-        url: `/game/details/${id}?plot=${plot}`,
+        url: `/game/character/${gameID}`,
         method: 'get',
     })
 }
+
+//获取第一章节剧情
+export function getStartPlot(gameID: any, characterID: any) {
+    return request({
+        url: `/game/startPlot/${gameID}?characterID=${characterID}`,
+        method: 'get',
+    })
+}
+
+//获取交互
+export function getInteraction(gameID: any, interactionNumber: any) {
+    return request({
+        url: `/game/getInteraction/${gameID}?interactionNumber=${interactionNumber}`,
+        method: 'get',
+    })
+}
+
+//交互完成获取下一章节剧情
+export function postInteraction(gameID: any, characterID: any, interactionID: any) {
+    return request({
+        url: `/game/finishInteraction/${gameID}?characterID=${characterID}?interactionID=${interactionID}`,
+        method: 'get',
+    })
+}
+
 //剧情排序
 export function postOrder(data: any) {
     return request({
