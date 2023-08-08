@@ -2,7 +2,7 @@
 ## 项目运行
 * npm install
 * npm run dev
-
+* 后端拉取 git clone -b back --single-branch http...
 ## 目录介绍
 * api 用于存放各种接口函数参考 test.ts
 * assert 存放图片、字体以及scss等样式文件，参考 test.css

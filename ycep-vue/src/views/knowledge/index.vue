@@ -438,7 +438,7 @@ export default defineComponent({
 
     showKnowledges() {
       let that = this;
-      getKnowledge(that.pageNum, that.pageSize)
+      getKnowledge()
         .then((res: any) => {
           console.log(res);
           that.pageNum++;
@@ -451,10 +451,9 @@ export default defineComponent({
 
     showGames() {
       let that = this;
-      getGame(that.pageNum, that.pageSize)
+      getGame()
         .then((res: any) => {
           console.log(res);
-          that.pageNum++;
           that.gameList = res.data;
         })
         .catch((err: any) => {

@@ -1,12 +1,12 @@
 <template>
 
-  <RouterView/>
+  <RouterView :key="route.path"/>
 
   <Bottom/>
 </template>
 
 <script lang="ts">
-import {RouterLink, RouterView} from "vue-router";
+import {RouterLink, RouterView,useRoute} from "vue-router";
 import Bottom from "./components/bottom.vue";
 
 
@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       data: "",
+      route:useRoute()
     };
   },
   components: {Bottom},

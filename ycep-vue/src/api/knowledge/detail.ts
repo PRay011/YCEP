@@ -9,9 +9,9 @@ export function getDetail(id: any) {
     })
 }
 
-export function getGame(id: any) {
+export function getGame(id: any, pageNum: any, pageSize: any) {
     return request({
-        url: `/main/game/${id}`,
+        url: `/main/game/${id}?pageNum=${pageNum}&pageSize=${pageSize}`,
         method: 'get',
     })
 }

@@ -133,9 +133,13 @@ export default defineComponent({
     };
   },
   components: { Top },
-  mounted() {},
+  mounted() {
+    this.ready();
+  },
   methods: {
-    ready() {},
+    ready() {
+      this.newVertification();
+    },
     newVertification() {
       let that = this;
       vertify()
@@ -151,18 +155,19 @@ export default defineComponent({
     loginBtnClick() {
       this.$router.push("/user/login");
     },
-    register(){
+    register() {
       let that = this;
       register(that.user)
         .then((res: any) => {
           console.log(res);
+          sessionStorage.setItem("username", this.user.username);
+          sessionStorage.setItem("token", res.data.token);
+          that.$router.push("/knowledge/index");
         })
         .catch((err: any) => {
           console.log(err);
         });
-      localStorage.setItem('username',this.user.username)
-      this.$router.push('/knowledge/index')
-    }
+    },
   },
 });
 </script>

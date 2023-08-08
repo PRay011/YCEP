@@ -44,6 +44,11 @@ const router = createRouter({
       component: () => import('../views/knowledge/index.vue')
     },
     {
+      path: '/knowledge/kind/:kindID',
+      name: 'knowledgek/kind',
+      component: () => import('../views/knowledge/kind.vue')
+    },
+    {
       path: '/knowledge/kind1',
       name: 'knowledgek/kind1',
       component: () => import('../views/knowledge/kind1.vue')

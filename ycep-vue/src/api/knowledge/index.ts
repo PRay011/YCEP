@@ -10,16 +10,16 @@ export function getNotice() {
 }
 
 //获取知识点
-export function getKnowledge(pageNum:any,pageSize:any) {
+export function getKnowledge() {
     return request({
-        url: `/main/interest/knowledge?currentPage=${pageNum}&pageSize=${pageSize}`,
+        url: `/main/interest/knowledge`,
         method: 'get',
     })
 }
 
-export function getGame(pageNum:any,pageSize:any) {
+export function getGame() {
     return request({
-        url: `/main/interest/game?currentPage=${pageNum}&pageSize=${pageSize}`,
+        url: `/main/interest/game`,
         method: 'get',
     })
 }

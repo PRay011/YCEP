@@ -1,34 +1,43 @@
 <template>
-
   <div class="header">
     <div class="header-content">
-      <div class="header-item" @click="titleItemClick(-1)" style="width: 400px;text-align: left">
+      <div
+        class="header-item"
+        @click="titleItemClick(-1)"
+        style="width: 400px; text-align: left"
+      >
         <p>YCEP网站</p>
       </div>
       <div class="header-item" @click="titleItemClick(0)">
         <p>首页</p>
-        <div class="underline" v-if="currentItem===0"></div>
+        <div class="underline" v-if="currentItem === 0"></div>
       </div>
 
-      <div class="header-item item1" @click="titleItemClick(1)">
+      <div
+        class="header-item item1"
+        @click="titleItemClick(kind.kindId)"
+        v-for="kind in kinds"
+        :key="kind.kindId"
+      >
         <template class="dropdown">
-          <el-dropdown @command="commandItemClick1">
+          <el-dropdown @command="commandItemClick">
             <span class="el-dropdown-link">
-              <p>编程</p><el-icon class="el-icon--right"><arrow-down/></el-icon>
+              <p>{{ kind.kindName }}</p>
+              <el-icon class="el-icon--right"><arrow-down /></el-icon>
             </span>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item command=1>排序算法</el-dropdown-item>
-                <el-dropdown-item command=2>数组</el-dropdown-item>
-                <el-dropdown-item command=3>链表</el-dropdown-item>
-                <el-dropdown-item command=4>对象</el-dropdown-item>
+                <el-dropdown-item command="1">排序算法</el-dropdown-item>
+                <el-dropdown-item command="2">数组</el-dropdown-item>
+                <el-dropdown-item command="3">链表</el-dropdown-item>
+                <el-dropdown-item command="4">对象</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
         </template>
-        <div class="underline" v-if="currentItem===1"></div>
+        <div class="underline" v-if="currentItem === kind.kindId"></div>
       </div>
-      <div class="header-item item2" @click="titleItemClick(2)">
+      <!-- <div class="header-item item1" @click="titleItemClick(2)">
         <template class="dropdown">
           <el-dropdown @command="commandItemClick2">
             <span class="el-dropdown-link">
@@ -46,7 +55,7 @@
         </template>
         <div class="underline" v-if="currentItem===2"></div>
       </div>
-      <div class="header-item item3" @click="titleItemClick(3)">
+      <div class="header-item item1" @click="titleItemClick(3)">
         <template class="dropdown">
           <el-dropdown @command="commandItemClick3">
             <span class="el-dropdown-link">
@@ -64,7 +73,7 @@
         </template>
         <div class="underline" v-if="currentItem===3"></div>
       </div>
-      <div class="header-item item4" @click="titleItemClick(4)">
+      <div class="header-item item1" @click="titleItemClick(4)">
         <template class="dropdown">
           <el-dropdown @command="commandItemClick4">
             <span class="el-dropdown-link">
@@ -81,11 +90,15 @@
           </el-dropdown>
         </template>
         <div class="underline" v-if="currentItem===4"></div>
-      </div>
+      </div> -->
 
       <template v-if="isLogged">
-        <el-avatar alt="用户头像" @click="selfCenterClick" class="self"
-                   src="https://i03piccdn.sogoucdn.com/5cf35c1052b8f21d"></el-avatar>
+        <el-avatar
+          alt="用户头像"
+          @click="selfCenterClick"
+          class="self"
+          src="https://i03piccdn.sogoucdn.com/5cf35c1052b8f21d"
+        ></el-avatar>
         <div class="self" @click="selfCenterClick">
           <p class="username">{{ user.username }}</p>
         </div>
@@ -95,7 +108,8 @@
       </template>
       <template v-else>
         <div class="header-item login">
-          <button @click="loginBtnClick">登录
+          <button @click="loginBtnClick">
+            登录
             <div class="arrow-wrapper">
               <div class="arrow"></div>
             </div>
@@ -104,118 +118,145 @@
       </template>
     </div>
   </div>
-
 </template>
 
-<script>
-import {ArrowDown} from '@element-plus/icons-vue'
+<script lang="ts">
+import { ArrowDown } from "@element-plus/icons-vue";
+import { getCategory } from "../api/knowledge/kind";
 
 export default {
   name: "top",
   data() {
     return {
+      kinds: [
+        {
+          kindId: 1,
+          kindName: "编程",
+        },
+      ],
       isLogged: false,
       user: {
         username: "蛄蛹者",
         password: "123",
-        chosenInterests:false,
+        chosenInterests: false,
       },
       currentItem: 0,
-      knowledgeList: ['数组', '算式', '排序', '追及',
-        '电路', '太空', '力', '电磁',
-        '法律', '品德', '生活', '相处',
-        '语法', '口语', '情景', '对话'],
-    }
+      knowledgeList: [
+        "数组",
+        "算式",
+        "排序",
+        "追及",
+        "电路",
+        "太空",
+        "力",
+        "电磁",
+        "法律",
+        "品德",
+        "生活",
+        "相处",
+        "语法",
+        "口语",
+        "情景",
+        "对话",
+      ],
+    };
   },
   mounted() {
     this.ready();
+    this.category();
   },
   methods: {
     ready() {
       //刷新后保持选中值不变
-      let path = this.$route.path
-      if (path === '/knowledge/kind1') {
-        this.currentItem = 1;
-      } else if (path === '/knowledge/kind2') {
-        this.currentItem = 2;
-      } else if (path === '/knowledge/kind3') {
-        this.currentItem = 3;
-      } else if (path === '/knowledge/kind4') {
-        this.currentItem = 4;
-      } else if (path === '/knowledge/index') {
-        this.currentItem = 0;
-      } else {
-        this.currentItem = -1;
-      }
-
+      let path = this.$route.params.kindID;
+      this.currentItem = Number(path);
       //判断用户登录
-      let username = localStorage.getItem('username')
-      console.log('username:' + username)
-      if (username !== '' && username) {
+      let username = sessionStorage.getItem("username");
+      console.log("username:" + username);
+      if (username !== "" && username) {
         this.isLogged = true;
         this.user.username = username;
       }
-
     },
-    titleItemClick(index) {
-      this.currentItem = index
+    category() {
+      let that = this;
+      getCategory()
+        .then((res: any) => {
+          console.log("catagory");
+          console.log(res);
+          that.kinds = res.data;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
+    titleItemClick(index: any) {
+      console.log(index);
+      this.currentItem = index;
       switch (index) {
         case -1:
-          this.$router.push('/');
+          this.$router.push("/");
           break;
         case 0:
           this.currentItem = 0;
-          this.$router.push('/knowledge/index');
+          this.$router.push("/knowledge/index");
           break;
-        default:
-          this.$router.push('/knowledge/kind' + index);
-          sessionStorage.setItem('index', 0)
+        default:{
+          
+          console.log(1);
+          this.$router.push("/knowledge/kind/" + index);
+        }
+          // sessionStorage.setItem('index', '0')
           break;
       }
     },
-    commandItemClick1(command) {
-      this.currentItem = 1;
-      this.$emit('getTopData1',command);
-      this.$router.push('/knowledge/kind1');
+
+    commandItemClick(command: any) {
+      this.currentItem = command;
+      this.$emit("getTopData1", command);
+      this.$router.push("/knowledge/kind" + command);
       // console.log('click on command:' + command);
     },
-    commandItemClick2(command) {
-      this.currentItem = 2;
-      this.$emit('getTopData2',command);
-      this.$router.push('/knowledge/kind2');
-      // console.log('click on command:' + command);
-    },
-    commandItemClick3(command) {
-      this.currentItem = 3;
-      this.$emit('getTopData3',command);
-      this.$router.push('/knowledge/kind3');
-      // console.log('click on command:' + command);
-    },
-    commandItemClick4(command) {
-      this.currentItem = 4;
-      this.$emit('getTopData4',command);
-      this.$router.push('/knowledge/kind4');
-      // console.log('click on command:' + command);
-    },
+    // commandItemClick1(command:any) {
+    //   this.currentItem = 1;
+    //   this.$emit('getTopData1',command);
+    //   this.$router.push('/knowledge/kind1');
+    //   // console.log('click on command:' + command);
+    // },
+    // commandItemClick2(command:any) {
+    //   this.currentItem = 2;
+    //   this.$emit('getTopData2',command);
+    //   this.$router.push('/knowledge/kind2');
+    //   // console.log('click on command:' + command);
+    // },
+    // commandItemClick3(command:any) {
+    //   this.currentItem = 3;
+    //   this.$emit('getTopData3',command);
+    //   this.$router.push('/knowledge/kind3');
+    //   // console.log('click on command:' + command);
+    // },
+    // commandItemClick4(command:any) {
+    //   this.currentItem = 4;
+    //   this.$emit('getTopData4',command);
+    //   this.$router.push('/knowledge/kind4');
+    //   // console.log('click on command:' + command);
+    // },
     selfCenterClick() {
-      this.$router.push('/user/selfCenter')
+      this.$router.push("/user/selfCenter");
     },
     loginBtnClick() {
-      this.$router.push('/user/login')
+      this.$router.push("/user/login");
     },
     logout() {
-      localStorage.removeItem('username')
-      this.$router.push('/')
-      this.$router.push('/knowledge/index')
+      sessionStorage.removeItem("username");
+      this.$router.push("/");
+      this.$router.push("/knowledge/index");
     },
-
   },
-}
-
+};
 </script>
 
 <style scoped lang="scss">
-
 $top_color: rgb(24, 26, 32);
 
 .header {
@@ -267,21 +308,20 @@ $top_color: rgb(24, 26, 32);
           display: flex;
           align-items: center;
           //有个乱出现的边界线，终于找到这个b了！
-          &:focus-visible{
-            outline:none;
+          &:focus-visible {
+            outline: none;
           }
         }
       }
 
       &:hover {
         outline: none;
-        & .dropdown .el-dropdown-link, & p {
+        & .dropdown .el-dropdown-link,
+        & p {
           color: #a1a1a1;
           border: none;
         }
-
       }
-
     }
 
     .self {
@@ -354,5 +394,4 @@ $top_color: rgb(24, 26, 32);
     }
   }
 }
-
 </style>
