@@ -101,6 +101,35 @@
         <button class="button" @click="again()">重新开始</button>
         <button class="button" @click="end()">结束游戏</button>
       </div>
+      <div class="key-plot">
+        <div class="chat">
+          <div class="chat-card">
+            <div class="chat-header">
+              <div class="h2">聊天室</div>
+            </div>
+            <el-scrollbar height="400px">
+              <div class="chat-body">
+                <template v-for="conversation in conversations">
+                  <div class="message outgoing">
+                    <p>{{ conversation.my }}</p>
+                  </div>
+                  <div class="message incoming">
+                    <p>{{ conversation.other }}</p>
+                  </div>
+                </template>
+              </div>
+            </el-scrollbar>
+            <div class="chat-footer">
+              <input placeholder="请输入..." type="text" v-model="sendMessage">
+              <button @click="sendMyMessage">发送</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="sort">
+
+        </div>
+      </div>
       <div class="game-info">
         <div class="title">
           <p class="text1">{{ game.title }}</p>
@@ -111,9 +140,11 @@
           <p class="text2">&emsp;&emsp;{{ game.description }}</p>
         </div>
         <div class="images">
-
+          <div class="image"><img :src="game.imgSrc" alt="游戏图片"/></div>
+          <div class="image"><img :src="plot.imgSrc" alt="游戏图片"/></div>
+          <div class="image"><img :src="characters[0]?.imgSrc" alt="游戏图片"/></div>
+          <div class="image"><img :src="characters[1]?.imgSrc" alt="游戏图片"/></div>
         </div>
-
       </div>
     </div>
   </div>
@@ -205,7 +236,7 @@ export default defineComponent({
       background: defaultImage,
       game: {
         gameId: 1,
-        imgSrc: "../../assets/images/灯泡.jpg",
+        imgSrc: "/src/assets/images/demo/game1.jpg",
         kindName: "",
         title: "电路排查",
         author: "da",
@@ -261,6 +292,32 @@ export default defineComponent({
       isInteracting: false,
       isInteracted: false,
       isChoiceConfirm: false,
+
+      //聊天和排序
+      showChatAndSort: true,
+      conversations: [
+        {
+          my:'你们掌握了什么数据都？',
+          other: '我完全没有头猪啊！你知道什么？',
+        },
+        {
+          my:'不瞒你说，我是游戏的开发人员~',
+          other: '啊，你怎...那你是不是知道所有剧情走向啊？',
+        },
+        {
+          my:'哈哈哈哈哈！那是必然',
+          other: '真厉害，不过我是剧情的设计人员。',
+        },
+        {
+          my:'。。。。。。',
+          other: '嘻嘻~~~',
+        },
+        {
+          my:'你吗',
+          other: '嘻嘻嘻~~~',
+        },
+      ],
+      sendMessage:'',
     };
   },
   components: {Top},
@@ -272,9 +329,9 @@ export default defineComponent({
       let gameID = sessionStorage.getItem("gameID");
       this.gameID = Number(gameID);
       let gameStr = sessionStorage.getItem("game");
-      if (gameStr != null) {
-        this.game = JSON.parse(gameStr);
-      }
+      // if (gameStr != null) {
+      //   this.game = JSON.parse(gameStr);
+      // }
       // console.log(this.game);
     },
     startGame() {
@@ -518,6 +575,15 @@ export default defineComponent({
     },
     getInteraction() {
       this.interaction();
+    },
+    //聊天和排序
+    //用户发送信息
+    sendMyMessage() {
+      this.conversations.push({
+        my:this.sendMessage,
+        other:'你说你说，我听着呢！',
+      })
+      this.sendMessage = ''
     },
     end() {
       this.$router.push("/game/review");
