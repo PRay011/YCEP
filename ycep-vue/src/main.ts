@@ -1,4 +1,5 @@
 import './assets/main.css'
+import 'element-plus/dist/index.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -19,3 +20,7 @@ app.mount('#app')
 router.afterEach((to,from,next) => {
     window.scrollTo(0,0);
 })
+
+
+
+

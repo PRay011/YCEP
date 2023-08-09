@@ -16,6 +16,10 @@
   border: none;
   color: #ffffff;
   background-color: #446dde;
+  cursor: pointer;
+  &:hover{
+    background-color: #007bff;
+  }
 }
 
 .main{
@@ -85,6 +89,10 @@
         .paper{
           width: 96%;
           margin: 0 auto;
+          .aiBtn{
+            @include main-button;
+            margin-top: 15px;
+          }
           .el-form{
             margin: 50px auto;
             max-width: 600px;
@@ -98,6 +106,8 @@
             }
             .el-input--small{
               width: 70px;
+              margin-bottom: 10px;
+              margin-top: 5px;
             }
             .chapter-name{
               display: block;
@@ -172,9 +182,6 @@
       .btn-container{
         button {
           @include main-button;
-          &:hover {
-            background-color: #007bff;
-          }
         }
       }
     }
@@ -202,7 +209,6 @@
           margin-top: 10px;
           border-radius: 5px;
         }
-
         .message.ai {
           background-color: #e1f5fe;
         }
@@ -219,6 +225,10 @@
           padding: 10px;
           border: 1px solid #ccc;
           border-radius: 5px 0 0 5px;
+          font-size: 15px;
+          &:focus {
+            outline: 1px solid #797979;
+          }
         }
         button {
           padding: 10px 20px;
