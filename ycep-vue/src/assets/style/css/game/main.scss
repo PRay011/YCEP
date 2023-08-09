@@ -291,19 +291,34 @@
       }
     }
   }
-  .game-info {
-    width: 80%;
-    height: 100px;
-    background-color: #a1a1a1;
-    margin: 20px auto;
-  }
-
   .game-actions {
     width: 80%;
-    height: 100px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
     @include pretty_button(600px, 60px);
   }
+  .game-info {
+    width: 80%;
+    height: auto;
+    background-color: #ffffff;
+    margin: 10px auto;
+    padding: 20px;
+    .title{
+      display: flex;
+      justify-content: space-between;
+      .text1{
+        font-size: 18px;
+        font-weight: 550;
+      }
+    }
+    .desc{
+      .text2{
+        margin-top: 10px;
+      }
+    }
+  }
+
+
 }

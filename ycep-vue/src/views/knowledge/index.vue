@@ -72,7 +72,7 @@
                   <p class="p2">太阳系中有多少行星？</p>
                 </div>
               </div>
-              <div class="item1" @click="klgDetailBtnClick(1)">
+              <div class="item1" @click="klgDetailBtnClick(2)">
                 <div class="image">
                   <img src="../../assets/images/氧气.jpg" alt="知识点图片" />
                 </div>

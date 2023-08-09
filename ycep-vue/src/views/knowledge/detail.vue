@@ -42,9 +42,9 @@
                     <template class="block-cards">
                       <div
                         class="card"
-                        v-for="item in gameList"
+                        v-for="(item,index) in gameList"
                         :key="item.gameId"
-                        @click="toGame(item.gameId)"
+                        @click="toGame(item.gameId,index)"
                       >
                         <div class="card-image">
                           <img :src="item.imgSrc" alt="背景图片" />
@@ -227,8 +227,9 @@ export default defineComponent({
       if (this.active > 0) this.active--;
     },
     //进入游戏
-    toGame(id: any) {
+    toGame(id: any, index: number) {
       sessionStorage.setItem("gameID", id);
+      sessionStorage.setItem("game", JSON.stringify(this.gameList[index]))
       this.$router.push("/game/main/" + id);
     },
     //点击进入知识点详情

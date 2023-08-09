@@ -75,7 +75,7 @@
       </div>
       <div class="actions" v-if="reviewVisible">
         <button class="button cancel" @click="backToKlg">返回知识点</button>
-        <button class="button confirm" @click="confirmTest">生成论文</button>
+        <button class="button confirm" @click="toThesis">生成论文</button>
       </div>
     </div>
     <div class="mask" v-if="scoreVisible"></div>
@@ -227,6 +227,9 @@ export default defineComponent({
     },
     backToKlg() {
       this.$router.go(-2);
+    },
+    backToGame() {
+      this.$router.go(-1);
     },
     confirmTest() {
       let userScore = 0;
