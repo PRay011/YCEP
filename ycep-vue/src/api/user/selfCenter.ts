@@ -1,9 +1,9 @@
 import { request } from '../../utils/request';
 
 //获取个人信息
-export function getUserInfo(account: any) {
+export function getUserInfo() {
     return request({
-        url: `user/info/${account}`,
+        url: `/user/info`,
         method: 'get',
     })
 }
@@ -15,10 +15,17 @@ export function putUserInfo(data: any) {
         data: data
     })
 }
+//获取兴趣爱好
+export function getInterest() {
+    return request({
+        url: `/interest/my`,
+        method: 'get',
+    })
+}
 //第一次添加爱好
 export function putInterest(account: any) {
     return request({
-        url: `/interest/knowledge/${account}`,
+        url: `/interest/knowledge`,
         method: 'put',
     })
 }

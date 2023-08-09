@@ -10,6 +10,20 @@
   }
 }
 
+@mixin main-button{
+  margin-right: 20px;
+  width:100px;
+  height:30px;
+  border-radius: 10px;
+  border: none;
+  color: #ffffff;
+  background-color: #446dde;
+  cursor: pointer;
+  &:hover{
+    background-color: #007bff;
+  }
+}
+
 .main {
   width: 90%;
   display: flex;
@@ -498,6 +512,88 @@
             margin-top: 20px;
             margin-left: 230px;
           }
+        }
+      }
+      &.thesis {
+        .el-scrollbar{
+          text-align: center;
+          .paper-content {
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 30px;
+            color: #222226;
+            hr{
+              width: 100%;
+            }
+            //background-color: #a1a1a1;
+            .block1{
+              width:100%;
+              height:40px;
+              display: flex;
+              justify-content: space-between;
+              .text1{
+                font-size:18px;
+                color:#a1a1a1;
+              }
+              .text2{
+                font-weight: 550;
+                font-size: 17px;
+                color: #696969;
+              }
+            }
+            .block2{
+              width:100%;
+              .text1{
+                line-height: 60px;
+                font-size: 24px;
+                font-weight: 600;
+              }
+              .text2{
+                font-family: "楷体", sans-serif;
+                font-size: 20px;
+                line-height: 50px;
+              }
+              .text3{
+                font-size: 16px;
+                font-family: "华文楷体", sans-serif;
+              }
+            }
+            .block3{
+              text-align: left;
+              .text1{
+                font-weight: 550;
+                margin-top: 10px;
+              }
+            }
+            .block4{
+              text-align: left;
+              .text1{
+                font-size: 18px;
+                height: 50px;
+                line-height: 50px;
+                font-weight: 550;
+              }
+            }
+          }
+        }
+        .thesisTop{
+          width: 95%;
+          margin: 0 auto;
+          padding-bottom: 20px;
+          display: flex;
+          justify-content: space-between;
+          .btn-container{
+            display: flex;
+            justify-content: right;
+            button {
+              @include main-button;
+              margin: 0;
+            }
+          }
+
         }
       }
     }

@@ -194,6 +194,8 @@ export default defineComponent({
   name: "index",
   data() {
     return {
+      //用户是否已选择感兴趣的知识点
+      isSelectedInterest:0,
       //选择感兴趣的知识点
       chooseInterestVisible: true,
       kindItemList: [
@@ -438,6 +440,13 @@ export default defineComponent({
       this.showKnowledges();
       this.showGames();
       this.category();
+      let username = sessionStorage.getItem('username');
+      let isSelectedInterest = sessionStorage.getItem('isSelectedInterest');
+      this.isSelectedInterest = isSelectedInterest-0 //字符串转数字
+      if(isSelectedInterest == 1 || username!=='' )
+        this.chooseInterestVisible = false;
+      else
+        this.chooseInterestVisible = true;
     },
 
     showKnowledges() {

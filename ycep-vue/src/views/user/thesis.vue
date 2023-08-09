@@ -185,7 +185,7 @@
           <div class="btn-container" v-if="currentNav == 7">
             <button @click="editPaperBtnClick">继续编辑</button>
             <button @click="confirmPaperBtnClick">确认生成</button>
-<!--            <button @click="printThesisClick">下载论文</button>-->
+            <button @click="downloadThesis()">下载论文</button>
           </div>
         </div>
         <div class="right">
@@ -246,6 +246,7 @@ import {defineComponent} from "vue";
 import Top from "../../components/top.vue";
 import {nextTick, ref} from 'vue'
 import {ElInput} from 'element-plus'
+import {getPdf} from "@/utils/htmlToPdf";
 // import printJS from 'print-js'
 // import html2Canvas from 'html2Canvas'
 
@@ -315,8 +316,6 @@ export default defineComponent({
       conversationIndex: 0,
       userMessage: '',
       responseMessage: '',
-      printThesisTitle:'青少年创新教育平台-学习论文',
-      isPrint:false,
     };
   },
   components: {Top},
@@ -381,24 +380,9 @@ export default defineComponent({
 
     },
     //下载论文pdf
-    // printThesisClick() {
-    //   this.isPrint = true
-    //   html2Canvas(<HTMLElement>this.$refs.print, {
-    //     allowTaint: true,
-    //     taintTest: false,
-    //     useCORS: true,
-    //     dpi: window.devicePixelRatio * 4,
-    //     scale: 4
-    //   }).then((canvas) => {
-    //     const url = canvas.toDataURL()
-    //     printJS({
-    //       printable: url, // 要打印的id
-    //       type: 'image',
-    //       style: '@page{size:auto;margin: 0cm 1cm 0cm 1cm;}' //去除页眉页脚
-    //     })
-    //     this.isPrint = false
-    //   })
-    // }
+    downloadThesis() {
+      getPdf(this.thesis)
+    }
   },
 });
 </script>

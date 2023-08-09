@@ -26,8 +26,8 @@
             </div>
             <div class="card__subtitle">{{ user.email }}</div>
             <div class="card__wrapper">
-              <button class="card__btn">编辑信息</button>
-              <button class="card__btn">退出系统</button>
+              <button class="card__btn" @click="editInfoClick">编辑信息</button>
+              <button class="card__btn" @click="signOutClick">退出系统</button>
             </div>
           </div>
         </div>
@@ -137,8 +137,8 @@
           <br/>
           <hr/>
           <div class="content">
-            <div class="item" v-for="thesis in thesisList">
-              <div class="card_box">
+            <div class="item" v-for="(thesis,index) in thesisList">
+              <div class="card_box" @click="thesisDetailClick(index)">
                 <span></span>
                 <p class="text1">{{ thesis.title }}</p>
                 <p class="text2">{{ thesis.keywords[0] }};{{ thesis.keywords[1] }}</p>
@@ -324,6 +324,54 @@
             <el-button type="primary" @click="interestEditClick">保存</el-button>
           </div>
         </div>
+        <div class="detail thesis" v-if="thesisVisible">
+          <div class="thesisTop">
+            <div class="title">论文详情>></div>
+            <div class="btn-container">
+              <button @click="downloadThesis()" style="margin-right: 20px">下载论文</button>
+              <button @click="closeThesisClick">关闭</button>
+            </div>
+          </div>
+          <el-scrollbar height="830px">
+            <div class="paper-content" id="printDiv">
+              <div class="block1">
+                <p class="text1">{{ thesisList[this.currentThesis].time }}</p>
+                <p class="text2">青少年创新教育平台</p>
+                <p class="text1">{{ thesisList[this.currentThesis].kind }}/{{ thesisList[this.currentThesis].item }}</p>
+              </div>
+              <hr/>
+              <hr/>
+              <div class="block2">
+                <p class="text1">{{ thesisList[this.currentThesis].title }}</p>
+                <p class="text2">{{ thesisList[this.currentThesis].author }}</p>
+                <p class="text3">（{{ thesisList[this.currentThesis].address }}）</p>
+              </div>
+              <br/>
+              <div class="block3">
+                <p class="text1">摘要：</p>
+                <p class="text2">&emsp;&emsp;{{ thesisList[this.currentThesis].brief }}</p>
+                <p class="text1">关键词：&emsp;
+                  <template v-for="keyword in thesisList[this.currentThesis].keywords">{{ keyword }};&emsp;</template>
+                </p>
+              </div>
+              <br/><br/>
+              <div class="block4">
+                <template v-for="chapter in thesisList[this.currentThesis].content">
+                  <p class="text1">{{ chapter.chapter }}</p>
+                  <p class="text2">&emsp;&emsp;{{ chapter.text }}</p>
+                </template>
+              </div>
+              <br/><br/>
+              <hr/>
+              <hr/>
+              <div class="block1">
+                <p class="text1">{{ thesisList[this.currentThesis].time }}</p>
+                <p class="text2">青少年创新教育平台</p>
+                <p class="text1">{{ thesisList[this.currentThesis].kind }}/{{ thesisList[this.currentThesis].item }}</p>
+              </div>
+            </div>
+          </el-scrollbar>
+        </div>
       </div>
     </div>
   </div>
@@ -332,7 +380,11 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import Top from "../../components/top.vue";
-import { ElMessage } from 'element-plus'
+import {ElMessage} from 'element-plus'
+import {getInterest, getUserInfo} from "../../api/user/selfCenter";
+import {getCategory} from "@/api/knowledge/kind";
+import {postInterest} from "@/api/knowledge";
+import {getPdf} from "@/utils/htmlToPdf";
 
 export default defineComponent({
   name: "selfCenter",
@@ -427,7 +479,7 @@ export default defineComponent({
       ],
       thesisList: [
         {
-          id: '1',
+          id: 1,
           time: '2023/8/6',
           kind: '物理',
           item: '电路',
@@ -456,7 +508,7 @@ export default defineComponent({
           ]
         },
         {
-          id: '1',
+          id: 2,
           time: '2023/8/6',
           kind: '物理',
           item: '电路',
@@ -485,7 +537,7 @@ export default defineComponent({
           ]
         },
         {
-          id: '1',
+          id: 3,
           time: '2023/8/6',
           kind: '物理',
           item: '电路',
@@ -514,7 +566,7 @@ export default defineComponent({
           ]
         },
         {
-          id: '1',
+          id: 4,
           time: '2023/8/6',
           kind: '物理',
           item: '电路',
@@ -543,7 +595,7 @@ export default defineComponent({
           ]
         },
         {
-          id: '1',
+          id: 5,
           time: '2023/8/6',
           kind: '物理',
           item: '电路',
@@ -572,7 +624,7 @@ export default defineComponent({
           ]
         },
         {
-          id: '1',
+          id: 6,
           time: '2023/8/6',
           kind: '物理',
           item: '电路',
@@ -601,7 +653,7 @@ export default defineComponent({
           ]
         },
         {
-          id: '1',
+          id: 7,
           time: '2023/8/6',
           kind: '物理',
           item: '电路',
@@ -630,8 +682,11 @@ export default defineComponent({
           ]
         },
       ],
+      currentThesis: 0,
+      thesisVisible: false,
       kindList: ['全部', '编程', '材料', '物理', '化学'],
       selectedKind: 0,
+      isSelectedInterest: 0,
       //感兴趣的知识点
       kindItemList: [
         {
@@ -739,14 +794,71 @@ export default defineComponent({
           ],
         },
       ],
+      interest: [],
     };
   },
   components: {Top},
   mounted() {
+    this.ready();
   },
   methods: {
     ready() {
+      this.showUserinfo();
+      let isSelectedInterest = sessionStorage.getItem('isSelectedInterest');
+      this.isSelectedInterest = isSelectedInterest - 0 //字符串转数字
+      this.showCategory();
     },
+    editInfoClick() {
+      this.leftNavClick(5);
+    },
+    signOutClick() {
+      sessionStorage.clear();
+      this.$router.push("/knowledge/index");
+    },
+    showUserinfo() {
+      let that = this;
+      getUserInfo()
+          .then((res: any) => {
+            console.log(res);
+            that.user = res.data;
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
+    },
+    showCategory() {
+      let that = this;
+      getCategory()
+          .then((res: any) => {
+            console.log("interest");
+            console.log(res);
+            that.kindItemList = res.data;
+            that.kindItemList.forEach((kind: any, i: any) => {
+              kind.items.forEach((item: any, i: any) => {
+                item.isSelected = false;
+              });
+            });
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
+      if (this.isSelectedInterest == 1) {
+        getInterest().then((res: any) => {
+          let selectedItems = res.data
+          //判断用户选择的兴趣点
+          for (let i = 0; i < selectedItems.length; i++) {
+            for (let j = 0; j < this.kindItemList.length; j++) {
+              for (let k = 0; k < this.kindItemList[j].items.length; k++) {
+                if (selectedItems[i].itemId == this.kindItemList[j].items[k].itemId) {
+                  this.kindItemList[j].items[k].isSelected = true;
+                }
+              }
+            }
+          }
+        })
+      }
+    },
+
     // 翻页
     handlePageChange(val: number) {
       this.paginationConfig.currentPage = val;
@@ -777,12 +889,42 @@ export default defineComponent({
     },
     //修改感兴趣的知识点
     interestEditClick() {
+      this.postInterest();
       ElMessage({
         message: '感兴趣的知识点修改成功！',
         type: 'success',
       })
     },
-
+    postInterest() {
+      let that = this;
+      this.kindItemList.forEach((kind: any, i: any) => {
+        kind.items.forEach((item: any, i: any) => {
+          if (item.isSelected) {
+            this.interest.push(item.itemId);
+          }
+        });
+      });
+      postInterest(this.interest)
+          .then((res: any) => {
+            console.log(res);
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
+    },
+    thesisDetailClick(index: number) {
+      this.currentThesis = index;
+      this.currentNav = 0;
+      this.thesisVisible = true;
+    },
+    closeThesisClick() {
+      this.thesisVisible = false;
+      this.currentNav = 2;
+    },
+    //下载论文pdf
+    downloadThesis() {
+      getPdf(this.thesisList[this.currentThesis])
+    },
   },
 });
 </script>
