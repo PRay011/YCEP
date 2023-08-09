@@ -45,6 +45,11 @@ public class MainPageController {
         return CommonResponse.success(pageInfo);
     }
 
+    @GetMapping("/knowledge/all/{kindID}")
+    public CommonResponse getKnowledgeAndGameByKind(@PathVariable("kindID") int kindId, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+        return CommonResponse.success(mainPageService.getKnowledgeAndGameByKind(kindId, pageNum, pageSize));
+    }
+
     @GetMapping("/knowledge/{itemID}")
     public CommonResponse getKnowledgeAndGame(@PathVariable("itemID") int itemId, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
         PageInfo<KnowledgeAndGame> pageInfo = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> {

@@ -12,7 +12,11 @@ public interface MainPageService {
 
     List<KnowledgeAndGame> getKnowledgeAndGame(int itemId);
 
+    List<KnowledgeAndGame> getKnowledgeAndGameByKind(int kindId, int pageNum, int pageSize);
+
     List<Game> getGameList(int knowledgeId);
 
     KnowledgeDocument getKnowledgeInfo(int id);
+
+
 }

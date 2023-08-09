@@ -8,7 +8,9 @@ import cn.edu.csu.ycepspring.entity.dto.LoginResp;
 import cn.edu.csu.ycepspring.entity.dto.PasswordBody;
 import cn.edu.csu.ycepspring.entity.dto.UserInfo;
 import cn.edu.csu.ycepspring.entity.po.mysql.AuthLocal;
+import cn.edu.csu.ycepspring.entity.po.mysql.Item;
 import cn.edu.csu.ycepspring.entity.po.mysql.User;
+import cn.edu.csu.ycepspring.mapper.InterestMapper;
 import cn.edu.csu.ycepspring.mapper.UserMapper;
 import cn.edu.csu.ycepspring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private InterestMapper interestMapper;
+
     @Override
     public LoginResp checkAccount(String username, String password) {
         AuthLocal auth = userMapper.selectPasswordByUsername(username);
@@ -31,7 +36,9 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("密码错误");
         }
         int roleId = userMapper.selectRoleIdByAccount(auth.getAccount());
-        return new LoginResp(roleId, auth.getAccount(), username);
+        // 查询是否已选择兴趣点,0否1是
+        List<Item> myInterest = interestMapper.selectMyInterest(auth.getAccount());
+        return new LoginResp(roleId, auth.getAccount(), username, myInterest.isEmpty() ? 0 : 1);
     }
 
     @Override
@@ -47,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
         AuthLocal auth = new AuthLocal(user.getAccount(), username, password);
         userMapper.insertAuthLocal(auth);
-        return new LoginResp(RoleConstants.USER, auth.getAccount(), auth.getUsername());
+        return new LoginResp(RoleConstants.USER, auth.getAccount(), auth.getUsername(), 0);
     }
 
     @Override

@@ -53,4 +53,41 @@
                  inner join kind as k on i.kind_id = k.kind_id
         where i.item_id = #{itemId};
     </select>
+
+    <select id="selectKnowledgeAndGameByKind" resultMap="selectKnowledgeAndGameByKindMap">
+        select k.kind_name,
+               kn.knowledge_id,
+               kn.img_src     as i1,
+               kn.title       as t1,
+               kn.author      as a1,
+               kn.description as d1,
+               g.game_id,
+               g.img_src      as i2,
+               g.title        as t2,
+               g.author       as a2,
+               g.description  as d2
+        from (((kind as k
+            left join item as i on k.kind_id = i.kind_id)
+            left join knowledge as kn on i.item_id = kn.item_id)
+            left join game as g on kn.knowledge_id = g.knowledge_id)
+        where g.game_id in (select max(game_id) from game group by knowledge_id)
+          and k.kind_id = #{kindId} limit #{num}
+        offset #{start_index};
+    </select>
+    <resultMap id="selectKnowledgeAndGameByKindMap" type="cn.edu.csu.ycepspring.entity.dto.KnowledgeAndGame">
+        <id property="id" column="knowledge_id"/>
+        <result property="imgSrc" column="i1"/>
+        <result property="title" column="t1"/>
+        <result property="author" column="a1"/>
+        <result property="desc" column="d1"/>
+        <result property="kindName" column="kind_name"/>
+        <association property="game">
+            <id property="id" column="game_id"/>
+            <result property="imgSrc" column="i2"/>
+            <result property="title" column="t2"/>
+            <result property="author" column="a2"/>
+            <result property="desc" column="d2"/>
+            <result property="kindName" column="kind_name"/>
+        </association>
+    </resultMap>
 </mapper>

@@ -28,7 +28,7 @@
     </update>
 
     <select id="selectPasswordByUsername" resultType="cn.edu.csu.ycepspring.entity.po.mysql.AuthLocal">
-        select account, passwordBody
+        select account, password
         from auth_local
         where username = #{username};
     </select>

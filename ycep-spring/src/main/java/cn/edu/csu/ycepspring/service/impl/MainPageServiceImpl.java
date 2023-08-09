@@ -46,6 +46,11 @@ public class MainPageServiceImpl implements MainPageService {
     }
 
     @Override
+    public List<KnowledgeAndGame> getKnowledgeAndGameByKind(int kindId, int pageNum, int pageSize) {
+        return mainPageMapper.selectKnowledgeAndGameByKind(kindId, pageSize, (pageNum - 1) * pageSize);
+    }
+
+    @Override
     public KnowledgeDocument getKnowledgeInfo(int id) {
         return mongoTemplate.findById(id, KnowledgeDocument.class);
     }

@@ -12,10 +12,12 @@ public class LoginResp {
     private int account;
     private String username;
     private String token;
+    private int isSelectedInterest;
 
-    public LoginResp(int roleId, int account, String username) {
+    public LoginResp(int roleId, int account, String username, int isSelectedInterest) {
         this.roleId = roleId;
         this.account = account;
         this.username = username;
+        this.isSelectedInterest = isSelectedInterest;
     }
 }

@@ -21,7 +21,7 @@
         from interest as i
                  inner join knowledge as k on i.item_id = k.item_id
         where i.account = #{account}
-        order by rand() limit 10;
+        order by rand() limit 5;
     </select>
     <select id="selectGameByInterest" resultType="cn.edu.csu.ycepspring.entity.po.mysql.Game">
         select g.*
@@ -29,6 +29,6 @@
             inner join knowledge as k on i.item_id = k.item_id)
                  inner join game as g on k.knowledge_id = g.knowledge_id
         where i.account = #{account}
-        order by rand() limit 10;
+        order by rand() limit 5;
     </select>
 </mapper>

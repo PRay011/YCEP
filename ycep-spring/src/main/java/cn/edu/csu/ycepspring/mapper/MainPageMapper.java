@@ -20,4 +20,6 @@ public interface MainPageMapper {
     String selectKindNameByItemId(@Param("itemId") int itemId);
 
     GameVO selectOneGameByKnowledgeId(@Param("knowledgeId") int knowledgeId);
+
+    List<KnowledgeAndGame> selectKnowledgeAndGameByKind(@Param("kindId") int kindId, @Param("num") int num, @Param("start_index") int start_index);
 }
