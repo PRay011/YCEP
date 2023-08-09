@@ -13,3 +13,10 @@ export function getCategory() {
         method: 'get',
     })
 }
+
+export function getAllList(kindID: any, pageNum: any, pageSize: any) {
+    return request({
+        url: `/main/knowledge/all/${kindID}?pageNum=${pageNum}&pageSize=${pageSize}`,
+        method: 'get',
+    })
+}

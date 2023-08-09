@@ -134,7 +134,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Top from "../../components/top.vue";
-import { getCategory, getList } from "../../api/knowledge/kind";
+import { getCategory, getList, getAllList } from "../../api/knowledge/kind";
 
 export default defineComponent({
   name: "kind1",
@@ -144,7 +144,8 @@ export default defineComponent({
       kindID: 1,
       update: true,
       selectedItem: -1,
-      itemList: [{ itemId: 1, itemName: "电路", knowledges: null }],
+      itemList: [{ itemId: -1, itemName: "全部", knowledges: null }],
+      itemAll: { itemId: -1, itemName: "全部", knowledges: null },
       paginationConfig: {
         currentPage: 1, // 当前页码
         pageSize: 4, // 每页显示的条数
@@ -183,9 +184,14 @@ export default defineComponent({
     },
     //收到子组件信息
     changeTitleItem(data: any) {
+      console.log("子组件");
       console.log(data);
       this.selectedItem = data;
-      this.getKnowledge();
+      if (data == -1) {
+        this.allKnowledge();
+      } else {
+        this.getKnowledge();
+      }
     },
     //前往知识点详情界面
     toDetails(id: any) {
@@ -194,7 +200,12 @@ export default defineComponent({
     // 页面中间
     itemClick(index: any) {
       this.selectedItem = index;
-      this.ready();
+      this.paginationConfig.currentPage = 1;
+      if (index == -1) {
+        this.allKnowledge();
+      } else {
+        this.getKnowledge();
+      }
     },
     //点击进入知识点详情
     klgDetailBtnClick(id: any) {
@@ -204,7 +215,11 @@ export default defineComponent({
     handlePageChange(val: number) {
       this.paginationConfig.currentPage = val;
       console.log("当前页面数为：" + val);
-      this.getKnowledge();
+      if (this.selectedItem == -1) {
+        this.allKnowledge();
+      } else {
+        this.getKnowledge();
+      }
     },
     category() {
       let that = this;
@@ -212,15 +227,33 @@ export default defineComponent({
         .then((res: any) => {
           console.log("catagory");
           console.log(res);
+          that.itemList = [];
           res.data.forEach((kind: any, i: any) => {
             if (kind.kindId == this.kindID) {
               that.itemList = kind.items;
               console.log(kind.items);
             }
           });
-          if(that.selectedItem == -1)
-          that.selectedItem = that.itemList[0].itemId
-        that.getKnowledge();
+          //把全部添加至第一项
+          that.itemList.unshift(that.itemAll);
+          that.allKnowledge();
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
+    allKnowledge() {
+      let that = this;
+      getAllList(
+        this.kindID,
+        this.paginationConfig.currentPage,
+        this.paginationConfig.pageSize
+      )
+        .then((res: any) => {
+          console.log("allKnowledge");
+          console.log(res);
+          that.knowledgeInfoList = res.data;
+          that.paginationConfig.total = res.data.total;
         })
         .catch((err: any) => {
           console.log(err);
@@ -234,6 +267,7 @@ export default defineComponent({
         this.paginationConfig.pageSize
       )
         .then((res: any) => {
+          console.log("oneKnowledge");
           console.log(res);
           that.knowledgeInfoList = res.data.list;
           that.paginationConfig.total = res.data.total;
