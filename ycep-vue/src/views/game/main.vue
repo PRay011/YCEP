@@ -1,31 +1,29 @@
 <template>
   <!--  顶部导航栏-->
-  <Top/>
+  <Top />
   <div class="container">
     <div class="main">
       <div
-          class="game-main"
-          id="game_main"
-          v-loading="loading"
-          :style="{
+        class="game-main"
+        id="game_main"
+        v-loading="loading"
+        :style="{
           background: `url(${background})`,
           'background-size': 'cover',
         }"
       >
-        <el-icon class="fullScreen" @click="toggleScreen"
-        >
-          <FullScreen
-          />
+        <el-icon class="fullScreen" @click="toggleScreen">
+          <FullScreen />
         </el-icon>
         <el-icon class="chatRoom" @click="chatRoom">
-          <ChatDotRound/>
+          <ChatDotRound />
         </el-icon>
         <el-icon class="exitGame" @click="exitGame">
-          <CircleClose/>
+          <CircleClose />
         </el-icon>
 
         <div class="play-btn" v-if="!playing" @click="startGame()">
-          <img src="../../assets/images/play_btn.png" alt="播放按钮"/>
+          <img src="../../assets/images/play_btn.png" alt="播放按钮" />
           <div class="mask"></div>
         </div>
         <div class="choose-mode" v-if="isPlayed">
@@ -37,16 +35,16 @@
         </div>
         <div class="choose-character" v-if="isCharacter">
           <div
-              :class="{
+            :class="{
               character: true,
               active: character.active,
               hide: character.hide,
             }"
-              v-for="(character, index) in characters"
-              :key="index"
-              @click="characterChosen(index)"
+            v-for="(character, index) in characters"
+            :key="index"
+            @click="characterChosen(index)"
           >
-            <img :src="character.imgSrc" class="character-image"/><br/>
+            <img :src="character.imgSrc" class="character-image" /><br />
             <div class="character-name">{{ character.name }}</div>
             <div class="character-confirm" v-if="isCharacterConfirm">
               <button class="selectButton" @click.stop="reChooseCharacter">
@@ -59,9 +57,9 @@
           </div>
         </div>
         <div
-            class="chatCharacter"
-            v-if="isGame"
-            :style="{
+          class="chatCharacter"
+          v-if="isGame"
+          :style="{
             background: `url(${myCharacter.imgSrc})`,
             'background-size': 'cover',
           }"
@@ -75,16 +73,16 @@
         </div>
         <div class="interaction" v-if="isInteracted">
           <div
-              :class="{
+            :class="{
               choice: true,
               active: choice.active,
               hide: choice.hide,
             }"
-              v-for="(choice, index) in choices"
-              :key="index"
-              @click="choiceChosen(index)"
+            v-for="(choice, index) in choices"
+            :key="index"
+            @click="choiceChosen(index)"
           >
-            <img :src="choice.imgSrc" class="character-image"/><br/>
+            <img :src="choice.imgSrc" class="character-image" /><br />
             <div class="character-name">{{ choice.name }}</div>
             <div class="character-confirm" v-if="isChoiceConfirm">
               <button class="selectButton" @click.stop="reChooseChoice">
@@ -135,7 +133,7 @@
           <p class="text1">{{ game.title }}</p>
           <el-tag>{{ game.author }}</el-tag>
         </div>
-        <hr/>
+        <hr />
         <div class="desc">
           <p class="text2">&emsp;&emsp;{{ game.description }}</p>
         </div>
@@ -151,14 +149,14 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import screenfull from "screenfull";
 import Top from "../../components/top.vue";
 import image1 from "../../assets/images/氧气.jpg";
 import image2 from "../../assets/images/宇宙.jpg";
 import backImage1 from "../../assets/images/gameBack.jpg";
 import defaultImage from "../../assets/images/default.jpg";
-import {fa} from "element-plus/es/locale/index.js";
+import { fa } from "element-plus/es/locale/index.js";
 import type interactionVue from "./interaction.vue";
 import {
   getStartPlot,
@@ -287,6 +285,7 @@ export default defineComponent({
       isCharacterConfirm: false,
       isGame: false,
       //交互
+      //这里是下一次要进行的交互
       interactionNumber: 1,
       interactionID: 0,
       isInteracting: false,
@@ -320,7 +319,7 @@ export default defineComponent({
       sendMessage:'',
     };
   },
-  components: {Top},
+  components: { Top },
   mounted() {
     this.ready();
   },
@@ -329,9 +328,9 @@ export default defineComponent({
       let gameID = sessionStorage.getItem("gameID");
       this.gameID = Number(gameID);
       let gameStr = sessionStorage.getItem("game");
-      // if (gameStr != null) {
-      //   this.game = JSON.parse(gameStr);
-      // }
+      if (gameStr != null) {
+        this.game = JSON.parse(gameStr);
+      }
       // console.log(this.game);
     },
     startGame() {
@@ -446,8 +445,7 @@ export default defineComponent({
     chatRoom() {
       this.$router.push("/game/room");
     },
-    exitGame() {
-    },
+    exitGame() {},
     // 翻页
     previousPage() {
       //判断是不是第一页，是就查看前面一个plot
@@ -488,7 +486,7 @@ export default defineComponent({
               this.isInteracting = true;
               this.getInteraction();
             } else {
-              console.log('交互中')
+              console.log("交互中");
             }
           }
         }
@@ -497,81 +495,82 @@ export default defineComponent({
     character() {
       let that = this;
       getCharacter(that.gameID)
-          .then((res: any) => {
-            console.log(res);
-            that.characters = res.data;
-            that.characters.forEach((character, i) => {
-              character.active = false;
-              character.hide = false;
-            });
-          })
-          .catch((err: any) => {
-            console.log(err);
+        .then((res: any) => {
+          console.log('character');
+          that.characters = res.data;
+          that.characters.forEach((character, i) => {
+            character.active = false;
+            character.hide = false;
           });
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     startPlot() {
       let that = this;
       getStartPlot(that.gameID, that.myCharacter.id)
-          .then((res: any) => {
-            console.log(res);
-            that.isFinished = res.data.isFinished;
-            let plot = res.data.plot;
-            that.plotRecord = [];
-            that.plotRecord.push(plot);
-            //获取背景图片和剧情
-            that.background = this.plotRecord[0].imgSrc;
-            that.data = this.plotRecord[0].content[0].text;
-            that.isCharacter = false;
-            that.isGame = true;
-          })
-          .catch((err: any) => {
-            console.log(err);
-          });
+        .then((res: any) => {
+          console.log(res);
+          that.isFinished = res.data.isFinished;
+          let plot = res.data.plot;
+          that.plotRecord = [];
+          that.plotRecord.push(plot);
+          //获取背景图片和剧情
+          that.background = this.plotRecord[0].imgSrc;
+          that.data = this.plotRecord[0].content[0].text;
+          that.isCharacter = false;
+          that.isGame = true;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     interaction() {
       let that = this;
-      getInteraction(that.gameID, that.interactionNumber)
-          .then((res: any) => {
-            console.log(res);
-            that.isInteracted = true;
-            that.choices = [];
-            that.choices = res.data.choices;
-            that.choices.forEach((choice, i) => {
-              choice.active = false;
-              choice.hide = false;
-            });
-          })
-          .catch((err: any) => {
-            console.log(err);
+      getInteraction(that.gameID, that.myCharacter.id, that.interactionNumber)
+        .then((res: any) => {
+          console.log(res);
+          that.isInteracted = true;
+          that.choices = [];
+          that.choices = res.data;
+          that.choices.forEach((choice, i) => {
+            choice.active = false;
+            choice.hide = false;
           });
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     finishInteraction() {
       let that = this;
-      postInteraction(that.gameID, that.myCharacter.id, that.interactionID)
-          .then((res: any) => {
-            console.log("finish");
-            console.log(res);
-            let plot = res.data.plot;
-            that.isFinished = res.data.isFinished;
-            //获取后续背景图片和剧情
-            that.plotRecord.push(plot);
-            that.isInteracted = false;
-            that.isChoiceConfirm = false;
-            that.isInteracting = false;
-            that.choices.forEach((choice, i) => {
-              choice.active = false;
-              choice.hide = false;
-            });
-            //获取新添加的部分
-            that.background = this.plotRecord.slice(-1)[0].imgSrc;
-            that.data = this.plotRecord.slice(-1)[0].content[0].text;
-            //改变currentPage
-            that.currentPage.page = 0;
-            that.currentPage.plot++;
-          })
-          .catch((err: any) => {
-            console.log(err);
+      postInteraction(that.gameID, that.myCharacter.id,that.interactionNumber, that.interactionID)
+        .then((res: any) => {
+          console.log("finish");
+          console.log(res);
+          let plot = res.data.plot;
+          that.isFinished = res.data.isFinished;
+          that.interactionNumber++;
+          //获取后续背景图片和剧情
+          that.plotRecord.push(plot);
+          that.isInteracted = false;
+          that.isChoiceConfirm = false;
+          that.isInteracting = false;
+          that.choices.forEach((choice, i) => {
+            choice.active = false;
+            choice.hide = false;
           });
+          //获取新添加的部分
+          that.background = this.plotRecord.slice(-1)[0].imgSrc;
+          that.data = this.plotRecord.slice(-1)[0].content[0].text;
+          //改变currentPage
+          that.currentPage.page = 0;
+          that.currentPage.plot++;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     getInteraction() {
       this.interaction();

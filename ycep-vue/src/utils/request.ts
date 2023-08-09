@@ -5,7 +5,7 @@ import { Message } from "@element-plus/icons-vue";
 export function request(config: any) {
   const instance = axios.create({
     baseURL: "/api",
-    timeout: 5000,
+    timeout: 50000,
     // 'transformRequest' 允许在向服务器发送前，修改请求数据
     transformRequest: [
       function (data: any) {

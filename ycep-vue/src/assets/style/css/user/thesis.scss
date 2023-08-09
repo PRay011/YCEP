@@ -8,21 +8,21 @@
   }
 }
 
-@mixin main-button{
+@mixin main-button {
   margin-right: 20px;
-  width:100px;
-  height:30px;
+  width: 100px;
+  height: 30px;
   border-radius: 10px;
   border: none;
   color: #ffffff;
   background-color: #446dde;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: #007bff;
   }
 }
 
-.main{
+.main {
   width: 90%;
   margin: 30px auto;
 
@@ -40,7 +40,7 @@
       margin-left: 20px;
     }
     .actions {
-      button{
+      button {
         @include main-button;
       }
     }
@@ -55,10 +55,10 @@
       flex: 0 0 150px; /* 设置固定宽度为150px，不伸缩 */
       background-color: #ffffff;
       padding: 20px 10px;
-      width:150px;
-      .tac{
+      width: 150px;
+      .tac {
         width: 100%;
-        .el-menu{
+        .el-menu {
           border: none;
           .el-menu-item {
             padding-top: 20px;
@@ -67,7 +67,6 @@
           }
         }
       }
-
     }
     .middle {
       bottom: 0; /* 将底部对齐 */
@@ -79,37 +78,38 @@
       padding: 20px;
       text-align: center;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      .el-scrollbar{
-        height:630px;
-        .title{
+      .el-scrollbar {
+        height: 630px;
+        .title {
           text-align: left;
           margin-top: 18px;
           margin-bottom: 20px;
         }
-        .paper{
+        .paper {
           width: 96%;
           margin: 0 auto;
-          .aiBtn{
+          .aiBtn {
             @include main-button;
             margin-top: 15px;
           }
-          .el-form{
+          .el-form {
             margin: 50px auto;
             max-width: 600px;
-            .el-form-item{
+            .el-form-item {
               margin-top: 20px;
-              .el-tag,button{
+              .el-tag,
+              button {
                 margin-right: 10px;
                 margin-bottom: 10px;
                 margin-top: 5px;
               }
             }
-            .el-input--small{
+            .el-input--small {
               width: 70px;
               margin-bottom: 10px;
               margin-top: 5px;
             }
-            .chapter-name{
+            .chapter-name {
               display: block;
               width: 100%;
               font-weight: 550;
@@ -126,52 +126,52 @@
           width: 100%;
           padding: 30px;
           color: #222226;
-          hr{
+          hr {
             width: 100%;
           }
           //background-color: #a1a1a1;
-          .block1{
-            width:100%;
-            height:40px;
+          .block1 {
+            width: 100%;
+            height: 40px;
             display: flex;
             justify-content: space-between;
-            .text1{
-              font-size:18px;
-              color:#a1a1a1;
+            .text1 {
+              font-size: 18px;
+              color: #a1a1a1;
             }
-            .text2{
+            .text2 {
               font-weight: 550;
               font-size: 17px;
               color: #696969;
             }
           }
-          .block2{
-            width:100%;
-            .text1{
+          .block2 {
+            width: 100%;
+            .text1 {
               line-height: 60px;
               font-size: 24px;
               font-weight: 600;
             }
-            .text2{
+            .text2 {
               font-family: "楷体", sans-serif;
               font-size: 20px;
               line-height: 50px;
             }
-            .text3{
+            .text3 {
               font-size: 16px;
               font-family: "华文楷体", sans-serif;
             }
           }
-          .block3{
+          .block3 {
             text-align: left;
-            .text1{
+            .text1 {
               font-weight: 550;
               margin-top: 10px;
             }
           }
-          .block4{
+          .block4 {
             text-align: left;
-            .text1{
+            .text1 {
               font-size: 18px;
               height: 50px;
               line-height: 50px;
@@ -180,7 +180,7 @@
           }
         }
       }
-      .btn-container{
+      .btn-container {
         button {
           @include main-button;
         }
@@ -190,12 +190,19 @@
       /* 让右侧区域填充剩余的可用空间 */
       margin-left: 10px;
       width: 350px;
-      .title{
+      .title {
         display: flex;
-        .text{
+        .text {
           margin-left: 10px;
-          font-size:16px;
+          font-size: 16px;
           color: #3f3f3f;
+        }
+        .refresh {
+          margin-left: 20%;
+          display: flex;
+          &:hover{
+            color:red
+          }
         }
       }
       .chat-box {
@@ -234,7 +241,7 @@
         }
         button {
           padding: 10px 20px;
-          background-color: #4CAF50;
+          background-color: #4caf50;
           color: #fff;
           border: none;
           border-radius: 0 5px 5px 0;
@@ -244,7 +251,7 @@
     }
   }
   .el-dialog {
-    img{
+    img {
       margin: 0 auto;
     }
   }
