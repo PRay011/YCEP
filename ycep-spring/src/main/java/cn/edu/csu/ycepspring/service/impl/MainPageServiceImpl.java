@@ -52,6 +52,6 @@ public class MainPageServiceImpl implements MainPageService {
 
     @Override
     public KnowledgeDocument getKnowledgeInfo(int id) {
-        return mongoTemplate.findById(id, KnowledgeDocument.class);
+        return mongoTemplate.findById(id, KnowledgeDocument.class, "knowledge");
     }
 }
