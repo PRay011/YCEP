@@ -1,6 +1,6 @@
 <template>
   <!--  顶部导航栏-->
-  <Top />
+<!--  <Top />-->
 
   <div class="container">
     <div class="main">
@@ -115,6 +115,7 @@ export default defineComponent({
         password: "",
         code: "",
         codeID: "",
+        isSelectedInterest:0,
       },
     };
   },
@@ -146,6 +147,7 @@ export default defineComponent({
       login(that.user)
         .then((res: any) => {
           console.log(res);
+          sessionStorage.setItem("isSelectedInterest", String(this.user.isSelectedInterest))
           sessionStorage.setItem("username", this.user.username);
           sessionStorage.setItem("token", res.data.token);
           this.$router.push("/knowledge/index");

@@ -26,17 +26,17 @@ export function getStartPlot(gameID: any, characterID: any) {
 }
 
 //获取交互
-export function getInteraction(gameID: any, interactionNumber: any) {
+export function getInteraction(gameID: any, characterID : any, interactionNumber: any) {
     return request({
-        url: `/game/getInteraction/${gameID}?interactionNumber=${interactionNumber}`,
+        url: `/game/getInteraction/${gameID}?interactionNumber=${interactionNumber}&characterID=${characterID}`,
         method: 'get',
     })
 }
 
 //交互完成获取下一章节剧情
-export function postInteraction(gameID: any, characterID: any, interactionID: any) {
+export function postInteraction(gameID: any, characterID: any, interactionNumber: any, interactionID: any) {
     return request({
-        url: `/game/finishInteraction/${gameID}?characterID=${characterID}?interactionID=${interactionID}`,
+        url: `/game/finishInteraction/${gameID}?characterID=${characterID}&interactionNumber=${interactionNumber}&interactionID=${interactionID}`,
         method: 'get',
     })
 }

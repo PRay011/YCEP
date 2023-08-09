@@ -96,57 +96,49 @@
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 2">
-              <p class="title">研究背景>></p>
+              <p class="title">创意来源>></p>
               <hr />
               <el-form>
-                <span class="chapter-name">{{
-                  thesis.content[0].chapter
-                }}</span>
+                <span class="chapter-name">一、创意来源</span>
                 <el-input
                   type="textarea"
-                  v-model="thesis.content[0].text"
+                  v-model="thesis.content[0]"
                   :autosize="{ minRows: 18 }"
                 ></el-input>
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 3">
-              <p class="title">方案设计>></p>
+              <p class="title">研究背景>></p>
               <hr />
               <el-form>
-                <span class="chapter-name">{{
-                  thesis.content[1].chapter
-                }}</span>
+                <span class="chapter-name">二、研究背景</span>
                 <el-input
                   type="textarea"
-                  v-model="thesis.content[1].text"
+                  v-model="thesis.content[1]"
                   :autosize="{ minRows: 18 }"
                 ></el-input>
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 4">
-              <p class="title">实践过程>></p>
+              <p class="title">创新点>></p>
               <hr />
               <el-form>
-                <span class="chapter-name">{{
-                  thesis.content[2].chapter
-                }}</span>
+                <span class="chapter-name">三、创新点</span>
                 <el-input
                   type="textarea"
-                  v-model="thesis.content[2].text"
+                  v-model="thesis.content[2]"
                   :autosize="{ minRows: 18 }"
                 ></el-input>
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 5">
-              <p class="title">结论>></p>
+              <p class="title">方案设计>></p>
               <hr />
               <el-form>
-                <span class="chapter-name">{{
-                  thesis.content[3].chapter
-                }}</span>
+                <span class="chapter-name">三、方案设计</span>
                 <el-input
                   type="textarea"
-                  v-model="thesis.content[3].text"
+                  v-model="thesis.content[3]"
                   :autosize="{ minRows: 18 }"
                 ></el-input>
               </el-form>
@@ -210,6 +202,7 @@
                 <p class="text3">（{{ thesis.address }}）</p>
               </div>
               <br />
+
               <div class="block3">
                 <p class="text1">摘要：</p>
                 <p class="text2">&emsp;&emsp;{{ thesis.brief }}</p>
@@ -222,10 +215,14 @@
               </div>
               <br /><br />
               <div class="block4">
-                <template v-for="chapter in thesis.content">
-                  <p class="text1">{{ chapter.chapter }}</p>
-                  <p class="text2">&emsp;&emsp;{{ chapter.text }}</p>
-                </template>
+                <p class="text1">一、创意来源</p>
+                <p class="text2">&emsp;&emsp;{{ thesis.content[0] }}</p>
+                <p class="text1">二、研究背景</p>
+                <p class="text2">&emsp;&emsp;{{ thesis.content[1] }}</p>
+                <p class="text1">三、创新点</p>
+                <p class="text2">&emsp;&emsp;{{ thesis.content[2] }}</p>
+                <p class="text1">四、方案设计</p>
+                <p class="text2">&emsp;&emsp;{{ thesis.content[3] }}</p>
               </div>
               <br /><br />
               <hr />
@@ -240,7 +237,7 @@
           <div class="btn-container" v-if="currentNav == 7">
             <button @click="editPaperBtnClick">继续编辑</button>
             <button @click="confirmPaperBtnClick">确认生成</button>
-            <!--            <button @click="printThesisClick">下载论文</button>-->
+            <button @click="downloadThesis">下载论文</button>
           </div>
         </div>
         <div class="right">
@@ -303,11 +300,9 @@
         </div>
         <template #footer>
           <span class="dialog-footer">
-            <el-button @click="confirmDialogVisible = false"
-              >回到首页</el-button
-            >
-            <el-button type="primary" @click="confirmDialogVisible = false">
-              查看论文
+            <el-button @click="backToIndexClick">回到首页</el-button>
+            <el-button type="primary" @click="toSelfCenter">
+              个人主页
             </el-button>
           </span>
         </template>
@@ -319,13 +314,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Top from "../../components/top.vue";
+
 import { nextTick, ref } from "vue";
-import { ElInput } from "element-plus";
+import { ElInput, ElMessage } from "element-plus";
+import { getPdf } from "../../utils/htmlToPdf";
 import {
   createSession,
   chat,
   refreshSession,
   deleteSession,
+  getBasicThesis,
+  getKeywordsAndBrief,
 } from "../../api/user/thesis";
 // import printJS from 'print-js'
 // import html2Canvas from 'html2Canvas'
@@ -336,6 +335,7 @@ export default defineComponent({
   name: "thesis",
   data() {
     return {
+      id: "",
       data: "",
       currentNav: 1,
       inputVisible: false,
@@ -352,24 +352,13 @@ export default defineComponent({
           "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
         keywords: ["无线传感器", "网络", "电源电路", "电源效率"],
         content: [
-          {
-            chapter: "一、创意来源",
-            text: "目前，越来越多的行业应用无线传感器网络技术，使网络电源电路的节点功能不断增加。无线传感器网络电源电路的工作原理包括电源管理系统中能量流动原理、功率跟踪原理及充电原理。电源电路中的能量流动控制主要通过管理开关元件的导通与关断功能，实现能量流动方向控制与引导的目标。在电路管理中，根据无线传感器网络电源电路能量流动类型的不同，分为能量流动负载模型和电源模型。在电源管理电路中包括两种负载，分别为电池和电路节点电路的输出能量在为铅酸电池充电的同时，还能为超级电容充电，保证了无线传感器负载电路的稳定运行。",
-          },
-          {
-            chapter: "二、研究背景",
-            text: "在开关电源技术快速发展的趋势下，网络电源开关的种类越来越多，电路的拓扑结构也越来越复杂。采用 Buck-Boost 拓扑结构，再结合隔离变压器的调节控制作用，生成电源电路中常用的变换器。开关稳压电源与开关降压电源串联，将电源电压进行有功转换，控制晶体管的导通与关断时间，从而调节输出电压。该电路用于无线传感器网络的电源电路，其中包括电容和负载。",
-          },
-          {
-            chapter: "三、创新点",
-            text: "本次实验选择具有无线接入功能的网关抓包工具与具有无线传感器网络节点的设备，在单片机开发的 C 语言集成开发环境下，硬件配置为 3.20GHz的 CPU 和 4.00 GB 内存的 PC 机，软件配置为Windows7SP1 操作系统，运行环境为 Visual Stu‐dio2010。利用NS2网络仿真软件进行无线传感器网络仿真，实现无线传感器自动生成与可视化操作。实验采用集成电路充电管理芯片，型号为ML2496，具有铅酸电池充电管理的功能。",
-          },
-          {
-            chapter: "四、方案设计",
-            text: "本文提出的无线传感器网络电源电路优化改进方法，能够提供稳定的电源电压输出，其设计指标满足无线传感器基本性能指标要求。经过实验证明，本文设计的优化改进方法整体运行性能较好，电源的运行效率更加具有优势。但是，本文在无线传感器网络稳压模块方面的研究仍然存在一定的不足，网络稳压模块仅可接收 3 种传感器类型，在未来的研究中，应当进一步改进。",
-          },
+          "目前，越来越多的行业应用无线传感器网络技术，使网络电源电路的节点功能不断增加。无线传感器网络电源电路的工作原理包括电源管理系统中能量流动原理、功率跟踪原理及充电原理。电源电路中的能量流动控制主要通过管理开关元件的导通与关断功能，实现能量流动方向控制与引导的目标。在电路管理中，根据无线传感器网络电源电路能量流动类型的不同，分为能量流动负载模型和电源模型。在电源管理电路中包括两种负载，分别为电池和电路节点电路的输出能量在为铅酸电池充电的同时，还能为超级电容充电，保证了无线传感器负载电路的稳定运行。",
+          "在开关电源技术快速发展的趋势下，网络电源开关的种类越来越多，电路的拓扑结构也越来越复杂。采用 Buck-Boost 拓扑结构，再结合隔离变压器的调节控制作用，生成电源电路中常用的变换器。开关稳压电源与开关降压电源串联，将电源电压进行有功转换，控制晶体管的导通与关断时间，从而调节输出电压。该电路用于无线传感器网络的电源电路，其中包括电容和负载。",
+          "本次实验选择具有无线接入功能的网关抓包工具与具有无线传感器网络节点的设备，在单片机开发的 C 语言集成开发环境下，硬件配置为 3.20GHz的 CPU 和 4.00 GB 内存的 PC 机，软件配置为Windows7SP1 操作系统，运行环境为 Visual Stu‐dio2010。利用NS2网络仿真软件进行无线传感器网络仿真，实现无线传感器自动生成与可视化操作。实验采用集成电路充电管理芯片，型号为ML2496，具有铅酸电池充电管理的功能。",
+          "本文提出的无线传感器网络电源电路优化改进方法，能够提供稳定的电源电压输出，其设计指标满足无线传感器基本性能指标要求。经过实验证明，本文设计的优化改进方法整体运行性能较好，电源的运行效率更加具有优势。但是，本文在无线传感器网络稳压模块方面的研究仍然存在一定的不足，网络稳压模块仅可接收 3 种传感器类型，在未来的研究中，应当进一步改进。",
         ],
       },
+      content: {},
       confirmDialogVisible: false,
       conversations: [
         // {
@@ -396,8 +385,6 @@ export default defineComponent({
       conversationIndex: 0,
       userMessage: "",
       responseMessage: "",
-      printThesisTitle: "青少年创新教育平台-学习论文",
-      isPrint: false,
       //开启会话
       sessionPart: "创意来源",
       inSession: false,
@@ -411,30 +398,65 @@ export default defineComponent({
   methods: {
     ready() {
       this.conversations = [];
+      let gameID = sessionStorage.getItem("gameID")!;
+      this.id = gameID;
+      this.showBasicThesis();
     },
     leftNavClick(index: any) {
       this.currentNav = index;
       switch (index) {
-        case '2':
+        case "2":
           this.sessionPart = "创意来源";
-          break
-        case '3':
+          break;
+        case "3":
           this.sessionPart = "研究背景";
-          break
-        case '4':
+          break;
+        case "4":
           this.sessionPart = "创新点";
-          break
-        case '5':
+          break;
+        case "5":
           this.sessionPart = "方案设计";
-          break
+          break;
         default:
           this.sessionPart = "创意来源";
-          break
+          break;
       }
       console.log(this.sessionPart);
     },
+    //获取论文框架
+    showBasicThesis() {
+      let that = this;
+      getBasicThesis(that.id)
+        .then((res) => {
+          console.log("论文框架", res);
+          this.thesis = res.data;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
     //点击AI生成关键词和摘要按钮
-    aiKeywordsClick() {},
+    aiKeywordsClick() {
+      this.showKeywordAndBrief();
+    },
+    //AI生成关键词和摘要
+    showKeywordAndBrief() {
+      let that = this;
+      // console.log(that.thesis.id+','+that.thesis.content)
+      getKeywordsAndBrief(that.thesis.id, that.thesis.content)
+        .then((res) => {
+          console.log("AI生成关键词和摘要", res);
+          this.thesis.keywords = res.data.keywords;
+          this.thesis.brief = res.data.brief;
+          ElMessage({
+            message: "AI成功生成关键词和摘要！",
+            type: "success",
+          });
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
     //关键词标签
     handleClose(tag: string) {
       this.thesis.keywords.splice(this.thesis.keywords.indexOf(tag), 1);
@@ -526,7 +548,6 @@ export default defineComponent({
           console.log(err);
         });
     },
-
     sendMessage() {
       console.log(this.userMessage);
       this.conversations.push({
@@ -543,28 +564,30 @@ export default defineComponent({
       }
     },
     //回到试题页面
-    backToTestClick() {},
+
+    backToTestClick() {
+      this.$router.go(-1);
+    },
     //回到知识点页面
-    backToKnowledgeClick() {},
+    backToKnowledgeClick() {
+      this.$router.go(-2);
+    },
     //下载论文pdf
-    // printThesisClick() {
-    //   this.isPrint = true
-    //   html2Canvas(<HTMLElement>this.$refs.print, {
-    //     allowTaint: true,
-    //     taintTest: false,
-    //     useCORS: true,
-    //     dpi: window.devicePixelRatio * 4,
-    //     scale: 4
-    //   }).then((canvas) => {
-    //     const url = canvas.toDataURL()
-    //     printJS({
-    //       printable: url, // 要打印的id
-    //       type: 'image',
-    //       style: '@page{size:auto;margin: 0cm 1cm 0cm 1cm;}' //去除页眉页脚
-    //     })
-    //     this.isPrint = false
-    //   })
-    // }
+    downloadThesis() {
+      getPdf(this.thesis);
+      ElMessage({
+        message: "正在获取，请稍后...",
+        type: "success",
+      });
+    },
+    //生成结束回到首页
+    backToIndexClick() {
+      this.$router.push("/knowledge/index");
+    },
+    //到个人账户查看论文详情
+    toSelfCenter() {
+      this.$router.push("/user/selfCenter");
+    },
   },
   beforeRouteLeave(to, from, next) {
     if (this.sessionKey) {

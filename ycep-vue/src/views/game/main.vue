@@ -12,11 +12,15 @@
           'background-size': 'cover',
         }"
       >
-        <el-icon class="fullScreen" @click="toggleScreen"
-          ><FullScreen
-        /></el-icon>
-        <el-icon class="chatRoom" @click="chatRoom"><ChatDotRound /></el-icon>
-        <el-icon class="exitGame" @click="exitGame"><CircleClose /></el-icon>
+        <el-icon class="fullScreen" @click="toggleScreen">
+          <FullScreen />
+        </el-icon>
+        <el-icon class="chatRoom" @click="chatRoom">
+          <ChatDotRound />
+        </el-icon>
+        <el-icon class="exitGame" @click="exitGame">
+          <CircleClose />
+        </el-icon>
 
         <div class="play-btn" v-if="!playing" @click="startGame()">
           <img src="../../assets/images/play_btn.png" alt="播放按钮" />
@@ -95,7 +99,17 @@
         <button class="button" @click="again()">重新开始</button>
         <button class="button" @click="end()">结束游戏</button>
       </div>
-      <div class="game-info"></div>
+      <div class="game-info">
+        <div class="title">
+          <p class="text1">{{ game.title }}</p>
+          <el-tag>{{ game.author }}</el-tag>
+        </div>
+        <hr />
+        <div class="desc">
+          <p class="text2">&emsp;&emsp;{{ game.description }}</p>
+        </div>
+        <div class="images"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -185,8 +199,12 @@ export default defineComponent({
       loading: false,
       background: defaultImage,
       game: {
-        id: 1,
-        title: "",
+        gameId: 1,
+        imgSrc: "../../assets/images/灯泡.jpg",
+        kindName: "",
+        title: "电路排查",
+        author: "da",
+        description: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
       },
       //可选角色
       characters: [
@@ -233,6 +251,7 @@ export default defineComponent({
       isCharacterConfirm: false,
       isGame: false,
       //交互
+      //这里是下一次要进行的交互
       interactionNumber: 1,
       interactionID: 0,
       isInteracting: false,
@@ -248,6 +267,11 @@ export default defineComponent({
     ready() {
       let gameID = sessionStorage.getItem("gameID");
       this.gameID = Number(gameID);
+      let gameStr = sessionStorage.getItem("game");
+      if (gameStr != null) {
+        this.game = JSON.parse(gameStr);
+      }
+      // console.log(this.game);
     },
     startGame() {
       this.playing = true;
@@ -394,15 +418,15 @@ export default defineComponent({
           this.currentPage.page = -1;
           this.nextPage();
         } else {
-          if(this.isFinished) {
+          if (this.isFinished) {
             this.end();
           } else {
             if (!this.isInteracting) {
               //避免连续点击两次交互
               this.isInteracting = true;
               this.getInteraction();
-            }else{
-              console.log('交互中')
+            } else {
+              console.log("交互中");
             }
           }
         }
@@ -412,7 +436,7 @@ export default defineComponent({
       let that = this;
       getCharacter(that.gameID)
         .then((res: any) => {
-          console.log(res);
+          console.log('character');
           that.characters = res.data;
           that.characters.forEach((character, i) => {
             character.active = false;
@@ -444,12 +468,12 @@ export default defineComponent({
     },
     interaction() {
       let that = this;
-      getInteraction(that.gameID, that.interactionNumber)
+      getInteraction(that.gameID, that.myCharacter.id, that.interactionNumber)
         .then((res: any) => {
           console.log(res);
           that.isInteracted = true;
           that.choices = [];
-          that.choices = res.data.choices;
+          that.choices = res.data;
           that.choices.forEach((choice, i) => {
             choice.active = false;
             choice.hide = false;
@@ -461,12 +485,13 @@ export default defineComponent({
     },
     finishInteraction() {
       let that = this;
-      postInteraction(that.gameID, that.myCharacter.id, that.interactionID)
+      postInteraction(that.gameID, that.myCharacter.id,that.interactionNumber, that.interactionID)
         .then((res: any) => {
           console.log("finish");
           console.log(res);
           let plot = res.data.plot;
           that.isFinished = res.data.isFinished;
+          that.interactionNumber++;
           //获取后续背景图片和剧情
           that.plotRecord.push(plot);
           that.isInteracted = false;

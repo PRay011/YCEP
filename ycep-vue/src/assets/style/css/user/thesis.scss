@@ -123,7 +123,8 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          width: 96%;
+          width: 100%;
+          padding: 30px;
           color: #222226;
           hr {
             width: 100%;
@@ -215,6 +216,7 @@
           padding: 10px;
           margin-top: 10px;
           border-radius: 5px;
+          height:auto;
         }
         .message.ai {
           background-color: #e1f5fe;
