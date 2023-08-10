@@ -2,6 +2,7 @@ package cn.edu.csu.ycepspring.service;
 
 import cn.edu.csu.ycepspring.entity.po.mongo.game.Choice;
 import cn.edu.csu.ycepspring.entity.po.mongo.game.GameRole;
+import cn.edu.csu.ycepspring.entity.po.mongo.game.Reinforce;
 
 import java.util.List;
 import java.util.Map;
@@ -14,4 +15,6 @@ public interface GameService {
     List<Choice> getInteraction(int gameId, int characterId, int interactionNumber);
 
     Map<String, Object> getfinishInteraction(int gameId, int characterId, int interactionNumber, int interactionId);
+
+    List<Reinforce> getReinforce(int gameId);
 }

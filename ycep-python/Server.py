@@ -6,7 +6,9 @@ from thrift.protocol import TBinaryProtocol
 from thrift.server import TServer
 from thrift.transport import TSocket, TTransport
 
-from aichat01 import get_prompt, send
+from ai.abstract import get_prompt_abstract, send_abstract
+from ai.body import get_prompt, send
+from ai.keyword import get_prompt_keyword, send_keyword
 from rpc import AIService
 
 
@@ -85,6 +87,20 @@ class RpcHandler:
             self.redis.delete(sessionKey)
             return True
 
+    def getBriefAndKeywords(self, theme, article):
+        # 获取摘要
+        prompt_abstract = get_prompt_abstract(theme)
+        abstract = send_abstract(prompt_abstract, article)
+        # 获取关键词
+        prompt_keyword = get_prompt_keyword(abstract)
+        keyword = send_keyword(prompt_keyword)
+        # 返回
+        resp = {
+            "abstract": abstract,
+            "keyword": keyword
+        }
+        return json.dumps(resp)
+
 
 # 启动服务
 if __name__ == '__main__':
@@ -97,16 +113,3 @@ if __name__ == '__main__':
     server = TServer.TSimpleServer(processor, transport, tfactory, pfactory)
     print('Starting the Python server...')
     server.serve()
-
-# 本地开发测试
-# if __name__ == '__main__':
-#     handler = RpcHandler()
-#     sessionKey = handler.newSession()
-#     while True:
-#         # 模拟用户输入
-#         content = input("user: ")
-#         # 分章节
-#         sessionType = 0
-#         # 调用接口
-#         response = handler.chat(content, sessionKey, sessionType)
-#         print(f"AI: {response}")

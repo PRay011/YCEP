@@ -53,6 +53,15 @@ class Iface(object):
         """
         pass
 
+    def getBriefAndKeywords(self, theme, article):
+        """
+        Parameters:
+         - theme
+         - article
+
+        """
+        pass
+
 
 class Client(Iface):
     def __init__(self, iprot, oprot=None):
@@ -193,6 +202,40 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "closeSession failed: unknown result")
 
+    def getBriefAndKeywords(self, theme, article):
+        """
+        Parameters:
+         - theme
+         - article
+
+        """
+        self.send_getBriefAndKeywords(theme, article)
+        return self.recv_getBriefAndKeywords()
+
+    def send_getBriefAndKeywords(self, theme, article):
+        self._oprot.writeMessageBegin('getBriefAndKeywords', TMessageType.CALL, self._seqid)
+        args = getBriefAndKeywords_args()
+        args.theme = theme
+        args.article = article
+        args.write(self._oprot)
+        self._oprot.writeMessageEnd()
+        self._oprot.trans.flush()
+
+    def recv_getBriefAndKeywords(self):
+        iprot = self._iprot
+        (fname, mtype, rseqid) = iprot.readMessageBegin()
+        if mtype == TMessageType.EXCEPTION:
+            x = TApplicationException()
+            x.read(iprot)
+            iprot.readMessageEnd()
+            raise x
+        result = getBriefAndKeywords_result()
+        result.read(iprot)
+        iprot.readMessageEnd()
+        if result.success is not None:
+            return result.success
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "getBriefAndKeywords failed: unknown result")
+
 
 class Processor(Iface, TProcessor):
     def __init__(self, handler):
@@ -202,6 +245,7 @@ class Processor(Iface, TProcessor):
         self._processMap["chat"] = Processor.process_chat
         self._processMap["resetSession"] = Processor.process_resetSession
         self._processMap["closeSession"] = Processor.process_closeSession
+        self._processMap["getBriefAndKeywords"] = Processor.process_getBriefAndKeywords
         self._on_message_begin = None
 
     def on_message_begin(self, func):
@@ -312,6 +356,29 @@ class Processor(Iface, TProcessor):
             msg_type = TMessageType.EXCEPTION
             result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
         oprot.writeMessageBegin("closeSession", msg_type, seqid)
+        result.write(oprot)
+        oprot.writeMessageEnd()
+        oprot.trans.flush()
+
+    def process_getBriefAndKeywords(self, seqid, iprot, oprot):
+        args = getBriefAndKeywords_args()
+        args.read(iprot)
+        iprot.readMessageEnd()
+        result = getBriefAndKeywords_result()
+        try:
+            result.success = self._handler.getBriefAndKeywords(args.theme, args.article)
+            msg_type = TMessageType.REPLY
+        except TTransport.TTransportException:
+            raise
+        except TApplicationException as ex:
+            logging.exception('TApplication exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = ex
+        except Exception:
+            logging.exception('Unexpected exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
+        oprot.writeMessageBegin("getBriefAndKeywords", msg_type, seqid)
         result.write(oprot)
         oprot.writeMessageEnd()
         oprot.trans.flush()
@@ -832,6 +899,141 @@ class closeSession_result(object):
 all_structs.append(closeSession_result)
 closeSession_result.thrift_spec = (
     (0, TType.BOOL, 'success', None, None, ),  # 0
+)
+
+
+class getBriefAndKeywords_args(object):
+    """
+    Attributes:
+     - theme
+     - article
+
+    """
+
+
+    def __init__(self, theme=None, article=None,):
+        self.theme = theme
+        self.article = article
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.theme = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 2:
+                if ftype == TType.STRING:
+                    self.article = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('getBriefAndKeywords_args')
+        if self.theme is not None:
+            oprot.writeFieldBegin('theme', TType.STRING, 1)
+            oprot.writeString(self.theme.encode('utf-8') if sys.version_info[0] == 2 else self.theme)
+            oprot.writeFieldEnd()
+        if self.article is not None:
+            oprot.writeFieldBegin('article', TType.STRING, 2)
+            oprot.writeString(self.article.encode('utf-8') if sys.version_info[0] == 2 else self.article)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(getBriefAndKeywords_args)
+getBriefAndKeywords_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'theme', 'UTF8', None, ),  # 1
+    (2, TType.STRING, 'article', 'UTF8', None, ),  # 2
+)
+
+
+class getBriefAndKeywords_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.STRING:
+                    self.success = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('getBriefAndKeywords_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.STRING, 0)
+            oprot.writeString(self.success.encode('utf-8') if sys.version_info[0] == 2 else self.success)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(getBriefAndKeywords_result)
+getBriefAndKeywords_result.thrift_spec = (
+    (0, TType.STRING, 'success', 'UTF8', None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

@@ -18,4 +18,5 @@ public class GameDocument {
     private List<GameRole> role;
     private List<List<Plot>> plot;
     private List<List<List<Choice>>> choices;
+    private List<Reinforce> reinforce;
 }

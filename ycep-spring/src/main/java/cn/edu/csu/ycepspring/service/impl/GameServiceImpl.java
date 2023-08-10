@@ -3,6 +3,7 @@ package cn.edu.csu.ycepspring.service.impl;
 import cn.edu.csu.ycepspring.entity.po.mongo.game.Choice;
 import cn.edu.csu.ycepspring.entity.po.mongo.game.GameDocument;
 import cn.edu.csu.ycepspring.entity.po.mongo.game.GameRole;
+import cn.edu.csu.ycepspring.entity.po.mongo.game.Reinforce;
 import cn.edu.csu.ycepspring.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -55,5 +56,13 @@ public class GameServiceImpl implements GameService {
         resp.put("isFinished", result.getPlot().get(characterId - 1).size() <= interactionNumber + 1);
         resp.put("plot", result.getPlot().get(characterId - 1).get(interactionNumber));
         return resp;
+    }
+
+    @Override
+    public List<Reinforce> getReinforce(int gameId) {
+        Query query = new Query(Criteria.where("_id").is(gameId));
+        query.fields().include("reinforce");
+        GameDocument result = mongoTemplate.findOne(query, GameDocument.class, "game");
+        return result.getReinforce();
     }
 }

@@ -11,7 +11,7 @@
  Target Server Version : 60008 (6.0.8)
  File Encoding         : 65001
 
- Date: 09/08/2023 23:22:07
+ Date: 10/08/2023 23:21:46
 */
 
 
@@ -28,12 +28,12 @@ db.getCollection("game").insert([ {
     _id: 1,
     role: [
         {
-            role_id: 1,
+            id: 1,
             name: "林立",
             imgSrc: "lingli.png"
         },
         {
-            role_id: 2,
+            id: 2,
             name: "云清",
             imgSrc: "yueqing.png"
         }
@@ -513,7 +513,7 @@ db.getCollection("game").insert([ {
         [
             [
                 {
-                    choice_id: 1,
+                    id: 1,
                     name: "点击绿宝石可出现简单介绍",
                     description: "绿碧玺：深层地质中经过百般变化而凝练成的一抹绿色，深邃绿意中隐撤的神奇能量。它象征着希望、健康以及蓬勃盎然的生命力，被称作“生命之花”。",
                     imgSrc: "string"
@@ -521,13 +521,13 @@ db.getCollection("game").insert([ {
             ],
             [
                 {
-                    choice_id: 1,
+                    id: 1,
                     name: "string",
                     description: "点击监控，C展厅监控无法查看；",
                     imgSrc: "string"
                 },
                 {
-                    choice_id: 2,
+                    id: 2,
                     name: "string",
                     description: "点击电路操作手册，出现一本关于电路的书，再点击可观看学习视频。看完之后可点击{放入背包}按键。设置一个线索包，将收集到的线索放入背包内，学生要是忘记了或者需要整合线索可以随时查看】",
                     imgSrc: "string"
@@ -537,7 +537,7 @@ db.getCollection("game").insert([ {
         [
             [
                 {
-                    choice_id: 1,
+                    id: 1,
                     name: "点击绿宝石可出现简单介绍",
                     description: "绿碧玺：深层地质中经过百般变化而凝练成的一抹绿色，深邃绿意中隐撤的神奇能量。它象征着希望、健康以及蓬勃盎然的生命力，被称作“生命之花”。",
                     imgSrc: "string"
@@ -545,25 +545,87 @@ db.getCollection("game").insert([ {
             ],
             [
                 {
-                    choice_id: 1,
+                    id: 1,
                     name: "string",
                     description: "点击电线，发现电线在角落的一端有断连点。",
                     imgSrc: "string"
                 },
                 {
-                    choice_id: 2,
+                    id: 2,
                     name: "string",
                     description: "点击监控器，出现文字：厕所里怎么会安装监控器呢？",
                     imgSrc: "string"
                 },
                 {
-                    choice_id: 3,
+                    id: 3,
                     name: "string",
                     description: "点击小纸条，发现关于断路和短路的知识点有标记重点的痕迹，点击即可进行学习。",
                     imgSrc: "string"
                 }
             ]
         ]
+    ],
+    reinforce: [
+        {
+            question: "string",
+            choice: [
+                "string",
+                "string",
+                "string",
+                "string"
+            ],
+            answer: 0,
+            explain: "string",
+            score: 20
+        },
+        {
+            question: "string",
+            choice: [
+                "string",
+                "string",
+                "string",
+                "string"
+            ],
+            answer: 1,
+            explain: "string",
+            score: 20
+        },
+        {
+            question: "string",
+            choice: [
+                "string",
+                "string",
+                "string",
+                "string"
+            ],
+            answer: 2,
+            explain: "string",
+            score: 20
+        },
+        {
+            question: "string",
+            choice: [
+                "string",
+                "string",
+                "string",
+                "string"
+            ],
+            answer: 3,
+            explain: "string",
+            score: 20
+        },
+        {
+            question: "string",
+            choice: [
+                "string",
+                "string",
+                "string",
+                "string"
+            ],
+            answer: 0,
+            explain: "string",
+            score: 20
+        }
     ]
 } ]);
 
@@ -615,3 +677,25 @@ db.createCollection("paper");
 // ----------------------------
 // Documents of paper
 // ----------------------------
+db.getCollection("paper").insert([ {
+    _id: ObjectId("64d4fce0b674753a4c22d9cd"),
+    account: NumberInt("3"),
+    time: "2023-08-10 23:06:08",
+    kind: "编程",
+    item: "单元测试",
+    title: "些第又后能存",
+    author: "occaecat aliquip",
+    address: "辽宁省黄石市日土县",
+    brief: "minim deserunt cillum et laborum",
+    keywords: [
+        "ut",
+        "Loremn"
+    ],
+    content: [
+        "dolor ut anim",
+        "elit esse aliqua",
+        "do voluptate ex tempor",
+        "volupta fsda"
+    ],
+    _class: "cn.edu.csu.ycepspring.entity.po.mongo.PaperDocument"
+} ]);

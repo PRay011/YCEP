@@ -28,6 +28,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('  string chat(string content, string sessionKey)')
     print('  bool resetSession(string sessionKey)')
     print('  bool closeSession(string sessionKey)')
+    print('  string getBriefAndKeywords(string theme, string article)')
     print('')
     sys.exit(0)
 
@@ -130,6 +131,12 @@ elif cmd == 'closeSession':
         print('closeSession requires 1 args')
         sys.exit(1)
     pp.pprint(client.closeSession(args[0],))
+
+elif cmd == 'getBriefAndKeywords':
+    if len(args) != 2:
+        print('getBriefAndKeywords requires 2 args')
+        sys.exit(1)
+    pp.pprint(client.getBriefAndKeywords(args[0], args[1],))
 
 else:
     print('Unrecognized method %s' % cmd)

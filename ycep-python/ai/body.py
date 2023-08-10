@@ -22,8 +22,7 @@ def get_access_token():
 
 def get_prompt(theme, part):
     # 在模型上请求prompt模板，theme和part是可以更改的变量，这个函数返回请求到的prompt
-    url = "https://aip.baidubce.com/rest/2.0/wenxinworkshop/api/v1/template/info?id=2429&" \
-          "theme=" + theme + "&part=" + part + "&access_token=" + get_access_token()
+    url = f"https://aip.baidubce.com/rest/2.0/wenxinworkshop/api/v1/template/info?id=2429&theme={theme}&part={part}&access_token={get_access_token()}"
 
     payload = json.dumps("")
     headers = {
@@ -65,6 +64,7 @@ def send(messages, content):
     start_idx = response.index(start_str) + len(start_str)
     end_idx = response[start_idx:].index('"is_truncated"')
     response = response[start_idx:start_idx + end_idx - 2]
+
     chat_ai = {
         "role": "assistant",
         "content": response

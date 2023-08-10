@@ -30,4 +30,9 @@ public class GameController {
     public CommonResponse getfinishInteraction(@PathVariable("gameID") int gameId, @RequestParam("characterID") int characterId, @RequestParam("interactionNumber") int interactionNumber, @RequestParam("interactionID") int interactionId) {
         return CommonResponse.success(gameService.getfinishInteraction(gameId, characterId, interactionNumber, interactionId));
     }
+
+    @GetMapping("/reinforce/test/{gameId}")
+    public CommonResponse getReinforce(@PathVariable("gameId") int gameId) {
+        return CommonResponse.success(gameService.getReinforce(gameId));
+    }
 }

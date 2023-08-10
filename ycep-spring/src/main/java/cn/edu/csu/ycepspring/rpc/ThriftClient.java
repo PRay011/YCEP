@@ -93,4 +93,23 @@ public class ThriftClient {
             return false;
         }
     }
+
+    /**
+     * 关闭会话
+     */
+    public String getBriefAndKeywords(String theme, String article) {
+        try {
+            TTransport transport = new TSocket(serverHost, serverPort);
+            transport.open();
+            TProtocol protocol = new TBinaryProtocol(transport);
+            AIService.Client client = new AIService.Client(protocol);
+            // 返回结果
+            String result = client.getBriefAndKeywords(theme, article);
+            transport.close();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
