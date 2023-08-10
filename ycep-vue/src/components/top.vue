@@ -121,7 +121,6 @@
 </template>
 
 <script lang="ts">
-import { ArrowDown } from "@element-plus/icons-vue";
 import { getCategory } from "../api/knowledge/kind";
 
 export default {
@@ -202,7 +201,6 @@ export default {
           this.$router.push("/knowledge/index");
           break;
         default:{
-          
           console.log(1);
           this.$router.push("/knowledge/kind/" + index);
         }
@@ -215,32 +213,7 @@ export default {
       this.currentItem = command;
       this.$emit("getTopData1", command);
       this.$router.push("/knowledge/kind" + command);
-      // console.log('click on command:' + command);
     },
-    // commandItemClick1(command:any) {
-    //   this.currentItem = 1;
-    //   this.$emit('getTopData1',command);
-    //   this.$router.push('/knowledge/kind1');
-    //   // console.log('click on command:' + command);
-    // },
-    // commandItemClick2(command:any) {
-    //   this.currentItem = 2;
-    //   this.$emit('getTopData2',command);
-    //   this.$router.push('/knowledge/kind2');
-    //   // console.log('click on command:' + command);
-    // },
-    // commandItemClick3(command:any) {
-    //   this.currentItem = 3;
-    //   this.$emit('getTopData3',command);
-    //   this.$router.push('/knowledge/kind3');
-    //   // console.log('click on command:' + command);
-    // },
-    // commandItemClick4(command:any) {
-    //   this.currentItem = 4;
-    //   this.$emit('getTopData4',command);
-    //   this.$router.push('/knowledge/kind4');
-    //   // console.log('click on command:' + command);
-    // },
     selfCenterClick() {
       this.$router.push("/user/selfCenter");
     },
@@ -248,18 +221,22 @@ export default {
       this.$router.push("/user/login");
     },
     logout() {
-      sessionStorage.removeItem("username");
+      sessionStorage.clear();
       this.$router.push("/");
-      this.$router.push("/knowledge/index");
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-$top_color: rgb(24, 26, 32);
+//$top_color: rgb(24, 26, 32);
+$top_color:#ffffff;
+//$font_color: #ffffff;
+$font_color:#000000;
+$font_color_hover: #a2a2a2;
 
 .header {
+  border-bottom: 2px #eaeaea solid;
   position: fixed;
   top: 0;
   width: 100%;
@@ -280,7 +257,7 @@ $top_color: rgb(24, 26, 32);
     p {
       font-size: 17px;
       font-family: "Helvetica", sans-serif;
-      color: #e2e2e2;
+      color: $font_color;
     }
 
     .header-item {
@@ -295,7 +272,7 @@ $top_color: rgb(24, 26, 32);
         width: 100px;
         height: 3px;
         margin-top: 35px;
-        background-color: #c2c2c2;
+        background-color: $font_color;
       }
 
       .dropdown {
@@ -304,7 +281,7 @@ $top_color: rgb(24, 26, 32);
 
         .el-dropdown-link {
           cursor: pointer;
-          color: #ffffff;
+          color: $font_color;
           display: flex;
           align-items: center;
           //有个乱出现的边界线，终于找到这个b了！
@@ -318,7 +295,7 @@ $top_color: rgb(24, 26, 32);
         outline: none;
         & .dropdown .el-dropdown-link,
         & p {
-          color: #a1a1a1;
+          color: $font_color_hover;
           border: none;
         }
       }

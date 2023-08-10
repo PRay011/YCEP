@@ -1,11 +1,13 @@
 <template>
   <!--  顶部导航栏-->
 <!--  <Top />-->
-
   <div class="container">
+    <div class="filter"></div>
     <div class="main">
+      <div class="left"></div>
       <div class="form-container">
         <p class="title">用户登录</p>
+        <p class="title2">-----------青少年创新教育平台欢迎您的登录-----------</p>
         <div class="form">
           <div class="input-group">
             <label for="username">用户名</label>
@@ -44,9 +46,6 @@
                   id="verificationCode"
                   @click="newVertification()"
               /></a>
-            </div>
-            <div class="forgot">
-              <a rel="noopener noreferrer" href="#">忘记密码 ?</a>
             </div>
           </div>
           <button class="sign" @click="login">登录</button>

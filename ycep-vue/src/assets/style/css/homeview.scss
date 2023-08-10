@@ -7,7 +7,7 @@
 }
 
 $font_color: #e1e1e1;
-$font_color_selected: limegreen;
+$font_color_selected: #81c9B5;
 @mixin pretty-card-div {
   .card {
     width: 190px;
@@ -75,7 +75,7 @@ $font_color_selected: limegreen;
   .descriptionList {
     width: 20%;
     height: 80%;
-    margin-top: 220px;
+    margin-top: 150px;
     margin-left: 150px;
     //background-color: #a1a1a1;
     display: flex;
@@ -279,7 +279,7 @@ $font_color_selected: limegreen;
 
   .pretty-button-div {
     position: relative;
-    top: 350px;
+    top: 300px;
     left: 100px;
     display: flex;
     flex-direction: column;

@@ -6,7 +6,7 @@
     <div class="main">
       <!-- 顶部轮播图 -->
       <div class="title-block">
-        <el-carousel height="300px" :interval="10000">
+        <el-carousel height="500px" :interval="10000">
           <el-carousel-item v-for="item in imageList" :key="item">
             <img :src="item" alt="轮播图" />
           </el-carousel-item>
@@ -134,7 +134,7 @@
                   <p class="text-body">{{ item.description }}</p>
                   <el-tag class="text-author">作者：{{ item.author }}</el-tag>
                 </div>
-                <button class="card-button">{{ item.kindName }}</button>
+                <button class="card-button">游戏</button>
               </div>
             </template>
           </template>

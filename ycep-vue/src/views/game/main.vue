@@ -1,30 +1,30 @@
+<link rel="stylesheet" href="../../assets/style/css/game/main.scss">
 <template>
   <!--  顶部导航栏-->
-  <Top />
+  <Top/>
   <div class="container">
     <div class="main">
       <div
-        class="game-main"
-        id="game_main"
-        v-loading="loading"
-        :style="{
+          class="game-main"
+          id="game_main"
+          v-loading="loading"
+          :style="{
           background: `url(${background})`,
           'background-size': 'cover',
         }"
       >
         <el-icon class="fullScreen" @click="toggleScreen">
-          <FullScreen />
+          <FullScreen/>
         </el-icon>
         <el-icon class="chatRoom" @click="chatRoom">
-          <ChatDotRound />
+          <ChatDotRound/>
         </el-icon>
         <el-icon class="exitGame" @click="exitGame">
-          <CircleClose />
+          <CircleClose/>
         </el-icon>
 
         <div class="play-btn" v-if="!playing" @click="startGame()">
-          <img src="../../assets/images/play_btn.png" alt="播放按钮" />
-          <div class="mask"></div>
+          <img src="../../assets/images/play_btn.png" alt="播放按钮"/>
         </div>
         <div class="choose-mode" v-if="isPlayed">
           <div class="choose-title">请选择游戏模式</div>
@@ -35,16 +35,16 @@
         </div>
         <div class="choose-character" v-if="isCharacter">
           <div
-            :class="{
+              :class="{
               character: true,
               active: character.active,
               hide: character.hide,
             }"
-            v-for="(character, index) in characters"
-            :key="index"
-            @click="characterChosen(index)"
+              v-for="(character, index) in characters"
+              :key="index"
+              @click="characterChosen(index)"
           >
-            <img :src="character.imgSrc" class="character-image" /><br />
+            <img :src="character.imgSrc" class="character-image"/><br/>
             <div class="character-name">{{ character.name }}</div>
             <div class="character-confirm" v-if="isCharacterConfirm">
               <button class="selectButton" @click.stop="reChooseCharacter">
@@ -57,9 +57,9 @@
           </div>
         </div>
         <div
-          class="chatCharacter"
-          v-if="isGame"
-          :style="{
+            class="chatCharacter"
+            v-if="isGame"
+            :style="{
             background: `url(${myCharacter.imgSrc})`,
             'background-size': 'cover',
           }"
@@ -73,16 +73,16 @@
         </div>
         <div class="interaction" v-if="isInteracted">
           <div
-            :class="{
+              :class="{
               choice: true,
               active: choice.active,
               hide: choice.hide,
             }"
-            v-for="(choice, index) in choices"
-            :key="index"
-            @click="choiceChosen(index)"
+              v-for="(choice, index) in choices"
+              :key="index"
+              @click="choiceChosen(index)"
           >
-            <img :src="choice.imgSrc" class="character-image" /><br />
+            <img :src="choice.imgSrc" class="character-image"/><br/>
             <div class="character-name">{{ choice.name }}</div>
             <div class="character-confirm" v-if="isChoiceConfirm">
               <button class="selectButton" @click.stop="reChooseChoice">
@@ -97,43 +97,15 @@
       </div>
       <div class="game-actions">
         <button class="button" @click="again()">重新开始</button>
+        <button class="button" @click="key()">关键剧情</button>
         <button class="button" @click="end()">结束游戏</button>
-      </div>
-      <div class="key-plot">
-        <div class="chat">
-          <div class="chat-card">
-            <div class="chat-header">
-              <div class="h2">聊天室</div>
-            </div>
-            <el-scrollbar height="400px">
-              <div class="chat-body">
-                <template v-for="conversation in conversations">
-                  <div class="message outgoing">
-                    <p>{{ conversation.my }}</p>
-                  </div>
-                  <div class="message incoming">
-                    <p>{{ conversation.other }}</p>
-                  </div>
-                </template>
-              </div>
-            </el-scrollbar>
-            <div class="chat-footer">
-              <input placeholder="请输入..." type="text" v-model="sendMessage">
-              <button @click="sendMyMessage">发送</button>
-            </div>
-          </div>
-
-        </div>
-        <div class="sort">
-
-        </div>
       </div>
       <div class="game-info">
         <div class="title">
           <p class="text1">{{ game.title }}</p>
           <el-tag>{{ game.author }}</el-tag>
         </div>
-        <hr />
+        <hr/>
         <div class="desc">
           <p class="text2">&emsp;&emsp;{{ game.description }}</p>
         </div>
@@ -145,18 +117,59 @@
         </div>
       </div>
     </div>
+    <div class="mask" v-if="showChatAndSort"></div>
+    <div class="key-plot" v-if="showChatAndSort">
+      <el-icon class="closeBtn" @click="closeKeyClick" size="30"><Close /></el-icon>
+      <div class="chat">
+        <div class="chat-card">
+          <div class="chat-header">
+            <div class="h2">聊天室</div>
+          </div>
+          <el-scrollbar height="450px">
+            <div class="chat-body">
+              <template v-for="conversation in conversations">
+                <div class="message outgoing">
+                  <p>{{ conversation.my }}</p>
+                </div>
+                <div class="message incoming">
+                  <p>{{ conversation.other }}</p>
+                </div>
+              </template>
+            </div>
+          </el-scrollbar>
+          <div class="chat-footer">
+            <input placeholder="请输入..." type="text" v-model="sendMessage">
+            <button @click="sendMyMessage">发送</button>
+          </div>
+        </div>
+      </div>
+      <div class="sort">
+        <div class="title">游戏步骤排序</div>
+        <div class="content">
+          <VueDraggableNext v-model="sortList" @start="onStart" @end="onEnd">
+            <transition-group>
+              <div class="item" v-for="(item,index) in sortList" :key="item.index">
+                <p class="item-text">{{ item.index }}：{{item.text}}</p>
+              </div>
+            </transition-group>
+          </VueDraggableNext>
+        </div>
+        <button class="confirmSortBtn" @click="confirmSortClick">确认排序</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 import screenfull from "screenfull";
+import { VueDraggableNext } from 'vue-draggable-next'
 import Top from "../../components/top.vue";
 import image1 from "../../assets/images/氧气.jpg";
 import image2 from "../../assets/images/宇宙.jpg";
 import backImage1 from "../../assets/images/gameBack.jpg";
 import defaultImage from "../../assets/images/default.jpg";
-import { fa } from "element-plus/es/locale/index.js";
+import {fa} from "element-plus/es/locale/index.js";
 import type interactionVue from "./interaction.vue";
 import {
   getStartPlot,
@@ -164,6 +177,7 @@ import {
   getInteraction,
   postInteraction,
 } from "../../api/game/main";
+import {ElMessage} from "element-plus";
 
 export default defineComponent({
   name: "main",
@@ -293,33 +307,41 @@ export default defineComponent({
       isChoiceConfirm: false,
 
       //聊天和排序
-      showChatAndSort: true,
+      showChatAndSort: false,
       conversations: [
         {
-          my:'你们掌握了什么数据都？',
+          my: '你们掌握了什么数据都？',
           other: '我完全没有头猪啊！你知道什么？',
         },
         {
-          my:'不瞒你说，我是游戏的开发人员~',
+          my: '不瞒你说，我是游戏的开发人员~',
           other: '啊，你怎...那你是不是知道所有剧情走向啊？',
         },
         {
-          my:'哈哈哈哈哈！那是必然',
+          my: '哈哈哈哈哈！那是必然',
           other: '真厉害，不过我是剧情的设计人员。',
         },
         {
-          my:'。。。。。。',
+          my: '。。。。。。',
           other: '嘻嘻~~~',
         },
         {
-          my:'你吗',
+          my: '你吗',
           other: '嘻嘻嘻~~~',
         },
       ],
-      sendMessage:'',
+      sendMessage: '',
+      sortList: [
+        {index:1, correctIndex:5, text: "这是第一个标题名称"},
+        {index:2, correctIndex:4, text: "这是第二个标题名称"},
+        {index:3, correctIndex:3, text: "这是第三个标题名称"},
+        {index:4, correctIndex:2, text: "这是第四个标题名称"},
+        {index:5, correctIndex:1, text: "这是第五个标题名称"},
+      ],
+      userSortList:[],
     };
   },
-  components: { Top },
+  components: {Top,VueDraggableNext},
   mounted() {
     this.ready();
   },
@@ -445,7 +467,8 @@ export default defineComponent({
     chatRoom() {
       this.$router.push("/game/room");
     },
-    exitGame() {},
+    exitGame() {
+    },
     // 翻页
     previousPage() {
       //判断是不是第一页，是就查看前面一个plot
@@ -479,6 +502,7 @@ export default defineComponent({
           this.nextPage();
         } else {
           if (this.isFinished) {
+            // this.showChatAndSort = true;
             this.end();
           } else {
             if (!this.isInteracting) {
@@ -495,95 +519,155 @@ export default defineComponent({
     character() {
       let that = this;
       getCharacter(that.gameID)
-        .then((res: any) => {
-          console.log('character');
-          that.characters = res.data;
-          that.characters.forEach((character, i) => {
-            character.active = false;
-            character.hide = false;
+          .then((res: any) => {
+            console.log('character');
+            that.characters = res.data;
+            that.characters.forEach((character, i) => {
+              character.active = false;
+              character.hide = false;
+            });
+          })
+          .catch((err: any) => {
+            console.log(err);
           });
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
     },
     startPlot() {
       let that = this;
       getStartPlot(that.gameID, that.myCharacter.id)
-        .then((res: any) => {
-          console.log(res);
-          that.isFinished = res.data.isFinished;
-          let plot = res.data.plot;
-          that.plotRecord = [];
-          that.plotRecord.push(plot);
-          //获取背景图片和剧情
-          that.background = this.plotRecord[0].imgSrc;
-          that.data = this.plotRecord[0].content[0].text;
-          that.isCharacter = false;
-          that.isGame = true;
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log(res);
+            that.isFinished = res.data.isFinished;
+            let plot = res.data.plot;
+            that.plotRecord = [];
+            that.plotRecord.push(plot);
+            //获取背景图片和剧情
+            that.background = this.plotRecord[0].imgSrc;
+            that.data = this.plotRecord[0].content[0].text;
+            that.isCharacter = false;
+            that.isGame = true;
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
     interaction() {
       let that = this;
       getInteraction(that.gameID, that.myCharacter.id, that.interactionNumber)
-        .then((res: any) => {
-          console.log(res);
-          that.isInteracted = true;
-          that.choices = [];
-          that.choices = res.data;
-          that.choices.forEach((choice, i) => {
-            choice.active = false;
-            choice.hide = false;
+          .then((res: any) => {
+            console.log(res);
+            that.isInteracted = true;
+            that.choices = [];
+            that.choices = res.data;
+            that.choices.forEach((choice, i) => {
+              choice.active = false;
+              choice.hide = false;
+            });
+          })
+          .catch((err: any) => {
+            console.log(err);
           });
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
     },
     finishInteraction() {
       let that = this;
-      postInteraction(that.gameID, that.myCharacter.id,that.interactionNumber, that.interactionID)
-        .then((res: any) => {
-          console.log("finish");
-          console.log(res);
-          let plot = res.data.plot;
-          that.isFinished = res.data.isFinished;
-          that.interactionNumber++;
-          //获取后续背景图片和剧情
-          that.plotRecord.push(plot);
-          that.isInteracted = false;
-          that.isChoiceConfirm = false;
-          that.isInteracting = false;
-          that.choices.forEach((choice, i) => {
-            choice.active = false;
-            choice.hide = false;
+      postInteraction(that.gameID, that.myCharacter.id, that.interactionNumber, that.interactionID)
+          .then((res: any) => {
+            console.log("finish");
+            console.log(res);
+            let plot = res.data.plot;
+            that.isFinished = res.data.isFinished;
+            that.interactionNumber++;
+            //获取后续背景图片和剧情
+            that.plotRecord.push(plot);
+            that.isInteracted = false;
+            that.isChoiceConfirm = false;
+            that.isInteracting = false;
+            that.choices.forEach((choice, i) => {
+              choice.active = false;
+              choice.hide = false;
+            });
+            //获取新添加的部分
+            that.background = this.plotRecord.slice(-1)[0].imgSrc;
+            that.data = this.plotRecord.slice(-1)[0].content[0].text;
+            //改变currentPage
+            that.currentPage.page = 0;
+            that.currentPage.plot++;
+          })
+          .catch((err: any) => {
+            console.log(err);
           });
-          //获取新添加的部分
-          that.background = this.plotRecord.slice(-1)[0].imgSrc;
-          that.data = this.plotRecord.slice(-1)[0].content[0].text;
-          //改变currentPage
-          that.currentPage.page = 0;
-          that.currentPage.plot++;
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
     },
     getInteraction() {
       this.interaction();
     },
     //聊天和排序
+    key() {
+      //开启关键剧情遮罩层
+      this.showChatAndSort = true;
+    },
+    closeKeyClick() {
+      //关闭关键剧情遮罩层
+      this.showChatAndSort = false;
+    },
     //用户发送信息
     sendMyMessage() {
       this.conversations.push({
-        my:this.sendMessage,
-        other:'你说你说，我听着呢！',
+        my: this.sendMessage,
+        other: '你说你说，我听着呢！',
       })
       this.sendMessage = ''
     },
+    //游戏步骤排序
+    //开始拖拽事件
+    onStart(e){
+      // console.log(e);
+    },
+    //拖拽结束事件
+    onEnd(e) {
+      // 这里将会有调整前后的 index 及其他可能需要传递给接口的信息
+      // console.log(e);
+    },
+    confirmSortClick() {
+      for (let i = 0; i < this.sortList.length; i++) {
+        this.userSortList.push({index:this.sortList[i].index,userIndex:i+1})
+      }
+      console.log('sortList:',this.sortList)
+      console.log('userSortList:',this.userSortList)
+      let isAllCorrect = true;
+      //判断答题情况
+      let length = this.sortList.length
+      for (let index = 1; index < length+1; index++) {
+        for (let i = 0; i < length; i++) {
+          if(this.sortList[i].index == index){
+            for (let j = 0; j < this.userSortList.length; j++) {
+              if(this.userSortList[j].index == index){
+                if(this.sortList[i].correctIndex == this.userSortList[j].userIndex){
+                  console.log('第'+(i+1)+'题写对了')
+                }
+                else {
+                  console.log('第'+(i+1)+'题写错了')
+                  isAllCorrect = false;
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+      if(isAllCorrect){
+        ElMessage({
+          message: '恭喜你，通过排序测试！',
+          type: 'success',
+        })
+      }else{
+        this.userSortList = [];
+        ElMessage({
+          message: '很遗憾，答错了，再试一次吧！',
+          type: 'error',
+        })
+      }
+
+    },
+    //结束游戏
     end() {
       this.$router.push("/game/review");
     },
