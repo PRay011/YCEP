@@ -400,7 +400,7 @@ export default defineComponent({
       this.conversations = [];
       let gameID = sessionStorage.getItem("gameID")!;
       this.id = gameID;
-      this.showBasicThesis();
+      // this.showBasicThesis();
     },
     leftNavClick(index: any) {
       this.currentNav = index;
@@ -443,11 +443,12 @@ export default defineComponent({
     showKeywordAndBrief() {
       let that = this;
       // console.log(that.thesis.id+','+that.thesis.content)
-      getKeywordsAndBrief(that.thesis.id, that.thesis.content)
+      console.log(that.thesis.content)
+      getKeywordsAndBrief(that.thesis.content)
         .then((res) => {
           console.log("AI生成关键词和摘要", res);
           this.thesis.keywords = res.data.keywords;
-          this.thesis.brief = res.data.brief;
+          this.thesis.brief = res.data.abstract;
           ElMessage({
             message: "AI成功生成关键词和摘要！",
             type: "success",
@@ -525,15 +526,17 @@ export default defineComponent({
 
     refreash() {
       let that = this;
-      refreshSession(that.sessionKey)
-        .then((res: any) => {
-          console.log("refresh");
-          that.conversationIndex = 0;
-          that.conversations = [];
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+      if (that.inSession) {
+        refreshSession(that.sessionKey)
+          .then((res: any) => {
+            console.log("refresh");
+            that.conversationIndex = 0;
+            that.conversations = [];
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
+      }
     },
 
     close(next: any) {

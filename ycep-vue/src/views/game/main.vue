@@ -436,7 +436,7 @@ export default defineComponent({
       let that = this;
       getCharacter(that.gameID)
         .then((res: any) => {
-          console.log('character');
+          console.log("character");
           that.characters = res.data;
           that.characters.forEach((character, i) => {
             character.active = false;
@@ -455,10 +455,14 @@ export default defineComponent({
           that.isFinished = res.data.isFinished;
           let plot = res.data.plot;
           that.plotRecord = [];
+          let first = that.plotRecord.length
           that.plotRecord.push(plot);
+          // res.data.plot.forEach((plot:any, i:any) => {
+          //   that.plotRecord.push(plot);
+          // });
           //获取背景图片和剧情
-          that.background = this.plotRecord[0].imgSrc;
-          that.data = this.plotRecord[0].content[0].text;
+          that.background = this.plotRecord[first].imgSrc;
+          that.data = this.plotRecord[first].content[0].text;
           that.isCharacter = false;
           that.isGame = true;
         })
@@ -485,15 +489,24 @@ export default defineComponent({
     },
     finishInteraction() {
       let that = this;
-      postInteraction(that.gameID, that.myCharacter.id,that.interactionNumber, that.interactionID)
+      postInteraction(
+        that.gameID,
+        that.myCharacter.id,
+        that.interactionNumber,
+        that.interactionID
+      )
         .then((res: any) => {
           console.log("finish");
           console.log(res);
           let plot = res.data.plot;
           that.isFinished = res.data.isFinished;
-          that.interactionNumber++;
+          that.interactionNumber++; 
+          let next = that.plotRecord.length
           //获取后续背景图片和剧情
           that.plotRecord.push(plot);
+          // res.data.plot.forEach((plot:any, i:any) => {
+          //   that.plotRecord.push(plot);
+          // });
           that.isInteracted = false;
           that.isChoiceConfirm = false;
           that.isInteracting = false;
@@ -502,8 +515,9 @@ export default defineComponent({
             choice.hide = false;
           });
           //获取新添加的部分
-          that.background = this.plotRecord.slice(-1)[0].imgSrc;
-          that.data = this.plotRecord.slice(-1)[0].content[0].text;
+          that.background = this.plotRecord[next].imgSrc;
+          that.data =
+            this.plotRecord[next].content[0].text;
           //改变currentPage
           that.currentPage.page = 0;
           that.currentPage.plot++;
