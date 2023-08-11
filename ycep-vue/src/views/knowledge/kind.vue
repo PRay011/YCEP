@@ -6,10 +6,20 @@
     <div class="main" v-if="update">
       <div class="kind">
         <div class="info">
-          <p class="text1">编程</p>
-          <p class="text2">锻炼思维/加强动手能力/培养兴趣</p>
-          <div class="tags"></div>
+          <span style="display: flex">
+            <p class="text1">物理</p>
+            <p class="text2">/PHYSICS</p>
+          </span>
+          <p class="text3">如何从行进的车厢中跳下来？冰为什么是滑的？如何分辨熟鸡蛋和生鸡蛋……
+            这些日常现象该如何用物理学知识解释？这里有包含了声学、光学、热学、电学（电磁学）以及力学（力、运动、简单机械）等五大板块的物理知识，
+            一起来学习吧！</p>
+          <div class="tags">
+            <div class="tag">锻炼思维</div>
+            <div class="tag">动手能力</div>
+            <div class="tag">培养兴趣</div>
+          </div>
         </div>
+<!--        <div class="image"><img src="../../assets/images/物理.png"/></div>-->
       </div>
 
       <div class="title">
@@ -48,7 +58,7 @@
                   <path
                     opacity="1"
                     d="M14 5H20"
-                    stroke="#000"
+                    stroke="#5968f3"
                     stroke-width="1.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -56,14 +66,14 @@
                   <path
                     opacity="1"
                     d="M14 8H17"
-                    stroke="#000"
+                    stroke="#5968f3"
                     stroke-width="1.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   ></path>
                   <path
                     d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2"
-                    stroke="#000"
+                    stroke="#5968f3"
                     stroke-width="2.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -71,7 +81,7 @@
                   <path
                     opacity="1"
                     d="M22 22L20 20"
-                    stroke="#000"
+                    stroke="#5968f3"
                     stroke-width="3.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"

@@ -17,10 +17,10 @@
   border-radius: 10px;
   border: none;
   color: #ffffff;
-  background-color: #446dde;
+  background-color: $basic_color;
   cursor: pointer;
   &:hover{
-    background-color: #007bff;
+    background-color: $basic_color_hover;
   }
 }
 
@@ -184,13 +184,13 @@
             cursor: pointer;
 
             &:hover {
-              color: #5968f3
+              color: $basic_color_hover
             }
           }
         }
 
         .title-item.selected {
-          background-color: #5968f3;
+          background-color: $basic_color;
           border-radius: 3px;
 
           .text {
@@ -331,7 +331,7 @@
 
             /*Hover*/
             .card:hover {
-              border-color: #008bf8;
+              border-color: $basic_color;
               box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
             }
 
@@ -437,7 +437,7 @@
             width: 100%;
             height: 30px;
             //background-image: linear-gradient(45deg, #ff6547 0%, #ffb144  51%, #ff7053  100%);
-            background-image: linear-gradient(45deg, #4246ec 0%, #4e6ada 51%, #4246ec 100%);
+            background-image: linear-gradient(45deg, $basic_color_hover 0%, $basic_color 51%, $basic_color_hover 100%);
             transform: rotate(-45deg) translateY(-50px);
             display: flex;
             align-items: center;
@@ -495,13 +495,13 @@
                 margin-right: 10px;
                 margin-top: 7px;
                 &:active {
-                  background-color: #008bf8;
+                  background-color: $basic_color;
                   color: #ffffff;
                   font-weight: 540;
                 }
               }
               .item-name.selected {
-                background-color: #008bf8;
+                background-color: $basic_color;
                 color: #ffffff;
                 font-weight: 540;
               }

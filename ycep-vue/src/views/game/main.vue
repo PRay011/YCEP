@@ -144,17 +144,24 @@
         </div>
       </div>
       <div class="sort">
-        <div class="title">游戏步骤排序</div>
-        <div class="content">
-          <VueDraggableNext v-model="sortList" @start="onStart" @end="onEnd">
-            <transition-group>
-              <div class="item" v-for="(item,index) in sortList" :key="item.index">
-                <p class="item-text">{{ item.index }}：{{item.text}}</p>
-              </div>
-            </transition-group>
-          </VueDraggableNext>
+        <div class="sort-card">
+          <div class="title">
+            <p>游戏步骤排序</p>
+          </div>
+          <div class="content">
+            <VueDraggableNext v-model="sortList" @start="onStart" @end="onEnd">
+              <transition-group>
+                <div class="item" v-for="(item,index) in sortList" :key="item.index">
+                  <p class="item-text">{{ item.index }}：{{item.text}}</p>
+                </div>
+              </transition-group>
+            </VueDraggableNext>
+          </div>
+          <div class="confirmSortBtn">
+            <button @click="confirmSortClick">确认排序</button>
+          </div>
+
         </div>
-        <button class="confirmSortBtn" @click="confirmSortClick">确认排序</button>
       </div>
     </div>
   </div>

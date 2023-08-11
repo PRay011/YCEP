@@ -15,6 +15,7 @@
 
       <div
         class="header-item item1"
+        :class="currentItem === kind.kindId?'selected':''"
         @click="titleItemClick(kind.kindId)"
         v-for="kind in kinds"
         :key="kind.kindId"
@@ -100,7 +101,7 @@
           src="https://i03piccdn.sogoucdn.com/5cf35c1052b8f21d"
         ></el-avatar>
         <div class="self" @click="selfCenterClick">
-          <p class="username">{{ user.username }}</p>
+          <p class="username" style="font-family: coca_cola, serif">{{ user.username }}</p>
         </div>
         <div class="header-item" @click="logout">
           <p>退出账号</p>
@@ -266,13 +267,19 @@ $font_color_hover: #a2a2a2;
       display: flex;
       flex-direction: column;
       cursor: pointer;
+      &.selected{
+        .dropdown .el-dropdown-link,.dropdown .el-dropdown-link p,{
+          color: $basic_color;
+          font-weight: 550;
+        }
+      }
 
       .underline {
         position: absolute;
         width: 100px;
         height: 3px;
         margin-top: 35px;
-        background-color: $font_color;
+        background-color: $basic_color;
       }
 
       .dropdown {

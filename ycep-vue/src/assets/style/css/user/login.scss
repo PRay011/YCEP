@@ -4,7 +4,6 @@
     min-height:100vh;
     display: flex;
     align-items: center;
-    //background-color: #ffffff;
     background-image: url('../../assets/images/触碰手指.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -14,7 +13,7 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);//高斯模糊滤镜
     }
   }
 }
@@ -34,7 +33,7 @@ $font_color2: #26378c;
   .left{
     width: 350px;
     height:auto;
-    background-image: url('../../assets/images/机器人献花.jpg');
+    background-image: url('../../assets/images/机器人手指.png');
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: $border_radius 0 0 $border_radius;

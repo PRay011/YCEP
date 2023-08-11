@@ -2,7 +2,6 @@ $theme_color: rgb(14, 111, 100);
 $word_color: rgba(127, 131, 133);
 $max_height: 100vh;
 $max_width: 1570px;
-$back_color: #f6f6f6;
 $Mleft: 330px;
 @font-face {
   font-family: coca_cola;
@@ -106,120 +105,15 @@ $Mleft: 330px;
   }
 }
 
-
-
+$back_color: #fafafa;
+$basic_color:#008bf8;
+$basic_color_hover: #007bff;
+$font_dark_color:#34495e;
+$dark_color: #000000;
 
 @mixin basic_font(){
   line-height: 1.5;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-}
-
-//index页面乱码的按钮
-@mixin pretty-button-div{
-  button,button::after {
-    padding: 10px 50px;
-    font-size: 20px;
-    border-radius: 5px;
-    color: white;
-    background-color: transparent;
-    position: relative;
-    border: 1px solid rgb(0, 255, 213);
-    box-shadow: 0px 10px 10px -10px rgb(0, 255, 213);
-  }
-
-  button::after {
-    --move1: inset(50% 50% 50% 50%);
-    --move2: inset(31% 0 40% 0);
-    --move3: inset(39% 0 15% 0);
-    --move4: inset(45% 0 40% 0);
-    --move5: inset(45% 0 6% 0);
-    --move6: inset(14% 0 61% 0);
-    clip-path: var(--move1);
-    content: 'GLITCH';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-  }
-
-  button:hover::after {
-    animation: glitch_4011 1s;
-    animation-timing-function: steps(2, end);
-    text-shadow: -3px -3px 0px #1df2f0, 3px 3px 0px #E94BE8;
-    background-color: transparent;
-    border: 3px solid rgb(0, 255, 213);
-  }
-
-  button:hover {
-    text-shadow: -1px -1px 0px #1df2f0, 1px 1px 0px #E94BE8;
-  }
-
-  button:hover {
-    background-color: transparent;
-    border: 1px solid rgb(0, 255, 213);
-    box-shadow: 0px 10px 10px -10px rgb(0, 255, 213);
-  }
-
-  @keyframes glitch_4011 {
-    0% {
-      clip-path: var(--move1);
-      transform: translate(0px,-10px);
-    }
-
-    10% {
-      clip-path: var(--move2);
-      transform: translate(-10px,10px);
-    }
-
-    20% {
-      clip-path: var(--move3);
-      transform: translate(10px,0px);
-    }
-
-    30% {
-      clip-path: var(--move4);
-      transform: translate(-10px,10px);
-    }
-
-    40% {
-      clip-path: var(--move5);
-      transform: translate(10px,-10px);
-    }
-
-    50% {
-      clip-path: var(--move6);
-      transform: translate(-10px,10px);
-    }
-
-    60% {
-      clip-path: var(--move1);
-      transform: translate(10px,-10px);
-    }
-
-    70% {
-      clip-path: var(--move3);
-      transform: translate(-10px,10px);
-    }
-
-    80% {
-      clip-path: var(--move2);
-      transform: translate(10px,-10px);
-    }
-
-    90% {
-      clip-path: var(--move4);
-      transform: translate(-10px,10px);
-    }
-
-    100% {
-      clip-path: var(--move1);
-      transform: translate(0);
-    }
-  }
-
-
 }
 
 //game页面选择海浪样式的按钮
@@ -287,76 +181,3 @@ $Mleft: 330px;
   }
 }
 
-//变换样式的radio button
-@mixin pretty-radio-div{
-  /* Hide the default checkbox */
-  .div input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-
-  .div {
-    display: block;
-    position: relative;
-    cursor: pointer;
-    font-size: 20px;
-    user-select: none;
-  }
-
-  /* Create a custom checkbox */
-  .checkmark {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 1.9em;
-    width: 1.9em;
-    background-color: #ccc;
-    border-radius: 50%;
-    transition: .4s;
-    box-shadow: inset 17px 17px 16px #b3b3b3,
-    inset -17px -17px 16px #ffffff;
-  }
-
-  .checkmark:hover {
-    box-shadow: inset 17px 17px 16px #a2a2a2,
-    inset -17px -17px 16px #ffffff;
-  }
-
-  /* When the checkbox is checked, add a blue background */
-  .div input:checked ~ .checkmark {
-    box-shadow: none;
-    background-color: #81c9b5;
-    transform: rotateX(360deg);
-  }
-
-  .div input:checked ~ .checkmark:hover {
-    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
-  }
-
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-
-  /* Show the checkmark when checked */
-  .div input:checked ~ .checkmark:after {
-    display: block;
-  }
-
-  /* Style the checkmark/indicator */
-  .div .checkmark:after {
-    left: 0.76em;
-    top: 0.45em;
-    width: 0.4em;
-    height: 0.8em;
-    border: solid white;
-    border-width: 0 0.15em 0.15em 0;
-    box-shadow: 0.1em 0.1em 0em 0 rgba(0,0,0,0.3);
-    transform: rotate(45deg);
-  }
-}

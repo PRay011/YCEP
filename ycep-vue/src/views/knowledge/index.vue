@@ -65,20 +65,26 @@
             <div class="block-main">
               <div class="item1" @click="klgDetailBtnClick(1)">
                 <div class="image">
-                  <img src="../../assets/images/宇宙.jpg" alt="知识点图片" />
+                  <img src="https://images.pexels.com/photos/45072/pexels-photo-45072.jpeg?auto=compress&cs=tinysrgb&w=800" alt="知识点图片" />
                 </div>
                 <div class="cover">
-                  <p class="p1">趣味物理</p>
-                  <p class="p2">太阳系中有多少行星？</p>
+                  <span>
+                    <p class="p1">基础电路分析</p>
+                    <el-tag>作者：南桥几晴秋</el-tag>
+                  </span>
+                  <p class="p2">你有想过家里的灯、空调等电器是怎么亮起来的吗？让我们一起来学习一下基础电路结构的设计吧！</p>
                 </div>
               </div>
-              <div class="item1" @click="klgDetailBtnClick(2)">
+              <div class="item1" @click="klgDetailBtnClick(6)">
                 <div class="image">
-                  <img src="../../assets/images/氧气.jpg" alt="知识点图片" />
+                  <img src="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="知识点图片" />
                 </div>
                 <div class="cover">
-                  <p class="p1">微观化学</p>
-                  <p class="p2">生活中的氧气是怎么来的？</p>
+                  <span>
+                    <p class="p1">台式电脑电路连接</p>
+                    <el-tag>作者：硬件找我</el-tag>
+                  </span>
+                  <p class="p2">上计算机课的时候有注意过台式电脑的主机是怎么跟显示器相连的吗？一起来了解一下吧！</p>
                 </div>
               </div>
             </div>
@@ -97,7 +103,7 @@
                   <p class="text-body">{{ item.description }}</p>
                   <el-tag class="text-author">作者：{{ item.author }}</el-tag>
                 </div>
-                <button class="card-button">{{ item.kindName }}</button>
+                <button class="card-button">知识</button>
               </div>
             </template>
           </template>
@@ -110,9 +116,9 @@
             <div class="block-title eng">
               <p>Games That May Interest You</p>
             </div>
-            <div class="block-main">
+            <div class="block-main" style="height: 330px;">
               <div class="item2">
-                <el-carousel height="200px" :interval="10000">
+                <el-carousel height="300px" :interval="10000">
                   <el-carousel-item v-for="item in imageList2" :key="item">
                     <img :src="item" alt="轮播图" />
                   </el-carousel-item>

@@ -4,7 +4,46 @@
 
   <div class="container">
     <div class="main">
-      <div class="left"></div>
+      <div class="left">
+        <div class="side-block1">
+          <img src="../../assets/images/demo/detail1.png" alt="背景图片"/>
+        </div>
+        <div class="side-block2">
+          <p class="title">热门知识点</p>
+          <div class="content">
+            <div class="item">
+              <p>基础电路分析</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
+            </div>
+            <div class="item">
+              <p>台式电脑电路连接</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
+            </div>
+            <div class="item">
+              <p>静电的产生和“形状”</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
+            </div>
+            <div class="item">
+              <p>静电的产生和“形状”</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
+            </div>
+            <div class="item">
+              <p>静电的产生和“形状”</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
+            </div>
+            <div class="item">
+              <p>静电的产生和“形状”</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="center">
         <div class="knowledge">
           <div class="title">
@@ -25,19 +64,16 @@
           <div class="content">
             <div class="content-text" if="knowledge.content">
               <div v-if="active < knowledge.content.length">
+                <div class="content-text-words">
+                  {{ knowledge.content[active].text }}
+                </div>
                 <img
                   :src="knowledge.content[active].imgSrc"
                   class="content-text-image"
                 />
-                <div class="content-text-words">
-                  {{ knowledge.content[active].text }}
-                </div>
               </div>
               <div class="" v-else>
                 <div class="game">
-                  <!-- <p class="title-tip">相关游戏</p> -->
-                  <!-- <br />
-                  <hr /> -->
                   <div class="game-items">
                     <template class="block-cards">
                       <div
@@ -83,30 +119,58 @@
                 :key="index"
               />
             </el-steps>
-            <el-button style="margin-top: 12px" @click="previous"
-              >previous step</el-button
-            >
-            <el-button style="margin-top: 12px" @click="next"
-              >Next step</el-button
-            >
+            <div class="step-btns">
+              <el-button class="step-btn" @click="previous">上一页</el-button>
+              <el-button class="step-btn" @click="next">下一页</el-button>
+            </div>
           </div>
           <br />
         </div>
       </div>
       <div class="right">
-        <!--推荐游戏-->
-        <div
-          class="recommend-game"
-          v-for="item in recommendGameList"
-          :key="item.id"
-        >
-          <div class="card" @click="klgDetailBtnClick(item.id)">
-            <div class="card-image">
-              <img :src="item.imgSrc" alt="背景图片" />
+        <div class="side-block1">
+          <img src="../../assets/images/物理.png" style="margin-top: 20px;" alt="">
+        </div>
+        <div class="side-block2">
+          <p class="title">目录</p>
+          <div class="content">
+            <div class="item" v-for="plot in knowledge.content">
+              <p>{{ plot.text }}</p>
             </div>
-            <div class="card-details">
-              <p class="text-title">{{ item.title }}</p>
-              <el-tag class="text-author">作者：{{ item.author }}</el-tag>
+          </div>
+        </div>
+        <div class="side-block2">
+          <p class="title">热门游戏</p>
+          <div class="content">
+            <div class="item">
+              <p>静电的产生和“形状”</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
+            </div>
+            <div class="item">
+              <p>静电的产生和“形状”</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
+            </div>
+            <div class="item">
+              <p>静电的产生和“形状”</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
+            </div>
+            <div class="item">
+              <p>静电的产生和“形状”</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
+            </div>
+            <div class="item">
+              <p>静电的产生和“形状”</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
+            </div>
+            <div class="item">
+              <p>静电的产生和“形状”</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">178</p>
             </div>
           </div>
         </div>
@@ -119,6 +183,7 @@
 import { defineComponent } from "vue";
 import Top from "../../components/top.vue";
 import { getDetail, getGame } from "../../api/knowledge/detail";
+import {getKnowledge} from "@/api/knowledge";
 
 export default defineComponent({
   name: "detail",
@@ -156,28 +221,26 @@ export default defineComponent({
           description: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
         },
       ],
-      recommendGameList: [
-        {
-          id: 1,
-          imgSrc: "/src/assets/images/demo/game1.jpg",
-          title: "法庭疑案",
-          kind: 2,
-          kindName: "材料",
-          introduction:
-            "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
-          author: "机智的皇冠",
-        },
-        {
-          id: 2,
-          imgSrc: "/src/assets/images/demo/game2.jpg",
-          title: "电路排查",
-          kind: 3,
-          kindName: "物理",
-          introduction:
-            "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
-          author: "看手机东方红",
-        },
+      hotKnowledge:[
+        '基础电路分析',
+        '台式电脑电路连接',
+        '静电的形态',
+        '高空中的雷电',
+        '风力发电',
+        '页面设计',
+        '简易计算器',
+        '简易鞋架建模',
       ],
+      hotGames:[
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+      ]
     };
   },
   components: { Top },
@@ -192,6 +255,7 @@ export default defineComponent({
       this.getDetails();
       this.getGames();
     },
+
     getGames() {
       let that = this;
       getGame(

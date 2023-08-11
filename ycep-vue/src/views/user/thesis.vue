@@ -32,7 +32,7 @@
                   <el-icon>
                     <House />
                   </el-icon>
-                  <span>研究背景和必要性分析</span>
+                  <span>背景&必要性</span>
                 </el-menu-item>
                 <el-menu-item index="3">
                   <el-icon>
