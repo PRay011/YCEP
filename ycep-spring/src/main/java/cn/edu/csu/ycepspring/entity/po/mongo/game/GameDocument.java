@@ -16,7 +16,8 @@ public class GameDocument {
     @Id
     private int id;
     private List<GameRole> role;
+    private List<List<Integer>> rolePlotRemoveIndex;
     private List<List<Plot>> plot;
-    private List<List<List<Choice>>> choices;
+    private List<List<Choice>> choices;
     private List<Reinforce> reinforce;
 }

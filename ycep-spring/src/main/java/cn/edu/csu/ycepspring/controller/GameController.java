@@ -22,13 +22,13 @@ public class GameController {
     }
 
     @GetMapping("/getInteraction/{gameID}")
-    public CommonResponse getInteraction(@PathVariable("gameID") int gameId, @RequestParam("characterID") int characterId, @RequestParam("interactionNumber") int interactionNumber) {
-        return CommonResponse.success(gameService.getInteraction(gameId, characterId, interactionNumber));
+    public CommonResponse getInteraction(@PathVariable("gameID") int gameId, @RequestParam("interactionNumber") int interactionNumber) {
+        return CommonResponse.success(gameService.getInteraction(gameId, interactionNumber));
     }
 
     @GetMapping("/finishInteraction/{gameID}")
-    public CommonResponse getfinishInteraction(@PathVariable("gameID") int gameId, @RequestParam("characterID") int characterId, @RequestParam("interactionNumber") int interactionNumber, @RequestParam("interactionID") int interactionId) {
-        return CommonResponse.success(gameService.getfinishInteraction(gameId, characterId, interactionNumber, interactionId));
+    public CommonResponse getfinishInteraction(@PathVariable("gameID") int gameId, @RequestParam("characterID") int characterId, @RequestParam("interactionNumber") int interactionNumber) {
+        return CommonResponse.success(gameService.getfinishInteraction(gameId, characterId, interactionNumber));
     }
 
     @GetMapping("/reinforce/test/{gameId}")

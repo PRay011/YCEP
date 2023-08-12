@@ -12,9 +12,9 @@ public interface GameService {
 
     Map<String, Object> getStartPlot(int gameId, int characterId);
 
-    List<Choice> getInteraction(int gameId, int characterId, int interactionNumber);
+    List<Choice> getInteraction(int gameId, int interactionNumber);
 
-    Map<String, Object> getfinishInteraction(int gameId, int characterId, int interactionNumber, int interactionId);
+    Map<String, Object> getfinishInteraction(int gameId, int characterId, int interactionNumber);
 
     List<Reinforce> getReinforce(int gameId);
 }
