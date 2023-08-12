@@ -6,7 +6,7 @@
     <div class="main">
       <!-- 顶部轮播图 -->
       <div class="title-block">
-        <el-carousel height="300px" :interval="10000">
+        <el-carousel height="500px" :interval="10000">
           <el-carousel-item v-for="item in imageList" :key="item">
             <img :src="item" alt="轮播图" />
           </el-carousel-item>
@@ -90,7 +90,7 @@
                 :key="item.knowledgeId"
               >
                 <div class="card-image">
-                  <img :src="item.imgSrc" alt="背景图片" />
+                  <img :src="imgHost + item.imgSrc" alt="背景图片" />
                 </div>
                 <div class="card-details">
                   <p class="text-title">{{ item.title }}</p>
@@ -127,14 +127,14 @@
                 @click="klgDetailBtnClick(item.id)"
               >
                 <div class="card-image">
-                  <img :src="item.imgSrc" alt="背景图片" />
+                  <img :src="imgHost + item.imgSrc" alt="背景图片" />
                 </div>
                 <div class="card-details">
                   <p class="text-title">{{ item.title }}</p>
                   <p class="text-body">{{ item.description }}</p>
                   <el-tag class="text-author">作者：{{ item.author }}</el-tag>
                 </div>
-                <button class="card-button">{{ item.kindName }}</button>
+                <button class="card-button">游戏</button>
               </div>
             </template>
           </template>
@@ -184,7 +184,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, getCurrentInstance } from "vue";
 import Top from "../../components/top.vue";
 import { getKnowledge, getGame } from "../../api/knowledge/index";
 import { getCategory } from "../../api/knowledge/kind";
@@ -194,8 +194,10 @@ export default defineComponent({
   name: "index",
   data() {
     return {
+      imgHost:
+        getCurrentInstance()?.appContext.config.globalProperties.$imgHost,
       //用户是否已选择感兴趣的知识点
-      isSelectedInterest:0,
+      isSelectedInterest: 0,
       //选择感兴趣的知识点
       chooseInterestVisible: true,
       kindItemList: [
@@ -440,13 +442,12 @@ export default defineComponent({
       this.showKnowledges();
       this.showGames();
       this.category();
-      let username = sessionStorage.getItem('username');
-      let isSelectedInterest = sessionStorage.getItem('isSelectedInterest');
-      this.isSelectedInterest = isSelectedInterest-0 //字符串转数字
-      if(isSelectedInterest == 1 || username!=='' )
+      let username = sessionStorage.getItem("username");
+      let isSelectedInterest = sessionStorage.getItem("isSelectedInterest");
+      this.isSelectedInterest = isSelectedInterest - 0; //字符串转数字
+      if (isSelectedInterest == 1 || username !== "")
         this.chooseInterestVisible = false;
-      else
-        this.chooseInterestVisible = true;
+      else this.chooseInterestVisible = true;
     },
 
     showKnowledges() {

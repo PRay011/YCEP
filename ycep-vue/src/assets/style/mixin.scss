@@ -328,7 +328,7 @@ $Mleft: 330px;
   /* When the checkbox is checked, add a blue background */
   .div input:checked ~ .checkmark {
     box-shadow: none;
-    background-color: limegreen;
+    background-color: #81c9b5;
     transform: rotateX(360deg);
   }
 

@@ -30,27 +30,27 @@
                 </el-menu-item>
                 <el-menu-item index="2">
                   <el-icon>
+                    <House />
+                  </el-icon>
+                  <span>研究背景和必要性分析</span>
+                </el-menu-item>
+                <el-menu-item index="3">
+                  <el-icon>
                     <MagicStick />
                   </el-icon>
                   <span>创意来源</span>
                 </el-menu-item>
-                <el-menu-item index="3">
-                  <el-icon>
-                    <House />
-                  </el-icon>
-                  <span>研究背景</span>
-                </el-menu-item>
                 <el-menu-item index="4">
+                  <el-icon>
+                    <DataAnalysis />
+                  </el-icon>
+                  <span>基本设计</span>
+                </el-menu-item>
+                <el-menu-item index="5">
                   <el-icon>
                     <Magnet />
                   </el-icon>
                   <span>创新点</span>
-                </el-menu-item>
-                <el-menu-item index="5">
-                  <el-icon>
-                    <DataAnalysis />
-                  </el-icon>
-                  <span>方案设计</span>
                 </el-menu-item>
                 <el-menu-item index="6">
                   <el-icon>
@@ -96,10 +96,10 @@
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 2">
-              <p class="title">创意来源>></p>
+              <p class="title">研究背景和必要性分析>></p>
               <hr />
               <el-form>
-                <span class="chapter-name">一、创意来源</span>
+                <span class="chapter-name">一、研究背景和必要性分析</span>
                 <el-input
                   type="textarea"
                   v-model="thesis.content[0]"
@@ -108,10 +108,10 @@
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 3">
-              <p class="title">研究背景>></p>
+              <p class="title">创意来源>></p>
               <hr />
               <el-form>
-                <span class="chapter-name">二、研究背景</span>
+                <span class="chapter-name">二、创意来源</span>
                 <el-input
                   type="textarea"
                   v-model="thesis.content[1]"
@@ -120,10 +120,10 @@
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 4">
-              <p class="title">创新点>></p>
+              <p class="title">基本设计>></p>
               <hr />
               <el-form>
-                <span class="chapter-name">三、创新点</span>
+                <span class="chapter-name">三、基本设计</span>
                 <el-input
                   type="textarea"
                   v-model="thesis.content[2]"
@@ -132,10 +132,10 @@
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 5">
-              <p class="title">方案设计>></p>
+              <p class="title">创新点>></p>
               <hr />
               <el-form>
-                <span class="chapter-name">三、方案设计</span>
+                <span class="chapter-name">三、创新点</span>
                 <el-input
                   type="textarea"
                   v-model="thesis.content[3]"
@@ -215,13 +215,13 @@
               </div>
               <br /><br />
               <div class="block4">
-                <p class="text1">一、创意来源</p>
+                <p class="text1">一、研究背景和必要性分析</p>
                 <p class="text2">&emsp;&emsp;{{ thesis.content[0] }}</p>
-                <p class="text1">二、研究背景</p>
+                <p class="text1">二、创意来源</p>
                 <p class="text2">&emsp;&emsp;{{ thesis.content[1] }}</p>
-                <p class="text1">三、创新点</p>
+                <p class="text1">三、基本设计</p>
                 <p class="text2">&emsp;&emsp;{{ thesis.content[2] }}</p>
-                <p class="text1">四、方案设计</p>
+                <p class="text1">四、创新点</p>
                 <p class="text2">&emsp;&emsp;{{ thesis.content[3] }}</p>
               </div>
               <br /><br />
