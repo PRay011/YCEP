@@ -4,9 +4,7 @@
     padding-top: 50px;
     display: flex;
     align-items: center;
-    background-image: url("../../../images/bgi.jpg");
-    background-size: cover;
-    background-repeat: repeat;
+    background-color: $back_color;
   }
 }
 
@@ -75,9 +73,10 @@
     margin-top: 20px;
     padding: 10px 60px 60px 60px;
     margin-bottom: 10px;
-    background-image: url('../../assets/images/paper.jpg');
-    background-size: cover;
-    background-repeat: repeat;
+    //background-image: url('../../assets/images/paper.jpg');
+    //background-size: cover;
+    //background-repeat: repeat;
+    background-color: #f2f2f2;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -88,19 +87,26 @@
       margin-top: 40px;
       .question{
         display: flex;
-        height: 50px;
         .index{
           font-size: 20px;
           font-weight: 600;
-          line-height: 50px;
         }
         .text{
           font-size: 18px;
           font-weight: 550;
-          line-height: 50px;
+          //line-height: 50px;
+        }
+      }
+      .question-image{
+        width: 100%;
+        text-align: center;
+        img{
+          width: 300px;
+          margin: 0 auto;
         }
       }
       .choices{
+        position: relative;
         display: flex;
         flex-wrap: wrap;
         .choice-item{
@@ -119,7 +125,7 @@
             cursor: pointer;
           }
           .choice-name{
-            font-size: 20px;
+            font-size: 16px;
           }
           &:active,&.selected{
             .choice-icon{
@@ -158,8 +164,6 @@
     margin-top: 20px;
     margin-bottom: 50px;
     padding: 30px;
-    background-image: url('../../assets/images/paper.jpg');
-    background-size: cover;
     border-radius: 10px;
     display:flex;
     justify-content: space-evenly;
@@ -185,7 +189,6 @@
     margin-top: 40px;
     .question{
       display: flex;
-      height: 50px;
       .index{
         font-size: 20px;
         font-weight: 600;
@@ -196,7 +199,7 @@
         font-weight: 550;
         line-height: 50px;
       }
-      
+
     }
     .choices{
       display: flex;
@@ -258,7 +261,7 @@
         font-size: 15px;
       }
       .content{
-
+        width: 900px;
       }
     }
   }

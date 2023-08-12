@@ -11,35 +11,10 @@
         <div class="side-block2">
           <p class="title">热门知识点</p>
           <div class="content">
-            <div class="item">
-              <p>基础电路分析</p>
+            <div class="item" v-for="item in hotKnowledge">
+              <p>{{ item.title }}</p>
               <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
-            </div>
-            <div class="item">
-              <p>台式电脑电路连接</p>
-              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
-            </div>
-            <div class="item">
-              <p>静电的产生和“形状”</p>
-              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
-            </div>
-            <div class="item">
-              <p>静电的产生和“形状”</p>
-              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
-            </div>
-            <div class="item">
-              <p>静电的产生和“形状”</p>
-              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
-            </div>
-            <div class="item">
-              <p>静电的产生和“形状”</p>
-              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
+              <p class="eye">{{ item.eye }}</p>
             </div>
           </div>
         </div>
@@ -71,9 +46,9 @@
                   :src="imgHost + knowledge.content[active].imgSrc"
                   class="content-text-image"
                 />
-                <div class="content-text-words">
-                  {{ knowledge.content[active].text }}
-                </div>
+<!--                <div class="content-text-words">-->
+<!--                  {{ knowledge.content[active].text }}-->
+<!--                </div>-->
               </div>
               <div class="" v-else>
                 <div class="game">
@@ -145,35 +120,10 @@
         <div class="side-block2">
           <p class="title">热门游戏</p>
           <div class="content">
-            <div class="item">
-              <p>静电的产生和“形状”</p>
+            <div class="item" v-for="item in hotGames">
+              <p>{{ item.title }}</p>
               <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
-            </div>
-            <div class="item">
-              <p>静电的产生和“形状”</p>
-              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
-            </div>
-            <div class="item">
-              <p>静电的产生和“形状”</p>
-              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
-            </div>
-            <div class="item">
-              <p>静电的产生和“形状”</p>
-              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
-            </div>
-            <div class="item">
-              <p>静电的产生和“形状”</p>
-              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
-            </div>
-            <div class="item">
-              <p>静电的产生和“形状”</p>
-              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
-              <p class="eye">178</p>
+              <p class="eye">{{ item.eye }}</p>
             </div>
           </div>
         </div>
@@ -227,24 +177,88 @@ export default defineComponent({
         },
       ],
       hotKnowledge:[
-        '基础电路分析',
-        '台式电脑电路连接',
-        '静电的形态',
-        '高空中的雷电',
-        '风力发电',
-        '页面设计',
-        '简易计算器',
-        '简易鞋架建模',
+        {
+          title:'基础电路分析',
+          eye:'176',
+        },
+        {
+          title:'台式电脑电路连接',
+          eye:'20',
+        },
+        {
+          title:'静电的形态',
+          eye:'99',
+        },
+        {
+          title:'高空中的雷电',
+          eye:'112',
+        },
+        {
+          title:'风力发电',
+          eye:'123',
+        },
+        {
+          title:'数据分析',
+          eye:'245',
+        },
+        {
+          title:'页面设计',
+          eye:'234',
+        },
+        {
+          title:'简易计算器',
+          eye:'472',
+        },
+        {
+          title:'智能眼镜',
+          eye:'23',
+        },
+        {
+          title:'简易鞋架建模',
+          eye:'54',
+        },
       ],
       hotGames:[
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
+        {
+          title:'物理电波',
+          eye:'',
+        },
+        {
+          title:'帮她开灯',
+          eye:'',
+        },
+        {
+          title:'我需要计算器！',
+          eye:'',
+        },
+        {
+          title:'发电！发电！发电！',
+          eye:'',
+        },
+        {
+          title:'从生到熟',
+          eye:'',
+        },
+        {
+          title:'3D零食',
+          eye:'',
+        },
+        {
+          title:'太阳能发电',
+          eye:'',
+        },
+        {
+          title:'做网站去',
+          eye:'',
+        },
+        {
+          title:'抱紧我',
+          eye:'',
+        },
+        {
+          title:'厨房里的物质变化',
+          eye:'',
+        },
       ]
     };
   },
@@ -289,10 +303,14 @@ export default defineComponent({
     },
     next() {
       if (this.active < this.knowledge.content.length) this.active++;
+      //设置距离顶部250px
+      document.body.scrollTop = document.documentElement.scrollTop = 275;
       console.log(this.active);
     },
     previous() {
       if (this.active > 0) this.active--;
+      //设置距离顶部250px
+      document.body.scrollTop = document.documentElement.scrollTop = 275;
     },
     //进入游戏
     toGame(id: any, index: number) {

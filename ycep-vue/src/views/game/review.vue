@@ -17,6 +17,9 @@
             <p class="index">{{ itemIndex + 1 }}、</p>
             <p class="text">{{ item.question }}</p>
           </div>
+          <div class="question-image">
+            <img :src="item.imgSrc" alt="" />
+          </div>
           <div class="choices">
             <div
               class="choice-item"
@@ -24,7 +27,7 @@
               :key="choiceIndex"
               @click="choiceItemClick(itemIndex, choiceIndex)"
               :class="
-                test[itemIndex].selected === choiceIndex ? 'selected' : ''
+                test[itemIndex].selected === choiceIndex+1 ? 'selected' : ''
               "
             >
               <div class="choice-icon" v-if="choiceIndex === 0">A</div>
@@ -53,9 +56,9 @@
               v-for="(choice, choiceIndex) in item.choice"
               :key="choiceIndex"
               :class="[
-                test[itemIndex].answer === choiceIndex ? 'right' : '',
-                test[itemIndex].answer !== choiceIndex &&
-                choiceIndex === test[itemIndex].selected
+                test[itemIndex].answer === choiceIndex+1 ? 'right' : '',
+                test[itemIndex].answer !== choiceIndex+1 &&
+                choiceIndex+1 === test[itemIndex].selected
                   ? 'wrong'
                   : '',
               ]"
@@ -69,7 +72,7 @@
           </div>
           <div class="explain">
             <p class="title">解析：</p>
-            <p class="content">{{ item.explain }}</p>
+            <p class="content text">{{ item.explain }}</p>
           </div>
         </div>
       </div>
@@ -175,39 +178,8 @@ export default defineComponent({
             "束带结发宏观环境水电费合计打撒,束带结发宏观环境水电费合计打撒,束带结发宏观环境水电费合计打撒,束带结发宏观环境水电费合计打撒,束带结发宏观环境水电费合计打撒",
           score: 20,
           selected: 0,
-        },
-        {
-          question: "你说的国家大事不回家",
-          choice: ["对", "错", "都行", "我不知道"],
-          answer: 0,
-          explain: "束带结发宏观环境水电费合计打撒",
-          score: 20,
-          selected: 1,
-        },
-        {
-          question: "你说的国家大事不回家",
-          choice: ["对", "错", "都行", "我不知道"],
-          answer: 0,
-          explain: "束带结发宏观环境水电费合计打撒",
-          score: 20,
-          selected: 0,
-        },
-        {
-          question: "你说的国家大事不回家",
-          choice: ["对", "错", "都行", "我不知道"],
-          answer: 0,
-          explain: "束带结发宏观环境水电费合计打撒",
-          score: 20,
-          selected: 0,
-        },
-        {
-          question: "你说的国家大事不回家",
-          choice: ["对", "错", "都行", "我不知道"],
-          answer: 0,
-          explain: "束带结发宏观环境水电费合计打撒",
-          score: 20,
-          selected: 0,
-        },
+          imgSrc:'',
+        }
       ],
       fullScore: 0,
       userScore: 90,
@@ -237,6 +209,7 @@ export default defineComponent({
         if (this.test[i].selected == this.test[i].answer)
           userScore += this.test[i].score;
       }
+      console.log('test:',this.test)
       this.userScore = userScore;
       this.scoreVisible = true;
       //返回顶部
@@ -254,6 +227,10 @@ export default defineComponent({
             item.selected = 0;
           });
           that.fullScore = score;
+          //添加写死的图片
+          that.test[0].imgSrc = '/src/assets/images/demo/question1.png';
+          that.test[1].imgSrc = '/src/assets/images/demo/question2.png';
+          that.test[2].imgSrc = '/src/assets/images/demo/question3.png';
         })
         .catch((err: any) => {
           console.log(err);
@@ -268,7 +245,7 @@ export default defineComponent({
       this.$router.push("/user/thesis");
     },
     choiceItemClick(itemIndex: number, choiceIndex: number) {
-      this.test[itemIndex].selected = choiceIndex;
+      this.test[itemIndex].selected = choiceIndex+1;
     },
   },
 });

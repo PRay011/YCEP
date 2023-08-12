@@ -3,7 +3,7 @@
     <div class="header-content">
       <div
         class="header-item"
-        @click="titleItemClick(-1)"
+        @click="titleItemClick(0)"
         style="width: 400px; text-align: left"
       >
         <p>YCEP网站</p>
@@ -38,67 +38,13 @@
         </template>
         <div class="underline" v-if="currentItem === kind.kindId"></div>
       </div>
-      <!-- <div class="header-item item1" @click="titleItemClick(2)">
-        <template class="dropdown">
-          <el-dropdown @command="commandItemClick2">
-            <span class="el-dropdown-link">
-              <p>材料</p><el-icon class="el-icon--right"><arrow-down/></el-icon>
-            </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item command=1>木材</el-dropdown-item>
-                <el-dropdown-item command=2>钢材</el-dropdown-item>
-                <el-dropdown-item command=3>芯片</el-dropdown-item>
-                <el-dropdown-item command=4>物联网</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </template>
-        <div class="underline" v-if="currentItem===2"></div>
-      </div>
-      <div class="header-item item1" @click="titleItemClick(3)">
-        <template class="dropdown">
-          <el-dropdown @command="commandItemClick3">
-            <span class="el-dropdown-link">
-              <p>物理</p><el-icon class="el-icon--right"><arrow-down/></el-icon>
-            </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item command=1>电路</el-dropdown-item>
-                <el-dropdown-item command=2>太空</el-dropdown-item>
-                <el-dropdown-item command=3>力</el-dropdown-item>
-                <el-dropdown-item command=4>电磁</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </template>
-        <div class="underline" v-if="currentItem===3"></div>
-      </div>
-      <div class="header-item item1" @click="titleItemClick(4)">
-        <template class="dropdown">
-          <el-dropdown @command="commandItemClick4">
-            <span class="el-dropdown-link">
-              <p>化学</p><el-icon class="el-icon--right"><arrow-down/></el-icon>
-            </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item command=1>液体</el-dropdown-item>
-                <el-dropdown-item command=2>气体</el-dropdown-item>
-                <el-dropdown-item command=3>固体</el-dropdown-item>
-                <el-dropdown-item command=4>合成</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </template>
-        <div class="underline" v-if="currentItem===4"></div>
-      </div> -->
 
       <template v-if="isLogged">
         <el-avatar
           alt="用户头像"
           @click="selfCenterClick"
           class="self"
-          src="https://i03piccdn.sogoucdn.com/5cf35c1052b8f21d"
+          src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2022%2F1110%2F0be1778cj00rl4jow0010c000hs00hsg.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
         ></el-avatar>
         <div class="self" @click="selfCenterClick">
           <p class="username" style="font-family: coca_cola, serif">{{ user.username }}</p>

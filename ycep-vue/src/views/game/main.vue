@@ -114,11 +114,8 @@
         <div class="images">
           <div class="image"><img :src="imgHost+game.imgSrc" alt="游戏图片" /></div>
           <div class="image"><img :src="imgHost+plot.imgSrc" alt="游戏图片" /></div>
-          <div class="image">
-            <img :src="imgHost+characters[0]?.imgSrc" alt="游戏图片" />
-          </div>
-          <div class="image">
-            <img :src="imgHost+characters[1]?.imgSrc" alt="游戏图片" />
+          <div class="image" v-for="imgSrc in gameDetailImgSrc">
+            <img :src="imgSrc" alt="游戏图片" />
           </div>
         </div>
       </div>
@@ -201,6 +198,11 @@ export default defineComponent({
         id: 0,
         imgSrc: image1,
       },
+      gameDetailImgSrc:[
+          '/src/assets/images/demo/gamedetail1.jpg',
+          '/src/assets/images/demo/gamedetail2.jpg',
+          '/src/assets/images/demo/gamedetail3.jpg',
+      ],
       //单页剧情
       data: "",
       // 用于存放剧情
@@ -324,32 +326,36 @@ export default defineComponent({
       conversations: [
         {
           my: '你们掌握了什么数据都？',
-          other: '我完全没有头猪啊！你知道什么？',
+          other: '摄像头看不了录像，监控坏了！',
         },
         {
-          my: '不瞒你说，我是游戏的开发人员~',
-          other: '啊，你怎...那你是不是知道所有剧情走向啊？',
+          my: '啊，那这条路就找不到嫌疑人了...我这边看到了卫生间的电线了，从这入手试试',
+          other: '嗯嗯，我们先把电路连一下！',
         },
         {
-          my: '哈哈哈哈哈！那是必然',
-          other: '真厉害，不过我是剧情的设计人员。',
+          my: '这应该是个并联电路吧！房间好多',
+          other: '是的，我看看，应该是这样连...',
         },
         {
-          my: '。。。。。。',
-          other: '嘻嘻~~~',
+          my: '好棒！那这个排序题，我试试23145',
+          other: '好的...怎么样，对了吗？',
         },
         {
-          my: '你吗',
-          other: '嘻嘻嘻~~~',
+          my: '不太对...你试试',
+          other: '好...欸23154对了！',
+        },
+        {
+          my: '太棒了！',
+          other: '哈哈哈哈哈通关！',
         },
       ],
       sendMessage: '',
       sortList: [
-        {index:1, correctIndex:5, text: "这是第一个标题名称"},
-        {index:2, correctIndex:4, text: "这是第二个标题名称"},
-        {index:3, correctIndex:3, text: "这是第三个标题名称"},
-        {index:4, correctIndex:2, text: "这是第四个标题名称"},
-        {index:5, correctIndex:1, text: "这是第五个标题名称"},
+        {index:1, correctIndex:3, text: "连接宝石博物馆的电路图"},
+        {index:2, correctIndex:1, text: "“海洋之心”宝石失窃"},
+        {index:3, correctIndex:2, text: "修好厕所门口裸露的电线"},
+        {index:4, correctIndex:5, text: "抓到嫌疑人老李"},
+        {index:5, correctIndex:4, text: "推断偷盗者对供电室厕所进行短接"},
       ],
       userSortList:[],
     };
