@@ -47,14 +47,14 @@ public class CaptchaService {
         BufferedImage image = null;
 
         // 数学计算验证码
-        String capText = captchaProducerMath.createText();
-        capStr = capText.substring(0, capText.lastIndexOf("@"));
-        code = capText.substring(capText.lastIndexOf("@") + 1);
-        image = captchaProducerMath.createImage(capStr);
+//        String capText = captchaProducerMath.createText();
+//        capStr = capText.substring(0, capText.lastIndexOf("@"));
+//        code = capText.substring(capText.lastIndexOf("@") + 1);
+//        image = captchaProducerMath.createImage(capStr);
 
         // 字符验证码
-        // capStr = code = captchaProducer.createText();
-        // image = captchaProducer.createImage(capStr);
+        capStr = code = captchaProducer.createText();
+        image = captchaProducer.createImage(capStr);
 
         redisUtils.setCacheObject(verifyKey, code, CacheConstants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
         // 转换流信息写出
@@ -75,18 +75,15 @@ public class CaptchaService {
      */
     public void checkCaptcha(String code, String uuid) {
         if (code == null || code.equals("")) {
-//            loginLogService.recordLoginLog(account, "failed", "验证码不能为空");
             throw new ServiceException("验证码不能为空");
         }
         if (uuid == null || uuid.equals("")) {
-//            loginLogService.recordLoginLog(account, "failed", "验证码已失效");
             throw new ServiceException("验证码已失效");
         }
         String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;
         String captcha = redisUtils.getCacheObject(verifyKey);
         redisUtils.deleteObject(verifyKey);
         if (!code.equalsIgnoreCase(captcha)) {
-//            loginLogService.recordLoginLog(account, "failed", "验证码错误");
             throw new ServiceException("验证码错误");
         }
     }
