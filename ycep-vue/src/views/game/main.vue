@@ -557,10 +557,10 @@ export default defineComponent({
           let plot = res.data.plot;
           that.plotRecord = [];
           let first = that.plotRecord.length;
-          that.plotRecord.push(plot);
-          // res.data.plot.forEach((plot:any, i:any) => {
-          //   that.plotRecord.push(plot);
-          // });
+          // that.plotRecord.push(plot);
+          res.data.plot.forEach((plot:any, i:any) => {
+            that.plotRecord.push(plot);
+          });
           //获取背景图片和剧情
           that.background = this.plotRecord[first].imgSrc;
           that.data = this.plotRecord[first].content[0].text;
