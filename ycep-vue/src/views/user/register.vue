@@ -2,9 +2,14 @@
   <!--  顶部导航栏-->
 <!--  <Top />-->
   <div class="container">
+    <div class="filter"></div>
     <div class="main">
+      <div class="left"></div>
       <div class="form-container">
         <p class="title">用户注册</p>
+        <p class="title2">
+          -----------青少年创新教育平台欢迎您的注册-----------
+        </p>
         <div class="form">
           <div class="input-group">
             <label for="username">用户名</label>
