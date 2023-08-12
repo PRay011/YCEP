@@ -326,6 +326,7 @@ import {
   getBasicThesis,
   getKeywordsAndBrief,
 } from "../../api/user/thesis";
+import { content } from "html2canvas/dist/types/css/property-descriptors/content";
 // import printJS from 'print-js'
 // import html2Canvas from 'html2Canvas'
 
@@ -443,11 +444,15 @@ export default defineComponent({
     showKeywordAndBrief() {
       let that = this;
       // console.log(that.thesis.id+','+that.thesis.content)
-      console.log(that.thesis.content)
-      getKeywordsAndBrief(that.thesis.content)
+      let data = {
+        title: that.thesis.title,
+        content: that.thesis.content,
+      };
+      console.log(that.thesis.content);
+      getKeywordsAndBrief(data)
         .then((res) => {
           console.log("AI生成关键词和摘要", res);
-          this.thesis.keywords = res.data.keywords;
+          this.thesis.keywords = res.data.keyword;
           this.thesis.brief = res.data.abstract;
           ElMessage({
             message: "AI成功生成关键词和摘要！",

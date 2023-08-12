@@ -1,4 +1,3 @@
-<!-- <link rel="stylesheet" href="../../assets/style/css/game/main.scss"> -->
 <template>
   <!--  顶部导航栏-->
   <Top />
@@ -9,7 +8,7 @@
         id="game_main"
         v-loading="loading"
         :style="{
-          background: `url(${background})`,
+          background: `url(${imgHost + background})`,
           'background-size': 'cover',
         }"
       >
@@ -63,7 +62,7 @@
           class="chatCharacter"
           v-if="isGame"
           :style="{
-            background: `url(${imgHost+myCharacter.imgSrc})`,
+            background: `url(${imgHost + myCharacter.imgSrc})`,
             'background-size': 'cover',
           }"
         ></div>
@@ -85,9 +84,9 @@
             :key="index"
             @click="choiceChosen(index)"
           >
-            <img :src="imgHost+choice.imgSrc" class="character-image" /><br />
-            <div class="character-name">{{ choice.description }}</div>
-            <div class="character-confirm" v-if="isChoiceConfirm">
+            <img :src="imgHost + choice.imgSrc" class="choice-image" /><br />
+            <div class="choice-name">{{ choice.name }}</div>
+            <div class="choice-confirm" v-if="isChoiceConfirm">
               <button class="selectButton" @click.stop="reChooseChoice">
                 重选
               </button>
@@ -113,13 +112,17 @@
           <p class="text2">&emsp;&emsp;{{ game.description }}</p>
         </div>
         <div class="images">
-          <div class="image"><img :src="imgHost+game.imgSrc" alt="游戏图片" /></div>
-          <div class="image"><img :src="imgHost+plot.imgSrc" alt="游戏图片" /></div>
           <div class="image">
-            <img :src="imgHost+characters[0]?.imgSrc" alt="游戏图片" />
+            <img :src="imgHost + game.imgSrc" alt="游戏图片" />
           </div>
           <div class="image">
-            <img :src="imgHost+characters[1]?.imgSrc" alt="游戏图片" />
+            <img :src="imgHost + plot.imgSrc" alt="游戏图片" />
+          </div>
+          <div class="image">
+            <img :src="imgHost + characters[0]?.imgSrc" alt="游戏图片" />
+          </div>
+          <div class="image">
+            <img :src="imgHost + characters[1]?.imgSrc" alt="游戏图片" />
           </div>
         </div>
       </div>
@@ -179,7 +182,6 @@ import Top from "../../components/top.vue";
 import image1 from "../../assets/images/氧气.jpg";
 import image2 from "../../assets/images/宇宙.jpg";
 import backImage1 from "../../assets/images/gameBack.jpg";
-import defaultImage from "../../assets/images/default.jpg";
 // import {fa} from "element-plus/es/locale/index.js";
 import type interactionVue from "./interaction.vue";
 import {
@@ -194,7 +196,8 @@ export default defineComponent({
   name: "main",
   data() {
     return {
-      imgHost: getCurrentInstance()?.appContext.config.globalProperties.$imgHost,
+      imgHost:
+        getCurrentInstance()?.appContext.config.globalProperties.$imgHost,
       gameID: 0,
       myCharacter: {
         id: 0,
@@ -204,7 +207,7 @@ export default defineComponent({
       data: "",
       // 用于存放剧情
       plot: {
-        imgSrc: defaultImage,
+        imgSrc: "default.jpg",
         content: [
           {
             text: "asjhdfuiashdasiofhnasiofjsaofjasi9of",
@@ -219,7 +222,7 @@ export default defineComponent({
       },
       plotRecord: [
         {
-          imgSrc: defaultImage,
+          imgSrc: "default.jpg",
           content: [
             {
               text: "asjhdfuiashdasiofhnasiofjsaofjasi9of",
@@ -257,7 +260,7 @@ export default defineComponent({
       //全屏
       isFullscreen: false,
       loading: false,
-      background: defaultImage,
+      background: "default.jpg",
       game: {
         gameId: 1,
         imgSrc: "/src/assets/images/demo/game1.jpg",
@@ -380,7 +383,7 @@ export default defineComponent({
       this.isGame = false;
       this.isInteracted = false;
       this.isChoiceConfirm = false;
-      this.background = defaultImage;
+      this.background = "default.jpg";
       this.currentPage.page = 0;
       this.currentPage.plot = 0;
       this.characters.forEach((character, i) => {
@@ -479,7 +482,9 @@ export default defineComponent({
     chatRoom() {
       this.$router.push("/game/room");
     },
-    exitGame() {},
+    exitGame() {
+      this.again()
+    },
     // 翻页
     previousPage() {
       //判断是不是第一页，是就查看前面一个plot
@@ -599,10 +604,10 @@ export default defineComponent({
           that.interactionNumber++;
           let next = that.plotRecord.length;
           //获取后续背景图片和剧情
-          that.plotRecord.push(plot);
-          // res.data.plot.forEach((plot:any, i:any) => {
-          //   that.plotRecord.push(plot);
-          // });
+          // that.plotRecord.push(plot);
+          res.data.plot.forEach((plot: any, i: any) => {
+            that.plotRecord.push(plot);
+          });
           that.isInteracted = false;
           that.isChoiceConfirm = false;
           that.isInteracting = false;
