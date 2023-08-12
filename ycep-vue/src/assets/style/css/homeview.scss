@@ -317,13 +317,15 @@ $font_color_selected: #81c9B5;
         width: 200px;
         height: 200px;
         color: $basic_color;
+        //color :#ffffff;
         font-size: 18px;
         text-align: center;
-        background: transparent;
+        //background: transparent;
+        background-color: #d2d2d2;
         opacity: 0.9;
-        border: 2px solid;
+        border: 2px solid #dadada;
         //border-image: linear-gradient(to right, #1929e5, #355c7d, #557d35, #cfcf16, #a51f1f) 1;
-        box-shadow: 0 0 100px $basic_color_hover;
+        box-shadow: 0 0 100px #ffffff;
         .el-icon{
           margin: 50px auto 0;
         }
