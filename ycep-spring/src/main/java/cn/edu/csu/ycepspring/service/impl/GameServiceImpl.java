@@ -27,14 +27,14 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Map<String, Object> getStartPlot(int gameId, int characterId) {
+    public Map<String, Object> getStartPlot(int gameId) {
         Query query = new Query(Criteria.where("_id").is(gameId));
         query.fields().include("plot");
         GameDocument result = mongoTemplate.findOne(query, GameDocument.class, "game");
 
         Map<String, Object> resp = new HashMap<>();
         resp.put("isFinished", false);
-        resp.put("plot", result.getPlot().get(characterId - 1).get(0));
+        resp.put("plot", result.getPlot().get(0));
         return resp;
     }
 
@@ -61,7 +61,7 @@ public class GameServiceImpl implements GameService {
         }
 
         Map<String, Object> resp = new HashMap<>();
-        resp.put("isFinished", result.getPlot().get(characterId - 1).size() <= interactionNumber + 1);
+        resp.put("isFinished", true);
         resp.put("plot", plots);
         return resp;
     }

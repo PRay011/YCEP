@@ -10,7 +10,7 @@ import java.util.Map;
 public interface GameService {
     List<GameRole> getCharacter(int gameId);
 
-    Map<String, Object> getStartPlot(int gameId, int characterId);
+    Map<String, Object> getStartPlot(int gameId);
 
     List<Choice> getInteraction(int gameId, int interactionNumber);
 

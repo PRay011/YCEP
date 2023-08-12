@@ -18,7 +18,7 @@ public class GameController {
 
     @GetMapping("/startPlot/{gameID}")
     public CommonResponse getStartPlot(@PathVariable("gameID") int gameId, @RequestParam("characterID") int characterId) {
-        return CommonResponse.success(gameService.getStartPlot(gameId, characterId));
+        return CommonResponse.success(gameService.getStartPlot(gameId));
     }
 
     @GetMapping("/getInteraction/{gameID}")
