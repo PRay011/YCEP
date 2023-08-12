@@ -3,7 +3,7 @@
     <div class="header-content">
       <div
         class="header-item"
-        @click="titleItemClick(-1)"
+        @click="titleItemClick(0)"
         style="width: 400px; text-align: left"
       >
         <p>YCEP网站</p>
@@ -15,6 +15,7 @@
 
       <div
         class="header-item item1"
+        :class="currentItem === kind.kindId?'selected':''"
         @click="titleItemClick(kind.kindId)"
         v-for="kind in kinds"
         :key="kind.kindId"
@@ -34,10 +35,10 @@
           alt="用户头像"
           @click="selfCenterClick"
           class="self"
-          src="https://i03piccdn.sogoucdn.com/5cf35c1052b8f21d"
+          src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2022%2F1110%2F0be1778cj00rl4jow0010c000hs00hsg.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
         ></el-avatar>
         <div class="self" @click="selfCenterClick">
-          <p class="username">{{ user.username }}</p>
+          <p class="username" style="font-family: coca_cola, serif">{{ user.username }}</p>
         </div>
         <div class="header-item" @click="logout">
           <p>退出账号</p>
@@ -212,13 +213,19 @@ $font_color_hover: #a2a2a2;
       display: flex;
       flex-direction: column;
       cursor: pointer;
+      &.selected{
+        .dropdown .el-dropdown-link,.dropdown .el-dropdown-link p,{
+          color: $basic_color;
+          font-weight: 550;
+        }
+      }
 
       .underline {
         position: absolute;
         width: 100px;
         height: 3px;
         margin-top: 35px;
-        background-color: $font_color;
+        background-color: $basic_color;
       }
 
       .dropdown {

@@ -14,7 +14,7 @@
             </div>
             <div class="card__avatar">
               <el-avatar
-                src="https://i03piccdn.sogoucdn.com/5cf35c1052b8f21d"
+                src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2022%2F1110%2F0be1778cj00rl4jow0010c000hs00hsg.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
                 alt="背景图片"
               />
             </div>
@@ -752,84 +752,6 @@ export default defineComponent({
               itemId: 3,
               itemName: "数组",
               isSelected: true,
-            },
-            {
-              itemId: 4,
-              itemName: "对象",
-              isSelected: false,
-            },
-          ],
-        },
-        {
-          kindId: 2,
-          kindName: "材料",
-          items: [
-            {
-              itemId: 1,
-              itemName: "排序算法",
-              isSelected: false,
-            },
-            {
-              itemId: 2,
-              itemName: "链表",
-              isSelected: false,
-            },
-            {
-              itemId: 3,
-              itemName: "数组",
-              isSelected: false,
-            },
-            {
-              itemId: 4,
-              itemName: "对象",
-              isSelected: false,
-            },
-          ],
-        },
-        {
-          kindId: 3,
-          kindName: "物理",
-          items: [
-            {
-              itemId: 1,
-              itemName: "排序算法",
-              isSelected: false,
-            },
-            {
-              itemId: 2,
-              itemName: "链表",
-              isSelected: false,
-            },
-            {
-              itemId: 3,
-              itemName: "数组",
-              isSelected: false,
-            },
-            {
-              itemId: 4,
-              itemName: "对象",
-              isSelected: false,
-            },
-          ],
-        },
-        {
-          kindId: 4,
-          kindName: "化学",
-          items: [
-            {
-              itemId: 1,
-              itemName: "排序算法",
-              isSelected: false,
-            },
-            {
-              itemId: 2,
-              itemName: "链表",
-              isSelected: false,
-            },
-            {
-              itemId: 3,
-              itemName: "数组",
-              isSelected: false,
             },
             {
               itemId: 4,

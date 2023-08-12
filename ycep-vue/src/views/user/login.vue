@@ -132,7 +132,6 @@ export default defineComponent({
       let that = this;
       vertify()
         .then((res: any) => {
-          console.log(res);
           that.user.codeID = res.codeID;
           that.codeUrl = "data:image/gif;base64," + res.image;
         })
@@ -147,7 +146,6 @@ export default defineComponent({
       let that = this;
       login(that.user)
         .then((res: any) => {
-          console.log(res);
           sessionStorage.setItem(
             "isSelectedInterest",
             String(this.user.isSelectedInterest)

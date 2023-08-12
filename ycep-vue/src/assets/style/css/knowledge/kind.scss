@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     padding-bottom: 100px;
-    background-color: #f5f5f5;
+    background-color: $back_color;
   }
 }
 
@@ -16,10 +16,12 @@
     margin: 100px auto 0;
     width: 80%;
     height: 200px;
-    background-color: #fff;
     border-radius: 10px;
-    overflow: hidden;
-    background-image: url("../../assets/images/bgi.jpg");
+    display: flex;
+    justify-content: space-between;
+    //overflow: hidden;
+    background-image: url("../../assets/images/物理_title2.jpg");
+    background-size: cover;
 
     .info {
       width: 70%;
@@ -36,11 +38,48 @@
       .text2 {
         font-size: 20px;
         font-weight: 400;
-        color: #e1e1e1;
+        color: #fafafa;
+        margin: 13px 0 0 10px
+      }
+
+      .text3{
+        padding: 5px;
+        background-color: rgba(255,255,255,0.2);
+        font-size: 13px;
+        color: #f3f3f3;
+      }
+
+      .tags{
+        display:flex;
+        margin-top: 10px;
+        .tag{
+          display: inline-block;
+          height: 32px;
+          background: #f6f7f9;
+          box-shadow: 0px 2px 4px 0px #e0dfe1, inset 0px 1px 3px 0px rgb(255 255 255 / 50%);
+          border-radius: 4px;
+          border: 1px solid #dadbde;
+          font-size: 14px;
+          color: #3b3e47;
+          line-height: 30px;
+          margin-right: 23px;
+          padding: 0 16px;
+          position: relative;
+        }
       }
 
     }
 
+    //.image{
+    //  margin-right: 20px;
+    //  display: flex;
+    //  justify-content: center;
+    //  background-color: #ffffff;
+    //  img{
+    //    margin: 10px;
+    //    width: 380px;
+    //  }
+    //}
   }
 
   .title {
@@ -101,7 +140,7 @@
         height: 40px;
         padding: 10px;
         transition: .2s linear;
-        border: 2.5px solid black;
+        border: 2px solid $basic_color;
         border-radius: 5px;
         font-size: 15px;
         text-transform: uppercase;
@@ -110,12 +149,15 @@
 
       .input:focus {
         outline: none;
-        border: 0.5px solid black;
-        box-shadow: -5px -5px 0px black;
+        border: 0.5px solid $basic_color;
+        box-shadow: -5px -5px 0px $basic_color;
       }
 
       .input-container:hover > .icon {
         animation: anim 1s linear infinite;
+        svg{
+          color:$basic_color;
+        }
       }
 
       @keyframes anim {

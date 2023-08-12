@@ -144,9 +144,9 @@ export default defineComponent({
       let that = this;
       vertify()
         .then((res: any) => {
-          console.log(res);
+          console.log(res); 
           that.user.codeID = res.codeID;
-          that.codeUrl = "data:image/gif;base64," + res.img;
+          that.codeUrl = "data:image/gif;base64," + res.image;
         })
         .catch((err: any) => {
           console.log(err);

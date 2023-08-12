@@ -4,7 +4,21 @@
 
   <div class="container">
     <div class="main">
-      <div class="left"></div>
+      <div class="left">
+        <div class="side-block1">
+          <img src="../../assets/images/demo/detail1.png" alt="背景图片"/>
+        </div>
+        <div class="side-block2">
+          <p class="title">热门知识点</p>
+          <div class="content">
+            <div class="item" v-for="item in hotKnowledge">
+              <p>{{ item.title }}</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">{{ item.eye }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="center">
         <div class="knowledge">
           <div class="title">
@@ -25,19 +39,19 @@
           <div class="content">
             <div class="content-text" if="knowledge.content">
               <div v-if="active < knowledge.content.length">
+                <div class="content-text-words">
+                  {{ knowledge.content[active].text }}
+                </div>
                 <img
                   :src="imgHost + knowledge.content[active].imgSrc"
                   class="content-text-image"
                 />
-                <div class="content-text-words">
-                  {{ knowledge.content[active].text }}
-                </div>
+<!--                <div class="content-text-words">-->
+<!--                  {{ knowledge.content[active].text }}-->
+<!--                </div>-->
               </div>
               <div class="" v-else>
                 <div class="game">
-                  <!-- <p class="title-tip">相关游戏</p> -->
-                  <!-- <br />
-                  <hr /> -->
                   <div class="game-items">
                     <template class="block-cards">
                       <div
@@ -83,30 +97,33 @@
                 :key="index"
               />
             </el-steps>
-            <el-button style="margin-top: 12px" @click="previous"
-              >previous step</el-button
-            >
-            <el-button style="margin-top: 12px" @click="next"
-              >Next step</el-button
-            >
+            <div class="step-btns">
+              <el-button class="step-btn" @click="previous">上一页</el-button>
+              <el-button class="step-btn" @click="next">下一页</el-button>
+            </div>
           </div>
           <br />
         </div>
       </div>
       <div class="right">
-        <!--推荐游戏-->
-        <div
-          class="recommend-game"
-          v-for="item in recommendGameList"
-          :key="item.id"
-        >
-          <div class="card" @click="klgDetailBtnClick(item.id)">
-            <div class="card-image">
-              <img :src="imgHost + item.imgSrc" alt="背景图片" />
+        <div class="side-block1">
+          <img src="../../assets/images/物理.png" style="margin-top: 20px;" alt="">
+        </div>
+        <div class="side-block2">
+          <p class="title">目录</p>
+          <div class="content">
+            <div class="item" v-for="plot in knowledge.content">
+              <p>{{ plot.text }}</p>
             </div>
-            <div class="card-details">
-              <p class="text-title">{{ item.title }}</p>
-              <el-tag class="text-author">作者：{{ item.author }}</el-tag>
+          </div>
+        </div>
+        <div class="side-block2">
+          <p class="title">热门游戏</p>
+          <div class="content">
+            <div class="item" v-for="item in hotGames">
+              <p>{{ item.title }}</p>
+              <img src="../../assets/images/eye-icon.png" alt="浏览人数">
+              <p class="eye">{{ item.eye }}</p>
             </div>
           </div>
         </div>
@@ -119,6 +136,7 @@
 import { defineComponent, getCurrentInstance } from "vue";
 import Top from "../../components/top.vue";
 import { getDetail, getGame } from "../../api/knowledge/detail";
+import {getKnowledge} from "@/api/knowledge";
 
 export default defineComponent({
   name: "detail",
@@ -158,28 +176,90 @@ export default defineComponent({
           description: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
         },
       ],
-      recommendGameList: [
+      hotKnowledge:[
         {
-          id: 1,
-          imgSrc: "/src/assets/images/demo/game1.jpg",
-          title: "法庭疑案",
-          kind: 2,
-          kindName: "材料",
-          introduction:
-            "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
-          author: "机智的皇冠",
+          title:'基础电路分析',
+          eye:'176',
         },
         {
-          id: 2,
-          imgSrc: "/src/assets/images/demo/game2.jpg",
-          title: "电路排查",
-          kind: 3,
-          kindName: "物理",
-          introduction:
-            "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
-          author: "看手机东方红",
+          title:'台式电脑电路连接',
+          eye:'20',
+        },
+        {
+          title:'静电的形态',
+          eye:'99',
+        },
+        {
+          title:'高空中的雷电',
+          eye:'112',
+        },
+        {
+          title:'风力发电',
+          eye:'123',
+        },
+        {
+          title:'数据分析',
+          eye:'245',
+        },
+        {
+          title:'页面设计',
+          eye:'234',
+        },
+        {
+          title:'简易计算器',
+          eye:'472',
+        },
+        {
+          title:'智能眼镜',
+          eye:'23',
+        },
+        {
+          title:'简易鞋架建模',
+          eye:'54',
         },
       ],
+      hotGames:[
+        {
+          title:'物理电波',
+          eye:'',
+        },
+        {
+          title:'帮她开灯',
+          eye:'',
+        },
+        {
+          title:'我需要计算器！',
+          eye:'',
+        },
+        {
+          title:'发电！发电！发电！',
+          eye:'',
+        },
+        {
+          title:'从生到熟',
+          eye:'',
+        },
+        {
+          title:'3D零食',
+          eye:'',
+        },
+        {
+          title:'太阳能发电',
+          eye:'',
+        },
+        {
+          title:'做网站去',
+          eye:'',
+        },
+        {
+          title:'抱紧我',
+          eye:'',
+        },
+        {
+          title:'厨房里的物质变化',
+          eye:'',
+        },
+      ]
     };
   },
   components: { Top },
@@ -223,10 +303,14 @@ export default defineComponent({
     },
     next() {
       if (this.active < this.knowledge.content.length) this.active++;
+      //设置距离顶部250px
+      document.body.scrollTop = document.documentElement.scrollTop = 275;
       console.log(this.active);
     },
     previous() {
       if (this.active > 0) this.active--;
+      //设置距离顶部250px
+      document.body.scrollTop = document.documentElement.scrollTop = 275;
     },
     //进入游戏
     toGame(id: any, index: number) {
