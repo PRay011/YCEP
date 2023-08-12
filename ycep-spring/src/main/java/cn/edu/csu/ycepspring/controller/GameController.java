@@ -27,7 +27,7 @@ public class GameController {
     }
 
     @GetMapping("/finishInteraction/{gameID}")
-    public CommonResponse getfinishInteraction(@PathVariable("gameID") int gameId, @RequestParam("characterID") int characterId, @RequestParam("interactionNumber") int interactionNumber) {
+    public CommonResponse getfinishInteraction(@PathVariable("gameID") int gameId, @RequestParam("characterID") int characterId, @RequestParam("interactionID") int interactionId, @RequestParam("interactionNumber") int interactionNumber) {
         return CommonResponse.success(gameService.getfinishInteraction(gameId, characterId, interactionNumber));
     }
 
