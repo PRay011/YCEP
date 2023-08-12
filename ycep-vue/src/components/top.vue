@@ -20,77 +20,14 @@
         :key="kind.kindId"
       >
         <template class="dropdown">
-          <el-dropdown @command="commandItemClick">
+          <el-dropdown>
             <span class="el-dropdown-link">
               <p>{{ kind.kindName }}</p>
-              <el-icon class="el-icon--right"><arrow-down /></el-icon>
             </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item command="1">排序算法</el-dropdown-item>
-                <el-dropdown-item command="2">数组</el-dropdown-item>
-                <el-dropdown-item command="3">链表</el-dropdown-item>
-                <el-dropdown-item command="4">对象</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
           </el-dropdown>
         </template>
         <div class="underline" v-if="currentItem === kind.kindId"></div>
       </div>
-      <!-- <div class="header-item item1" @click="titleItemClick(2)">
-        <template class="dropdown">
-          <el-dropdown @command="commandItemClick2">
-            <span class="el-dropdown-link">
-              <p>材料</p><el-icon class="el-icon--right"><arrow-down/></el-icon>
-            </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item command=1>木材</el-dropdown-item>
-                <el-dropdown-item command=2>钢材</el-dropdown-item>
-                <el-dropdown-item command=3>芯片</el-dropdown-item>
-                <el-dropdown-item command=4>物联网</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </template>
-        <div class="underline" v-if="currentItem===2"></div>
-      </div>
-      <div class="header-item item1" @click="titleItemClick(3)">
-        <template class="dropdown">
-          <el-dropdown @command="commandItemClick3">
-            <span class="el-dropdown-link">
-              <p>物理</p><el-icon class="el-icon--right"><arrow-down/></el-icon>
-            </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item command=1>电路</el-dropdown-item>
-                <el-dropdown-item command=2>太空</el-dropdown-item>
-                <el-dropdown-item command=3>力</el-dropdown-item>
-                <el-dropdown-item command=4>电磁</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </template>
-        <div class="underline" v-if="currentItem===3"></div>
-      </div>
-      <div class="header-item item1" @click="titleItemClick(4)">
-        <template class="dropdown">
-          <el-dropdown @command="commandItemClick4">
-            <span class="el-dropdown-link">
-              <p>化学</p><el-icon class="el-icon--right"><arrow-down/></el-icon>
-            </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item command=1>液体</el-dropdown-item>
-                <el-dropdown-item command=2>气体</el-dropdown-item>
-                <el-dropdown-item command=3>固体</el-dropdown-item>
-                <el-dropdown-item command=4>合成</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </template>
-        <div class="underline" v-if="currentItem===4"></div>
-      </div> -->
 
       <template v-if="isLogged">
         <el-avatar
@@ -122,6 +59,7 @@
 
 <script lang="ts">
 import { getCategory } from "../api/knowledge/kind";
+import { logout } from "../api/user/login";
 
 export default {
   name: "top",
@@ -200,10 +138,11 @@ export default {
           this.currentItem = 0;
           this.$router.push("/knowledge/index");
           break;
-        default:{
-          console.log(1);
-          this.$router.push("/knowledge/kind/" + index);
-        }
+        default:
+          {
+            console.log(1);
+            this.$router.push("/knowledge/kind/" + index);
+          }
           // sessionStorage.setItem('index', '0')
           break;
       }
@@ -221,8 +160,15 @@ export default {
       this.$router.push("/user/login");
     },
     logout() {
-      sessionStorage.clear();
-      this.$router.push("/");
+      logout()
+        .then((res: any) => {
+          console.log("catagory");
+          sessionStorage.clear();
+          this.$router.push("/");
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
   },
 };
@@ -230,9 +176,9 @@ export default {
 
 <style scoped lang="scss">
 //$top_color: rgb(24, 26, 32);
-$top_color:#ffffff;
+$top_color: #ffffff;
 //$font_color: #ffffff;
-$font_color:#000000;
+$font_color: #000000;
 $font_color_hover: #a2a2a2;
 
 .header {

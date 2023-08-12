@@ -16,3 +16,11 @@ export function vertify() {
         method: 'get',
     })  
 }
+
+// 推出登录
+export function logout() {
+    return request({
+        url: '/user/logout',
+        method: 'delete',
+    })  
+}

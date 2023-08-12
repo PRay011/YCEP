@@ -2,15 +2,15 @@
 
   <div class="bottom">
     <div class="bottom-content">
-      <h2>YCEP网站欢迎您的访问！</h2>
-      <h3>任何问题请联系QQ：2519219483</h3>
-      <a href="https://www.csu.edu.cn/"><h3>www.csu.edu.cn</h3></a>
+      <h2>青少年创新教育网站欢迎您的访问！</h2>
+      <!-- <h3>任何问题请联系QQ：2519219483</h3> -->
+      <!-- <a href="https://www.csu.edu.cn/"><h3>www.csu.edu.cn</h3></a> -->
     </div>
 
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "bottom"
 }

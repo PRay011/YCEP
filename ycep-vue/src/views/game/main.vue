@@ -85,7 +85,10 @@
             @click="choiceChosen(index)"
           >
             <img :src="imgHost + choice.imgSrc" class="choice-image" /><br />
-            <div class="choice-name">{{ choice.name }}</div>
+            <div class="choice-name" v-if="choice.active">
+              {{ choice.description }}
+            </div>
+            <div class="choice-name" v-else>{{ choice.name }}</div>
             <div class="choice-confirm" v-if="isChoiceConfirm">
               <button class="selectButton" @click.stop="reChooseChoice">
                 重选
@@ -295,14 +298,6 @@ export default defineComponent({
           active: false,
           hide: false,
         },
-        {
-          id: 1,
-          name: "越越",
-          imgSrc: image2,
-          description: "",
-          active: false,
-          hide: false,
-        },
       ],
       isPlayed: false,
       playing: false,
@@ -483,7 +478,7 @@ export default defineComponent({
       this.$router.push("/game/room");
     },
     exitGame() {
-      this.again()
+      this.again();
     },
     // 翻页
     previousPage() {
@@ -558,7 +553,7 @@ export default defineComponent({
           that.plotRecord = [];
           let first = that.plotRecord.length;
           // that.plotRecord.push(plot);
-          res.data.plot.forEach((plot:any, i:any) => {
+          res.data.plot.forEach((plot: any, i: any) => {
             that.plotRecord.push(plot);
           });
           //获取背景图片和剧情
@@ -599,7 +594,6 @@ export default defineComponent({
         .then((res: any) => {
           console.log("finish");
           console.log(res);
-          let plot = res.data.plot;
           that.isFinished = res.data.isFinished;
           that.interactionNumber++;
           let next = that.plotRecord.length;

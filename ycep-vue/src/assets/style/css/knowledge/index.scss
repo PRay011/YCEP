@@ -218,6 +218,12 @@
               .text-body {
                 color: rgb(134, 134, 134);
                 font-size: 12px;
+                overflow: hidden;
+                white-space: normal;
+                word-break: break-word;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
               }
 
               /*Text*/

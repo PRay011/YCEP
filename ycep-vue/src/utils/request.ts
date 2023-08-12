@@ -41,6 +41,7 @@ export function request(config: any) {
       //例：后端数据处理错误，并返回错误原因；前端获取错误原因并展示
       console.log("响应信息=>", res);
       let alterMessage = '';
+      let errorCode = res.data.code;
       switch (res.data.code) {
         case 400:
           alterMessage = "错误请求";
@@ -59,19 +60,22 @@ export function request(config: any) {
           alterMessage = "请求方法未允许";
           break;
         case 500:
-          alterMessage = "系统内部错误";
+          alterMessage = "系统内部错误,暂无数据";
           break;
       }
       if (alterMessage !== '') {
         alert(alterMessage);
+        let token = sessionStorage.getItem('token')
+        if (token) {
+
+          window.location.href = "/knowledge/index"
+        }
+        else {
+
+          window.location.href = "/";
+        }
+        // if(errorCode == 400 || errorCode == )
       }
-      //这里还需要添加一个token过期之后的token移除
-      // if (res.data.success == false) {
-      //   alert({
-      //     message: res.data.data.message + "，请重试！",
-      //     type: "warning",
-      //   });
-      // }
       return res ? res.data : res;
     },
     (err: any) => {
