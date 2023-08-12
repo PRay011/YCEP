@@ -8,7 +8,7 @@
         id="game_main"
         v-loading="loading"
         :style="{
-          background: `url(${background})`,
+          background: `url(${imgHost+background})`,
           'background-size': 'cover',
         }"
       >
