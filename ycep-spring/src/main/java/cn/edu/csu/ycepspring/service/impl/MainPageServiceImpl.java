@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MainPageServiceImpl implements MainPageService {
@@ -46,8 +48,13 @@ public class MainPageServiceImpl implements MainPageService {
     }
 
     @Override
-    public List<KnowledgeAndGame> getKnowledgeAndGameByKind(int kindId, int pageNum, int pageSize) {
-        return mainPageMapper.selectKnowledgeAndGameByKind(kindId, pageSize, (pageNum - 1) * pageSize);
+    public Map<String, Object> getKnowledgeAndGameByKind(int kindId, int pageNum, int pageSize) {
+        int total = mainPageMapper.selectKnowledgeAndGameByKindCount(kindId);
+        List<KnowledgeAndGame> list = mainPageMapper.selectKnowledgeAndGameByKind(kindId, pageSize, (pageNum - 1) * pageSize);
+        Map<String, Object> data = new HashMap<>();
+        data.put("total", total);
+        data.put("list", list);
+        return data;
     }
 
     @Override

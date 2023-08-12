@@ -22,4 +22,6 @@ public interface MainPageMapper {
     GameVO selectOneGameByKnowledgeId(@Param("knowledgeId") int knowledgeId);
 
     List<KnowledgeAndGame> selectKnowledgeAndGameByKind(@Param("kindId") int kindId, @Param("num") int num, @Param("start_index") int start_index);
+
+    int selectKnowledgeAndGameByKindCount(@Param("kindId") int kindId);
 }
