@@ -9,8 +9,8 @@
         values (#{roleId});
     </insert>
     <insert id="insertAuthLocal">
-        insert into auth_local(account, username, passwordBody)
-        values (#{account}, #{username}, #{passwordBody});
+        insert into auth_local(account, username, password)
+        values (#{account}, #{username}, #{password});
     </insert>
     <update id="updateUserInfo">
         update user
