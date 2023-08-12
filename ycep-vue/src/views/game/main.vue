@@ -1,30 +1,29 @@
-<link rel="stylesheet" href="../../assets/style/css/game/main.scss">
 <template>
   <!--  顶部导航栏-->
-  <Top/>
+  <Top />
   <div class="container">
     <div class="main">
       <div
-          class="game-main"
-          id="game_main"
-          v-loading="loading"
-          :style="{
+        class="game-main"
+        id="game_main"
+        v-loading="loading"
+        :style="{
           background: `url(${background})`,
           'background-size': 'cover',
         }"
       >
         <el-icon class="fullScreen" @click="toggleScreen">
-          <FullScreen/>
+          <FullScreen />
         </el-icon>
         <el-icon class="chatRoom" @click="chatRoom">
-          <ChatDotRound/>
+          <ChatDotRound />
         </el-icon>
         <el-icon class="exitGame" @click="exitGame">
-          <CircleClose/>
+          <CircleClose />
         </el-icon>
 
         <div class="play-btn" v-if="!playing" @click="startGame()">
-          <img src="../../assets/images/play_btn.png" alt="播放按钮"/>
+          <img src="../../assets/images/play_btn.png" alt="播放按钮" />
         </div>
         <div class="choose-mode" v-if="isPlayed">
           <div class="choose-title">请选择游戏模式</div>
@@ -35,16 +34,19 @@
         </div>
         <div class="choose-character" v-if="isCharacter">
           <div
-              :class="{
+            :class="{
               character: true,
               active: character.active,
               hide: character.hide,
             }"
-              v-for="(character, index) in characters"
-              :key="index"
-              @click="characterChosen(index)"
+            v-for="(character, index) in characters"
+            :key="index"
+            @click="characterChosen(index)"
           >
-            <img :src="character.imgSrc" class="character-image"/><br/>
+            <img
+              :src="imgHost + character.imgSrc"
+              class="character-image"
+            /><br />
             <div class="character-name">{{ character.name }}</div>
             <div class="character-confirm" v-if="isCharacterConfirm">
               <button class="selectButton" @click.stop="reChooseCharacter">
@@ -57,10 +59,10 @@
           </div>
         </div>
         <div
-            class="chatCharacter"
-            v-if="isGame"
-            :style="{
-            background: `url(${myCharacter.imgSrc})`,
+          class="chatCharacter"
+          v-if="isGame"
+          :style="{
+            background: `url(${imgHost+myCharacter.imgSrc})`,
             'background-size': 'cover',
           }"
         ></div>
@@ -73,17 +75,17 @@
         </div>
         <div class="interaction" v-if="isInteracted">
           <div
-              :class="{
+            :class="{
               choice: true,
               active: choice.active,
               hide: choice.hide,
             }"
-              v-for="(choice, index) in choices"
-              :key="index"
-              @click="choiceChosen(index)"
+            v-for="(choice, index) in choices"
+            :key="index"
+            @click="choiceChosen(index)"
           >
-            <img :src="choice.imgSrc" class="character-image"/><br/>
-            <div class="character-name">{{ choice.name }}</div>
+            <img :src="imgHost+choice.imgSrc" class="character-image" /><br />
+            <div class="character-name">{{ choice.description }}</div>
             <div class="character-confirm" v-if="isChoiceConfirm">
               <button class="selectButton" @click.stop="reChooseChoice">
                 重选
@@ -105,15 +107,19 @@
           <p class="text1">{{ game.title }}</p>
           <el-tag>{{ game.author }}</el-tag>
         </div>
-        <hr/>
+        <hr />
         <div class="desc">
           <p class="text2">&emsp;&emsp;{{ game.description }}</p>
         </div>
         <div class="images">
-          <div class="image"><img :src="game.imgSrc" alt="游戏图片"/></div>
-          <div class="image"><img :src="plot.imgSrc" alt="游戏图片"/></div>
-          <div class="image"><img :src="characters[0]?.imgSrc" alt="游戏图片"/></div>
-          <div class="image"><img :src="characters[1]?.imgSrc" alt="游戏图片"/></div>
+          <div class="image"><img :src="imgHost+game.imgSrc" alt="游戏图片" /></div>
+          <div class="image"><img :src="imgHost+plot.imgSrc" alt="游戏图片" /></div>
+          <div class="image">
+            <img :src="imgHost+characters[0]?.imgSrc" alt="游戏图片" />
+          </div>
+          <div class="image">
+            <img :src="imgHost+characters[1]?.imgSrc" alt="游戏图片" />
+          </div>
         </div>
       </div>
     </div>
@@ -138,7 +144,7 @@
             </div>
           </el-scrollbar>
           <div class="chat-footer">
-            <input placeholder="请输入..." type="text" v-model="sendMessage">
+            <input placeholder="请输入..." type="text" v-model="sendMessage" />
             <button @click="sendMyMessage">发送</button>
           </div>
         </div>
@@ -160,7 +166,6 @@
           <div class="confirmSortBtn">
             <button @click="confirmSortClick">确认排序</button>
           </div>
-
         </div>
       </div>
     </div>
@@ -168,9 +173,9 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent, getCurrentInstance } from "vue";
 import screenfull from "screenfull";
-import { VueDraggableNext } from 'vue-draggable-next'
+import { VueDraggableNext } from "vue-draggable-next";
 import Top from "../../components/top.vue";
 import image1 from "../../assets/images/氧气.jpg";
 import image2 from "../../assets/images/宇宙.jpg";
@@ -184,12 +189,13 @@ import {
   getInteraction,
   postInteraction,
 } from "../../api/game/main";
-import {ElMessage} from "element-plus";
+import { ElMessage } from "element-plus";
 
 export default defineComponent({
   name: "main",
   data() {
     return {
+      imgHost: getCurrentInstance()?.appContext.config.globalProperties.$imgHost,
       gameID: 0,
       myCharacter: {
         id: 0,
@@ -474,8 +480,7 @@ export default defineComponent({
     chatRoom() {
       this.$router.push("/game/room");
     },
-    exitGame() {
-    },
+    exitGame() {},
     // 翻页
     previousPage() {
       //判断是不是第一页，是就查看前面一个plot
@@ -526,82 +531,96 @@ export default defineComponent({
     character() {
       let that = this;
       getCharacter(that.gameID)
-          .then((res: any) => {
-            console.log('character');
-            that.characters = res.data;
-            that.characters.forEach((character, i) => {
-              character.active = false;
-              character.hide = false;
-            });
-          })
-          .catch((err: any) => {
-            console.log(err);
+        .then((res: any) => {
+          console.log("character");
+          that.characters = res.data;
+          that.characters.forEach((character, i) => {
+            character.active = false;
+            character.hide = false;
           });
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     startPlot() {
       let that = this;
+      console.log(that.myCharacter.id);
       getStartPlot(that.gameID, that.myCharacter.id)
-          .then((res: any) => {
-            console.log(res);
-            that.isFinished = res.data.isFinished;
-            let plot = res.data.plot;
-            that.plotRecord = [];
-            that.plotRecord.push(plot);
-            //获取背景图片和剧情
-            that.background = this.plotRecord[0].imgSrc;
-            that.data = this.plotRecord[0].content[0].text;
-            that.isCharacter = false;
-            that.isGame = true;
-          })
-          .catch((err: any) => {
-            console.log(err);
-          });
+        .then((res: any) => {
+          console.log(res);
+          that.isFinished = res.data.isFinished;
+          let plot = res.data.plot;
+          that.plotRecord = [];
+          let first = that.plotRecord.length;
+          that.plotRecord.push(plot);
+          // res.data.plot.forEach((plot:any, i:any) => {
+          //   that.plotRecord.push(plot);
+          // });
+          //获取背景图片和剧情
+          that.background = this.plotRecord[first].imgSrc;
+          that.data = this.plotRecord[first].content[0].text;
+          that.isCharacter = false;
+          that.isGame = true;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     interaction() {
       let that = this;
       getInteraction(that.gameID, that.myCharacter.id, that.interactionNumber)
-          .then((res: any) => {
-            console.log(res);
-            that.isInteracted = true;
-            that.choices = [];
-            that.choices = res.data;
-            that.choices.forEach((choice, i) => {
-              choice.active = false;
-              choice.hide = false;
-            });
-          })
-          .catch((err: any) => {
-            console.log(err);
+        .then((res: any) => {
+          console.log(res);
+          that.isInteracted = true;
+          that.choices = [];
+          that.choices = res.data;
+          that.choices.forEach((choice, i) => {
+            choice.active = false;
+            choice.hide = false;
           });
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     finishInteraction() {
       let that = this;
-      postInteraction(that.gameID, that.myCharacter.id, that.interactionNumber, that.interactionID)
-          .then((res: any) => {
-            console.log("finish");
-            console.log(res);
-            let plot = res.data.plot;
-            that.isFinished = res.data.isFinished;
-            that.interactionNumber++;
-            //获取后续背景图片和剧情
-            that.plotRecord.push(plot);
-            that.isInteracted = false;
-            that.isChoiceConfirm = false;
-            that.isInteracting = false;
-            that.choices.forEach((choice, i) => {
-              choice.active = false;
-              choice.hide = false;
-            });
-            //获取新添加的部分
-            that.background = this.plotRecord.slice(-1)[0].imgSrc;
-            that.data = this.plotRecord.slice(-1)[0].content[0].text;
-            //改变currentPage
-            that.currentPage.page = 0;
-            that.currentPage.plot++;
-          })
-          .catch((err: any) => {
-            console.log(err);
+      postInteraction(
+        that.gameID,
+        that.myCharacter.id,
+        that.interactionNumber,
+        that.interactionID
+      )
+        .then((res: any) => {
+          console.log("finish");
+          console.log(res);
+          let plot = res.data.plot;
+          that.isFinished = res.data.isFinished;
+          that.interactionNumber++;
+          let next = that.plotRecord.length;
+          //获取后续背景图片和剧情
+          that.plotRecord.push(plot);
+          // res.data.plot.forEach((plot:any, i:any) => {
+          //   that.plotRecord.push(plot);
+          // });
+          that.isInteracted = false;
+          that.isChoiceConfirm = false;
+          that.isInteracting = false;
+          that.choices.forEach((choice, i) => {
+            choice.active = false;
+            choice.hide = false;
           });
+          //获取新添加的部分
+          that.background = this.plotRecord[next].imgSrc;
+          that.data = this.plotRecord[next].content[0].text;
+          //改变currentPage
+          that.currentPage.page = 0;
+          that.currentPage.plot++;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     getInteraction() {
       this.interaction();
@@ -619,13 +638,13 @@ export default defineComponent({
     sendMyMessage() {
       this.conversations.push({
         my: this.sendMessage,
-        other: '你说你说，我听着呢！',
-      })
-      this.sendMessage = ''
+        other: "你说你说，我听着呢！",
+      });
+      this.sendMessage = "";
     },
     //游戏步骤排序
     //开始拖拽事件
-    onStart(e){
+    onStart(e) {
       // console.log(e);
     },
     //拖拽结束事件
@@ -672,7 +691,6 @@ export default defineComponent({
           type: 'error',
         })
       }
-
     },
     //结束游戏
     end() {

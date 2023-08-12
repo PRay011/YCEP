@@ -24,9 +24,9 @@ export function getBasicThesis(gameId: any) {
 }
 
 //AI生成关键词和摘要
-export function getKeywordsAndBrief(thesisId: any, data: any) {
+export function getKeywordsAndBrief(data: any) {
     return request({
-        url: `/thesis/keywordsAndBrief/${thesisId}`,
+        url: `/ai/getBriefAndKeywords`,
         method: 'post',
         data: data
     })

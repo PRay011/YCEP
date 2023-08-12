@@ -96,7 +96,7 @@
                 :key="item.knowledgeId"
               >
                 <div class="card-image">
-                  <img :src="item.imgSrc" alt="背景图片" />
+                  <img :src="imgHost + item.imgSrc" alt="背景图片" />
                 </div>
                 <div class="card-details">
                   <p class="text-title">{{ item.title }}</p>
@@ -133,7 +133,7 @@
                 @click="klgDetailBtnClick(item.id)"
               >
                 <div class="card-image">
-                  <img :src="item.imgSrc" alt="背景图片" />
+                  <img :src="imgHost + item.imgSrc" alt="背景图片" />
                 </div>
                 <div class="card-details">
                   <p class="text-title">{{ item.title }}</p>
@@ -190,7 +190,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, getCurrentInstance } from "vue";
 import Top from "../../components/top.vue";
 import { getKnowledge, getGame } from "../../api/knowledge/index";
 import { getCategory } from "../../api/knowledge/kind";
@@ -200,8 +200,10 @@ export default defineComponent({
   name: "index",
   data() {
     return {
+      imgHost:
+        getCurrentInstance()?.appContext.config.globalProperties.$imgHost,
       //用户是否已选择感兴趣的知识点
-      isSelectedInterest:0,
+      isSelectedInterest: 0,
       //选择感兴趣的知识点
       chooseInterestVisible: true,
       kindItemList: [
@@ -446,13 +448,12 @@ export default defineComponent({
       this.showKnowledges();
       this.showGames();
       this.category();
-      let username = sessionStorage.getItem('username');
-      let isSelectedInterest = sessionStorage.getItem('isSelectedInterest');
-      this.isSelectedInterest = isSelectedInterest-0 //字符串转数字
-      if(isSelectedInterest == 1 || username!=='' )
+      let username = sessionStorage.getItem("username");
+      let isSelectedInterest = sessionStorage.getItem("isSelectedInterest");
+      this.isSelectedInterest = isSelectedInterest - 0; //字符串转数字
+      if (isSelectedInterest == 1 || username !== "")
         this.chooseInterestVisible = false;
-      else
-        this.chooseInterestVisible = true;
+      else this.chooseInterestVisible = true;
     },
 
     showKnowledges() {

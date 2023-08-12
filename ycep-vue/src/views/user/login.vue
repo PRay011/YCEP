@@ -1,13 +1,15 @@
 <template>
   <!--  顶部导航栏-->
-<!--  <Top />-->
+  <!--  <Top />-->
   <div class="container">
     <div class="filter"></div>
     <div class="main">
       <div class="left"></div>
       <div class="form-container">
         <p class="title">用户登录</p>
-        <p class="title2">-----------青少年创新教育平台欢迎您的登录-----------</p>
+        <p class="title2">
+          -----------青少年创新教育平台欢迎您的登录-----------
+        </p>
         <div class="form">
           <div class="input-group">
             <label for="username">用户名</label>
@@ -114,7 +116,7 @@ export default defineComponent({
         password: "",
         code: "",
         codeID: "",
-        isSelectedInterest:0,
+        isSelectedInterest: 0,
       },
     };
   },
@@ -146,7 +148,10 @@ export default defineComponent({
       login(that.user)
         .then((res: any) => {
           console.log(res);
-          sessionStorage.setItem("isSelectedInterest", String(this.user.isSelectedInterest))
+          sessionStorage.setItem(
+            "isSelectedInterest",
+            String(this.user.isSelectedInterest)
+          );
           sessionStorage.setItem("username", this.user.username);
           sessionStorage.setItem("token", res.data.token);
           this.$router.push("/knowledge/index");

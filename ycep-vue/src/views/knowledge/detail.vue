@@ -68,9 +68,12 @@
                   {{ knowledge.content[active].text }}
                 </div>
                 <img
-                  :src="knowledge.content[active].imgSrc"
+                  :src="imgHost + knowledge.content[active].imgSrc"
                   class="content-text-image"
                 />
+                <div class="content-text-words">
+                  {{ knowledge.content[active].text }}
+                </div>
               </div>
               <div class="" v-else>
                 <div class="game">
@@ -78,12 +81,12 @@
                     <template class="block-cards">
                       <div
                         class="card"
-                        v-for="(item,index) in gameList"
+                        v-for="(item, index) in gameList"
                         :key="item.gameId"
-                        @click="toGame(item.gameId,index)"
+                        @click="toGame(item.gameId, index)"
                       >
                         <div class="card-image">
-                          <img :src="item.imgSrc" alt="背景图片" />
+                          <img :src="imgHost + item.imgSrc" alt="背景图片" />
                         </div>
                         <div class="card-details">
                           <p class="text-title">{{ item.title }}</p>
@@ -180,7 +183,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, getCurrentInstance } from "vue";
 import Top from "../../components/top.vue";
 import { getDetail, getGame } from "../../api/knowledge/detail";
 import {getKnowledge} from "@/api/knowledge";
@@ -189,6 +192,8 @@ export default defineComponent({
   name: "detail",
   data() {
     return {
+      imgHost:
+        getCurrentInstance()?.appContext.config.globalProperties.$imgHost,
       active: 0,
       hadRead: false,
       id: 0,
@@ -250,12 +255,11 @@ export default defineComponent({
   methods: {
     ready() {
       let id = this.$route.params.id;
-      console.log( 'id'+this.id)
+      console.log("id" + this.id);
       this.id = Number(id);
       this.getDetails();
       this.getGames();
     },
-
     getGames() {
       let that = this;
       getGame(
@@ -264,7 +268,7 @@ export default defineComponent({
         this.paginationConfig.pageSize
       )
         .then((res: any) => {
-          console.log('getGame'+res);
+          console.log("getGame" + res);
           that.gameList = res.data.list;
           that.paginationConfig.total = res.data.total;
         })
@@ -276,7 +280,7 @@ export default defineComponent({
       let that = this;
       getDetail(this.id)
         .then((res: any) => {
-          console.log("getKnowledge"+res);
+          console.log("getKnowledge" + res);
           that.knowledge = res.data;
         })
         .catch((err: any) => {
@@ -293,7 +297,7 @@ export default defineComponent({
     //进入游戏
     toGame(id: any, index: number) {
       sessionStorage.setItem("gameID", id);
-      sessionStorage.setItem("game", JSON.stringify(this.gameList[index]))
+      sessionStorage.setItem("game", JSON.stringify(this.gameList[index]));
       this.$router.push("/game/main/" + id);
     },
     //点击进入知识点详情

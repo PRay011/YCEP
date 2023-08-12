@@ -103,7 +103,7 @@
           >
             <div class="knowledge">
               <div class="image">
-                <img :src="knowledge.imgSrc" alt="知识点图片" />
+                <img :src="imgHost + knowledge.imgSrc" alt="知识点图片" />
               </div>
               <div class="info">
                 <p class="title-tag">{{ knowledge.title }}</p>
@@ -115,7 +115,7 @@
             <div class="game" v-if="knowledge.game">
               <div class="card" @click="klgDetailBtnClick(knowledge.id)">
                 <div class="card-image">
-                  <img :src="knowledge.game.imgSrc" alt="背景图片" />
+                  <img :src="imgHost + knowledge.game.imgSrc" alt="背景图片" />
                 </div>
                 <div class="card-details">
                   <p class="text-title">{{ knowledge.game.title }}</p>
@@ -142,7 +142,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, getCurrentInstance } from "vue";
 import Top from "../../components/top.vue";
 import { getCategory, getList, getAllList } from "../../api/knowledge/kind";
 
@@ -151,6 +151,8 @@ export default defineComponent({
   components: { Top },
   data() {
     return {
+      imgHost:
+        getCurrentInstance()?.appContext.config.globalProperties.$imgHost,
       kindID: 1,
       update: true,
       selectedItem: -1,

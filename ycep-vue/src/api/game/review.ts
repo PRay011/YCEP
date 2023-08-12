@@ -3,7 +3,7 @@ import { request } from '../../utils/request';
 //导出login方法，供其它地方使用
 export function getTest(gameId: any) {
     return request({
-        url: `/reinforce/test/${gameId}`,
+        url: `/game/reinforce/test/${gameId}`,
         method: 'get',
     })
 }

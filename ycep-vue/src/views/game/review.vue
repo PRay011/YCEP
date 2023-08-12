@@ -113,30 +113,30 @@
             <div class="result-text-box">
               <div
                 class="heading-secondary"
-                v-if="fullScore / userScore >= 0.9"
+                v-if="userScore / fullScore >= 0.9"
               >
                 Excellent
               </div>
               <div
                 class="heading-secondary"
-                v-else-if="fullScore / userScore >= 0.8"
+                v-else-if=" userScore / fullScore >= 0.8"
               >
                 Great
               </div>
               <div
                 class="heading-secondary"
-                v-else-if="fullScore / userScore >= 0.6"
+                v-else-if="userScore / fullScore >= 0.6"
               >
                 Good
               </div>
               <div class="heading-secondary" v-else>Sorry</div>
-              <p class="paragraph" v-if="fullScore / userScore >= 0.9">
+              <p class="paragraph" v-if="userScore / fullScore >= 0.9">
                 在这次考试中，您的得分超过大部分同学！真棒，希望你在接下来的学习中再接再厉！
               </p>
-              <p class="paragraph" v-else-if="fullScore / userScore < 0.6">
+              <p class="paragraph" v-else-if="userScore / fullScore < 0.6">
                 在这次考试中，您还有所欠缺！在接下来的学习中要加油哦！
               </p>
-              <p class="paragraph" v-else-if="fullScore / userScore >= 0.6">
+              <p class="paragraph" v-else-if="userScore / fullScore >= 0.6">
                 在这次考试中，您已掌握大部分知识！真棒，在接下来的学习中继续努力，更上一层楼！
               </p>
             </div>
@@ -246,7 +246,7 @@ export default defineComponent({
       let that = this;
       getTest(this.id)
         .then((res: any) => {
-          console.log("getGame" + res);
+          console.log("getTest");
           that.test = res.data;
           let score = 0;
           that.test.forEach((item, i) => {
