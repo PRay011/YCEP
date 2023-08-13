@@ -41,7 +41,7 @@
 
 </template>
 
-<script>
+<script lang="ts">
 import PDFJS from 'pdfjs-dist'
 export default {
   name: "pdf",

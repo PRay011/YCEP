@@ -62,10 +62,6 @@
         <div
           class="chatCharacter"
           v-if="isGame"
-          :style="{
-            background: `url(${imgHost + myCharacter.imgSrc})`,
-            'background-size': 'cover',
-          }"
         ></div>
         <div class="chatBox" v-if="isGame">
           <div class="chat-content">{{ data }}</div>
@@ -191,9 +187,7 @@ import Top from "../../components/top.vue";
 import image1 from "../../assets/images/氧气.jpg";
 import image2 from "../../assets/images/宇宙.jpg";
 import backImage1 from "../../assets/images/gameBack.jpg";
-
-import defaultImage from "../../assets/images/default.jpg";
-import { fa } from "element-plus/es/locale/index.js";
+// import { fa } from "element-plus/es/locale/index.js";
 import type interactionVue from "./interaction.vue";
 import {
   getStartPlot,

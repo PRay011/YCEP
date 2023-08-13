@@ -326,9 +326,9 @@ import {
   getBasicThesis,
   getKeywordsAndBrief,
 } from "../../api/user/thesis";
-import { content } from "html2canvas/dist/types/css/property-descriptors/content";
-// import printJS from 'print-js'
-// import html2Canvas from 'html2Canvas'
+// import { content } from "html2canvas/dist/types/css/property-descriptors/content";
+// // import printJS from 'print-js'
+// // import html2Canvas from 'html2Canvas'
 
 const InputRef = ref<InstanceType<typeof ElInput>>();
 
