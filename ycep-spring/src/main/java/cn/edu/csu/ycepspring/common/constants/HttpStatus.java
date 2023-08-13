@@ -20,4 +20,9 @@ public class HttpStatus {
      * 系统内部错误
      */
     public static final int ERROR = 500;
+
+    /**
+     * 业务异常
+     */
+    public static final int EXCEPTION = 501;
 }

@@ -50,9 +50,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ServiceException.class)
     public CommonResponse handleServiceException(ServiceException e, HttpServletRequest request) {
-        Integer code = e.getCode();
         log.error(e.getMessage(), e);
-        return (code != null) ? CommonResponse.error(code, e.getMessage()) : CommonResponse.error(e.getMessage());
+        return CommonResponse.error(HttpStatus.EXCEPTION, e.getMessage());
     }
 
     /**
