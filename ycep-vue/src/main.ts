@@ -13,7 +13,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 app.use(VueAxios, axios);
 app.use(router)
-app.config.globalProperties.$imgHost = 'http://127.0.0.1:8081/static/'
+app.config.globalProperties.$imgHost = '/api/static/'
 
 app.mount('#app')
 

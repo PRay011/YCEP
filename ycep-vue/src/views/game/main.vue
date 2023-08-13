@@ -119,7 +119,7 @@
             <img :src="imgHost + plot.imgSrc" alt="游戏图片" />
           </div>
           <div class="image" v-for="imgSrc in gameDetailImgSrc">
-            <img :src="imgSrc" alt="游戏图片" />
+            <img :src="imgHost+imgSrc" alt="游戏图片" />
           </div>
         </div>
       </div>
@@ -209,9 +209,9 @@ export default defineComponent({
         imgSrc: image1,
       },
       gameDetailImgSrc: [
-        "/src/assets/images/demo/gamedetail1.jpg",
-        "/src/assets/images/demo/gamedetail2.jpg",
-        "/src/assets/images/demo/gamedetail3.jpg",
+        "5.jpg",
+        "10.jpg",
+        "17.jpg",
       ],
       //单页剧情
       data: "",

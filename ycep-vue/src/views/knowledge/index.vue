@@ -8,7 +8,7 @@
       <div class="title-block">
         <el-carousel height="500px" :interval="10000">
           <el-carousel-item v-for="item in imageList" :key="item">
-            <img :src="item" alt="轮播图" />
+            <img :src="imgHost + item" alt="轮播图" />
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -130,7 +130,7 @@
               <div class="item2">
                 <el-carousel height="300px" :interval="10000">
                   <el-carousel-item v-for="item in imageList2" :key="item">
-                    <img :src="item" alt="轮播图" />
+                    <img :src="imgHost + item" alt="轮播图" />
                   </el-carousel-item>
                 </el-carousel>
               </div>
@@ -343,16 +343,8 @@ export default defineComponent({
       pageNum: 1,
       //一页的个数
       pageSize: 5,
-      imageList: [
-        "/src/assets/images/demo/item1.jpg",
-        "/src/assets/images/demo/item2.jpg",
-        "/src/assets/images/demo/item3.jpg",
-      ],
-      imageList2: [
-        "/src/assets/images/demo/game1.jpg",
-        "/src/assets/images/demo/game2.jpg",
-        "/src/assets/images/demo/game3.jpg",
-      ],
+      imageList: ["item1.jpg", "item2.jpg", "item3.jpg"],
+      imageList2: ["game1.jpg", "game2.jpg", "game3.jpg"],
       knowledgeList: [
         {
           knowledgeId: 1,
@@ -362,7 +354,6 @@ export default defineComponent({
           description: "string",
           imgSrc: "/src/assets/images/灯泡.jpg",
         },
-       
       ],
       gameList: [
         {
@@ -476,7 +467,7 @@ export default defineComponent({
       });
       postInterest(this.interest)
         .then((res: any) => {
-          console.log('postInterest');
+          console.log("postInterest");
           this.chooseInterestVisible = false;
           this.showKnowledges();
           this.showGames();
