@@ -1,6 +1,6 @@
 <template>
   <!--  顶部导航栏-->
-<!--  <Top />-->
+  <!--  <Top />-->
   <div class="container">
     <div class="filter"></div>
     <div class="main">
@@ -32,7 +32,7 @@
             />
           </div>
           <div class="input-group">
-            <label for="email">确认密码：</label>
+            <label for="password">确认密码：</label>
             <input
               type="text"
               name="email"
@@ -149,8 +149,8 @@ export default defineComponent({
       let that = this;
       vertify()
         .then((res: any) => {
-          console.log(res); 
           that.user.codeID = res.codeID;
+          that.user.code = "";
           that.codeUrl = "data:image/gif;base64," + res.image;
         })
         .catch((err: any) => {
@@ -162,16 +162,28 @@ export default defineComponent({
     },
     register() {
       let that = this;
-      register(that.user)
-        .then((res: any) => {
-          console.log(res);
-          sessionStorage.setItem("username", this.user.username);
-          sessionStorage.setItem("token", res.data.token);
-          that.$router.push("/knowledge/index");
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+      if (that.confirmPassword == that.user.password) {
+        console.log(that.user);
+        register(that.user)
+          .then((res: any) => {
+            alert(res.msg);
+            console.log(res);
+            sessionStorage.setItem("isSelectedInterest", '0');
+            sessionStorage.setItem("username", this.user.username);
+            sessionStorage.setItem("token", res.data.token);
+            that.$router.push("/knowledge/index");
+          })
+          .catch((err: any) => {
+            that.confirmPassword = "";
+            that.user.password = "";
+            that.newVertification();
+          });
+      } else {
+        alert("两次输入密码不一致，请重新输入");
+        that.confirmPassword = "";
+        that.user.password = "";
+        that.newVertification();
+      }
     },
   },
 });

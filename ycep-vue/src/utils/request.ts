@@ -62,6 +62,8 @@ export function request(config: any) {
         case 500:
           alterMessage = "系统内部错误,暂无数据";
           break;
+        case 501:
+          alert(res.data.msg)
       }
       if (alterMessage !== '') {
         alert(alterMessage);
@@ -76,6 +78,7 @@ export function request(config: any) {
         }
         // if(errorCode == 400 || errorCode == )
       }
+
       return res ? res.data : res;
     },
     (err: any) => {

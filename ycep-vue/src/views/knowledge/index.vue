@@ -65,26 +65,36 @@
             <div class="block-main">
               <div class="item1" @click="klgDetailBtnClick(1)">
                 <div class="image">
-                  <img src="https://images.pexels.com/photos/45072/pexels-photo-45072.jpeg?auto=compress&cs=tinysrgb&w=800" alt="知识点图片" />
+                  <img
+                    src="https://images.pexels.com/photos/45072/pexels-photo-45072.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="知识点图片"
+                  />
                 </div>
                 <div class="cover">
                   <span>
                     <p class="p1">基础电路分析</p>
                     <el-tag>作者：南桥几晴秋</el-tag>
                   </span>
-                  <p class="p2">你有想过家里的灯、空调等电器是怎么亮起来的吗？让我们一起来学习一下基础电路结构的设计吧！</p>
+                  <p class="p2">
+                    你有想过家里的灯、空调等电器是怎么亮起来的吗？让我们一起来学习一下基础电路结构的设计吧！
+                  </p>
                 </div>
               </div>
               <div class="item1" @click="klgDetailBtnClick(6)">
                 <div class="image">
-                  <img src="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="知识点图片" />
+                  <img
+                    src="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="知识点图片"
+                  />
                 </div>
                 <div class="cover">
                   <span>
                     <p class="p1">台式电脑电路连接</p>
                     <el-tag>作者：硬件找我</el-tag>
                   </span>
-                  <p class="p2">上计算机课的时候有注意过台式电脑的主机是怎么跟显示器相连的吗？一起来了解一下吧！</p>
+                  <p class="p2">
+                    上计算机课的时候有注意过台式电脑的主机是怎么跟显示器相连的吗？一起来了解一下吧！
+                  </p>
                 </div>
               </div>
             </div>
@@ -116,7 +126,7 @@
             <div class="block-title eng">
               <p>Games That May Interest You</p>
             </div>
-            <div class="block-main" style="height: 330px;">
+            <div class="block-main" style="height: 330px">
               <div class="item2">
                 <el-carousel height="300px" :interval="10000">
                   <el-carousel-item v-for="item in imageList2" :key="item">
@@ -352,38 +362,7 @@ export default defineComponent({
           description: "string",
           imgSrc: "/src/assets/images/灯泡.jpg",
         },
-        {
-          knowledgeId: 2,
-          imgSrc: "/src/assets/images/灯泡.jpg",
-          title: "电路排查",
-          kindName: "编程",
-          description: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
-          author: "冷月汐",
-        },
-        {
-          knowledgeId: 3,
-          imgSrc: "/src/assets/images/灯泡.jpg",
-          title: "电路排查",
-          kindName: "编程",
-          description: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
-          author: "冷月汐",
-        },
-        {
-          knowledgeId: 4,
-          imgSrc: "/src/assets/images/灯泡.jpg",
-          title: "电路排查",
-          kindName: "编程",
-          description: "家里的灯泡是怎么亮起来的呢？来这里一探究竟吧！",
-          author: "冷月汐",
-        },
-        {
-          knowledgeId: 5,
-          imgSrc: "/src/assets/images/氧气.jpg",
-          title: "氧气制取",
-          kindName: "编程",
-          description: "氧气瓶中的氧气是怎么制造出来呢？",
-          author: "冷月汐",
-        },
+       
       ],
       gameList: [
         {
@@ -445,15 +424,20 @@ export default defineComponent({
   },
   methods: {
     ready() {
-      this.showKnowledges();
-      this.showGames();
-      this.category();
       let username = sessionStorage.getItem("username");
       let isSelectedInterest = sessionStorage.getItem("isSelectedInterest");
-      this.isSelectedInterest = isSelectedInterest - 0; //字符串转数字
-      if (isSelectedInterest == 1 || username !== "")
+      this.isSelectedInterest = Number(isSelectedInterest);
+      this.knowledgeList = [];
+      this.gameList = [];
+      if (this.isSelectedInterest == 1 && username !== "") {
         this.chooseInterestVisible = false;
-      else this.chooseInterestVisible = true;
+        this.showKnowledges();
+        this.showGames();
+      } else {
+        sessionStorage.setItem("isSelectedInterest", "1");
+        this.chooseInterestVisible = true;
+        this.category();
+      }
     },
 
     showKnowledges() {
@@ -492,8 +476,10 @@ export default defineComponent({
       });
       postInterest(this.interest)
         .then((res: any) => {
-          console.log(res);
+          console.log('postInterest');
           this.chooseInterestVisible = false;
+          this.showKnowledges();
+          this.showGames();
         })
         .catch((err: any) => {
           console.log(err);
@@ -504,7 +490,7 @@ export default defineComponent({
       let that = this;
       getCategory()
         .then((res: any) => {
-          console.log("interest");
+          console.log("getInterest");
           console.log(res);
           that.kindItemList = res.data;
           that.kindItemList.forEach((kind: any, i: any) => {

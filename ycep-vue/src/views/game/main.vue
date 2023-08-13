@@ -167,7 +167,7 @@
                 <div
                   class="item"
                   v-for="(item, index) in sortList"
-                  :key="item.index"
+                  :key="index"
                 >
                   <p class="item-text">{{ item.index }}：{{ item.text }}</p>
                 </div>
@@ -193,7 +193,7 @@ import image2 from "../../assets/images/宇宙.jpg";
 import backImage1 from "../../assets/images/gameBack.jpg";
 
 import defaultImage from "../../assets/images/default.jpg";
-import {fa} from "element-plus/es/locale/index.js";
+import { fa } from "element-plus/es/locale/index.js";
 import type interactionVue from "./interaction.vue";
 import {
   getStartPlot,
@@ -214,10 +214,10 @@ export default defineComponent({
         id: 0,
         imgSrc: image1,
       },
-      gameDetailImgSrc:[
-          '/src/assets/images/demo/gamedetail1.jpg',
-          '/src/assets/images/demo/gamedetail2.jpg',
-          '/src/assets/images/demo/gamedetail3.jpg',
+      gameDetailImgSrc: [
+        "/src/assets/images/demo/gamedetail1.jpg",
+        "/src/assets/images/demo/gamedetail2.jpg",
+        "/src/assets/images/demo/gamedetail3.jpg",
       ],
       //单页剧情
       data: "",
@@ -333,42 +333,42 @@ export default defineComponent({
       showChatAndSort: false,
       conversations: [
         {
-          my: '你们掌握了什么数据都？',
-          other: '摄像头看不了录像，监控坏了！',
+          my: "你们掌握了什么数据都？",
+          other: "摄像头看不了录像，监控坏了！",
         },
         {
-          my: '啊，那这条路就找不到嫌疑人了...我这边看到了卫生间的电线了，从这入手试试',
-          other: '嗯嗯，我们先把电路连一下！',
+          my: "啊，那这条路就找不到嫌疑人了...我这边看到了卫生间的电线了，从这入手试试",
+          other: "嗯嗯，我们先把电路连一下！",
         },
         {
-          my: '这应该是个并联电路吧！房间好多',
-          other: '是的，我看看，应该是这样连...',
+          my: "这应该是个并联电路吧！房间好多",
+          other: "是的，我看看，应该是这样连...",
         },
         {
-          my: '好棒！那这个排序题，我试试23145',
-          other: '好的...怎么样，对了吗？',
+          my: "好棒！那这个排序题，我试试23145",
+          other: "好的...怎么样，对了吗？",
         },
         {
-          my: '不太对...你试试',
-          other: '好...欸23154对了！',
+          my: "不太对...你试试",
+          other: "好...欸23154对了！",
         },
         {
-          my: '太棒了！',
-          other: '哈哈哈哈哈通关！',
+          my: "太棒了！",
+          other: "哈哈哈哈哈通关！",
         },
       ],
-      sendMessage: '',
+      sendMessage: "",
       sortList: [
-        {index:1, correctIndex:3, text: "连接宝石博物馆的电路图"},
-        {index:2, correctIndex:1, text: "“海洋之心”宝石失窃"},
-        {index:3, correctIndex:2, text: "修好厕所门口裸露的电线"},
-        {index:4, correctIndex:5, text: "抓到嫌疑人老李"},
-        {index:5, correctIndex:4, text: "推断偷盗者对供电室厕所进行短接"},
+        { index: 1, correctIndex: 3, text: "连接宝石博物馆的电路图" },
+        { index: 2, correctIndex: 1, text: "“海洋之心”宝石失窃" },
+        { index: 3, correctIndex: 2, text: "修好厕所门口裸露的电线" },
+        { index: 4, correctIndex: 5, text: "抓到嫌疑人老李" },
+        { index: 5, correctIndex: 4, text: "推断偷盗者对供电室厕所进行短接" },
       ],
-      userSortList:[],
+      userSortList: [],
     };
   },
-  components: {Top,VueDraggableNext},
+  components: { Top, VueDraggableNext },
   mounted() {
     this.ready();
   },
@@ -393,14 +393,13 @@ export default defineComponent({
       this.isCharacter = false;
       this.isCharacterConfirm = false;
       this.isGame = false;
-      this.isInteracting = false,
-      this.isInteracted = false;
+      (this.isInteracting = false), (this.isInteracted = false);
       this.isChoiceConfirm = false;
       this.background = "default.jpg";
       this.currentPage.page = 0;
       this.currentPage.plot = 0;
-      this.interactionNumber= 1;
-      this.interactionID= 0;
+      this.interactionNumber = 1;
+      this.interactionID = 0;
     },
     singerMode() {
       this.chosenMode = 0;
@@ -417,6 +416,11 @@ export default defineComponent({
       if (screenfull.isEnabled) {
         // screenfull提供放大的方法
         screenfull.toggle(element);
+      }
+      if (this.isFullscreen) {
+        this.isFullscreen = false;
+      } else {
+        this.isFullscreen = true;
       }
     },
     //卡片移动
@@ -487,7 +491,7 @@ export default defineComponent({
       }, 1000);
     },
     chatRoom() {
-      this.$router.push("/game/room");
+      // this.$router.push("/game/room");
     },
     exitGame() {
       this.again();
@@ -526,7 +530,9 @@ export default defineComponent({
         } else {
           if (this.isFinished) {
             // this.showChatAndSort = true;
-            this.toggleScreen();
+            if (this.isFullscreen) {
+              this.toggleScreen();
+            }
             this.key();
           } else {
             if (!this.isInteracting) {
@@ -665,23 +671,28 @@ export default defineComponent({
     },
     confirmSortClick() {
       for (let i = 0; i < this.sortList.length; i++) {
-        this.userSortList.push({index:this.sortList[i].index,userIndex:i+1})
+        this.userSortList.push({
+          index: this.sortList[i].index,
+          userIndex: i + 1,
+        });
       }
-      console.log('sortList:',this.sortList)
-      console.log('userSortList:',this.userSortList)
+      console.log("sortList:", this.sortList);
+      console.log("userSortList:", this.userSortList);
       let isAllCorrect = true;
       //判断答题情况
-      let length = this.sortList.length
-      for (let index = 1; index < length+1; index++) {
+      let length = this.sortList.length;
+      for (let index = 1; index < length + 1; index++) {
         for (let i = 0; i < length; i++) {
-          if(this.sortList[i].index == index){
+          if (this.sortList[i].index == index) {
             for (let j = 0; j < this.userSortList.length; j++) {
-              if(this.userSortList[j].index == index){
-                if(this.sortList[i].correctIndex == this.userSortList[j].userIndex){
-                  console.log('第'+(i+1)+'题写对了')
-                }
-                else {
-                  console.log('第'+(i+1)+'题写错了')
+              if (this.userSortList[j].index == index) {
+                if (
+                  this.sortList[i].correctIndex ==
+                  this.userSortList[j].userIndex
+                ) {
+                  console.log("第" + (i + 1) + "题写对了");
+                } else {
+                  console.log("第" + (i + 1) + "题写错了");
                   isAllCorrect = false;
                   break;
                 }
@@ -690,17 +701,17 @@ export default defineComponent({
           }
         }
       }
-      if(isAllCorrect){
+      if (isAllCorrect) {
         ElMessage({
-          message: '恭喜你，通过排序测试！点击结束游戏来进行巩固练习吧!',
-          type: 'success',
-        })
-      }else{
+          message: "恭喜你，通过排序测试！点击结束游戏来进行巩固练习吧!",
+          type: "success",
+        });
+      } else {
         this.userSortList = [];
         ElMessage({
-          message: '很遗憾，答错了，再试一次吧！',
-          type: 'error',
-        })
+          message: "很遗憾，答错了，再试一次吧！",
+          type: "error",
+        });
       }
     },
     //结束游戏

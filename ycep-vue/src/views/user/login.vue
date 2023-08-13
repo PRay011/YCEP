@@ -132,7 +132,9 @@ export default defineComponent({
       let that = this;
       vertify()
         .then((res: any) => {
+          console.log('vertification');
           that.user.codeID = res.codeID;
+          that.user.code = "";
           that.codeUrl = "data:image/gif;base64," + res.image;
         })
         .catch((err: any) => {
@@ -148,14 +150,15 @@ export default defineComponent({
         .then((res: any) => {
           sessionStorage.setItem(
             "isSelectedInterest",
-            String(this.user.isSelectedInterest)
+            String(res.data.isSelectedInterest)
           );
           sessionStorage.setItem("username", this.user.username);
           sessionStorage.setItem("token", res.data.token);
           this.$router.push("/knowledge/index");
         })
         .catch((err: any) => {
-          console.log(err);
+          that.user.password = ''
+          that.newVertification()
         });
     },
   },

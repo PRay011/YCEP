@@ -6,7 +6,7 @@
     <div class="main">
       <div class="left">
         <div class="side-block1">
-          <img src="../../assets/images/demo/detail1.png" alt="背景图片"/>
+          <img src="../../assets/images/编程.png" alt="背景图片"/>
         </div>
         <div class="side-block2">
           <p class="title">热门知识点</p>
