@@ -1,0 +1,315 @@
+@media (min-width: 1024px) {
+  .container {
+    min-height: 100vh;
+    padding-top: 80px;
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+  }
+}
+
+.main {
+  width: 100%;
+
+  .title-block {
+    width: 70%;
+    margin: 30px auto 0;
+
+    .el-carousel__item {
+      border-radius: 10px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    //.el-carousel__item:nth-child(2n) {
+    //  background-color: #99a9bf;
+    //}
+    //
+    //.el-carousel__item:nth-child(2n+1) {
+    //  background-color: #d3dce6;
+    //}
+  }
+
+  .tags {
+    width: 70%;
+    height: 60px;
+    background-color: #fff;
+    margin: 10px auto;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+
+    .tag-item {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+      height: 100%;
+
+      .el-icon {
+        line-height: 60px;
+        margin-top: 10px;
+      }
+
+      .tag-text {
+        font-size: 15px;
+        line-height: 60px;
+        color: #646464;
+      }
+    }
+  }
+
+  .body {
+    width: 80%;
+    margin: 40px auto 100px;
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+
+    .left {
+      width: 20%;
+      height: 800px;
+      //margin-left: 150px;
+      background-color: #a1a1a1;
+    }
+
+    .right {
+      margin: 0 auto;
+      width: 100%;
+      height: auto;
+      padding-bottom: 50px;
+      //background-color: #e2e2e2;
+
+      .block {
+        display: grid;
+        width: 100%;
+        margin-top: 20px;
+
+        .block-title {
+          width: 100%;
+          text-align: center;
+          margin:10px;
+          @include basic_font;
+
+          p {
+            font-size: 25px;
+            font-weight: 400;
+            color: #34495e;
+          }
+
+          &.eng p {
+            height: 18px;
+            font-size: 20px;
+            font-weight: 200;
+            color: #686f9a;
+            margin-bottom: 60px;
+          }
+        }
+
+        .block-main {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+
+          .item1 {
+            display: flex;
+            flex-direction: column;
+            width: 550px;
+            margin-left: 30px;
+            height: 270px;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.5s ease-out;
+            cursor: pointer;
+
+            &:hover {
+              box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+            }
+
+            .image {
+              height: 90%;
+              overflow: hidden;
+
+              img {
+                width: 100%;
+              }
+            }
+
+            .cover {
+              display: flex;
+              flex-direction: column;
+              height: 20%;
+              background-color: white;
+
+              p {
+                margin-left: 10px;
+                font-size: 15px;
+
+                &.p1 {
+                  font-weight: bold;
+                  font-size: 16px;
+                }
+
+                &.p2 {
+                  margin-bottom: 5px;
+                  font-size: 15px;
+                }
+
+              }
+            }
+          }
+
+          .item2 {
+            width: 90%;
+            height: 200px;
+            margin-left: 30px;
+
+            .el-carousel__item h3 {
+              color: #475669;
+              font-size: 14px;
+              opacity: 0.75;
+              line-height: 150px;
+              margin: 0;
+            }
+
+            .el-carousel__item:nth-child(2n) {
+              background-color: #99a9bf;
+            }
+
+            .el-carousel__item:nth-child(2n+1) {
+              background-color: #d3dce6;
+            }
+          }
+        }
+
+        .block-cards {
+          margin-top: 20px;
+          display: flex;
+          justify-content: center;
+          width: 100%;
+
+          .card {
+            width: 210px;
+            height: 270px;
+            margin-left: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            background: #ffffff;
+            position: relative;
+            transition: 0.5s ease-out;
+            overflow: visible;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+
+            .card-image {
+              height: 50%;
+              border-radius: 10px 10px 0 0;
+              overflow: hidden;
+
+              img {
+                width: 100%;
+              }
+            }
+
+            .card-details {
+              padding: 1.0rem;
+              color: black;
+              height: 50%;
+              gap: .5em;
+              display: grid;
+              place-content: center;
+
+              .text-body {
+                color: rgb(134, 134, 134);
+                font-size: 12px;
+              }
+
+              /*Text*/
+              .text-title {
+                font-size: 15px;
+                font-weight: bold;
+              }
+            }
+
+            .card-button {
+              transform: translate(-50%, 125%);
+              width: 30%;
+              border-radius: 0 1rem 1rem 0;
+              border: none;
+              background-color: #008bf8;
+              color: #fff;
+              font-size: 9px;
+              padding: .5rem 1rem;
+              position: absolute;
+              left: 15%;
+              top: 0;
+              opacity: 0;
+              transition: 0.3s ease-out;
+              cursor: pointer;
+            }
+
+          }
+
+          /*Hover*/
+          .card:hover {
+            border-color: #008bf8;
+            box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+          }
+
+          .card:hover .card-button {
+            transform: translate(-50%, 50%);
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  .interest {
+    .content {
+      .kind{
+        display: grid;
+        margin-bottom: 20px;
+        .kind-name{
+          font-size: 17px;
+          font-weight: 550;
+          margin-bottom: 10px;
+        }
+        .item{
+          display:flex;
+          flex-wrap: wrap;
+          .item-name {
+            width:80px;
+            height:30px;
+            line-height: 28px;
+            text-align: center;
+            border: #e2e2e2 1px solid;
+            border-radius:5px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-top: 7px;
+            &:active {
+              background-color: #008bf8;
+              color: #ffffff;
+              font-weight: 540;
+            }
+          }
+          .item-name.selected {
+            background-color: #008bf8;
+            color: #ffffff;
+            font-weight: 540;
+          }
+        }
+      }
+    }
+    .dialog-footer button:first-child {
+      margin-right: 10px;
+    }
+  }
+
+}
+

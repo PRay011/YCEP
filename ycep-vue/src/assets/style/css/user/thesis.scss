@@ -1,0 +1,258 @@
+@media (min-width: 1024px) {
+  .container {
+    min-height: 100vh;
+    padding-top: 50px;
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+  }
+}
+
+@mixin main-button {
+  margin-right: 20px;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  color: #ffffff;
+  background-color: #446dde;
+  cursor: pointer;
+  &:hover {
+    background-color: #007bff;
+  }
+}
+
+.main {
+  width: 90%;
+  margin: 30px auto;
+
+  .header {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    color: #250c0c;
+    padding: 10px 0;
+    //box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    justify-content: space-between;
+    width: 100%;
+    .title {
+      font-size: 18px;
+      margin-left: 20px;
+    }
+    .actions {
+      button {
+        @include main-button;
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    .left {
+      flex: 0 0 150px; /* 设置固定宽度为150px，不伸缩 */
+      background-color: #ffffff;
+      padding: 20px 10px;
+      width: 150px;
+      .tac {
+        width: 100%;
+        .el-menu {
+          border: none;
+          .el-menu-item {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 10px;
+          }
+        }
+      }
+    }
+    .middle {
+      bottom: 0; /* 将底部对齐 */
+      right: 0; /* 将右边对齐 */
+      width: 900px; /* 设置一个固定宽度 */
+      height: 705px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      .el-scrollbar {
+        height: 630px;
+        .title {
+          text-align: left;
+          margin-top: 18px;
+          margin-bottom: 20px;
+        }
+        .paper {
+          width: 96%;
+          margin: 0 auto;
+          .aiBtn {
+            @include main-button;
+            margin-top: 15px;
+          }
+          .el-form {
+            margin: 50px auto;
+            max-width: 600px;
+            .el-form-item {
+              margin-top: 20px;
+              .el-tag,
+              button {
+                margin-right: 10px;
+                margin-bottom: 10px;
+                margin-top: 5px;
+              }
+            }
+            .el-input--small {
+              width: 70px;
+              margin-bottom: 10px;
+              margin-top: 5px;
+            }
+            .chapter-name {
+              display: block;
+              width: 100%;
+              font-weight: 550;
+              text-align: left;
+              margin-bottom: 10px;
+            }
+          }
+        }
+        .paper-content {
+          margin: 20px auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          padding: 30px;
+          color: #222226;
+          hr {
+            width: 100%;
+          }
+          //background-color: #a1a1a1;
+          .block1 {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            .text1 {
+              font-size: 18px;
+              color: #a1a1a1;
+            }
+            .text2 {
+              font-weight: 550;
+              font-size: 17px;
+              color: #696969;
+            }
+          }
+          .block2 {
+            width: 100%;
+            .text1 {
+              line-height: 60px;
+              font-size: 24px;
+              font-weight: 600;
+            }
+            .text2 {
+              font-family: "楷体", sans-serif;
+              font-size: 20px;
+              line-height: 50px;
+            }
+            .text3 {
+              font-size: 16px;
+              font-family: "华文楷体", sans-serif;
+            }
+          }
+          .block3 {
+            text-align: left;
+            .text1 {
+              font-weight: 550;
+              margin-top: 10px;
+            }
+          }
+          .block4 {
+            text-align: left;
+            .text1 {
+              font-size: 18px;
+              height: 50px;
+              line-height: 50px;
+              font-weight: 550;
+            }
+          }
+        }
+      }
+      .btn-container {
+        button {
+          @include main-button;
+        }
+      }
+    }
+    .right {
+      /* 让右侧区域填充剩余的可用空间 */
+      margin-left: 10px;
+      width: 350px;
+      .title {
+        display: flex;
+        .text {
+          margin-left: 10px;
+          font-size: 16px;
+          color: #3f3f3f;
+        }
+        .refresh {
+          margin-left: 20%;
+          display: flex;
+          &:hover{
+            color:red
+          }
+        }
+      }
+      .chat-box {
+        min-height: 660px;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        .message {
+          padding: 10px;
+          margin-top: 10px;
+          border-radius: 5px;
+          height:auto;
+        }
+        .message.ai {
+          background-color: #e1f5fe;
+        }
+
+        .message.user {
+          background-color: #bbdefb;
+        }
+      }
+      .user-input {
+        display: flex;
+        margin-top: 10px;
+        input {
+          flex-grow: 1;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px 0 0 5px;
+          font-size: 15px;
+          &:focus {
+            outline: 1px solid #797979;
+          }
+        }
+        button {
+          padding: 10px 20px;
+          background-color: #4caf50;
+          color: #fff;
+          border: none;
+          border-radius: 0 5px 5px 0;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .el-dialog {
+    img {
+      margin: 0 auto;
+    }
+  }
+}

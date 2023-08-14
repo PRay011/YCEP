@@ -1,4 +1,5 @@
 import './assets/main.css'
+import 'element-plus/dist/index.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -14,3 +15,13 @@ app.use(VueAxios, axios);
 app.use(router)
 
 app.mount('#app')
+
+// 跳转后返回顶部
+router.afterEach((to,from,next) => {
+    window.scrollTo(0,0);
+})
+
+
+
+
+

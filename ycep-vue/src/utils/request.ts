@@ -5,7 +5,7 @@ import { Message } from "@element-plus/icons-vue";
 export function request(config: any) {
   const instance = axios.create({
     baseURL: "/api",
-    timeout: 5000,
+    timeout: 50000,
     // 'transformRequest' 允许在向服务器发送前，修改请求数据
     transformRequest: [
       function (data: any) {
@@ -21,10 +21,9 @@ export function request(config: any) {
   instance.interceptors.request.use(
     (config: any) => {
       // 若存在token则带token
-      let user = JSON.parse(sessionStorage.getItem("user") || "{}");
-      // const token = store.state.token;
-      if (user.tokenInfo) {
-        config.headers.satoken = user.tokenInfo.tokenValue;
+      let token = sessionStorage.getItem('token')
+      if (token) {
+        config.headers.satoken = token;
       }
       // 放行
       return config;
@@ -67,23 +66,23 @@ export function request(config: any) {
         alert(alterMessage);
       }
       //这里还需要添加一个token过期之后的token移除
-      if (res.data.success == false) {
-        alert({
-          message: res.data.data.message + "，请重试！",
-          type: "warning",
-        });
-      }
+      // if (res.data.success == false) {
+      //   alert({
+      //     message: res.data.data.message + "，请重试！",
+      //     type: "warning",
+      //   });
+      // }
       return res ? res.data : res;
     },
     (err: any) => {
-      console.log("响应拦截=>", err.response);
+      console.log("响应拦截=>", err);
       if (err && err.response) {
         // 1.公共错误处理
       } else {
         // 超时处理
         if (JSON.stringify(err).includes("timeout")) {
           // alert("服务器响应超时，请刷新当前页");
-          window.location.href = "/error";
+          // window.location.href = "/error";
         }
         err.message = "连接服务器失败";
       }
