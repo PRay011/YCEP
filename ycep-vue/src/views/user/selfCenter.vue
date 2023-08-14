@@ -1,30 +1,30 @@
 <template>
   <!--  顶部导航栏-->
-  <Top />
+  <Top/>
   <div class="container">
     <div class="main">
       <div class="left">
         <div class="self-card">
           <div class="card">
             <div class="card__img">
-              <img src="../../assets/images/techBack.jpg" alt="背景图片" />
+              <img alt="背景图片" src="../../assets/images/techBack.jpg"/>
               <el-icon class="edit-bg" size="26">
-                <Edit />
+                <Edit/>
               </el-icon>
             </div>
             <div class="card__avatar">
               <el-avatar
-                src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2022%2F1110%2F0be1778cj00rl4jow0010c000hs00hsg.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
-                alt="背景图片"
+                  alt="背景图片"
+                  src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2022%2F1110%2F0be1778cj00rl4jow0010c000hs00hsg.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
               />
             </div>
             <div class="card__title">
               {{ user.username }}
-              <el-icon class="sex" v-if="user.sex === '女'" color="#ef20de">
-                <Female />
+              <el-icon v-if="user.sex === '女'" class="sex" color="#ef20de">
+                <Female/>
               </el-icon>
-              <el-icon class="sex" v-if="user.sex === '男'" color="#2062ef">
-                <Male />
+              <el-icon v-if="user.sex === '男'" class="sex" color="#2062ef">
+                <Male/>
               </el-icon>
             </div>
             <div class="card__subtitle">{{ user.email }}</div>
@@ -38,37 +38,37 @@
           <el-row class="tac">
             <el-col>
               <el-menu
-                default-active="1"
-                class="el-menu-vertical-demo"
-                @select="leftNavClick"
+                  class="el-menu-vertical-demo"
+                  default-active="1"
+                  @select="leftNavClick"
               >
                 <el-menu-item index="1">
                   <el-icon>
-                    <Circle-Check />
+                    <Circle-Check/>
                   </el-icon>
                   <span>已学习知识</span>
                 </el-menu-item>
                 <el-menu-item index="2">
                   <el-icon>
-                    <Document />
+                    <Document/>
                   </el-icon>
                   <span>学习论文</span>
                 </el-menu-item>
                 <el-menu-item index="3">
                   <el-icon>
-                    <View />
+                    <View/>
                   </el-icon>
                   <span>浏览记录</span>
                 </el-menu-item>
                 <el-menu-item index="4">
                   <el-icon>
-                    <Star />
+                    <Star/>
                   </el-icon>
                   <span>我的感兴趣</span>
                 </el-menu-item>
                 <el-menu-item index="5">
                   <el-icon>
-                    <User />
+                    <User/>
                   </el-icon>
                   <span>个人账户</span>
                 </el-menu-item>
@@ -78,31 +78,31 @@
         </div>
       </div>
       <div class="right">
-        <div class="detail page1" v-if="currentNav == 1">
+        <div v-if="currentNav == 1" class="detail page1">
           <div class="title">已学习知识>></div>
-          <br />
-          <hr />
+          <br/>
+          <hr/>
           <div class="kind">
             <div
-              v-for="(kind, index) in kindList"
-              :key="index"
-              class="title-item"
-              :class="{ selected: selectedKind == index }"
-              @click="kindClick(index)"
+                v-for="(kind, index) in kindList"
+                :key="index"
+                :class="{ selected: selectedKind == index }"
+                class="title-item"
+                @click="kindClick(index)"
             >
               <p class="text">{{ kind }}</p>
             </div>
           </div>
           <div class="content">
             <div
-              class="item"
-              v-for="item in knowledgeInfoList"
-              :key="item.id"
-              @click="klgDetailBtnClick(item.id)"
+                v-for="item in knowledgeInfoList"
+                :key="item.id"
+                class="item"
+                @click="klgDetailBtnClick(item.id)"
             >
               <div class="knowledge">
                 <div class="image">
-                  <img :src="imgHost + item.imgSrc" alt="知识点图片" />
+                  <img :src="imgHost + item.imgSrc" alt="知识点图片"/>
                 </div>
                 <div class="info">
                   <p class="title-tag">{{ item.title }}</p>
@@ -114,12 +114,12 @@
               <div class="game">
                 <div class="card" @click="klgDetailBtnClick(item.id)">
                   <div class="card-image">
-                    <img :src="imgHost + item.game.imgSrc" alt="背景图片" />
+                    <img :src="imgHost + item.game.imgSrc" alt="背景图片"/>
                   </div>
                   <div class="card-details">
                     <p class="text-title">{{ item.game.title }}</p>
                     <el-tag class="text-author"
-                      >作者：{{ item.game.author }}
+                    >作者：{{ item.game.author }}
                     </el-tag>
                   </div>
                 </div>
@@ -128,20 +128,20 @@
           </div>
           <div class="pagination">
             <el-pagination
-              v-model:currentPage="paginationConfig.currentPage"
-              layout="total, prev, pager, next"
-              :page-size="paginationConfig.pageSize"
-              :total="paginationConfig.total"
-              @current-change="handlePageChange"
+                v-model:currentPage="paginationConfig.currentPage"
+                :page-size="paginationConfig.pageSize"
+                :total="paginationConfig.total"
+                layout="total, prev, pager, next"
+                @current-change="handlePageChange"
             />
           </div>
         </div>
-        <div class="detail page2" v-if="currentNav == 2">
+        <div v-if="currentNav == 2" class="detail page2">
           <div class="title">学习论文>></div>
-          <br />
-          <hr />
+          <br/>
+          <hr/>
           <div class="content">
-            <div class="item" v-for="(thesis, index) in thesisList">
+            <div v-for="(thesis, index) in thesisList" class="item">
               <div class="card_box" @click="thesisDetailClick(index)">
                 <span></span>
                 <p class="text1">{{ thesis.title }}</p>
@@ -155,39 +155,39 @@
           </div>
           <div class="pagination">
             <el-pagination
-              v-model:currentPage="paginationConfig.currentPage"
-              layout="total, prev, pager, next"
-              :page-size="paginationConfig.pageSize"
-              :total="paginationConfig.total"
-              @current-change="handlePageChange"
+                v-model:currentPage="paginationConfig.currentPage"
+                :page-size="paginationConfig.pageSize"
+                :total="paginationConfig.total"
+                layout="total, prev, pager, next"
+                @current-change="handlePageChange"
             />
           </div>
         </div>
-        <div class="detail page1" v-if="currentNav == 3">
+        <div v-if="currentNav == 3" class="detail page1">
           <div class="title">浏览记录>></div>
-          <br />
-          <hr />
+          <br/>
+          <hr/>
           <div class="kind">
             <div
-              v-for="(kind, index) in kindList"
-              :key="index"
-              class="title-item"
-              :class="{ selected: selectedKind == index }"
-              @click="kindClick(index)"
+                v-for="(kind, index) in kindList"
+                :key="index"
+                :class="{ selected: selectedKind == index }"
+                class="title-item"
+                @click="kindClick(index)"
             >
               <p class="text">{{ kind }}</p>
             </div>
           </div>
           <div class="content">
             <div
-              class="item"
-              v-for="item in knowledgeInfoList"
-              :key="item.id"
-              @click="klgDetailBtnClick(item.id)"
+                v-for="item in knowledgeInfoList"
+                :key="item.id"
+                class="item"
+                @click="klgDetailBtnClick(item.id)"
             >
               <div class="knowledge">
                 <div class="image">
-                  <img :src="item.imgSrc" alt="知识点图片" />
+                  <img :src="item.imgSrc" alt="知识点图片"/>
                 </div>
                 <div class="info">
                   <p class="title-tag">{{ item.title }}</p>
@@ -199,12 +199,12 @@
               <div class="game">
                 <div class="card" @click="klgDetailBtnClick(item.id)">
                   <div class="card-image">
-                    <img :src="item.game.imgSrc" alt="背景图片" />
+                    <img :src="item.game.imgSrc" alt="背景图片"/>
                   </div>
                   <div class="card-details">
                     <p class="text-title">{{ item.game.title }}</p>
                     <el-tag class="text-author"
-                      >作者：{{ item.game.author }}
+                    >作者：{{ item.game.author }}
                     </el-tag>
                   </div>
                 </div>
@@ -213,39 +213,39 @@
           </div>
           <div class="pagination">
             <el-pagination
-              v-model:currentPage="paginationConfig.currentPage"
-              layout="total, prev, pager, next"
-              :page-size="paginationConfig.pageSize"
-              :total="paginationConfig.total"
-              @current-change="handlePageChange"
+                v-model:currentPage="paginationConfig.currentPage"
+                :page-size="paginationConfig.pageSize"
+                :total="paginationConfig.total"
+                layout="total, prev, pager, next"
+                @current-change="handlePageChange"
             />
           </div>
         </div>
-        <div class="detail page1" v-if="currentNav == 4">
+        <div v-if="currentNav == 4" class="detail page1">
           <div class="title">我的感兴趣>></div>
-          <br />
-          <hr />
+          <br/>
+          <hr/>
           <div class="kind">
             <div
-              v-for="(kind, index) in kindList"
-              :key="index"
-              class="title-item"
-              :class="{ selected: selectedKind == index }"
-              @click="kindClick(index)"
+                v-for="(kind, index) in kindList"
+                :key="index"
+                :class="{ selected: selectedKind == index }"
+                class="title-item"
+                @click="kindClick(index)"
             >
               <p class="text">{{ kind }}</p>
             </div>
           </div>
           <div class="content">
             <div
-              class="item"
-              v-for="item in knowledgeInfoList"
-              :key="item.id"
-              @click="klgDetailBtnClick(item.id)"
+                v-for="item in knowledgeInfoList"
+                :key="item.id"
+                class="item"
+                @click="klgDetailBtnClick(item.id)"
             >
               <div class="knowledge">
                 <div class="image">
-                  <img :src="item.imgSrc" alt="知识点图片" />
+                  <img :src="item.imgSrc" alt="知识点图片"/>
                 </div>
                 <div class="info">
                   <p class="title-tag">{{ item.title }}</p>
@@ -257,12 +257,12 @@
               <div class="game">
                 <div class="card" @click="klgDetailBtnClick(item.id)">
                   <div class="card-image">
-                    <img :src="item.game.imgSrc" alt="背景图片" />
+                    <img :src="item.game.imgSrc" alt="背景图片"/>
                   </div>
                   <div class="card-details">
                     <p class="text-title">{{ item.game.title }}</p>
                     <el-tag class="text-author"
-                      >作者：{{ item.game.author }}
+                    >作者：{{ item.game.author }}
                     </el-tag>
                   </div>
                 </div>
@@ -271,87 +271,89 @@
           </div>
           <div class="pagination">
             <el-pagination
-              v-model:currentPage="paginationConfig.currentPage"
-              layout="total, prev, pager, next"
-              :page-size="paginationConfig.pageSize"
-              :total="paginationConfig.total"
-              @current-change="handlePageChange"
+                v-model:currentPage="paginationConfig.currentPage"
+                :page-size="paginationConfig.pageSize"
+                :total="paginationConfig.total"
+                layout="total, prev, pager, next"
+                @current-change="handlePageChange"
             />
           </div>
         </div>
-        <div class="detail page3" v-if="currentNav == 5">
+        <div v-if="currentNav == 5" class="detail page3">
           <div class="title">个人账户>></div>
-          <br />
-          <hr />
+          <br/>
+          <hr/>
           <div class="title2">个人信息>></div>
-          <el-form label-width="80px" :inline="true">
+          <el-form :inline="true" label-width="80px">
             <el-form-item label="用户名">
-              <el-input type="text" v-model="user.username" />
+              <el-input v-model="user.username" type="text"/>
             </el-form-item>
             <el-form-item label="学校">
-              <el-input type="text" v-model="user.school" />
+              <el-input v-model="user.school" type="text"/>
             </el-form-item>
             <el-form-item label="电话">
-              <el-input type="text" v-model="user.phone" />
+              <el-input v-model="user.phone" type="text"/>
             </el-form-item>
             <el-form-item label="性别">
               <el-radio-group v-model="user.sex">
-                <el-radio label="男" />
-                <el-radio label="女" />
+                <el-radio label="男"/>
+                <el-radio label="女"/>
               </el-radio-group>
             </el-form-item>
             <el-form-item label="邮箱">
-              <el-input type="text" style="width: 500px" v-model="user.email" />
+              <el-input v-model="user.email" style="width: 500px" type="text"/>
             </el-form-item>
             <el-form-item label="个人简介">
               <el-input
-                type="textarea"
-                :autosize="{ minRows: 3 }"
-                v-model="user.description"
-                style="width: 500px"
+                  v-model="user.description"
+                  :autosize="{ minRows: 3 }"
+                  style="width: 500px"
+                  type="textarea"
               />
             </el-form-item>
             <el-button type="primary" @click="userinfoEditClick"
-              >保存</el-button
+            >保存
+            </el-button
             >
           </el-form>
           <div class="title2" style="margin-top: 50px">感兴趣的知识点>></div>
           <div class="interest">
             <div
-              class="kind"
-              v-for="(kind, kindIndex) in kindItemList"
-              :key="kindIndex"
+                v-for="(kind, kindIndex) in kindItemList"
+                :key="kindIndex"
+                class="kind"
             >
               <p class="kind-name">{{ kind.kindName }}</p>
               <div class="item">
                 <p
-                  class="item-name"
-                  v-for="(item, itemIndex) in kind.items"
-                  :key="itemIndex"
-                  :class="item.isSelected === true ? 'selected' : ''"
-                  @click="interestItemClick(kindIndex, itemIndex)"
+                    v-for="(item, itemIndex) in kind.items"
+                    :key="itemIndex"
+                    :class="item.isSelected === true ? 'selected' : ''"
+                    class="item-name"
+                    @click="interestItemClick(kindIndex, itemIndex)"
                 >
                   {{ item.itemName }}
                 </p>
               </div>
             </div>
             <el-button type="primary" @click="interestEditClick"
-              >保存</el-button
+            >保存
+            </el-button
             >
           </div>
         </div>
-        <div class="detail thesis" v-if="thesisVisible">
+        <div v-if="thesisVisible" class="detail thesis">
           <div class="thesisTop">
             <div class="title">论文详情>></div>
             <div class="btn-container">
-              <button @click="downloadThesis()" style="margin-right: 20px">
+              <button style="margin-right: 20px" @click="downloadThesis()">
                 下载论文
               </button>
               <button @click="closeThesisClick">关闭</button>
             </div>
           </div>
           <el-scrollbar height="830px">
-            <div class="paper-content" id="printDiv">
+            <div id="printDiv" class="paper-content">
               <div class="block1">
                 <p class="text1">{{ thesisList[this.currentThesis].time }}</p>
                 <p class="text2">青少年创新教育平台</p>
@@ -361,8 +363,8 @@
                   }}
                 </p>
               </div>
-              <hr />
-              <hr />
+              <hr/>
+              <hr/>
               <div class="block2">
                 <p class="text1">{{ thesisList[this.currentThesis].title }}</p>
                 <p class="text2">{{ thesisList[this.currentThesis].author }}</p>
@@ -370,7 +372,7 @@
                   （{{ thesisList[this.currentThesis].address }}）
                 </p>
               </div>
-              <br />
+              <br/>
               <div class="block3">
                 <p class="text1">摘要：</p>
                 <p class="text2">
@@ -379,23 +381,24 @@
                 <p class="text1">
                   关键词：&emsp;
                   <template
-                    v-for="keyword in thesisList[this.currentThesis].keywords"
-                    >{{ keyword }};&emsp;</template
+                      v-for="keyword in thesisList[this.currentThesis].keywords"
+                  >{{ keyword }};&emsp;
+                  </template
                   >
                 </p>
               </div>
-              <br /><br />
+              <br/><br/>
               <div class="block4">
                 <template
-                  v-for="chapter in thesisList[this.currentThesis].content"
+                    v-for="chapter in thesisList[this.currentThesis].content"
                 >
                   <p class="text1">{{ chapter.chapter }}</p>
                   <p class="text2">&emsp;&emsp;{{ chapter.text }}</p>
                 </template>
               </div>
-              <br /><br />
-              <hr />
-              <hr />
+              <br/><br/>
+              <hr/>
+              <hr/>
               <div class="block1">
                 <p class="text1">{{ thesisList[this.currentThesis].time }}</p>
                 <p class="text2">青少年创新教育平台</p>
@@ -414,20 +417,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance } from "vue";
+import {defineComponent, getCurrentInstance} from "vue";
 import Top from "../../components/top.vue";
-import { ElMessage } from "element-plus";
-import { getInterest, getUserInfo } from "../../api/user/selfCenter";
-import { getCategory } from "@/api/knowledge/kind";
-import { postInterest } from "@/api/knowledge";
-import { getPdf } from "@/utils/htmlToPdf";
+import {ElMessage} from "element-plus";
+import {getInterest, getUserInfo} from "../../api/user/selfCenter";
+import {getCategory} from "@/api/knowledge/kind";
+import {postInterest} from "@/api/knowledge";
+import {getPdf} from "@/utils/htmlToPdf";
 
 export default defineComponent({
   name: "selfCenter",
   data() {
     return {
       imgHost:
-        getCurrentInstance()?.appContext.config.globalProperties.$imgHost,
+      getCurrentInstance()?.appContext.config.globalProperties.$imgHost,
       data: "",
       currentNav: 1,
       paginationConfig: {
@@ -448,10 +451,10 @@ export default defineComponent({
       knowledgeInfoList: [
         {
           id: 1,
-          imgSrc: "KnowledgeTest.jpg",
+          imgSrc: "knowledgeTest.jpg",
           title: "Spring Boot 单元测试",
           content:
-            "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
+              "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
           author: "冷雪兮",
           game: {
             id: 1,
@@ -468,7 +471,7 @@ export default defineComponent({
           imgSrc: "knowledgeTest.jpg",
           title: "Spring Boot 单元测试",
           content:
-            "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
+              "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
           author: "冷雪兮",
           game: {
             id: 1,
@@ -485,7 +488,7 @@ export default defineComponent({
           imgSrc: "knowledgeTest.jpg",
           title: "Spring Boot 单元测试",
           content:
-            "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
+              "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
           author: "冷雪兮",
           game: {
             id: 1,
@@ -502,7 +505,7 @@ export default defineComponent({
           imgSrc: "knowledgeTest.jpg",
           title: "Spring Boot 单元测试",
           content:
-            "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
+              "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
           author: "冷雪兮",
           game: {
             id: 1,
@@ -525,7 +528,7 @@ export default defineComponent({
           author: "蛄蛹者",
           address: "优胜北路第三小学，湖南 长沙，410000",
           brief:
-            "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
+              "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
           keywords: ["无线传感器", "网络", "电源电路", "电源效率"],
           content: [
             {
@@ -555,7 +558,7 @@ export default defineComponent({
           author: "蛄蛹者",
           address: "优胜北路第三小学，湖南 长沙，410000",
           brief:
-            "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
+              "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
           keywords: ["无线传感器", "网络", "电源电路", "电源效率"],
           content: [
             {
@@ -585,7 +588,7 @@ export default defineComponent({
           author: "蛄蛹者",
           address: "优胜北路第三小学，湖南 长沙，410000",
           brief:
-            "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
+              "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
           keywords: ["无线传感器", "网络", "电源电路", "电源效率"],
           content: [
             {
@@ -615,7 +618,7 @@ export default defineComponent({
           author: "蛄蛹者",
           address: "优胜北路第三小学，湖南 长沙，410000",
           brief:
-            "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
+              "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
           keywords: ["无线传感器", "网络", "电源电路", "电源效率"],
           content: [
             {
@@ -645,7 +648,7 @@ export default defineComponent({
           author: "蛄蛹者",
           address: "优胜北路第三小学，湖南 长沙，410000",
           brief:
-            "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
+              "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
           keywords: ["无线传感器", "网络", "电源电路", "电源效率"],
           content: [
             {
@@ -675,7 +678,7 @@ export default defineComponent({
           author: "蛄蛹者",
           address: "优胜北路第三小学，湖南 长沙，410000",
           brief:
-            "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
+              "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
           keywords: ["无线传感器", "网络", "电源电路", "电源效率"],
           content: [
             {
@@ -734,7 +737,7 @@ export default defineComponent({
       interest: [],
     };
   },
-  components: { Top },
+  components: {Top},
   mounted() {
     this.ready();
   },
@@ -755,30 +758,30 @@ export default defineComponent({
     showUserinfo() {
       let that = this;
       getUserInfo()
-        .then((res: any) => {
-          console.log(res);
-          that.user = res.data;
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log(res);
+            that.user = res.data;
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
     showCategory() {
       let that = this;
       getCategory()
-        .then((res: any) => {
-          console.log("interest");
-          console.log(res);
-          that.kindItemList = res.data;
-          that.kindItemList.forEach((kind: any, i: any) => {
-            kind.items.forEach((item: any, i: any) => {
-              item.isSelected = false;
+          .then((res: any) => {
+            console.log("interest");
+            console.log(res);
+            that.kindItemList = res.data;
+            that.kindItemList.forEach((kind: any, i: any) => {
+              kind.items.forEach((item: any, i: any) => {
+                item.isSelected = false;
+              });
             });
+          })
+          .catch((err: any) => {
+            console.log(err);
           });
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
       if (this.isSelectedInterest == 1) {
         getInterest().then((res: any) => {
           let selectedItems = res.data;
@@ -787,8 +790,8 @@ export default defineComponent({
             for (let j = 0; j < this.kindItemList.length; j++) {
               for (let k = 0; k < this.kindItemList[j].items.length; k++) {
                 if (
-                  selectedItems[i].itemId ==
-                  this.kindItemList[j].items[k].itemId
+                    selectedItems[i].itemId ==
+                    this.kindItemList[j].items[k].itemId
                 ) {
                   this.kindItemList[j].items[k].isSelected = true;
                 }
@@ -845,12 +848,12 @@ export default defineComponent({
         });
       });
       postInterest(this.interest)
-        .then((res: any) => {
-          console.log(res);
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log(res);
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
     thesisDetailClick(index: number) {
       this.currentThesis = index;
