@@ -1,4 +1,5 @@
 import './assets/main.css'
+import 'element-plus/dist/index.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -12,5 +13,17 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 app.use(VueAxios, axios);
 app.use(router)
+app.config.globalProperties.$imgHost = 'https://image.tdsmy.cn/ycep/'
+// app.config.globalProperties.$imgHost = 'http://localhost:8081/static/'
 
 app.mount('#app')
+
+// 跳转后返回顶部
+router.afterEach((to, from, next) => {
+    window.scrollTo(0, 0);
+})
+
+
+
+
+

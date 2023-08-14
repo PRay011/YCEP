@@ -1,0 +1,476 @@
+@media (min-width: 1024px) {
+  .container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+}
+
+$font_color: #e1e1e1;
+$font_color_selected: #81c9B5;
+@mixin pretty-card-div {
+  .card {
+    width: 190px;
+    height: 254px;
+    background: #07182E;
+    position: relative;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .card h2 {
+    z-index: 1;
+    color: white;
+    font-size: 2em;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+    height: 130%;
+    animation: rotBGimg 3s linear infinite;
+    transition: all 0.2s linear;
+  }
+
+  @keyframes rotBGimg {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    background: #07182E;;
+    inset: 5px;
+    border-radius: 15px;
+  }
+  /* .card:hover:before {
+    background-image: linear-gradient(180deg, rgb(81, 255, 0), purple);
+    animation: rotBGimg 3.5s linear infinite;
+  } */
+
+
+}
+//变换样式的radio button
+@mixin pretty-radio-div{
+  /* Hide the default checkbox */
+  .div input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .div {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+  }
+
+  /* Create a custom checkbox */
+  .checkmark {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 1.9em;
+    width: 1.9em;
+    background-color: #ccc;
+    border-radius: 50%;
+    transition: .4s;
+    box-shadow: inset 17px 17px 16px #b3b3b3,
+    inset -17px -17px 16px #ffffff;
+  }
+
+  .checkmark:hover {
+    box-shadow: inset 17px 17px 16px #a2a2a2,
+    inset -17px -17px 16px #ffffff;
+  }
+
+  /* When the checkbox is checked, add a blue background */
+  .div input:checked ~ .checkmark {
+    box-shadow: none;
+    background-color: $basic_color;
+    transform: rotateX(360deg);
+  }
+
+  .div input:checked ~ .checkmark:hover {
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+  }
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  /* Show the checkmark when checked */
+  .div input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  /* Style the checkmark/indicator */
+  .div .checkmark:after {
+    left: 0.76em;
+    top: 0.45em;
+    width: 0.4em;
+    height: 0.8em;
+    border: solid white;
+    border-width: 0 0.15em 0.15em 0;
+    box-shadow: 0.1em 0.1em 0em 0 rgba(0,0,0,0.3);
+    transform: rotate(45deg);
+  }
+}
+//index页面乱码的按钮
+@mixin pretty-button-div{
+  button,button::after {
+    padding: 10px 50px;
+    font-size: 20px;
+    border-radius: 5px;
+    color: white;
+    background-color: transparent;
+    position: relative;
+    border: 1px solid rgb(0, 255, 213);
+    box-shadow: 0px 10px 10px -10px rgb(0, 255, 213);
+  }
+
+  button::after {
+    --move1: inset(50% 50% 50% 50%);
+    --move2: inset(31% 0 40% 0);
+    --move3: inset(39% 0 15% 0);
+    --move4: inset(45% 0 40% 0);
+    --move5: inset(45% 0 6% 0);
+    --move6: inset(14% 0 61% 0);
+    clip-path: var(--move1);
+    content: 'GLITCH';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+  }
+
+  button:hover::after {
+    animation: glitch_4011 1s;
+    animation-timing-function: steps(2, end);
+    text-shadow: -3px -3px 0px #1df2f0, 3px 3px 0px #E94BE8;
+    background-color: transparent;
+    border: 3px solid rgb(0, 255, 213);
+  }
+
+  button:hover {
+    text-shadow: -1px -1px 0px #1df2f0, 1px 1px 0px #E94BE8;
+  }
+
+  button:hover {
+    background-color: transparent;
+    border: 1px solid rgb(0, 255, 213);
+    box-shadow: 0px 10px 10px -10px rgb(0, 255, 213);
+  }
+
+  @keyframes glitch_4011 {
+    0% {
+      clip-path: var(--move1);
+      transform: translate(0px,-10px);
+    }
+
+    10% {
+      clip-path: var(--move2);
+      transform: translate(-10px,10px);
+    }
+
+    20% {
+      clip-path: var(--move3);
+      transform: translate(10px,0px);
+    }
+
+    30% {
+      clip-path: var(--move4);
+      transform: translate(-10px,10px);
+    }
+
+    40% {
+      clip-path: var(--move5);
+      transform: translate(10px,-10px);
+    }
+
+    50% {
+      clip-path: var(--move6);
+      transform: translate(-10px,10px);
+    }
+
+    60% {
+      clip-path: var(--move1);
+      transform: translate(10px,-10px);
+    }
+
+    70% {
+      clip-path: var(--move3);
+      transform: translate(-10px,10px);
+    }
+
+    80% {
+      clip-path: var(--move2);
+      transform: translate(10px,-10px);
+    }
+
+    90% {
+      clip-path: var(--move4);
+      transform: translate(-10px,10px);
+    }
+
+    100% {
+      clip-path: var(--move1);
+      transform: translate(0);
+    }
+  }
+
+
+}
+
+.main {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  //background-image: url(https://files.zuhaohao.com/demon/bg-259831f5be454b73a1af099b4a83f5b0.png);
+  background-image: url("../assets/images/触碰手指.jpg");
+  background-size: 100% 100%;
+  background-position: 0 0;
+  position: relative;
+  overflow: hidden;
+
+  .descriptionList {
+    width: 20%;
+    height: 80%;
+    margin-top: 150px;
+    margin-left: 150px;
+    //background-color: #a1a1a1;
+    display: flex;
+    flex-direction: column;
+
+    .desc {
+      display: flex;
+      text-align: left;
+      margin: 30px;
+      cursor: pointer;
+
+      .pretty-radio-div {
+        @include pretty-radio-div;
+        margin-right: 50px;
+      }
+
+      label {
+        color: $font_color;
+        font-family: "Microsoft YaHei", sans-serif;
+        font-size: 18px;
+        line-height: 38px;
+
+        &.checked, &:hover {
+          font-size: 23px;
+          color: $basic_color;
+        }
+      }
+    }
+  }
+
+  .details {
+    //@include pretty-card-div;
+    width: 40%;
+    height: 60%;
+    margin-top: 220px;
+    //background-color: #a1a1a1;
+
+    .check1{
+      .cube-container {
+        width: 200px;
+        height: 200px;
+        perspective: 800px;
+        margin: 70px auto;
+      }
+
+      .cube {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        animation: rotate 8s infinite linear;
+      }
+
+      .face {
+        display: grid;
+        justify-content: center;
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        color: $basic_color;
+        //color :#ffffff;
+        font-size: 18px;
+        text-align: center;
+        //background: transparent;
+        background-color: #d2d2d2;
+        opacity: 0.9;
+        border: 2px solid #dadada;
+        //border-image: linear-gradient(to right, #1929e5, #355c7d, #557d35, #cfcf16, #a51f1f) 1;
+        box-shadow: 0 0 100px #ffffff;
+        .el-icon{
+          margin: 50px auto 0;
+        }
+        .tag-text{
+          margin-bottom: 25px;
+        }
+      }
+
+      .front {
+        transform: translateZ(100px);
+      }
+
+      .back {
+        transform: rotateY(180deg) translateZ(100px);
+      }
+
+      .right {
+        transform: rotateY(90deg) translateZ(100px);
+      }
+
+      .left {
+        transform: rotateY(-90deg) translateZ(100px);
+      }
+
+      .top {
+        transform: rotateX(90deg) translateZ(100px);
+      }
+
+      .bottom {
+        transform: rotateX(-90deg) translateZ(100px);
+      }
+
+      .cube-container:hover .cube {
+        animation-play-state: paused;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotateX(0) rotateY(0) rotateZ(0);
+        }
+
+        100% {
+          transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+        }
+      }
+
+
+
+    }
+    .check2{
+
+      .code-editor {
+        margin: 30px auto;
+        max-width: 400px;
+        background-color: #1d1e22;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        padding: 2px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px;
+      }
+
+      .title {
+        font-family: Lato, sans-serif;
+        font-weight: 900;
+        font-size: 14px;
+        letter-spacing: 1.57px;
+        color: rgb(212 212 212);
+      }
+
+      .icon {
+        width: 20px;
+        transition: .2s ease;
+      }
+
+      .icon:hover {
+        cursor: pointer;
+        border-radius: 50px;
+        background-color: #6e7281;
+      }
+
+      .editor-content {
+        margin: 0 10px 10px;
+        color: white;
+      }
+
+      .property {
+        margin-left: 30px;
+      }
+
+      .property:hover {
+        cursor: text;
+      }
+
+      .editor-content .color-0 {
+        color: rgb(86 156 214);
+      }
+
+      .editor-content .color-1 {
+        color: rgb(182 206 168);
+      }
+
+      .editor-content .color-2 {
+        color: rgb(156 220 254);
+      }
+
+      .editor-content .color-3 {
+        color: rgb(207 146 120);
+      }
+
+      .color-preview-1,.color-preview-2 {
+        height: 8px;
+        width: 8px;
+        border: 1px solid #fff;
+        display: inline-block;
+        margin-right: 3px;
+      }
+
+      .color-preview-1 {
+        background-color: #1d1e22;
+      }
+
+      .color-preview-1 {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+  }
+
+  .pretty-button-div {
+    position: relative;
+    top: 300px;
+    left: 100px;
+    display: flex;
+    flex-direction: column;
+    @include pretty-button-div;
+
+    button {
+      margin: 30px;
+    }
+  }
+}
+
