@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : MongoDB
+ Source Server         : 阿里云MongoDB
  Source Server Type    : MongoDB
  Source Server Version : 60008 (6.0.8)
- Source Host           : localhost:27017
+ Source Host           : tdsmy.cn:27017
  Source Schema         : ycep
 
  Target Server Type    : MongoDB
  Target Server Version : 60008 (6.0.8)
  File Encoding         : 65001
 
- Date: 12/08/2023 13:19:59
+ Date: 14/08/2023 11:36:42
 */
 
 
@@ -55,7 +55,7 @@ db.getCollection("game").insert([ {
     plot: [
         [
             {
-                imgSrc: "1.png",
+                imgSrc: "1.jpg",
                 content: [
                     {
                         text: "云清：“林立，宝石博物馆真的太美啦，咱们先去A展厅看看吧！”"
@@ -66,7 +66,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "2.png",
+                imgSrc: "2.jpg",
                 content: [
                     {
                         text: "云清：“林立，你快看这颗绿宝石，看起来很特别。”"
@@ -79,7 +79,7 @@ db.getCollection("game").insert([ {
         ],
         [
             {
-                imgSrc: "3.png",
+                imgSrc: "3.jpg",
                 content: [
                     {
                         text: "白慧：“听说C展厅有号称最美宝石的‘海洋之心’，将深沉静谧之美展现得淋漓尽致，我已经迫不及待去看看啦！”"
@@ -90,7 +90,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "4.png",
+                imgSrc: "4.jpg",
                 content: [
                     {
                         text: "林立：“A展厅都看过啦，云清，我们也去C展厅看看吧！”"
@@ -98,7 +98,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "5.png",
+                imgSrc: "5.jpg",
                 content: [
                     {
                         text: "整个博物馆发出：“滴嘟——滴嘟——滴嘟”的声音。"
@@ -118,7 +118,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "6.png",
+                imgSrc: "6.jpg",
                 content: [
                     {
                         text: "王璐（对林立）：“请问您可以陪我去供电室看看吗？”"
@@ -132,7 +132,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "7.png",
+                imgSrc: "7.jpg",
                 content: [
                     {
                         text: "林立：“云清，要不你留在大厅帮忙维持秩序，查找线索，怎么样？”"
@@ -143,7 +143,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "8.png",
+                imgSrc: "8.jpg",
                 content: [
                     {
                         text: "工作人员王璐说：“糟糕！我忘记告诉你前段时间场馆翻新，博物馆电路图还未更新，我们只能现场绘制一幅了。”"
@@ -157,7 +157,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "9.png",
+                imgSrc: "9.jpg",
                 content: [
                     {
                         text: ""
@@ -165,7 +165,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "10.png",
+                imgSrc: "10.jpg",
                 content: [
                     {
                         text: "出现一本关于电路的书，请结合之前学习知识思考"
@@ -173,7 +173,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "11.png",
+                imgSrc: "11.jpg",
                 content: [
                     {
                         text: "李明：“这博物馆咋管理的？在这里就是耽误大家时间，指不定嫌疑人早跑了。”"
@@ -193,7 +193,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "12.png",
+                imgSrc: "12.jpg",
                 content: [
                     {
                         text: "白慧和云清一同来到厕所进行查看。"
@@ -201,7 +201,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "13.png",
+                imgSrc: "13.jpg",
                 content: [
                     {
                         text: ""
@@ -209,7 +209,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "14.png",
+                imgSrc: "14.jpg",
                 content: [
                     {
                         text: ""
@@ -217,7 +217,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "15.png",
+                imgSrc: "15.jpg",
                 content: [
                     {
                         text: "断路和短路的知识点有标记重点的痕迹"
@@ -225,7 +225,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "16.png",
+                imgSrc: "16.jpg",
                 content: [
                     {
                         text: "林立、云清决定回到大厅，交换线索后一同找出嫌疑人。"
@@ -236,7 +236,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "17.png",
+                imgSrc: "17.jpg",
                 content: [
                     {
                         text: ""
@@ -244,7 +244,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "18.png",
+                imgSrc: "18.jpg",
                 content: [
                     {
                         text: "云清：“请问为什么厕所会有监控呢？”"
@@ -255,7 +255,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "19.png",
+                imgSrc: "19.jpg",
                 content: [
                     {
                         text: "经过林立和云清的努力，C展厅恢复了用电。"
@@ -269,7 +269,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "20.png",
+                imgSrc: "20.jpg",
                 content: [
                     {
                         text: "当工作人员带林立云清到达监控室时，博物馆突然断电，黑暗的恐惧向林丽云清以及游客们袭来。"
@@ -277,7 +277,7 @@ db.getCollection("game").insert([ {
                 ]
             },
             {
-                imgSrc: "21.png",
+                imgSrc: "21.jpg",
                 content: [
                     {
                         text: "“啪——”工作人员王璐打开手电筒，对着监控室兼供电室进行照明。"
@@ -341,69 +341,66 @@ db.getCollection("game").insert([ {
                 _id: 1,
                 name: "绿宝石",
                 description: "绿碧玺：深层地质中经过百般变化而凝练成的一抹绿色，深邃绿意中隐撤的神奇能量。它象征着希望、健康以及蓬勃盎然的生命力，被称作“生命之花”。",
-                imgSrc: "string"
+                imgSrc: "stone.png"
             }
         ]
     ],
     reinforce: [
         {
-            question: "string",
+            question: "如图所示，只闭合开关S1时,两灯均不亮,同时闭合开关S1和S2时,灯L1亮,灯L2不亮,电路可能出现的故障是( )",
             choice: [
-                "string",
-                "string",
-                "string",
-                "string"
-            ],
-            answer: 1,
-            explain: "string",
-            score: 20
-        },
-        {
-            question: "string",
-            choice: [
-                "string",
-                "string",
-                "string",
-                "string"
-            ],
-            answer: 3,
-            explain: "string",
-            score: 20
-        },
-        {
-            question: "string",
-            choice: [
-                "string",
-                "string",
-                "string",
-                "string"
+                "灯L1短路",
+                "灯L2断路",
+                "灯L1断路",
+                "灯L2短路"
             ],
             answer: 2,
-            explain: "string",
+            explain: "解:只闭合开关 S1时,两灯均不亮 ,说明电路某处有断路或两灯泡都被短路;当同时闭合S1和S2时,灯L2被短路,电路为灯L1的基本电路,并且灯L4亮,说明不是两灯泡同时被短路,而是断路故障,即灯L2断路。故选:B。",
             score: 20
         },
         {
-            question: "string",
+            question: "如图所示的电路中，当开关s闭合时,灯L1和L2均不亮。某同学用一根导线检查电路的故障,他将导线先并接在灯L两端,发现灯L2亮,L不亮,然后将导线并接在灯L2两端,发现两灯均不亮。由此可判断( )",
             choice: [
-                "string",
-                "string",
-                "string",
-                "string"
+                "灯L1短路",
+                "灯L1断路",
+                "灯L2短路",
+                "灯L2断路"
             ],
-            answer: 4,
-            explain: "string",
+            answer: 2,
+            explain: "解:由图知,两灯串联;闭合开关时两灯均不亮,说明电路中某处断路,或是两灯均被短路;若电路中只有灯L1短路或只有灯L2短路,则另一盖灯会发光，不符合题意,故AC错误;将导线先并接在L1两端,发现灯L2亮,灯L1不亮,说明灯L2是完好的,故D错误;然后将导线并接在灯L2两端,发现两灯均不亮,由此可知灯L1发生了断路,故B正确。故选:B。",
             score: 20
         },
         {
-            question: "string",
+            question: "在组成串联电路的实验中,连接了如图所示的电路,当开关S闭合时,灯L1、L2均不亮,某同学用一根导线并接在a、c两点时发现灯L2亮,灯L1不亮；然后将导线并接在b、d两点时发现灯L1亮,灯L2不亮。由此可以判断电路的故障是( )",
             choice: [
-                "string",
-                "string",
-                "string",
-                "string"
+                "灯L1断路",
+                "灯L2短路",
+                "开关接触不良",
+                "开关短路"
+            ],
+            answer: 3,
+            explain: "解:A、如果灯L断路,将导线并接在b.d两点时,电路仍是断路,不会出现灯L1亮、灯L2不亮的情况,故A错误;B、如果灯L2断路,将导线并接在a、c两点时,电路仍是断路,不会出现灯L2亮、灯L1不亮的情况，故B错误;C、如果开关接触不良,则用一根导线并接在a.c两点时,会出现灯L2亮、灯L1不亮的情况;然后将导线并接在b、d两点时,会出现灯L1亮、灯L2不亮的情况,故C正确;故选:C。",
+            score: 20
+        },
+        {
+            question: "在寻找“海洋之心”时，厕所处发生了什么故障将博物馆停电的？",
+            choice: [
+                "短路",
+                "断路",
+                "停电",
+                "开关失灵"
             ],
             answer: 1,
-            explain: "string",
+            explain: "解:参考游戏具体解析。",
+            score: 20
+        },
+        {
+            question: "经过这次学习，你都学会了哪些知识呢？记得市场回顾一下巩固记忆哦！",
+            choice: [
+                "好的，我会继续加油的！"
+            ],
+            answer: 1,
+            explain: "解:恭喜完成所有试题！",
             score: 20
         }
     ]
@@ -420,29 +417,37 @@ db.createCollection("knowledge");
 // ----------------------------
 db.getCollection("knowledge").insert([ {
     _id: 1,
-    title: "电路设计",
-    author: "张晓明",
-    desc: "你有想过吗？灯泡是怎么亮起来的呢？",
+    title: "简单电路设计",
+    author: "南桥几晴秋",
+    desc: "你有想过吗？灯泡是怎么亮起来的呢？开关和灯泡是怎么连接起来的呢？导线应该怎么连接才会让整个通路都正常导电？灯泡有时候会不亮，这又是怎么回事呢？来一起看看吧！",
     content: [
         {
-            text: "第一步，了解火线、零线、地线",
-            imgSrc: "http://dummyimage.com/400x400"
+            text: "(1）串联电路\r\n①定义：用电器首尾依次相连，然后接入电路中，我们说这些用电器是串联的。如图所示，L1和L2组成串联电路。",
+            imgSrc: "klgdetail1.jpg"
         },
         {
-            text: "第二步，设计电路",
-            imgSrc: "http://dummyimage.com/400x400"
+            text: "②特点\r\n·电流只有一条路径，无干路、支路之分。\r\n·电流依次通过每一个用电器，各用电器的工作互相影响，一个用电器因断路停止工作时，所有用电器都不能工作。\r\n·开关与用电器是串联的，一只开关控制所有用电器。★串联电路电流只有一条路径，且各用电器相互影响。",
+            imgSrc: "klgdetail2.jpg"
         },
         {
-            text: "第三步，连接电路和灯泡",
-            imgSrc: "http://dummyimage.com/400x400"
+            text: "(2）并联电路\r\n\r\n①定义：用电器的两端分别连在一起，然后接到电路中，我们说这些用电器是并联的。如图所示，L 1和L2组成并联电路。",
+            imgSrc: "klgdetail3.jpg"
         },
         {
-            text: "第四步，通电",
-            imgSrc: "http://dummyimage.com/400x400"
+            text: "②特点\r\n·电流有两条或两条以上的路径，有干路和支路之分。\r\n·干路电流在\"节点\"处分成两条或多条支路电流，每一支路都与电源形成一条通路，各支路用电器的工作互不影响。当某一支路断路时，其他支路仍可为通路。\r\n·干路上的开关控制整个电路的用电器，支路上的开关只控制本支路上的用电器。★并联电路电流有多条路径，且各用电器互不影响。",
+            imgSrc: "klgdetail4.jpg"
         },
         {
-            text: "第五步，打开开关",
-            imgSrc: "http://dummyimage.com/400x400"
+            text: "(3)  电路的三种状态\r\n\r\n1.通路\r\n·正常接通的电路，即用电器能够工作的电路。",
+            imgSrc: "klgdetail5.jpg"
+        },
+        {
+            text: "2.断路（开路）\r\n·开关未闭合或电线断开、接头松脱致使线路在某处断开的电路。",
+            imgSrc: "klgdetail6.jpg"
+        },
+        {
+            text: "3.短路\r\n·电源短路：导线不经过用电器直接跟电源两极连接的电路。\r\n·用电器短路：导线跟某一个用电器的两端直接连接的电路；电流不经过该用电器。\r\n可通过开关控制该用电器工作。",
+            imgSrc: "klgdetail7.jpg"
         }
     ],
     videoSrc: "abc"

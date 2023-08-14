@@ -63,10 +63,3 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: true
-
-# 静态资源路径
-static-resource:
-  # 本地保存路径
-  local-path: file:static/
-  # 虚拟映射路径
-  map-path: /static/**
