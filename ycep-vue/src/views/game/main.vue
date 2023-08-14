@@ -273,7 +273,7 @@ export default defineComponent({
       background: "default.jpg",
       game: {
         gameId: 1,
-        imgSrc: "/src/assets/images/demo/game1.jpg",
+        imgSrc: "/src/assets/images/demo/game1.png",
         kindName: "",
         title: "电路排查",
         author: "da",

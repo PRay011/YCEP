@@ -161,7 +161,7 @@ export default defineComponent({
         author: "冷雪兮",
         content: [
           {
-            imgSrc: "/src/assets/images/demo/game1.jpg",
+            imgSrc: "/src/assets/images/demo/game1.png",
             text: "？🍭 单元测试（unit testing），是指对软🍭件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
           },
         ],

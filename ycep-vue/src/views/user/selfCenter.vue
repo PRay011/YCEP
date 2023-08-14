@@ -455,7 +455,7 @@ export default defineComponent({
           author: "冷雪兮",
           game: {
             id: 1,
-            imgSrc: "/src/assets/images/demo/game1.jpg",
+            imgSrc: "/src/assets/images/demo/game1.png",
             title: "法庭疑案",
             kind: 2,
             kindName: "材料",
@@ -472,7 +472,7 @@ export default defineComponent({
           author: "冷雪兮",
           game: {
             id: 1,
-            imgSrc: "/src/assets/images/demo/game1.jpg",
+            imgSrc: "/src/assets/images/demo/game1.png",
             title: "法庭疑案",
             kind: 2,
             kindName: "材料",
@@ -489,7 +489,7 @@ export default defineComponent({
           author: "冷雪兮",
           game: {
             id: 1,
-            imgSrc: "/src/assets/images/demo/game1.jpg",
+            imgSrc: "/src/assets/images/demo/game1.png",
             title: "法庭疑案",
             kind: 2,
             kindName: "材料",
@@ -506,7 +506,7 @@ export default defineComponent({
           author: "冷雪兮",
           game: {
             id: 1,
-            imgSrc: "/src/assets/images/demo/game1.jpg",
+            imgSrc: "/src/assets/images/demo/game1.png",
             title: "法庭疑案",
             kind: 2,
             kindName: "材料",
