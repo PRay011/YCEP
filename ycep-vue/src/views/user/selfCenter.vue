@@ -102,7 +102,7 @@
             >
               <div class="knowledge">
                 <div class="image">
-                  <img :src="item.imgSrc" alt="知识点图片" />
+                  <img :src="imgHost + item.imgSrc" alt="知识点图片" />
                 </div>
                 <div class="info">
                   <p class="title-tag">{{ item.title }}</p>
@@ -114,7 +114,7 @@
               <div class="game">
                 <div class="card" @click="klgDetailBtnClick(item.id)">
                   <div class="card-image">
-                    <img :src="item.game.imgSrc" alt="背景图片" />
+                    <img :src="imgHost + item.game.imgSrc" alt="背景图片" />
                   </div>
                   <div class="card-details">
                     <p class="text-title">{{ item.game.title }}</p>
@@ -448,14 +448,31 @@ export default defineComponent({
       knowledgeInfoList: [
         {
           id: 1,
-          imgSrc: "/src/assets/images/灯泡.jpg",
+          imgSrc: "KnowledgeTest.jpg",
           title: "Spring Boot 单元测试",
           content:
             "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
           author: "冷雪兮",
           game: {
             id: 1,
-            imgSrc: "/src/assets/images/demo/game1.png",
+            imgSrc: "game1.png",
+            title: "法庭疑案",
+            kind: 2,
+            kindName: "材料",
+            body: "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
+            author: "机智的皇冠",
+          },
+        },
+        {
+          id: 2,
+          imgSrc: "knowledgeTest.jpg",
+          title: "Spring Boot 单元测试",
+          content:
+            "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
+          author: "冷雪兮",
+          game: {
+            id: 1,
+            imgSrc: "game2.png",
             title: "法庭疑案",
             kind: 2,
             kindName: "材料",
@@ -465,14 +482,14 @@ export default defineComponent({
         },
         {
           id: 1,
-          imgSrc: "/src/assets/images/灯泡.jpg",
+          imgSrc: "knowledgeTest.jpg",
           title: "Spring Boot 单元测试",
           content:
             "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
           author: "冷雪兮",
           game: {
             id: 1,
-            imgSrc: "/src/assets/images/demo/game1.png",
+            imgSrc: "game3.jpg",
             title: "法庭疑案",
             kind: 2,
             kindName: "材料",
@@ -482,31 +499,14 @@ export default defineComponent({
         },
         {
           id: 1,
-          imgSrc: "/src/assets/images/灯泡.jpg",
+          imgSrc: "knowledgeTest.jpg",
           title: "Spring Boot 单元测试",
           content:
             "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
           author: "冷雪兮",
           game: {
             id: 1,
-            imgSrc: "/src/assets/images/demo/game1.png",
-            title: "法庭疑案",
-            kind: 2,
-            kindName: "材料",
-            body: "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
-            author: "机智的皇冠",
-          },
-        },
-        {
-          id: 1,
-          imgSrc: "/src/assets/images/灯泡.jpg",
-          title: "Spring Boot 单元测试",
-          content:
-            "Spring Boot 中进行单元测试是一个常见的做法，可以帮助你验证应用程序的各个组件是否按预期工作。所以我们有必要去学习一番！一、什么是单元测试？🍭 单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证的过程就叫单元测试。单元测试是开发者编写的一小段代码，用于检验被测代码的⼀个很小的、很明确的（代码）功能是否正确。执行单元测试就是为了证明某段代码的执行结果是否符合我们的预期。如果测试结果符合我们的预期，称之为测试通过，否则就是测试未通过（或者叫测试失败）。",
-          author: "冷雪兮",
-          game: {
-            id: 1,
-            imgSrc: "/src/assets/images/demo/game1.png",
+            imgSrc: "game4.jpg",
             title: "法庭疑案",
             kind: 2,
             kindName: "材料",
@@ -668,37 +668,7 @@ export default defineComponent({
         },
         {
           id: 6,
-          time: "2023/8/6",
-          kind: "物理",
-          item: "电路",
-          title: "一般家庭电路的连接分析",
-          author: "蛄蛹者",
-          address: "优胜北路第三小学，湖南 长沙，410000",
-          brief:
-            "针对传统的无线传感器网络电源电路在电流能量的存储与分配方面存在的不足，提出了无线传感器网络电源电路优化改进方法。首先，构建电源电路优化配置模型，获取网络节点约束平衡功率指标；其次，结合网络电源开关种类，设计网络电源电路拓扑结构；再次，对传感器中所有的电源网络进行标号处理，采用双锂电池供电，设计传感器网络节点管理电路；最后，根据脉冲宽度与脉冲频率的特点，共同优化改进开关电源的调制模式。",
-          keywords: ["无线传感器", "网络", "电源电路", "电源效率"],
-          content: [
-            {
-              chapter: "一、项目背景",
-              text: "目前，越来越多的行业应用无线传感器网络技术，使网络电源电路的节点功能不断增加。无线传感器网络电源电路的工作原理包括电源管理系统中能量流动原理、功率跟踪原理及充电原理。电源电路中的能量流动控制主要通过管理开关元件的导通与关断功能，实现能量流动方向控制与引导的目标。在电路管理中，根据无线传感器网络电源电路能量流动类型的不同，分为能量流动负载模型和电源模型。在电源管理电路中包括两种负载，分别为电池和电路节点电路的输出能量在为铅酸电池充电的同时，还能为超级电容充电，保证了无线传感器负载电路的稳定运行。",
-            },
-            {
-              chapter: "二、设计网络电源电路拓扑结构",
-              text: "在开关电源技术快速发展的趋势下，网络电源开关的种类越来越多，电路的拓扑结构也越来越复杂。采用 Buck-Boost 拓扑结构，再结合隔离变压器的调节控制作用，生成电源电路中常用的变换器。开关稳压电源与开关降压电源串联，将电源电压进行有功转换，控制晶体管的导通与关断时间，从而调节输出电压。该电路用于无线传感器网络的电源电路，其中包括电容和负载。",
-            },
-            {
-              chapter: "三、仿真实验",
-              text: "本次实验选择具有无线接入功能的网关抓包工具与具有无线传感器网络节点的设备，在单片机开发的 C 语言集成开发环境下，硬件配置为 3.20GHz的 CPU 和 4.00 GB 内存的 PC 机，软件配置为Windows7SP1 操作系统，运行环境为 Visual Stu‐dio2010。利用NS2网络仿真软件进行无线传感器网络仿真，实现无线传感器自动生成与可视化操作。实验采用集成电路充电管理芯片，型号为ML2496，具有铅酸电池充电管理的功能。",
-            },
-            {
-              chapter: "四、结语",
-              text: "本文提出的无线传感器网络电源电路优化改进方法，能够提供稳定的电源电压输出，其设计指标满足无线传感器基本性能指标要求。经过实验证明，本文设计的优化改进方法整体运行性能较好，电源的运行效率更加具有优势。但是，本文在无线传感器网络稳压模块方面的研究仍然存在一定的不足，网络稳压模块仅可接收 3 种传感器类型，在未来的研究中，应当进一步改进。",
-            },
-          ],
-        },
-        {
-          id: 7,
-          time: "2023/8/6",
+          time: "2023/8/7",
           kind: "物理",
           item: "电路",
           title: "一般家庭电路的连接分析",

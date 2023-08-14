@@ -14,6 +14,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(VueAxios, axios);
 app.use(router)
 app.config.globalProperties.$imgHost = 'https://image.tdsmy.cn/ycep/'
+// app.config.globalProperties.$imgHost = 'http://localhost:8081/static/'
 
 app.mount('#app')
 
