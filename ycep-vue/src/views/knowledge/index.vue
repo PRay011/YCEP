@@ -344,7 +344,7 @@ export default defineComponent({
       //一页的个数
       pageSize: 5,
       imageList: ["item1.jpg", "item2.jpg", "item3.jpg"],
-      imageList2: ["game1.jpg", "game2.jpg", "game3.jpg"],
+      imageList2: ["game1.png", "game2.png", "game3.png"],
       knowledgeList: [
         {
           knowledgeId: 1,
@@ -358,7 +358,7 @@ export default defineComponent({
       gameList: [
         {
           id: 1,
-          imgSrc: "/src/assets/images/demo/game1.jpg",
+          imgSrc: "/src/assets/images/demo/game1.png",
           title: "法庭疑案",
           kind: 2,
           kindName: "材料",
@@ -368,7 +368,7 @@ export default defineComponent({
         },
         {
           id: 2,
-          imgSrc: "/src/assets/images/demo/game2.jpg",
+          imgSrc: "/src/assets/images/demo/game2.png",
           title: "电路排查",
           kind: 3,
           kindName: "物理",
@@ -378,7 +378,7 @@ export default defineComponent({
         },
         {
           id: 3,
-          imgSrc: "/src/assets/images/demo/game3.jpg",
+          imgSrc: "/src/assets/images/demo/game3.png",
           title: "三态变化",
           kind: 4,
           kindName: "化学",
@@ -388,7 +388,7 @@ export default defineComponent({
         },
         {
           id: 4,
-          imgSrc: "/src/assets/images/demo/game1.jpg",
+          imgSrc: "/src/assets/images/demo/game1.png",
           title: "法庭疑案",
           kind: 2,
           kindName: "材料",
@@ -398,7 +398,7 @@ export default defineComponent({
         },
         {
           id: 5,
-          imgSrc: "/src/assets/images/demo/game2.jpg",
+          imgSrc: "/src/assets/images/demo/game2.png",
           title: "电路排查",
           kind: 3,
           kindName: "物理",
