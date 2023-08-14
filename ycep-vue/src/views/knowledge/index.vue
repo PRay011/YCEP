@@ -1,14 +1,14 @@
 <template>
   <!--  顶部导航栏-->
-  <Top />
+  <Top/>
 
   <div class="container">
     <div class="main">
       <!-- 顶部轮播图 -->
       <div class="title-block">
-        <el-carousel height="500px" :interval="10000">
+        <el-carousel :interval="10000" height="500px">
           <el-carousel-item v-for="item in imageList" :key="item">
-            <img :src="imgHost + item" alt="轮播图" />
+            <img :src="imgHost + item" alt="轮播图"/>
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -16,37 +16,37 @@
       <div class="tags">
         <div class="tag-item">
           <el-icon size="40px">
-            <Cpu />
+            <Cpu/>
           </el-icon>
           <p class="tag-text">AI协助</p>
         </div>
         <div class="tag-item">
           <el-icon size="40px">
-            <VideoPlay />
+            <VideoPlay/>
           </el-icon>
           <p class="tag-text">配套游戏</p>
         </div>
         <div class="tag-item">
           <el-icon size="40px">
-            <ChromeFilled />
+            <ChromeFilled/>
           </el-icon>
           <p class="tag-text">支持联机</p>
         </div>
         <div class="tag-item">
           <el-icon size="40px">
-            <DocumentChecked />
+            <DocumentChecked/>
           </el-icon>
           <p class="tag-text">巩固练习</p>
         </div>
         <div class="tag-item">
           <el-icon size="40px">
-            <Document />
+            <Document/>
           </el-icon>
           <p class="tag-text">生成论文</p>
         </div>
         <div class="tag-item">
           <el-icon size="40px">
-            <DataAnalysis />
+            <DataAnalysis/>
           </el-icon>
           <p class="tag-text">数据可视</p>
         </div>
@@ -66,8 +66,8 @@
               <div class="item1" @click="klgDetailBtnClick(1)">
                 <div class="image">
                   <img
-                    src="https://images.pexels.com/photos/45072/pexels-photo-45072.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="知识点图片"
+                      alt="知识点图片"
+                      src="https://images.pexels.com/photos/45072/pexels-photo-45072.jpeg?auto=compress&cs=tinysrgb&w=800"
                   />
                 </div>
                 <div class="cover">
@@ -83,8 +83,8 @@
               <div class="item1" @click="klgDetailBtnClick(6)">
                 <div class="image">
                   <img
-                    src="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="知识点图片"
+                      alt="知识点图片"
+                      src="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=800"
                   />
                 </div>
                 <div class="cover">
@@ -100,13 +100,13 @@
             </div>
             <template class="block-cards">
               <div
-                class="card"
-                v-for="item in knowledgeList"
-                @click="klgDetailBtnClick(item.knowledgeId)"
-                :key="item.knowledgeId"
+                  v-for="item in knowledgeList"
+                  :key="item.knowledgeId"
+                  class="card"
+                  @click="klgDetailBtnClick(item.knowledgeId)"
               >
                 <div class="card-image">
-                  <img :src="imgHost + item.imgSrc" alt="背景图片" />
+                  <img :src="imgHost + item.imgSrc" alt="背景图片"/>
                 </div>
                 <div class="card-details">
                   <p class="text-title">{{ item.title }}</p>
@@ -128,22 +128,22 @@
             </div>
             <div class="block-main" style="height: 330px">
               <div class="item2">
-                <el-carousel height="300px" :interval="10000">
+                <el-carousel :interval="10000" height="300px">
                   <el-carousel-item v-for="item in imageList2" :key="item">
-                    <img :src="imgHost + item" alt="轮播图" />
+                    <img :src="imgHost + item" alt="轮播图"/>
                   </el-carousel-item>
                 </el-carousel>
               </div>
             </div>
             <template class="block-cards">
               <div
-                class="card"
-                v-for="item in gameList"
-                :key="item.id"
-                @click="klgDetailBtnClick(item.id)"
+                  v-for="item in gameList"
+                  :key="item.id"
+                  class="card"
+                  @click="klgDetailBtnClick(item.id)"
               >
                 <div class="card-image">
-                  <img :src="imgHost + item.imgSrc" alt="背景图片" />
+                  <img :src="imgHost + item.imgSrc" alt="背景图片"/>
                 </div>
                 <div class="card-details">
                   <p class="text-title">{{ item.title }}</p>
@@ -159,26 +159,26 @@
 
       <div class="interest">
         <el-dialog
-          v-model="chooseInterestVisible"
-          title="选择你感兴趣的知识点"
-          width="32%"
-          center
-          top="130px"
+            v-model="chooseInterestVisible"
+            center
+            title="选择你感兴趣的知识点"
+            top="130px"
+            width="32%"
         >
           <div class="content">
             <div
-              class="kind"
-              v-for="(kind, kindIndex) in kindItemList"
-              :key="kindIndex"
+                v-for="(kind, kindIndex) in kindItemList"
+                :key="kindIndex"
+                class="kind"
             >
               <p class="kind-name">{{ kind.kindName }}</p>
               <div class="item">
                 <p
-                  class="item-name"
-                  v-for="(item, itemIndex) in kind.items"
-                  :key="itemIndex"
-                  :class="item.isSelected === true ? 'selected' : ''"
-                  @click="interestItemClick(kindIndex, itemIndex)"
+                    v-for="(item, itemIndex) in kind.items"
+                    :key="itemIndex"
+                    :class="item.isSelected === true ? 'selected' : ''"
+                    class="item-name"
+                    @click="interestItemClick(kindIndex, itemIndex)"
                 >
                   {{ item.itemName }}
                 </p>
@@ -200,18 +200,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance } from "vue";
+import {defineComponent, getCurrentInstance} from "vue";
 import Top from "../../components/top.vue";
-import { getKnowledge, getGame } from "../../api/knowledge/index";
-import { getCategory } from "../../api/knowledge/kind";
-import { postInterest } from "../../api/knowledge/index";
+import {getGame, getKnowledge, postInterest} from "../../api/knowledge/index";
+import {getCategory} from "../../api/knowledge/kind";
 
 export default defineComponent({
   name: "index",
   data() {
     return {
       imgHost:
-        getCurrentInstance()?.appContext.config.globalProperties.$imgHost,
+      getCurrentInstance()?.appContext.config.globalProperties.$imgHost,
       //用户是否已选择感兴趣的知识点
       isSelectedInterest: 0,
       //选择感兴趣的知识点
@@ -344,7 +343,7 @@ export default defineComponent({
       //一页的个数
       pageSize: 5,
       imageList: ["item1.jpg", "item2.jpg", "item3.jpg"],
-      imageList2: ["game1.png", "game2.png", "game3.png"],
+      imageList2: ["game1.png", "game2.png", "game3.jpg"],
       knowledgeList: [
         {
           knowledgeId: 1,
@@ -363,7 +362,7 @@ export default defineComponent({
           kind: 2,
           kindName: "材料",
           description:
-            "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
+              "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
           author: "机智的皇冠",
         },
         {
@@ -373,7 +372,7 @@ export default defineComponent({
           kind: 3,
           kindName: "物理",
           description:
-            "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
+              "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
           author: "看手机东方红",
         },
         {
@@ -383,7 +382,7 @@ export default defineComponent({
           kind: 4,
           kindName: "化学",
           description:
-            "空气里究竟都有些什么状态的物质呢？小白走在路上发出了这样的疑问。",
+              "空气里究竟都有些什么状态的物质呢？小白走在路上发出了这样的疑问。",
           author: "梵蒂冈",
         },
         {
@@ -393,7 +392,7 @@ export default defineComponent({
           kind: 2,
           kindName: "材料",
           description:
-            "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
+              "放学回家的小军路上做了一件事，竟然犯了法！法官有点发愁！",
           author: "机智的皇冠",
         },
         {
@@ -403,13 +402,13 @@ export default defineComponent({
           kind: 3,
           kindName: "物理",
           description:
-            "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
+              "莉莉在正常工作，办公室的台灯却突然爆炸了！快来帮帮她吧！",
           author: "看手机东方红",
         },
       ],
     };
   },
-  components: { Top },
+  components: {Top},
   mounted() {
     this.ready();
   },
@@ -434,26 +433,26 @@ export default defineComponent({
     showKnowledges() {
       let that = this;
       getKnowledge()
-        .then((res: any) => {
-          console.log(res);
-          that.pageNum++;
-          that.knowledgeList = res.data;
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log(res);
+            that.pageNum++;
+            that.knowledgeList = res.data;
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
 
     showGames() {
       let that = this;
       getGame()
-        .then((res: any) => {
-          console.log(res);
-          that.gameList = res.data;
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log(res);
+            that.gameList = res.data;
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
 
     postInterest() {
@@ -466,33 +465,33 @@ export default defineComponent({
         });
       });
       postInterest(this.interest)
-        .then((res: any) => {
-          console.log("postInterest");
-          this.chooseInterestVisible = false;
-          this.showKnowledges();
-          this.showGames();
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log("postInterest");
+            this.chooseInterestVisible = false;
+            this.showKnowledges();
+            this.showGames();
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
 
     category() {
       let that = this;
       getCategory()
-        .then((res: any) => {
-          console.log("getInterest");
-          console.log(res);
-          that.kindItemList = res.data;
-          that.kindItemList.forEach((kind: any, i: any) => {
-            kind.items.forEach((item: any, i: any) => {
-              item.isSelected = false;
+          .then((res: any) => {
+            console.log("getInterest");
+            console.log(res);
+            that.kindItemList = res.data;
+            that.kindItemList.forEach((kind: any, i: any) => {
+              kind.items.forEach((item: any, i: any) => {
+                item.isSelected = false;
+              });
             });
+          })
+          .catch((err: any) => {
+            console.log(err);
           });
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
     },
 
     interestItemClick(kindIndex: number, itemIndex: number) {
