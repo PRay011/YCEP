@@ -4,7 +4,7 @@
       <div
         class="header-item"
         @click="titleItemClick(0)"
-        style="width: 400px; text-align: left"
+        style="width: 300px; text-align: left"
       >
         <p>YCEP网站</p>
       </div>
@@ -15,7 +15,7 @@
 
       <div
         class="header-item item1"
-        :class="currentItem === kind.kindId?'selected':''"
+        :class="currentItem === kind.kindId ? 'selected' : ''"
         @click="titleItemClick(kind.kindId)"
         v-for="kind in kinds"
         :key="kind.kindId"
@@ -35,14 +35,23 @@
           alt="用户头像"
           @click="selfCenterClick"
           class="self"
+          style="margin-left: 100px"
           src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2022%2F1110%2F0be1778cj00rl4jow0010c000hs00hsg.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
         ></el-avatar>
         <div class="self" @click="selfCenterClick">
-          <p class="username" style="font-family: coca_cola, serif">{{ user.username }}</p>
+          <p class="username" style="font-family: coca_cola, serif">
+            {{ user.username }}
+          </p>
         </div>
         <div class="header-item" @click="logout">
           <p>退出账号</p>
         </div>
+        <button class="learn-more" @click="toThesis">
+          <span class="circle" aria-hidden="true">
+            <span class="icon arrow"></span>
+          </span>
+          <span class="button-text">生成论文</span>
+        </button>
       </template>
       <template v-else>
         <div class="header-item login">
@@ -171,6 +180,10 @@ export default {
           console.log(err);
         });
     },
+    //生成论文
+    toThesis(){
+      this.$router.push("/user/thesis");
+    }
   },
 };
 </script>
@@ -213,8 +226,9 @@ $font_color_hover: #a2a2a2;
       display: flex;
       flex-direction: column;
       cursor: pointer;
-      &.selected{
-        .dropdown .el-dropdown-link,.dropdown .el-dropdown-link p,{
+      &.selected {
+        .dropdown .el-dropdown-link,
+        .dropdown .el-dropdown-link p {
           color: $basic_color;
           font-weight: 550;
         }
@@ -323,5 +337,94 @@ $font_color_hover: #a2a2a2;
       }
     }
   }
+}
+
+button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+button.learn-more {
+  left: 100px;
+  width: 12rem;
+  height: auto;
+}
+
+button.learn-more .circle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #282936;
+  border-radius: 1.625rem;
+}
+
+button.learn-more .circle .icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+}
+
+button.learn-more .circle .icon.arrow {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  left: 0.625rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: none;
+}
+
+button.learn-more .circle .icon.arrow::before {
+  position: absolute;
+  content: "";
+  top: -0.29rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+}
+
+button.learn-more .button-text {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 0 1.85rem;
+  color: #282936;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+button:hover .circle {
+  width: 100%;
+}
+
+button:hover .circle .icon.arrow {
+  background: #fff;
+  transform: translate(1rem, 0);
+}
+
+button:hover .button-text {
+  color: #fff;
 }
 </style>

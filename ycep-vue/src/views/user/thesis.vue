@@ -355,43 +355,27 @@ export default defineComponent({
         content: [
           //一、
           "中小学生的综合素质教育需要注重培养学生的创新能力、问题解决能力和逻辑思维。电路教育作为实际应用领域，能够激发学生的兴趣。然而，传统的电路教育方式难以吸引学生。结合游戏设计，可以创造出一个更具趣味性和参与感的学习环境。\n" +
-          "\n" +
-          "\"电路侦探\" 游戏的成功设计为中小学生的电路教育提供了一种新的途径。类似的方法也可以应用于其他学科，提高学生的学习积极性和效果。未来，可以进一步优化游戏设计，开发更多关卡和题目，扩展游戏的教育价值。",
+            "\n" +
+            '"电路侦探" 游戏的成功设计为中小学生的电路教育提供了一种新的途径。类似的方法也可以应用于其他学科，提高学生的学习积极性和效果。未来，可以进一步优化游戏设计，开发更多关卡和题目，扩展游戏的教育价值。',
           //二、
           "游戏设计灵感来自于经典的侦探故事和电路故障排查过程。设计的目标是将学习与娱乐相结合，通过解决电路故障问题，锻炼学生的逻辑思维和判断能力。\n" +
-          "\n" +
-          "我们进行了一系列评估，包括问卷调查、知识测试和学生反馈，以评估创新方法在电路教育中的实际效果。结果表明，学生对于创新方法的学习体验更为积极，并且在知识掌握方面表现更优异。",
+            "\n" +
+            "我们进行了一系列评估，包括问卷调查、知识测试和学生反馈，以评估创新方法在电路教育中的实际效果。结果表明，学生对于创新方法的学习体验更为积极，并且在知识掌握方面表现更优异。",
           //三、
           "我们设计了一组实验，对比了传统课堂教学和创新方法的教育效果。结果显示，采用创新方法的学生在电路知识的理解和问题解决能力方面表现出更明显的提升。\n" +
-          "\n" +
-          "创新方法为中小学生电路教育带来了新的可能性。本研究的实验和评估结果表明，实际案例分析和互动式学习等方法能够有效地提升学生的学习兴趣和问题解决能力，为电路教育注入了新的活力。",
+            "\n" +
+            "创新方法为中小学生电路教育带来了新的可能性。本研究的实验和评估结果表明，实际案例分析和互动式学习等方法能够有效地提升学生的学习兴趣和问题解决能力，为电路教育注入了新的活力。",
           //四、
           "本研究提出了以下创新方法，以改善中小学生的电路教育：\n" +
-          "\n" +
-          "实际案例分析： 在课堂中引入实际电路故障案例，让学生从实际问题入手，深入理解电路原理和故障排除方法。\n" +
-          "\n" +
-          "互动式学习： 通过小组合作、讨论和实验，在学生之间创造积极互动的学习氛围，培养他们的团队合作和沟通能力。",
+            "\n" +
+            "实际案例分析： 在课堂中引入实际电路故障案例，让学生从实际问题入手，深入理解电路原理和故障排除方法。\n" +
+            "\n" +
+            "互动式学习： 通过小组合作、讨论和实验，在学生之间创造积极互动的学习氛围，培养他们的团队合作和沟通能力。",
         ],
       },
       content: {},
       confirmDialogVisible: false,
       conversations: [
-        // {
-        //   user: "创意来源怎么写？",
-        //   ai: "对于创意来源，您可以先从自身的兴趣和所学专业的前沿领域入手。",
-        // },
-        // {
-        //   user: "研究背景是什么？",
-        //   ai: "在研究背景中，可以回顾相关文献，阐述与您研究课题相关的研究现状。",
-        // },
-        // {
-        //   user: "创新点怎么选择？",
-        //   ai: "创新点是您的论文独特之处，可以在已有研究基础上指出自己的创新思路和方法。",
-        // },
-        // {
-        //   user: "方案设计指的是什么？",
-        //   ai: "方案设计部分需要详细说明您的研究方法和实验设计。",
-        // },
         {
           user: "摘要和关键词是？",
           ai: "在摘要与关键词中，简明扼要地总结您的论文内容，并列出关键词方便检索。",
@@ -401,7 +385,7 @@ export default defineComponent({
       userMessage: "",
       responseMessage: "",
       //开启会话
-      sessionPart: "创意来源",
+      sessionPart: "研究背景",
       inSession: false,
       sessionKey: "",
     };
@@ -425,22 +409,24 @@ export default defineComponent({
       this.currentNav = index;
       switch (index) {
         case "2":
-          this.sessionPart = "创意来源";
-          break;
-        case "3":
           this.sessionPart = "研究背景";
           break;
-        case "4":
-          this.sessionPart = "创新点";
-          break;
-        case "5":
-          this.sessionPart = "方案设计";
-          break;
-        default:
+        case "3":
           this.sessionPart = "创意来源";
           break;
+        case "4":
+          this.sessionPart = "方案设计";
+          break;
+        case "5":
+          this.sessionPart = "创新点";
+          break;
+        default:
+          this.sessionPart = "研究背景";
+          break;
       }
-      console.log(this.sessionPart);
+      if (this.inSession) {
+        this.otherPart();
+      }
     },
     //获取论文框架
     showBasicThesis() {
@@ -510,17 +496,16 @@ export default defineComponent({
       let that = this;
       let data = {
         theme: this.thesis.title,
-        part: "创意来源",
+        part: this.sessionPart,
       };
       createSession(data)
         .then((res: any) => {
           console.log("create");
-          console.log(res);
           that.sessionKey = res.data;
           that.inSession = true;
-          if (that.inSession) {
-            that.chatAI(that.userMessage);
-          }
+          // if (that.inSession) {
+          //   that.chatAI(that.userMessage);
+          // }
         })
         .catch((err: any) => {
           console.log(err);
@@ -538,6 +523,8 @@ export default defineComponent({
           console.log("chat");
           console.log(res);
           let aiResponse = res.msg;
+          console.log(that.conversations);
+          console.log(this.conversationIndex);
           this.conversations[this.conversationIndex++].ai = aiResponse;
           this.userMessage = "";
           //接收ai的回应
@@ -561,13 +548,24 @@ export default defineComponent({
           });
       }
     },
-
+    otherPart() {
+      let that = this;
+      deleteSession(that.sessionKey)
+        .then((res: any) => {
+          console.log("otherPart");
+          this.inSession = false;
+          that.create();
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    },
     close(next: any) {
       let that = this;
       deleteSession(that.sessionKey)
         .then((res: any) => {
           console.log("delete");
-          this.conversations = [];
+          that.conversations = [];
           next();
         })
         .catch((err: any) => {
@@ -575,6 +573,7 @@ export default defineComponent({
         });
     },
     sendMessage() {
+      let that = this;
       console.log(this.userMessage);
       this.conversations.push({
         user: this.userMessage,
@@ -586,7 +585,13 @@ export default defineComponent({
         this.chatAI(this.userMessage);
       } else {
         //会话未开启
-        this.create();
+        let start = new Promise(function (resolve, reject) {
+          that.create();
+          resolve('会话开启');
+        });
+        start.then(function () {
+          that.chatAI(that.userMessage);
+        });
       }
     },
     //回到试题页面
