@@ -10,16 +10,16 @@
   }
 }
 
-@mixin main-button{
+@mixin main-button {
   margin-right: 20px;
-  width:100px;
-  height:30px;
+  width: 100px;
+  height: 30px;
   border-radius: 10px;
   border: none;
   color: #ffffff;
   background-color: $basic_color;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: $basic_color_hover;
   }
 }
@@ -32,7 +32,7 @@
 
   .left {
     width: 23%;
-    height:950px;
+    height: 950px;
     background-color: #ffffff;
 
     .self-card {
@@ -201,7 +201,7 @@
         }
       }
 
-      .pagination{
+      .pagination {
         margin-top: 10px;
         margin-left: 70%;
       }
@@ -351,7 +351,8 @@
         .content {
           display: flex;
           flex-wrap: wrap;
-          .item{
+
+          .item {
             margin-left: 10px;
             margin-top: 50px;
             margin-right: 40px;
@@ -450,56 +451,65 @@
           }
         }
       }
-      &.page3{
-        .title2{
-          margin-top:20px;
+
+      &.page3 {
+        .title2 {
+          margin-top: 20px;
           margin-left: 20px;
         }
-        .el-form{
-          margin-top:30px;
+
+        .el-form {
+          margin-top: 30px;
           margin-left: 150px;
-          width:80%;
-          .el-form-item{
-            .el-input{
+          width: 80%;
+
+          .el-form-item {
+            .el-input {
               //width: 500px;
             }
           }
-          .el-button{
+
+          .el-button {
             width: 500px;
             margin-left: 80px;
           }
         }
-        .interest{
 
-          .kind{
+        .interest {
+
+          .kind {
             display: flex;
             margin: 20px auto 0 180px;
             width: 500px;
             height: auto;
 
-            .kind-name{
+            .kind-name {
               width: 50px;
               margin-top: 10px;
             }
-            .item{
-              display:flex;
+
+            .item {
+              display: flex;
               flex-wrap: wrap;
+
               .item-name {
-                width:80px;
-                height:30px;
+                width: 80px;
+                height: 30px;
                 line-height: 28px;
                 text-align: center;
                 border: #e2e2e2 1px solid;
-                border-radius:5px;
+                border-radius: 5px;
                 cursor: pointer;
                 margin-right: 10px;
                 margin-top: 7px;
+
                 &:active {
                   background-color: $basic_color;
                   color: #ffffff;
                   font-weight: 540;
                 }
               }
+
               .item-name.selected {
                 background-color: $basic_color;
                 color: #ffffff;
@@ -507,16 +517,19 @@
               }
             }
           }
-          .el-button{
+
+          .el-button {
             width: 500px;
             margin-top: 20px;
             margin-left: 230px;
           }
         }
       }
+
       &.thesis {
-        .el-scrollbar{
+        .el-scrollbar {
           text-align: center;
+
           .paper-content {
             margin: 20px auto;
             display: flex;
@@ -525,52 +538,64 @@
             width: 100%;
             padding: 30px;
             color: #222226;
-            hr{
+
+            hr {
               width: 100%;
             }
+
             //background-color: #a1a1a1;
-            .block1{
-              width:100%;
-              height:40px;
+            .block1 {
+              width: 100%;
+              height: 40px;
               display: flex;
               justify-content: space-between;
-              .text1{
-                font-size:18px;
-                color:#a1a1a1;
+
+              .text1 {
+                font-size: 18px;
+                color: #a1a1a1;
               }
-              .text2{
+
+              .text2 {
                 font-weight: 550;
                 font-size: 17px;
                 color: #696969;
               }
             }
-            .block2{
-              width:100%;
-              .text1{
+
+            .block2 {
+              width: 100%;
+
+              .text1 {
                 line-height: 60px;
                 font-size: 24px;
                 font-weight: 600;
               }
-              .text2{
+
+              .text2 {
                 font-family: "楷体", sans-serif;
                 font-size: 20px;
                 line-height: 50px;
               }
-              .text3{
+
+              .text3 {
                 font-size: 16px;
                 font-family: "华文楷体", sans-serif;
               }
             }
-            .block3{
+
+            .block3 {
               text-align: left;
-              .text1{
+
+              .text1 {
                 font-weight: 550;
                 margin-top: 10px;
               }
             }
-            .block4{
+
+            .block4 {
               text-align: left;
-              .text1{
+
+              .text1 {
                 font-size: 18px;
                 height: 50px;
                 line-height: 50px;
@@ -579,15 +604,18 @@
             }
           }
         }
-        .thesisTop{
+
+        .thesisTop {
           width: 95%;
           margin: 0 auto;
           padding-bottom: 20px;
           display: flex;
           justify-content: space-between;
-          .btn-container{
+
+          .btn-container {
             display: flex;
             justify-content: right;
+
             button {
               @include main-button;
               margin: 0;
