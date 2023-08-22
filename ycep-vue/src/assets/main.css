@@ -1,2 +1,8 @@
 @import './base.css';
 /*全局应用样式*/
+/*引导动画样式 因为intro.js是全局引用的，只能在这里修改样式*/
+.introjs-skipbutton {
+    /*!important;覆盖所有样式*/
+    font-size: 18px !important;
+    margin-right:5px !important;
+}

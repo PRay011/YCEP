@@ -1,7 +1,7 @@
 @media (min-width: 1024px) {
   .container {
     min-height: 100vh;
-    padding-top: 50px;
+    //padding-top: 50px;
     display: flex;
     align-items: center;
     background-color: #f1f1f1;
@@ -24,24 +24,39 @@
 
 .main {
   width: 90%;
-  margin: 30px auto;
+  //margin: 30px auto;
+  margin: 0 auto;
 
   .header {
     margin: 0 auto;
     display: flex;
     align-items: center;
     color: #250c0c;
-    padding: 10px 0;
     //box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     justify-content: space-between;
     width: 100%;
     .title {
-      font-size: 18px;
-      margin-left: 20px;
+      display: flex;
+      .text{
+        margin-top: 20px;
+        margin-left: 70px;
+        font-family: 华文行楷, sans-serif;
+        font-size: 22px;
+      }
+      img{
+        margin-left: 40px;
+        height: 60px;
+      }
     }
     .actions {
       button {
         @include main-button;
+      }
+      .guide-icon{
+        position: absolute;
+        top:10px;
+        width:30px;
+        left: 1295px;
       }
     }
   }
@@ -50,7 +65,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin: 0 auto;
+    margin: 0 auto 20px;
     .left {
       flex: 0 0 150px; /* 设置固定宽度为150px，不伸缩 */
       background-color: #ffffff;
@@ -72,14 +87,14 @@
       bottom: 0; /* 将底部对齐 */
       right: 0; /* 将右边对齐 */
       width: 900px; /* 设置一个固定宽度 */
-      height: 705px;
+      height: 750px;
       background-color: #ffffff;
       border-radius: 5px;
       padding: 20px;
       text-align: center;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       .el-scrollbar {
-        height: 630px;
+        height: 680px;
         .title {
           text-align: left;
           margin-top: 18px;
@@ -90,7 +105,8 @@
           margin: 0 auto;
           .aiBtn {
             @include main-button;
-            margin-top: 15px;
+            margin-top: 10px;
+            margin-right: 0;
           }
           .el-form {
             margin: 50px auto;
@@ -115,6 +131,33 @@
               font-weight: 550;
               text-align: left;
               margin-bottom: 10px;
+            }
+          }
+          .paper-top{
+            display: flex;
+            justify-content: space-between;
+            .info{
+              display: flex;
+              flex-direction: column;
+              .title{
+                margin-top: 10px;
+                margin-left: 10px;
+                margin-bottom: 10px;
+                font-family: coca_cola,sans-serif;
+                font-size: 20px;
+              }
+              .desc{
+                margin-left: 10px;
+                width: 500px;
+                text-align: left;
+                color: #8f8f8f;
+                font-family: "楷体", sans-serif;
+              }
+            }
+
+            img{
+              height: 120px;
+              margin-right: 10px;
             }
           }
         }
@@ -181,6 +224,7 @@
         }
       }
       .btn-container {
+        margin-top: 5px;
         button {
           @include main-button;
         }
@@ -206,7 +250,7 @@
         }
       }
       .chat-box {
-        min-height: 660px;
+        min-height: 690px;
         padding: 10px;
         background-color: #fff;
         border-radius: 5px;
@@ -253,6 +297,7 @@
   .el-dialog {
     img {
       margin: 0 auto;
+      width: 70%;
     }
   }
 }

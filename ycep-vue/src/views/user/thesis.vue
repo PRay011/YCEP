@@ -1,16 +1,21 @@
 <template>
   <!--  顶部导航栏-->
-  <Top />
+  <!--  <Top/>-->
 
   <div class="container">
     <div class="main">
       <div class="header">
-        <p class="title">生成论文</p>
+        <div class="title">
+          <img src="../../assets/images/thesis/论文插画0.png" alt="">
+<!--          <p class="text">AI帮你写论文</p>-->
+        </div>
+
         <div class="actions">
-          <button class="backToTest" @click="backToTestClick">回到试题</button>
-          <button class="backToKnowledge" @click="backToKnowledgeClick">
-            重新学习
-          </button>
+          <!--          <button class="backToTest" @click="backToTestClick">回到试题</button>-->
+          <!--          <button class="backToKnowledge" @click="backToKnowledgeClick">重新学习</button>-->
+          <img class="guide-icon" src="../../assets/images/thesis/论文插画8.png" alt="">
+          <button @click="guideClick">新手指引</button>
+          <button @click="backToIndexClick">回到首页</button>
         </div>
       </div>
       <div class="content">
@@ -18,49 +23,49 @@
           <el-row class="tac">
             <el-col>
               <el-menu
-                default-active="1"
-                class="el-menu-vertical-demo"
-                @select="leftNavClick"
+                  default-active="1"
+                  class="el-menu-vertical-demo"
+                  @select="leftNavClick"
               >
-                <el-menu-item index="1">
+                <el-menu-item index="1" id="step1">
                   <el-icon>
-                    <Circle-Check />
+                    <Circle-Check/>
                   </el-icon>
                   <span>基本信息</span>
                 </el-menu-item>
-                <el-menu-item index="2">
+                <el-menu-item index="2" id="step2">
                   <el-icon>
-                    <House />
+                    <House/>
                   </el-icon>
                   <span>背景&必要性</span>
                 </el-menu-item>
-                <el-menu-item index="3">
+                <el-menu-item index="3" id="step3">
                   <el-icon>
-                    <MagicStick />
+                    <MagicStick/>
                   </el-icon>
                   <span>创意来源</span>
                 </el-menu-item>
                 <el-menu-item index="4">
                   <el-icon>
-                    <DataAnalysis />
+                    <DataAnalysis/>
                   </el-icon>
                   <span>基本设计</span>
                 </el-menu-item>
                 <el-menu-item index="5">
                   <el-icon>
-                    <Magnet />
+                    <Magnet/>
                   </el-icon>
                   <span>创新点</span>
                 </el-menu-item>
                 <el-menu-item index="6">
                   <el-icon>
-                    <Key />
+                    <Key/>
                   </el-icon>
                   <span>摘要&关键词</span>
                 </el-menu-item>
                 <el-menu-item index="7">
                   <el-icon>
-                    <Document />
+                    <Document/>
                   </el-icon>
                   <span>预览论文</span>
                 </el-menu-item>
@@ -69,121 +74,165 @@
           </el-row>
         </div>
         <div class="middle">
-          <el-scrollbar height="600px">
+          <el-scrollbar height="680px">
             <div class="paper" v-if="currentNav == 1">
-              <p class="title">基本信息>></p>
-              <hr />
+              <div class="paper-top">
+                <div class="info">
+                  <p class="title">基本信息>></p>
+                  <p class="desc">在这里填写你要生成的论文的基本信息，包括论文题目、作者信息等，这是生成论文的第一步，需要你仔细思考确定填写内容哦~</p>
+                </div>
+                <img src="../../assets/images/thesis/论文插画1.png" alt=""/>
+              </div>
+              <hr/>
               <el-form label-width="150px">
                 <el-form-item label="论文题目">
                   <el-input
-                    type="text"
-                    maxlength="20"
-                    show-word-limit
-                    v-model="thesis.title"
+                      type="text"
+                      maxlength="20"
+                      show-word-limit
+                      v-model="thesis.title"
                   />
                 </el-form-item>
                 <el-form-item label="作者">
                   <el-input
-                    type="text"
-                    maxlength="10"
-                    show-word-limit
-                    v-model="thesis.author"
+                      type="text"
+                      maxlength="10"
+                      show-word-limit
+                      v-model="author.name"
                   />
                 </el-form-item>
-                <el-form-item label="学校&地址&邮编">
-                  <el-input type="text" v-model="thesis.address" />
+                <el-form-item label="学校">
+                  <el-input type="text" v-model="author.school"/>
+                </el-form-item>
+                <el-form-item label="地址">
+                  <el-input type="text" v-model="author.address"/>
+                </el-form-item>
+                <el-form-item label="邮编">
+                  <el-input type="text" v-model="author.zip"/>
                 </el-form-item>
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 2">
-              <p class="title">研究背景和必要性分析>></p>
-              <hr />
+              <div class="paper-top">
+                <div class="info">
+                  <p class="title">背景&必要性>></p>
+                  <p class="desc">在这里填写你要生成的论文的基本信息，包括论文题目、作者信息等，这是生成论文的第一步，需要你仔细思考确定填写内容哦~</p>
+                </div>
+                <img src="../../assets/images/thesis/论文插画2.png" alt=""/>
+              </div>
+              <hr/>
               <el-form>
                 <span class="chapter-name">一、研究背景和必要性分析</span>
                 <el-input
-                  type="textarea"
-                  v-model="thesis.content[0]"
-                  :autosize="{ minRows: 18 }"
+                    type="textarea"
+                    v-model="thesis.content[0]"
+                    :autosize="{ minRows: 18 }"
                 ></el-input>
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 3">
-              <p class="title">创意来源>></p>
-              <hr />
+              <div class="paper-top">
+                <div class="info">
+                  <p class="title">创意来源>></p>
+                  <p class="desc">在这里填写你要生成的论文的基本信息，包括论文题目、作者信息等，这是生成论文的第一步，需要你仔细思考确定填写内容哦~</p>
+                </div>
+                <img src="../../assets/images/thesis/论文插画3.png" alt=""/>
+              </div>
+              <hr/>
               <el-form>
                 <span class="chapter-name">二、创意来源</span>
                 <el-input
-                  type="textarea"
-                  v-model="thesis.content[1]"
-                  :autosize="{ minRows: 18 }"
+                    type="textarea"
+                    v-model="thesis.content[1]"
+                    :autosize="{ minRows: 18 }"
                 ></el-input>
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 4">
-              <p class="title">基本设计>></p>
-              <hr />
+              <div class="paper-top">
+                <div class="info">
+                  <p class="title">基本设计>></p>
+                  <p class="desc">在这里填写你要生成的论文的基本信息，包括论文题目、作者信息等，这是生成论文的第一步，需要你仔细思考确定填写内容哦~</p>
+                </div>
+                <img src="../../assets/images/thesis/论文插画4.png" alt=""/>
+              </div>
+              <hr/>
               <el-form>
                 <span class="chapter-name">三、基本设计</span>
                 <el-input
-                  type="textarea"
-                  v-model="thesis.content[2]"
-                  :autosize="{ minRows: 18 }"
+                    type="textarea"
+                    v-model="thesis.content[2]"
+                    :autosize="{ minRows: 18 }"
                 ></el-input>
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 5">
-              <p class="title">创新点>></p>
-              <hr />
+              <div class="paper-top">
+                <div class="info">
+                  <p class="title">创新点>></p>
+                  <p class="desc">在这里填写你要生成的论文的基本信息，包括论文题目、作者信息等，这是生成论文的第一步，需要你仔细思考确定填写内容哦~</p>
+                </div>
+                <img src="../../assets/images/thesis/论文插画5.png" alt=""/>
+              </div>
+              <hr/>
               <el-form>
                 <span class="chapter-name">三、创新点</span>
                 <el-input
-                  type="textarea"
-                  v-model="thesis.content[3]"
-                  :autosize="{ minRows: 18 }"
+                    type="textarea"
+                    v-model="thesis.content[3]"
+                    :autosize="{ minRows: 18 }"
                 ></el-input>
               </el-form>
             </div>
             <div class="paper" v-if="currentNav == 6">
-              <span style="display: flex; justify-content: space-between">
-                <p class="title">摘要&关键词>></p>
-                <button class="aiBtn" @click="aiKeywordsClick">AI生成</button>
-              </span>
-              <hr />
+              <div class="paper-top">
+                <div class="info">
+                  <span style="display: flex;justify-content: space-between">
+                    <p class="title">摘要&关键词>></p>
+                    <button class="aiBtn" @click="aiKeywordsClick">AI生成</button>
+                  </span>
+
+                  <p class="desc">在这里填写你要生成的论文的基本信息，包括论文题目、作者信息等，这是生成论文的第一步，需要你仔细思考确定填写内容哦~</p>
+                </div>
+                <img src="../../assets/images/thesis/论文插画6.png" alt=""/>
+
+              </div>
+              <hr/>
               <el-form label-width="80px">
                 <el-form-item label="关键词">
                   <el-tag
-                    v-for="tag in thesis.keywords"
-                    :key="tag"
-                    class="mx-1"
-                    closable
-                    :disable-transitions="false"
-                    @close="handleClose(tag)"
+                      v-for="tag in thesis.keywords"
+                      :key="tag"
+                      class="mx-1"
+                      closable
+                      :disable-transitions="false"
+                      @close="handleClose(tag)"
                   >
                     {{ tag }}
                   </el-tag>
                   <el-input
-                    v-if="inputVisible"
-                    ref="InputRef"
-                    v-model="inputValue"
-                    class="ml-1 w-20"
-                    size="small"
-                    @keyup.enter="handleInputConfirm"
-                    @blur="handleInputConfirm"
+                      v-if="inputVisible"
+                      ref="InputRef"
+                      v-model="inputValue"
+                      class="ml-1 w-20"
+                      size="small"
+                      @keyup.enter="handleInputConfirm"
+                      @blur="handleInputConfirm"
                   />
                   <el-button
-                    v-else
-                    class="button-new-tag ml-1"
-                    size="small"
-                    @click="showInput"
+                      v-else
+                      class="button-new-tag ml-1"
+                      size="small"
+                      @click="showInput"
                   >
                     + 关键词
                   </el-button>
                 </el-form-item>
                 <el-form-item label="摘要">
                   <el-input
-                    type="textarea"
-                    v-model="thesis.brief"
-                    :autosize="{ minRows: 10, maxRows: 50 }"
+                      type="textarea"
+                      v-model="thesis.brief"
+                      :autosize="{ minRows: 10, maxRows: 50 }"
                   />
                 </el-form-item>
               </el-form>
@@ -194,14 +243,14 @@
                 <p class="text2">青少年创新教育平台</p>
                 <p class="text1">{{ thesis.kind }}/{{ thesis.item }}</p>
               </div>
-              <hr />
-              <hr />
+              <hr/>
+              <hr/>
               <div class="block2">
                 <p class="text1">{{ thesis.title }}</p>
                 <p class="text2">{{ thesis.author }}</p>
                 <p class="text3">（{{ thesis.address }}）</p>
               </div>
-              <br />
+              <br/>
 
               <div class="block3">
                 <p class="text1">摘要：</p>
@@ -209,11 +258,12 @@
                 <p class="text1">
                   关键词：&emsp;
                   <template v-for="keyword in thesis.keywords"
-                    >{{ keyword }};&emsp;</template
+                  >{{ keyword }};&emsp;
+                  </template
                   >
                 </p>
               </div>
-              <br /><br />
+              <br/><br/>
               <div class="block4">
                 <p class="text1">一、研究背景和必要性分析</p>
                 <p class="text2">&emsp;&emsp;{{ thesis.content[0] }}</p>
@@ -224,9 +274,9 @@
                 <p class="text1">四、创新点</p>
                 <p class="text2">&emsp;&emsp;{{ thesis.content[3] }}</p>
               </div>
-              <br /><br />
-              <hr />
-              <hr />
+              <br/><br/>
+              <hr/>
+              <hr/>
               <div class="block1">
                 <p class="text1">{{ thesis.time }}</p>
                 <p class="text2">青少年创新教育平台</p>
@@ -244,12 +294,14 @@
           <div class="chat-box" id="chatBox">
             <div class="title">
               <el-icon size="30">
-                <ChatLineSquare />
+                <ChatLineSquare/>
               </el-icon>
               <p class="text">AI助手帮你写论文</p>
               <p class="refresh" @click="refreash()">
                 <span>重置会话</span>
-                <el-icon size="20"><Refresh /></el-icon>
+                <el-icon size="20">
+                  <Refresh/>
+                </el-icon>
               </p>
             </div>
             <!-- 这里将显示聊天消息 -->
@@ -261,15 +313,15 @@
                 <p>AI： 有什么可以帮助您？</p>
               </div>
               <template
-                v-for="(conversation, index) in conversations"
-                :key="index"
+                  v-for="(conversation, index) in conversations"
+                  :key="index"
               >
                 <div class="message user">
                   <p>你：{{ conversation.user }}</p>
                 </div>
                 <div
-                  class="message ai"
-                  v-if="
+                    class="message ai"
+                    v-if="
                     conversation.ai !== null && conversation.ai !== 'waiting...'
                   "
                 >
@@ -280,23 +332,23 @@
           </div>
           <div class="user-input">
             <input
-              type="text"
-              v-model="userMessage"
-              placeholder="在此输入消息..."
+                type="text"
+                v-model="userMessage"
+                placeholder="在此输入消息..."
             />
             <button @click="sendMessage()">发送</button>
           </div>
         </div>
       </div>
       <el-dialog
-        v-model="confirmDialogVisible"
-        title="恭喜你完成论文"
-        width="32%"
-        center
-        top="150px"
+          v-model="confirmDialogVisible"
+          title="恭喜你完成论文"
+          width="32%"
+          center
+          top="150px"
       >
         <div class="content">
-          <img src="../../assets/images/paper-icon.png" alt="论文配图" />
+          <img src="../../assets/images/thesis/论文插画7.png" alt="论文配图"/>
         </div>
         <template #footer>
           <span class="dialog-footer">
@@ -312,12 +364,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 import Top from "../../components/top.vue";
 
-import { nextTick, ref } from "vue";
-import { ElInput, ElMessage } from "element-plus";
-import { getPdf } from "../../utils/htmlToPdf";
+import {nextTick, ref} from "vue";
+import {ElInput, ElMessage} from "element-plus";
+import {getPdf} from "../../utils/htmlToPdf";
 import {
   createSession,
   chat,
@@ -326,9 +378,6 @@ import {
   getBasicThesis,
   getKeywordsAndBrief,
 } from "../../api/user/thesis";
-// import { content } from "html2canvas/dist/types/css/property-descriptors/content";
-// // import printJS from 'print-js'
-// // import html2Canvas from 'html2Canvas'
 
 const InputRef = ref<InstanceType<typeof ElInput>>();
 
@@ -341,6 +390,12 @@ export default defineComponent({
       currentNav: 1,
       inputVisible: false,
       inputValue: "",
+      author: {
+        name: '王晓飞',
+        school: '中南大学附属中学',
+        address: '湖南省长沙市',
+        zip: '410000'
+      },
       thesis: {
         id: "1",
         time: "2023/8/6",
@@ -348,29 +403,29 @@ export default defineComponent({
         item: "电路",
         title: "简单电路的连接分析",
         author: "pr",
-        address: "优胜北路第三小学，湖南 长沙，410000",
+        address: "优胜路小学，湖南省长沙市，410000",
         brief:
-          "本研究旨在探讨将简易的电路知识，以提升中小学生对电路教育的兴趣和理解能力。通过进行一个具有挑战性的游戏，培养学生的逻辑思维、实际问题解决能力和对电路故障的判断能力。游戏通过将电路故障作为关键线索，引导玩家找出偷窃宝石的嫌疑人，同时提供电路相关题目来加深学生的理解。",
+            "本研究旨在探讨将简易的电路知识，以提升中小学生对电路教育的兴趣和理解能力。通过进行一个具有挑战性的游戏，培养学生的逻辑思维、实际问题解决能力和对电路故障的判断能力。游戏通过将电路故障作为关键线索，引导玩家找出偷窃宝石的嫌疑人，同时提供电路相关题目来加深学生的理解。",
         keywords: ["无线传感器", "网络", "电源电路", "电源效率"],
         content: [
           //一、
           "中小学生的综合素质教育需要注重培养学生的创新能力、问题解决能力和逻辑思维。电路教育作为实际应用领域，能够激发学生的兴趣。然而，传统的电路教育方式难以吸引学生。结合游戏设计，可以创造出一个更具趣味性和参与感的学习环境。\n" +
-            "\n" +
-            '"电路侦探" 游戏的成功设计为中小学生的电路教育提供了一种新的途径。类似的方法也可以应用于其他学科，提高学生的学习积极性和效果。未来，可以进一步优化游戏设计，开发更多关卡和题目，扩展游戏的教育价值。',
+          "\n" +
+          '"电路侦探" 游戏的成功设计为中小学生的电路教育提供了一种新的途径。类似的方法也可以应用于其他学科，提高学生的学习积极性和效果。未来，可以进一步优化游戏设计，开发更多关卡和题目，扩展游戏的教育价值。',
           //二、
           "游戏设计灵感来自于经典的侦探故事和电路故障排查过程。设计的目标是将学习与娱乐相结合，通过解决电路故障问题，锻炼学生的逻辑思维和判断能力。\n" +
-            "\n" +
-            "我们进行了一系列评估，包括问卷调查、知识测试和学生反馈，以评估创新方法在电路教育中的实际效果。结果表明，学生对于创新方法的学习体验更为积极，并且在知识掌握方面表现更优异。",
+          "\n" +
+          "我们进行了一系列评估，包括问卷调查、知识测试和学生反馈，以评估创新方法在电路教育中的实际效果。结果表明，学生对于创新方法的学习体验更为积极，并且在知识掌握方面表现更优异。",
           //三、
           "我们设计了一组实验，对比了传统课堂教学和创新方法的教育效果。结果显示，采用创新方法的学生在电路知识的理解和问题解决能力方面表现出更明显的提升。\n" +
-            "\n" +
-            "创新方法为中小学生电路教育带来了新的可能性。本研究的实验和评估结果表明，实际案例分析和互动式学习等方法能够有效地提升学生的学习兴趣和问题解决能力，为电路教育注入了新的活力。",
+          "\n" +
+          "创新方法为中小学生电路教育带来了新的可能性。本研究的实验和评估结果表明，实际案例分析和互动式学习等方法能够有效地提升学生的学习兴趣和问题解决能力，为电路教育注入了新的活力。",
           //四、
           "本研究提出了以下创新方法，以改善中小学生的电路教育：\n" +
-            "\n" +
-            "实际案例分析： 在课堂中引入实际电路故障案例，让学生从实际问题入手，深入理解电路原理和故障排除方法。\n" +
-            "\n" +
-            "互动式学习： 通过小组合作、讨论和实验，在学生之间创造积极互动的学习氛围，培养他们的团队合作和沟通能力。",
+          "\n" +
+          "实际案例分析： 在课堂中引入实际电路故障案例，让学生从实际问题入手，深入理解电路原理和故障排除方法。\n" +
+          "\n" +
+          "互动式学习： 通过小组合作、讨论和实验，在学生之间创造积极互动的学习氛围，培养他们的团队合作和沟通能力。",
         ],
       },
       content: {},
@@ -388,11 +443,35 @@ export default defineComponent({
       sessionPart: "研究背景",
       inSession: false,
       sessionKey: "",
+      introOption: { // 参数对象
+        prevLabel: '上一步',
+        nextLabel: '下一步',
+        skipLabel: '跳过',
+        doneLabel: '完成',
+        tooltipClass: 'intro-tooltip', /* 引导说明文本框的样式 */
+        // highlightClass: 'intro-highlight', /* 说明高亮区域的样式 */
+        exitOnEsc: true, /* 是否使用键盘Esc退出 */
+        exitOnOverlayClick: false, /* 是否允许点击空白处退出 */
+        keyboardNavigation: true, /* 是否允许键盘来操作 */
+        showBullets: false, /* 是否使用点显示进度 */
+        showProgress: false, /* 是否显示进度条 */
+        scrollToElement: true, /* 是否滑动到高亮的区域 */
+        overlayOpacity: 0.5, // 遮罩层的透明度 0-1之间
+        positionPrecedence: ['bottom', 'top', 'right', 'left'], /* 当位置选择自动的时候，位置排列的优先级 */
+        disableInteraction: false, /* 是否禁止与元素的相互关联 */
+        hidePrev: true, /* 是否在第一步隐藏上一步 */
+        // hideNext: true, /* 是否在最后一步隐藏下一步 */
+        steps: [], /* steps步骤，可以写个工具类保存起来 */
+      },
     };
   },
-  components: { Top },
+  components: {Top},
   mounted() {
     this.ready();
+    //为保证页面渲染成功后调用函数，使用nextTick
+    this.$nextTick(() => {
+      this.initGuide(); // 调用新手引导的方法
+    })
   },
   methods: {
     ready() {
@@ -408,17 +487,28 @@ export default defineComponent({
     leftNavClick(index: any) {
       this.currentNav = index;
       switch (index) {
+        case "1":
+          this.sessionPart = "基本信息";
+          break;
         case "2":
-          this.sessionPart = "研究背景";
+          this.sessionPart = "背景&必要性";
           break;
         case "3":
           this.sessionPart = "创意来源";
           break;
         case "4":
-          this.sessionPart = "方案设计";
+          this.sessionPart = "基本设计";
           break;
         case "5":
           this.sessionPart = "创新点";
+          break;
+        case "6":
+          this.sessionPart = "摘要&关键词";
+          break;
+        case "7":
+          this.sessionPart = "研究背景";
+          this.thesis.author = this.author.name;
+          this.thesis.address = this.author.school + '，' + this.author.address + '，' + this.author.zip
           break;
         default:
           this.sessionPart = "研究背景";
@@ -428,17 +518,20 @@ export default defineComponent({
         this.otherPart();
       }
     },
+    guideClick() {
+      this.initGuide();
+    },
     //获取论文框架
     showBasicThesis() {
       let that = this;
       getBasicThesis(that.id)
-        .then((res) => {
-          console.log("论文框架", res);
-          this.thesis = res.data;
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res) => {
+            console.log("论文框架", res);
+            this.thesis = res.data;
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
     //点击AI生成关键词和摘要按钮
     aiKeywordsClick() {
@@ -454,18 +547,18 @@ export default defineComponent({
       };
       console.log(that.thesis.content);
       getKeywordsAndBrief(data)
-        .then((res) => {
-          console.log("AI生成关键词和摘要", res);
-          this.thesis.keywords = res.data.keyword;
-          this.thesis.brief = res.data.abstract;
-          ElMessage({
-            message: "AI成功生成关键词和摘要！",
-            type: "success",
+          .then((res) => {
+            console.log("AI生成关键词和摘要", res);
+            this.thesis.keywords = res.data.keyword;
+            this.thesis.brief = res.data.abstract;
+            ElMessage({
+              message: "AI成功生成关键词和摘要！",
+              type: "success",
+            });
+          })
+          .catch((err: any) => {
+            console.log(err);
           });
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
     },
     //关键词标签
     handleClose(tag: string) {
@@ -499,17 +592,17 @@ export default defineComponent({
         part: this.sessionPart,
       };
       createSession(data)
-        .then((res: any) => {
-          console.log("create");
-          that.sessionKey = res.data;
-          that.inSession = true;
-          // if (that.inSession) {
-          //   that.chatAI(that.userMessage);
-          // }
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log("create");
+            that.sessionKey = res.data;
+            that.inSession = true;
+            // if (that.inSession) {
+            //   that.chatAI(that.userMessage);
+            // }
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
 
     chatAI(message: any) {
@@ -519,58 +612,58 @@ export default defineComponent({
         sessionKey: that.sessionKey,
       };
       chat(data)
-        .then((res: any) => {
-          console.log("chat");
-          console.log(res);
-          let aiResponse = res.msg;
-          console.log(that.conversations);
-          console.log(this.conversationIndex);
-          this.conversations[this.conversationIndex++].ai = aiResponse;
-          this.userMessage = "";
-          //接收ai的回应
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log("chat");
+            console.log(res);
+            let aiResponse = res.msg;
+            console.log(that.conversations);
+            console.log(this.conversationIndex);
+            this.conversations[this.conversationIndex++].ai = aiResponse;
+            this.userMessage = "";
+            //接收ai的回应
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
 
     refreash() {
       let that = this;
       if (that.inSession) {
         refreshSession(that.sessionKey)
-          .then((res: any) => {
-            console.log("refresh");
-            that.conversationIndex = 0;
-            that.conversations = [];
-          })
-          .catch((err: any) => {
-            console.log(err);
-          });
+            .then((res: any) => {
+              console.log("refresh");
+              that.conversationIndex = 0;
+              that.conversations = [];
+            })
+            .catch((err: any) => {
+              console.log(err);
+            });
       }
     },
     otherPart() {
       let that = this;
       deleteSession(that.sessionKey)
-        .then((res: any) => {
-          console.log("otherPart");
-          this.inSession = false;
-          that.create();
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log("otherPart");
+            this.inSession = false;
+            that.create();
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
     close(next: any) {
       let that = this;
       deleteSession(that.sessionKey)
-        .then((res: any) => {
-          console.log("delete");
-          that.conversations = [];
-          next();
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log("delete");
+            that.conversations = [];
+            next();
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
     sendMessage() {
       let that = this;
@@ -595,7 +688,6 @@ export default defineComponent({
       }
     },
     //回到试题页面
-
     backToTestClick() {
       this.$router.go(-1);
     },
@@ -619,6 +711,31 @@ export default defineComponent({
     toSelfCenter() {
       this.$router.push("/user/selfCenter");
     },
+    //引导动画
+    initGuide() {
+      // 绑定标签元素的选择器数组
+      this.introOption.steps = [
+        {title: '系统使用指导', element: '#step1', position: 'right', intro: '鼠标悬浮在各个功能模块上，可快速查找系统对应操作SOP以及运维人员。'},
+        {title: '个人信息', element: '#step2', position: 'right', intro: '点击个人头像/下拉图标，选择个人信息，初始密码为******，建议修改为个人账号密码。',},
+        {title: '重新引导', element: '#step3', position: 'right', intro: '点击此处可重新查看引导流程。',},
+      ]
+      //在main.ts中已经声明过，报红可忽略
+      this.$intro()
+          .setOptions(this.introOption)
+          // 点击结束按钮后执行的事件
+          .oncomplete(() => {
+            console.log('点击结束按钮后执行的事件')
+          })
+          // 点击跳过按钮后执行的事件
+          .onexit(() => {
+            console.log('点击跳过按钮后执行的事件')
+          })
+          // 确认完毕之后执行的事件
+          .onbeforeexit(() => {
+            console.log('确认完毕之后执行的事件')
+          })
+          .start()
+    },
   },
   beforeRouteLeave(to, from, next) {
     if (this.sessionKey) {
@@ -631,5 +748,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.introjs-skipbutton {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
 @import "../../assets/style/css/user/thesis.scss";
 </style>

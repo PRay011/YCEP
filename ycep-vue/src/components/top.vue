@@ -2,9 +2,9 @@
   <div class="header">
     <div class="header-content">
       <div
-        class="header-item"
-        @click="titleItemClick(0)"
-        style="width: 300px; text-align: left"
+          class="header-item"
+          @click="titleItemClick(0)"
+          style="width: 300px; text-align: left"
       >
         <p>YCEP网站</p>
       </div>
@@ -14,38 +14,41 @@
       </div>
 
       <div
-        class="header-item item1"
-        :class="currentItem === kind.kindId ? 'selected' : ''"
-        @click="titleItemClick(kind.kindId)"
-        v-for="kind in kinds"
-        :key="kind.kindId"
+          class="header-item item1"
+          :class="currentItem === kind.kindId ? 'selected' : ''"
+          @click="titleItemClick(kind.kindId)"
+          v-for="kind in kinds"
+          :key="kind.kindId"
       >
         <template class="dropdown">
-          <el-dropdown>
-            <span class="el-dropdown-link">
-              <p>{{ kind.kindName }}</p>
-            </span>
-          </el-dropdown>
+          <span class="el-dropdown-link">
+            <p>{{ kind.kindName }}</p>
+          </span>
         </template>
         <div class="underline" v-if="currentItem === kind.kindId"></div>
       </div>
 
-      <template v-if="isLogged">
-        <el-avatar
-          alt="用户头像"
-          @click="selfCenterClick"
-          class="self"
-          style="margin-left: 100px"
-          src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2022%2F1110%2F0be1778cj00rl4jow0010c000hs00hsg.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
-        ></el-avatar>
-        <div class="self" @click="selfCenterClick">
-          <p class="username" style="font-family: coca_cola, serif">
-            {{ user.username }}
-          </p>
-        </div>
-        <div class="header-item" @click="logout">
-          <p>退出账号</p>
-        </div>
+      <template v-if="isLogged" class="dropdown" >
+        <el-dropdown style="margin-left: 30px;">
+          <div class="self">
+            <el-avatar
+                alt="用户头像"
+                @click="selfCenterClick"
+                class="self"
+                src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2022%2F1110%2F0be1778cj00rl4jow0010c000hs00hsg.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
+            ></el-avatar>
+            <p class="username" style="font-family: coca_cola, serif;font-size: 18px;text-align: center">
+              {{ user.username }}
+            </p>
+          </div>
+          <template #dropdown style="left: 20px;">
+            <el-dropdown-menu>
+              <el-dropdown-item @click="selfCenterClick">个人中心</el-dropdown-item>
+              <el-dropdown-item @click="logout" divided>退出账号</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+
         <button class="learn-more" @click="toThesis">
           <span class="circle" aria-hidden="true">
             <span class="icon arrow"></span>
@@ -68,8 +71,8 @@
 </template>
 
 <script lang="ts">
-import { getCategory } from "../api/knowledge/kind";
-import { logout } from "../api/user/login";
+import {getCategory} from "../api/knowledge/kind";
+import {logout} from "../api/user/login";
 
 export default {
   name: "top",
@@ -128,14 +131,14 @@ export default {
     category() {
       let that = this;
       getCategory()
-        .then((res: any) => {
-          console.log("catagory");
-          console.log(res);
-          that.kinds = res.data;
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log("catagory");
+            console.log(res);
+            that.kinds = res.data;
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
     titleItemClick(index: any) {
       console.log(index);
@@ -148,11 +151,10 @@ export default {
           this.currentItem = 0;
           this.$router.push("/knowledge/index");
           break;
-        default:
-          {
-            console.log(1);
-            this.$router.push("/knowledge/kind/" + index);
-          }
+        default: {
+          console.log(1);
+          this.$router.push("/knowledge/kind/" + index);
+        }
           // sessionStorage.setItem('index', '0')
           break;
       }
@@ -171,17 +173,17 @@ export default {
     },
     logout() {
       logout()
-        .then((res: any) => {
-          console.log("catagory");
-          sessionStorage.clear();
-          this.$router.push("/");
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+          .then((res: any) => {
+            console.log("catagory");
+            sessionStorage.clear();
+            this.$router.push("/");
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
     },
     //生成论文
-    toThesis(){
+    toThesis() {
       this.$router.push("/user/thesis");
     }
   },
@@ -226,6 +228,7 @@ $font_color_hover: #a2a2a2;
       display: flex;
       flex-direction: column;
       cursor: pointer;
+
       &.selected {
         .dropdown .el-dropdown-link,
         .dropdown .el-dropdown-link p {
@@ -242,24 +245,9 @@ $font_color_hover: #a2a2a2;
         background-color: $basic_color;
       }
 
-      .dropdown {
-        display: flex;
-        justify-content: center;
-
-        .el-dropdown-link {
-          cursor: pointer;
-          color: $font_color;
-          display: flex;
-          align-items: center;
-          //有个乱出现的边界线，终于找到这个b了！
-          &:focus-visible {
-            outline: none;
-          }
-        }
-      }
-
       &:hover {
         outline: none;
+
         & .dropdown .el-dropdown-link,
         & p {
           color: $font_color_hover;
@@ -268,8 +256,34 @@ $font_color_hover: #a2a2a2;
       }
     }
 
+    .dropdown {
+      display: flex;
+      justify-content: center;
+
+      .el-dropdown-link {
+        cursor: pointer;
+        color: $font_color;
+        display: flex;
+        align-items: center;
+        //有个乱出现的边界线，终于找到这个b了！
+        &:focus-visible {
+          outline: none;
+        }
+      }
+    }
+    .el-avatar:focus-visible {
+      outline: none;
+    }
     .self {
       cursor: pointer;
+      display: flex;
+      .username{
+        line-height: 40px;
+        margin-left: 10px;
+      }
+      &:focus-visible {
+        outline: none;
+      }
     }
 
     .login {
@@ -355,7 +369,7 @@ button {
 
 button.learn-more {
   left: 100px;
-  width: 12rem;
+  width: 10rem;
   height: auto;
 }
 
@@ -364,8 +378,8 @@ button.learn-more .circle {
   position: relative;
   display: block;
   margin: 0;
-  width: 3rem;
-  height: 3rem;
+  width: 45px;
+  height: 45px;
   background: #282936;
   border-radius: 1.625rem;
 }
@@ -410,7 +424,7 @@ button.learn-more .button-text {
   margin: 0 0 0 1.85rem;
   color: #282936;
   font-weight: 700;
-  line-height: 1.6;
+  line-height: 1.4;
   text-align: center;
   text-transform: uppercase;
 }
