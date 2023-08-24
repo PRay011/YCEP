@@ -334,7 +334,7 @@
                 :key="index"
               >
                 <div class="message user">
-                  <p>你：{{ conversation.user }}</p>
+                  <p style="white-space: pre-wrap;">你: {{ conversation.user }}</p>
                 </div>
                 <div
                   class="message ai"
@@ -342,7 +342,7 @@
                     conversation.ai !== null && conversation.ai !== 'waiting...'
                   "
                 >
-                  <p>AI： {{ conversation.ai }}</p>
+                 <p style="white-space: pre-wrap;">AI: {{ conversation.ai }}</p>
                 </div>
               </template>
             </el-scrollbar>
@@ -648,9 +648,9 @@ export default defineComponent({
           console.log("create");
           that.sessionKey = res.data;
           that.inSession = true;
-          // if (that.inSession) {
-          //   that.chatAI(that.userMessage);
-          // }
+          if (that.inSession) {
+            that.chatAI(that.userMessage);
+          }
         })
         .catch((err: any) => {
           console.log(err);
@@ -659,6 +659,10 @@ export default defineComponent({
 
     chatAI(message: any) {
       let that = this;
+      // let messageContent = 'dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasgbdyuiashgduiasd\n\n';
+      // let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, '<br />');
+      // this.conversations[this.conversationIndex++].ai = messageContent;
+      // this.userMessage = "";
       let data = {
         content: message,
         sessionKey: that.sessionKey,
@@ -667,9 +671,8 @@ export default defineComponent({
         .then((res: any) => {
           console.log("chat");
           console.log(res);
-          let aiResponse = res.msg;
+          let aiResponse = res.msg.replace(/(\r\n|\n|\r)/gm, '<br />');
           console.log(that.conversations);
-          console.log(this.conversationIndex);
           this.conversations[this.conversationIndex++].ai = aiResponse;
           this.userMessage = "";
           //接收ai的回应
@@ -815,10 +818,8 @@ export default defineComponent({
 
       if (isBorderClicked) {
         this.isMouseOver = true;
-        console.log("true");
       } else {
         this.isMouseOver = false;
-        console.log("false");
       }
     },
     startResize(event: any) {
