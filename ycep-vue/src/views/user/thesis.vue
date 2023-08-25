@@ -588,10 +588,12 @@ export default defineComponent({
   components: { Top },
   mounted() {
     this.ready();
-    //为保证页面渲染成功后调用函数，使用nextTick
-    this.$nextTick(() => {
-      this.initGuide(); // 调用新手引导的方法
-    });
+    //为保证页面渲染成功后调用函数，使用定时器和nextTick
+    let timer = setTimeout(() => {
+      this.$nextTick(() => {
+        this.initGuide(); // 调用新手引导的方法
+      });
+    }, 100)
   },
   methods: {
     ready() {
@@ -638,7 +640,7 @@ export default defineComponent({
         this.otherPart();
       }
     },
-    //将输入框中的文本转换成数组
+    //将输入框中的文本按换行转换成数组
     convertToArray() {
       this.chapter1 = this.thesis.content[0].split("\n").map(item => item.trim());
       this.chapter2 = this.thesis.content[1].split("\n").map(item => item.trim());
@@ -745,10 +747,10 @@ export default defineComponent({
 
     chatAI(message: any) {
       let that = this;
-      // let messageContent = 'dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasgbdyuiashgduiasd\n\n';
-      // let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, '<br />');
-      // this.conversations[this.conversationIndex++].ai = messageContent;
-      // this.userMessage = "";
+      let messageContent = 'dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasgbdyuiashgduiasd\n\n';
+      let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, '<br />');
+      this.conversations[this.conversationIndex++].ai = messageContent;
+      this.userMessage = "";
       let data = {
         content: message,
         sessionKey: that.sessionKey,
@@ -809,23 +811,30 @@ export default defineComponent({
     sendMessage() {
       let that = this;
       console.log(this.userMessage);
-      this.conversations.push({
-        user: this.userMessage,
-        ai: "waiting...",
-      });
-      console.log(this.conversations);
-      if (this.inSession) {
-        //会话已开启
-        this.chatAI(this.userMessage);
-      } else {
-        //会话未开启
-        let start = new Promise(function (resolve, reject) {
-          that.create();
-          resolve("会话开启");
+      if(this.userMessage == ''|| this.userMessage==null) {
+        ElMessage({
+          message: "发送的内容不能为空！",
+          type: "error",
         });
-        start.then(function () {
-          that.chatAI(that.userMessage);
+      }else{
+        this.conversations.push({
+          user: this.userMessage,
+          ai: "waiting...",
         });
+        console.log(this.conversations);
+        if (this.inSession) {
+          //会话已开启
+          this.chatAI(this.userMessage);
+        } else {
+          //会话未开启
+          let start = new Promise(function (resolve, reject) {
+            that.create();
+            resolve("会话开启");
+          });
+          start.then(function () {
+            that.chatAI(that.userMessage);
+          });
+        }
       }
     },
     //回到试题页面
@@ -958,10 +967,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.introjs-skipbutton {
-  font-size: 20px;
-  margin-right: 5px;
-}
-
 @import "../../assets/style/css/user/thesis.scss";
 </style>
