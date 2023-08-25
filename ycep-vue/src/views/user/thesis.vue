@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="../../assets/style/css/user/thesis.scss">
 <template>
   <!--  顶部导航栏-->
   <!--  <Top/>-->
@@ -7,43 +6,75 @@
     <div class="main">
       <div class="header">
         <div class="title">
-          <img src="../../assets/images/thesis/论文插画0.png" style="cursor: pointer" alt="" @click="currentNav = 0"/>
+          <img
+            src="../../assets/images/thesis/论文插画0.png"
+            style="cursor: pointer"
+            alt=""
+            @click="currentNav = 0"
+          />
           <!--          <p class="text">AI帮你写论文</p>-->
         </div>
         <div class="title-items">
-          <div class="title-item" :class="currentTitleNav===0?'selected':''" @click="titleItemNavClick(0)" id="step1">
-            <el-icon size="32" color='#363636'>
-              <Guide/>
+          <div
+            class="title-item"
+            :class="currentTitleNav === 0 ? 'selected' : ''"
+            @click="titleItemNavClick(0)"
+            id="step1"
+          >
+            <el-icon size="32" color="#363636">
+              <Guide />
             </el-icon>
             <p>论文导引</p>
           </div>
-          <div class="title-item" :class="currentTitleNav===1?'selected':''" @click="titleItemNavClick(1)" id="step2">
-            <el-icon size="32" color='#363636'>
-              <Document/>
+          <div
+            class="title-item"
+            :class="currentTitleNav === 1 ? 'selected' : ''"
+            @click="titleItemNavClick(1)"
+            id="step2"
+          >
+            <el-icon size="32" color="#363636">
+              <Document />
             </el-icon>
             <p>论文撰写</p>
           </div>
-          <div class="title-item" :class="currentTitleNav===2?'selected':''" @click="titleItemNavClick(2)" id="step3">
-            <el-icon size="32" color='#363636'>
-              <Checked/>
+          <div
+            class="title-item"
+            :class="currentTitleNav === 2 ? 'selected' : ''"
+            @click="titleItemNavClick(2)"
+            id="step3"
+          >
+            <el-icon size="32" color="#363636">
+              <Checked />
             </el-icon>
             <p>论文预览</p>
           </div>
-          <div class="title-item level2" v-if="currentTitleNav===2" @click="editPaperBtnClick">
-            <el-icon size="32" color='#363636'>
-              <Edit/>
+          <div
+            class="title-item level2"
+            v-if="currentTitleNav === 2"
+            @click="editPaperBtnClick"
+          >
+            <el-icon size="32" color="#363636">
+              <Edit />
             </el-icon>
             <p>继续编辑</p>
           </div>
-          <div class="title-item level2" v-if="currentTitleNav===2" @click="confirmPaperBtnClick">
-            <el-icon size="32" color='#363636'>
-              <DocumentChecked/>
+          <div
+            class="title-item level2"
+            v-if="currentTitleNav === 2"
+            @click="confirmPaperBtnClick"
+          >
+            <el-icon size="32" color="#363636">
+              <DocumentChecked />
             </el-icon>
             <p>确认生成</p>
           </div>
-          <div class="title-item level2" v-if="currentTitleNav===2" @click="downloadThesis">
-            <el-icon size="32" color='#363636'>
-              <CircleCheckFilled/>
+          <div
+            class="title-item level2"
+            v-if="currentTitleNav === 2"
+            @click="downloadThesis"
+          >
+            <el-icon size="32" color="#363636">
+              <CircleCheckFilled />
             </el-icon>
             <p>下载论文</p>
           </div>
@@ -52,9 +83,9 @@
           <!--          <button class="backToTest" @click="backToTestClick">回到试题</button>-->
           <!--          <button class="backToKnowledge" @click="backToKnowledgeClick">重新学习</button>-->
           <img
-              class="guide-icon"
-              src="../../assets/images/thesis/论文插画8.png"
-              alt=""
+            class="guide-icon"
+            src="../../assets/images/thesis/论文插画8.png"
+            alt=""
           />
           <button @click="guideClick">新手指引</button>
           <button @click="backToIndexClick">回到首页</button>
@@ -62,54 +93,92 @@
       </div>
       <div class="content">
         <div class="middle">
-          <div class="steps-bar" v-if="currentTitleNav===1">
+          <div class="steps-bar" v-if="currentTitleNav === 1">
             <div class="steps">
-              <div class="steps-item" :class="currentNav===1?'selected':''" @click="leftNavClick(1)">
+              <div
+                class="steps-item"
+                :class="currentNav === 1 ? 'selected' : ''"
+                @click="leftNavClick(1)"
+              >
                 <div class="steps-item-container">
-                  <div class="steps-item-icon"><span class="steps-text">1</span></div>
+                  <div class="steps-item-icon">
+                    <span class="steps-text">1</span>
+                  </div>
                   <div class="steps-item-content">
                     <div class="steps-item-title">基本信息</div>
                   </div>
                 </div>
               </div>
-              <div class="steps-item" :class="currentNav===2?'selected':''" @click="leftNavClick(2)">
+              <div
+                class="steps-item"
+                :class="currentNav === 2 ? 'selected' : ''"
+                @click="leftNavClick(2)"
+              >
                 <div class="steps-item-container">
-                  <div class="steps-item-icon"><span class="steps-text">2</span></div>
+                  <div class="steps-item-icon">
+                    <span class="steps-text">2</span>
+                  </div>
                   <div class="steps-item-content">
                     <div class="steps-item-title">背景和必要性</div>
                   </div>
                 </div>
               </div>
-              <div class="steps-item" :class="currentNav===3?'selected':''" @click="leftNavClick(3)">
+              <div
+                class="steps-item"
+                :class="currentNav === 3 ? 'selected' : ''"
+                @click="leftNavClick(3)"
+              >
                 <div class="steps-item-container">
-                  <div class="steps-item-icon"><span class="steps-text">3</span></div>
+                  <div class="steps-item-icon">
+                    <span class="steps-text">3</span>
+                  </div>
                   <div class="steps-item-content">
                     <div class="steps-item-title">创意来源</div>
                   </div>
                 </div>
               </div>
-              <div class="steps-item" :class="currentNav===4?'selected':''" @click="leftNavClick(4)">
+              <div
+                class="steps-item"
+                :class="currentNav === 4 ? 'selected' : ''"
+                @click="leftNavClick(4)"
+              >
                 <div class="steps-item-container">
-                  <div class="steps-item-icon"><span class="steps-text">4</span></div>
+                  <div class="steps-item-icon">
+                    <span class="steps-text">4</span>
+                  </div>
                   <div class="steps-item-content">
                     <div class="steps-item-title">基本设计</div>
                   </div>
                 </div>
               </div>
-              <div class="steps-item" :class="currentNav===5?'selected':''" @click="leftNavClick(5)">
+              <div
+                class="steps-item"
+                :class="currentNav === 5 ? 'selected' : ''"
+                @click="leftNavClick(5)"
+              >
                 <div class="steps-item-container">
-                  <div class="steps-item-icon"><span class="steps-text">5</span></div>
+                  <div class="steps-item-icon">
+                    <span class="steps-text">5</span>
+                  </div>
                   <div class="steps-item-content">
                     <div class="steps-item-title">创新点</div>
                   </div>
                 </div>
               </div>
-              <div class="steps-item" :class="currentNav===6?'selected':''" @click="leftNavClick(6)">
+              <div
+                class="steps-item"
+                :class="currentNav === 6 ? 'selected' : ''"
+                @click="leftNavClick(6)"
+              >
                 <div class="steps-item-container">
-                  <div class="steps-item-icon"><span class="steps-text">6</span></div>
+                  <div class="steps-item-icon">
+                    <span class="steps-text">6</span>
+                  </div>
                   <div class="steps-item-content">
                     <div class="steps-item-title">关键词和摘要</div>
-                    <div class="steps-item-description"><span>可AI生成</span></div>
+                    <div class="steps-item-description">
+                      <span>可AI生成</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -151,36 +220,36 @@
                     在这里填写你要生成的论文的基本信息，包括论文题目、作者信息等，这是生成论文的第一步，需要你仔细思考确定填写内容哦~
                   </p>
                 </div>
-                <img src="../../assets/images/thesis/论文插画1.png" alt=""/>
+                <img src="../../assets/images/thesis/论文插画1.png" alt="" />
               </div>
               <el-form label-width="150px">
                 <el-form-item label="论文题目">
                   <el-input
-                      type="text"
-                      maxlength="20"
-                      show-word-limit
-                      v-model="thesis.title"
+                    type="text"
+                    maxlength="20"
+                    show-word-limit
+                    v-model="thesis.title"
                   />
                 </el-form-item>
                 <el-form-item label="作者">
                   <el-input
-                      type="text"
-                      maxlength="10"
-                      show-word-limit
-                      v-model="thesis.author"
+                    type="text"
+                    maxlength="10"
+                    show-word-limit
+                    v-model="thesis.author"
                   />
                 </el-form-item>
                 <el-form-item label="学校">
-                  <el-input type="text" v-model="author.school"/>
+                  <el-input type="text" v-model="author.school" />
                 </el-form-item>
                 <el-form-item label="地址">
-                  <el-input type="text" v-model="author.address"/>
+                  <el-input type="text" v-model="author.address" />
                 </el-form-item>
                 <el-form-item label="邮编">
-                  <el-input type="text" v-model="author.zip"/>
+                  <el-input type="text" v-model="author.zip" />
                 </el-form-item>
               </el-form>
-              <button class="next" @click="currentNav=2">下一步</button>
+              <button class="next" @click="nextStep(2)">下一步</button>
             </div>
             <div class="paper" v-if="currentNav == 2">
               <div class="paper-top">
@@ -190,17 +259,17 @@
                     在这里填写论文的研究背景和必要性分析，即是指你开展这项研究的前提、起因，如果你不太清楚，可以问一问右边的AI助手哦~
                   </p>
                 </div>
-                <img src="../../assets/images/thesis/论文插画2.png" alt=""/>
+                <img src="../../assets/images/thesis/论文插画2.png" alt="" />
               </div>
               <el-form>
                 <!--                <span class="chapter-name">一、研究背景和必要性分析</span>-->
                 <el-input
-                    type="textarea"
-                    v-model="thesis.content[0]"
-                    :rows="20"
+                  type="textarea"
+                  v-model="thesis.content[0]"
+                  :rows="20"
                 ></el-input>
               </el-form>
-              <button class="next" @click="currentNav=3">下一步</button>
+              <button class="next" @click="nextStep(3)">下一步</button>
             </div>
             <div class="paper" v-if="currentNav == 3">
               <div class="paper-top">
@@ -210,17 +279,17 @@
                     在这里填写你要生成的论文的创意来源，即是有什么契机让你想到了这篇论文的主题？如果你不太清楚，可以问一问右边的AI助手哦~
                   </p>
                 </div>
-                <img src="../../assets/images/thesis/论文插画3.png" alt=""/>
+                <img src="../../assets/images/thesis/论文插画3.png" alt="" />
               </div>
               <el-form>
                 <!--                <span class="chapter-name">二、创意来源</span>-->
                 <el-input
-                    type="textarea"
-                    v-model="thesis.content[1]"
-                    :rows="20"
+                  type="textarea"
+                  v-model="thesis.content[1]"
+                  :rows="20"
                 ></el-input>
               </el-form>
-              <button class="next" @click="currentNav=4">下一步</button>
+              <button class="next" @click="nextStep(4)">下一步</button>
             </div>
             <div class="paper" v-if="currentNav == 4">
               <div class="paper-top">
@@ -230,17 +299,17 @@
                     在这里填写你要生成的论文的基本设计，即是你开展这个主题的研究的设计方案，采取什么实验方法等，如果你不太清楚，可以问一问右边的AI助手哦~
                   </p>
                 </div>
-                <img src="../../assets/images/thesis/论文插画4.png" alt=""/>
+                <img src="../../assets/images/thesis/论文插画4.png" alt="" />
               </div>
               <el-form>
                 <!--                <span class="chapter-name">三、基本设计</span>-->
                 <el-input
-                    type="textarea"
-                    v-model="thesis.content[2]"
-                    :rows="20"
+                  type="textarea"
+                  v-model="thesis.content[2]"
+                  :rows="20"
                 ></el-input>
               </el-form>
-              <button class="next" @click="currentNav=5">下一步</button>
+              <button class="next" @click="nextStep(5)">下一步</button>
             </div>
             <div class="paper" v-if="currentNav == 5">
               <div class="paper-top">
@@ -250,17 +319,17 @@
                     在这里填写你要生成的论文的创新点，根据你了解的研究背景等信息提炼出你想法中有所创新的地方，如果你不太清楚，可以问一问右边的AI助手哦~
                   </p>
                 </div>
-                <img src="../../assets/images/thesis/论文插画5.png" alt=""/>
+                <img src="../../assets/images/thesis/论文插画5.png" alt="" />
               </div>
               <el-form>
                 <!--                <span class="chapter-name">三、创新点</span>-->
                 <el-input
-                    type="textarea"
-                    v-model="thesis.content[3]"
-                    :rows="20"
+                  type="textarea"
+                  v-model="thesis.content[3]"
+                  :rows="20"
                 ></el-input>
               </el-form>
-              <button class="next" @click="currentNav=6">下一步</button>
+              <button class="next" @click="nextStep(6)">下一步</button>
             </div>
             <div class="paper" v-if="currentNav == 6">
               <div class="paper-top">
@@ -269,9 +338,9 @@
                     <p class="title">摘要和关键词>></p>
                     <div class="aiBtn" @click="aiKeywordsClick">
                       <img
-                          class="ai-icon"
-                          src="../../assets/images/thesis/robot.png"
-                          alt=""
+                        class="ai-icon"
+                        src="../../assets/images/thesis/robot.png"
+                        alt=""
                       />
                       <p class="text">AI生成</p>
                     </div>
@@ -283,43 +352,43 @@
                     在这里填写你要生成的论文的摘要和关键词，关键词可以有不止一个，摘要是整篇论文最核心的地方，字数不能过多，要抓住重点，AI可以根据前面你所写的内容来自动生成，不过仅限参考哦~
                   </p>
                 </div>
-                <img src="../../assets/images/thesis/论文插画6.png" alt=""/>
+                <img src="../../assets/images/thesis/论文插画6.png" alt="" />
               </div>
               <el-form label-width="80px">
                 <el-form-item label="关键词">
                   <el-tag
-                      v-for="tag in thesis.keywords"
-                      :key="tag"
-                      class="mx-1"
-                      closable
-                      :disable-transitions="false"
-                      @close="handleClose(tag)"
+                    v-for="tag in thesis.keywords"
+                    :key="tag"
+                    class="mx-1"
+                    closable
+                    :disable-transitions="false"
+                    @close="handleClose(tag)"
                   >
                     {{ tag }}
                   </el-tag>
                   <el-input
-                      v-if="inputVisible"
-                      ref="InputRef"
-                      v-model="inputValue"
-                      class="ml-1 w-20"
-                      size="small"
-                      @keyup.enter="handleInputConfirm"
-                      @blur="handleInputConfirm"
+                    v-if="inputVisible"
+                    ref="InputRef"
+                    v-model="inputValue"
+                    class="ml-1 w-20"
+                    size="small"
+                    @keyup.enter="handleInputConfirm"
+                    @blur="handleInputConfirm"
                   />
                   <el-button
-                      v-else
-                      class="button-new-tag ml-1"
-                      size="small"
-                      @click="showInput"
+                    v-else
+                    class="button-new-tag ml-1"
+                    size="small"
+                    @click="showInput"
                   >
                     + 关键词
                   </el-button>
                 </el-form-item>
                 <el-form-item label="摘要">
                   <el-input
-                      type="textarea"
-                      v-model="thesis.brief"
-                      :autosize="{ minRows: 10, maxRows: 50 }"
+                    type="textarea"
+                    v-model="thesis.brief"
+                    :autosize="{ minRows: 10, maxRows: 50 }"
                   />
                 </el-form-item>
               </el-form>
@@ -331,14 +400,14 @@
                 <p class="text2">青少年创新教育平台</p>
                 <p class="text1">{{ thesis.kind }}/{{ thesis.item }}</p>
               </div>
-              <hr/>
-              <hr/>
+              <hr />
+              <hr />
               <div class="block2">
                 <p class="text1">{{ thesis.title }}</p>
                 <p class="text2">{{ thesis.author }}</p>
                 <p class="text3">（{{ thesis.address }}）</p>
               </div>
-              <br/>
+              <br />
 
               <div class="block3">
                 <p class="text1">摘要：</p>
@@ -346,11 +415,11 @@
                 <p class="text1">
                   关键词：&emsp;
                   <template v-for="keyword in thesis.keywords"
-                  >{{ keyword }};&emsp;
+                    >{{ keyword }};&emsp;
                   </template>
                 </p>
               </div>
-              <br/><br/>
+              <br /><br />
               <div class="block4">
                 <p class="text1">一、研究背景和必要性分析</p>
                 <p class="text2" v-for="p in chapter1">{{ p }}</p>
@@ -361,9 +430,9 @@
                 <p class="text1">四、创新点</p>
                 <p class="text2" v-for="p in chapter4">{{ p }}</p>
               </div>
-              <br/><br/>
-              <hr/>
-              <hr/>
+              <br /><br />
+              <hr />
+              <hr />
               <div class="block1">
                 <p class="text1">{{ thesis.time }}</p>
                 <p class="text2">青少年创新教育平台</p>
@@ -377,19 +446,20 @@
           <!--            <button @click="downloadThesis">下载论文</button>-->
           <!--          </div>-->
         </div>
-        <div id="step4"
-            class="right"
-            :style="{ width: containerWidth + 'px', right: 0 + 'px' }"
-            @mouseover="changeCursor"
-            @mousedown="startResize"
-            :class="{ resizeable: isMouseOver }"
+        <div
+          id="step4"
+          class="right"
+          :style="{ width: containerWidth + 'px', right: 0 + 'px' }"
+          @mouseover="changeCursor"
+          @mousedown="startResize"
+          :class="{ resizeable: isMouseOver }"
         >
           <div class="chat-box" id="chatBox">
             <div class="title">
               <img
-                  class="chat-icon"
-                  src="../../assets/images/thesis/robot.png"
-                  alt=""
+                class="chat-icon"
+                src="../../assets/images/thesis/robot.png"
+                alt=""
               />
               <p class="text">AI助手</p>
               <p class="topic">
@@ -405,8 +475,8 @@
                 </div>
               </div>
               <template
-                  v-for="(conversation, index) in conversations"
-                  :key="index"
+                v-for="(conversation, index) in conversations"
+                :key="index"
               >
                 <div class="message-container user">
                   <div class="message user">
@@ -422,7 +492,6 @@
                     <span>AI：<p class="chapter" v-for="p in conversation.aiMessageArray">{{ p }}</p></span>
                   </div>
                 </div>
-
               </template>
             </el-scrollbar>
           </div>
@@ -446,7 +515,7 @@
             />
             <p class="search">
               <el-icon size="25">
-                <Promotion @click="sendMessage()"/>
+                <Promotion @click="sendMessage()" />
               </el-icon>
             </p>
           </div>
@@ -535,17 +604,16 @@ export default defineComponent({
           "互动式学习： 通过小组合作、讨论和实验，在学生之间创造积极互动的学习氛围，培养他们的团队合作和沟通能力。",
         ],
       },
-      chapter1:[],
-      chapter2:[],
-      chapter3:[],
-      chapter4:[],
+      chapter1: [],
+      chapter2: [],
+      chapter3: [],
+      chapter4: [],
       content: {},
       confirmDialogVisible: false,
       conversations: [
         {
           user: "摘要和关键词是？",
           ai: "在摘要与关键词中，简明扼要地总结您的论文内容，并列出关键词方便检索。",
-          aiMessageArray: [],
         },
       ],
       conversationIndex: 0,
@@ -583,13 +651,13 @@ export default defineComponent({
       },
 
       //下面是拉宽
-      containerWidth: 440,
+      containerWidth: 390,
       containerLeft: 0,
       isMouseOver: false,
       isResizing: false,
       initialX: 0,
       initialWidth: 0,
-      minWidth: 440, // 设置最小宽度
+      minWidth: 390, // 设置最小宽度
       maxWidth: 1000, // 设置最小宽度
     };
   },
@@ -601,7 +669,7 @@ export default defineComponent({
       this.$nextTick(() => {
         this.initGuide(); // 调用新手引导的方法
       });
-    }, 100)
+    }, 100);
   },
   methods: {
     ready() {
@@ -613,6 +681,10 @@ export default defineComponent({
       let gameID = sessionStorage.getItem("gameID")!;
       this.id = gameID;
       // this.showBasicThesis();
+    },
+    //下一步
+    nextStep(nav: number) {
+      this.leftNavClick(nav);
     },
     leftNavClick(index: any) {
       this.currentNav = index;
@@ -824,12 +896,12 @@ export default defineComponent({
     sendMessage() {
       let that = this;
       console.log(this.userMessage);
-      if(this.userMessage == ''|| this.userMessage==null) {
+      if (this.userMessage == "" || this.userMessage == null) {
         ElMessage({
           message: "发送的内容不能为空！",
           type: "error",
         });
-      }else{
+      } else {
         this.conversations.push({
           user: this.userMessage,
           ai: "waiting...",
@@ -905,20 +977,20 @@ export default defineComponent({
       ];
       //在main.ts中已经声明过，报红可忽略
       this.$intro()
-          .setOptions(this.introOption)
-          // 点击结束按钮后执行的事件
-          .oncomplete(() => {
-            console.log("点击结束按钮后执行的事件");
-          })
-          // 点击跳过按钮后执行的事件
-          .onexit(() => {
-            console.log("点击跳过按钮后执行的事件");
-          })
-          // 确认完毕之后执行的事件
-          .onbeforeexit(() => {
-            console.log("确认完毕之后执行的事件");
-          })
-          .start();
+        .setOptions(this.introOption)
+        // 点击结束按钮后执行的事件
+        .oncomplete(() => {
+          console.log("点击结束按钮后执行的事件");
+        })
+        // 点击跳过按钮后执行的事件
+        .onexit(() => {
+          console.log("点击跳过按钮后执行的事件");
+        })
+        // 确认完毕之后执行的事件
+        .onbeforeexit(() => {
+          console.log("确认完毕之后执行的事件");
+        })
+        .start();
     },
 
     //拉宽控件

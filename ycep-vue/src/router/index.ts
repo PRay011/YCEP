@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -75,7 +75,7 @@ const router = createRouter({
         }
 
     ],
-    scrollBehavior(to, from, savedPosition) {
+    scrollBehavior(to: any, from: any, savedPosition: any) {
         //if判断可加可不加、根据自己需求
         //savedPosition当且仅当通过浏览器的前进/后退按钮触发时才可用
         if (savedPosition) {

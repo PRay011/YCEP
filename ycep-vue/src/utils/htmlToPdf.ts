@@ -1,7 +1,7 @@
 import html2Canvas from 'html2canvas'
 import JsPDF from 'jspdf'
 
-export function getPdf(thesis) {
+export function getPdf(thesis: any) {
     var title = thesis.title
     html2Canvas(<HTMLElement>document.querySelector('#printDiv'), {
         allowTaint: true

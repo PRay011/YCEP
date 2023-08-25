@@ -59,10 +59,7 @@
             </div>
           </div>
         </div>
-        <div
-          class="chatCharacter"
-          v-if="isGame"
-        ></div>
+        <div class="chatCharacter" v-if="isGame"></div>
         <div class="chatBox" v-if="isGame">
           <div class="chat-content">{{ data }}</div>
           <button class="chat-page-previous" @click="previousPage()">
@@ -119,7 +116,7 @@
             <img :src="imgHost + plot.imgSrc" alt="游戏图片" />
           </div>
           <div class="image" v-for="imgSrc in gameDetailImgSrc">
-            <img :src="imgHost+imgSrc" alt="游戏图片" />
+            <img :src="imgHost + imgSrc" alt="游戏图片" />
           </div>
         </div>
       </div>
@@ -208,11 +205,7 @@ export default defineComponent({
         id: 0,
         imgSrc: image1,
       },
-      gameDetailImgSrc: [
-        "5.jpg",
-        "10.jpg",
-        "17.jpg",
-      ],
+      gameDetailImgSrc: ["5.jpg", "10.jpg", "17.jpg"],
       //单页剧情
       data: "",
       // 用于存放剧情
@@ -655,11 +648,11 @@ export default defineComponent({
     },
     //游戏步骤排序
     //开始拖拽事件
-    onStart(e) {
+    onStart(e: any) {
       // console.log(e);
     },
     //拖拽结束事件
-    onEnd(e) {
+    onEnd(e: any) {
       // 这里将会有调整前后的 index 及其他可能需要传递给接口的信息
       // console.log(e);
     },
