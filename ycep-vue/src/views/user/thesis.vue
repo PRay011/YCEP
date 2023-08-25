@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../../assets/style/css/user/thesis.scss">
 <template>
   <!--  顶部导航栏-->
   <!--  <Top/>-->
@@ -398,24 +399,30 @@
             </div>
             <!-- 这里将显示聊天消息 -->
             <el-scrollbar height="600px">
-              <div class="message ai">
-                <p>AI： 有什么可以帮助您？</p>
+              <div class="message-container ai">
+                <div class="message ai">
+                  <p>AI：有什么可以帮助您？</p>
+                </div>
               </div>
               <template
                   v-for="(conversation, index) in conversations"
                   :key="index"
               >
-                <div class="message user">
-                  <p style="white-space: pre-wrap;">你: {{ conversation.user }}</p>
+                <div class="message-container user">
+                  <div class="message user">
+                    <p>你：{{ conversation.user }}</p>
+                  </div>
                 </div>
-                <div
-                  class="message ai"
-                  v-if="
-                    conversation.ai !== null && conversation.ai !== 'waiting...'
-                  "
-                >
-                 <p style="white-space: pre-wrap;">AI: {{ conversation.ai }}</p>
+                <div class="message-container ai">
+                  <div
+                      class="message ai"
+                      v-if="conversation.ai !== null && conversation.ai !== 'waiting...'"
+                  >
+                    <!--                 <p>AI: {{ conversation.ai }}</p>-->
+                    <span>AI：<p class="chapter" v-for="p in conversation.aiMessageArray">{{ p }}</p></span>
+                  </div>
                 </div>
+
               </template>
             </el-scrollbar>
           </div>
@@ -538,6 +545,7 @@ export default defineComponent({
         {
           user: "摘要和关键词是？",
           ai: "在摘要与关键词中，简明扼要地总结您的论文内容，并列出关键词方便检索。",
+          aiMessageArray: [],
         },
       ],
       conversationIndex: 0,
@@ -747,27 +755,32 @@ export default defineComponent({
 
     chatAI(message: any) {
       let that = this;
-      let messageContent = 'dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasgbdyuiashgduiasd\n\n';
-      let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, '<br />');
-      this.conversations[this.conversationIndex++].ai = messageContent;
+      let messageContent = 'dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasdhsjadhjkasdhashdaskjdhjasksgbdyuiashgduiasd\nsdgjhasgdjhasgdhasdajh\n';
+      //将文本按每段存放入数组中，便于后续缩进2em
+      Reflect.set(this.conversations[this.conversationIndex], 'aiMessageArray', messageContent.split("\n").map(item => item.trim()));
+      console.log('this.conversationIndex:'+this.conversationIndex)
+      // this.conversations[this.conversationIndex++].aiMessageArray = messageContent.split("\n").map(item => item.trim());
+      // let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, '&emsp;&emsp;<br />');
+      this.conversations[this.conversationIndex].ai = messageContent;
+      this.conversationIndex++;
       this.userMessage = "";
       let data = {
         content: message,
         sessionKey: that.sessionKey,
       };
-      chat(data)
-        .then((res: any) => {
-          console.log("chat");
-          console.log(res);
-          let aiResponse = res.msg.replace(/(\r\n|\n|\r)/gm, '<br />');
-          console.log(that.conversations);
-          this.conversations[this.conversationIndex++].ai = aiResponse;
-          this.userMessage = "";
-          //接收ai的回应
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+      // chat(data)
+      //   .then((res: any) => {
+      //     console.log("chat");
+      //     console.log(res);
+      //     let aiResponse = res.msg.replace(/(\r\n|\n|\r)/gm, '<br />');
+      //     console.log(that.conversations);
+      //     this.conversations[this.conversationIndex++].ai = aiResponse;
+      //     this.userMessage = "";
+      //     //接收ai的回应
+      //   })
+      //   .catch((err: any) => {
+      //     console.log(err);
+      //   });
     },
 
     refreash() {
