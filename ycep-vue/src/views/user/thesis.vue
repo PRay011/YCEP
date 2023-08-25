@@ -64,20 +64,20 @@
             @click="confirmPaperBtnClick"
           >
             <el-icon size="32" color="#363636">
-              <DocumentChecked />
+              <CircleCheckFilled />
             </el-icon>
             <p>确认生成</p>
           </div>
-          <div
-            class="title-item level2"
-            v-if="currentTitleNav === 2"
-            @click="downloadThesis"
-          >
-            <el-icon size="32" color="#363636">
-              <CircleCheckFilled />
-            </el-icon>
-            <p>下载论文</p>
-          </div>
+<!--          <div-->
+<!--            class="title-item level2"-->
+<!--            v-if="currentTitleNav === 2"-->
+<!--            @click="downloadThesis"-->
+<!--          >-->
+<!--            <el-icon size="32" color="#363636">-->
+<!--              <DocumentChecked />-->
+<!--            </el-icon>-->
+<!--            <p>下载论文</p>-->
+<!--          </div>-->
         </div>
         <div class="actions">
           <!--          <button class="backToTest" @click="backToTestClick">回到试题</button>-->
@@ -534,8 +534,11 @@
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="backToIndexClick">回到首页</el-button>
-            <el-button type="primary" @click="toSelfCenter">
-              个人主页
+<!--            <el-button type="primary" @click="toSelfCenter">-->
+<!--              个人主页-->
+<!--            </el-button>-->
+            <el-button type="primary" @click="downloadThesis">
+              下载论文
             </el-button>
           </span>
         </template>
