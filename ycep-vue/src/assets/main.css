@@ -1,8 +1,26 @@
 @import './base.css';
 /*全局应用样式*/
+::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 8px;
+    height: 330px;
+    background-color: #EDEDED;
+}
+
+::-webkit-scrollbar-thumb { /*滚动条里面的滑块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.12);
+    background: #CDCCCC;
+}
+
+::-webkit-scrollbar-track { /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    background: #EDEDED;
+}
+
 /*引导动画样式 因为intro.js是全局引用的，只能在这里修改样式*/
 .introjs-skipbutton {
     /*!important;覆盖所有样式*/
     font-size: 18px !important;
-    margin-right:5px !important;
+    margin-right: 5px !important;
 }
