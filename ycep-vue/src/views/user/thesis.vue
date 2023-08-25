@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="../../assets/style/mixin.scss">
 <template>
   <!--  顶部导航栏-->
   <!--  <Top/>-->
@@ -407,30 +406,36 @@
                   :key="index"
               >
                 <div class="message user">
-                  <p>你：{{ conversation.user }}</p>
+                  <p style="white-space: pre-wrap;">你: {{ conversation.user }}</p>
                 </div>
                 <div
-                    class="message ai"
-                    v-if="
+                  class="message ai"
+                  v-if="
                     conversation.ai !== null && conversation.ai !== 'waiting...'
                   "
                 >
-                  <p>AI： {{ conversation.ai }}</p>
+                 <p style="white-space: pre-wrap;">AI: {{ conversation.ai }}</p>
                 </div>
               </template>
             </el-scrollbar>
           </div>
           <div class="user-input">
+            <!--  <input
+                type="text"
+                v-model="userMessage"
+                placeholder="在此输入消息..."
+            />
+            <button @click="sendMessage()">发送</button> -->
             <p class="refresh" @click="refreash()">
               <el-icon size="25">
-                <Refresh/>
+                <Refresh />
               </el-icon>
             </p>
             <input
-                placeholder="Type here"
-                class="input"
-                v-model="userMessage"
-                type="text"
+              placeholder="Type here"
+              class="input"
+              v-model="userMessage"
+              type="text"
             />
             <p class="search">
               <el-icon size="25">
@@ -441,14 +446,14 @@
         </div>
       </div>
       <el-dialog
-          v-model="confirmDialogVisible"
-          title="恭喜你完成论文"
-          width="32%"
-          center
-          top="150px"
+        v-model="confirmDialogVisible"
+        title="恭喜你完成论文"
+        width="32%"
+        center
+        top="150px"
       >
         <div class="content">
-          <img src="../../assets/images/thesis/论文插画7.png" alt="论文配图"/>
+          <img src="../../assets/images/thesis/论文插画7.png" alt="论文配图" />
         </div>
         <template #footer>
           <span class="dialog-footer">
@@ -464,12 +469,12 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import Top from "../../components/top.vue";
 
-import {nextTick, ref} from "vue";
-import {ElInput, ElMessage} from "element-plus";
-import {getPdf} from "../../utils/htmlToPdf";
+import { nextTick, ref } from "vue";
+import { ElInput, ElMessage } from "element-plus";
+import { getPdf } from "../../utils/htmlToPdf";
 import {
   createSession,
   chat,
@@ -505,7 +510,7 @@ export default defineComponent({
         author: "pr",
         address: "优胜路小学，湖南省长沙市，410000",
         brief:
-            "本研究旨在探讨将简易的电路知识，以提升中小学生对电路教育的兴趣和理解能力。通过进行一个具有挑战性的游戏，培养学生的逻辑思维、实际问题解决能力和对电路故障的判断能力。游戏通过将电路故障作为关键线索，引导玩家找出偷窃宝石的嫌疑人，同时提供电路相关题目来加深学生的理解。",
+          "本研究旨在探讨将简易的电路知识，以提升中小学生对电路教育的兴趣和理解能力。通过进行一个具有挑战性的游戏，培养学生的逻辑思维、实际问题解决能力和对电路故障的判断能力。游戏通过将电路故障作为关键线索，引导玩家找出偷窃宝石的嫌疑人，同时提供电路相关题目来加深学生的理解。",
         keywords: ["无线传感器", "网络", "电源电路", "电源效率"],
         content: [
           //一、
@@ -580,7 +585,7 @@ export default defineComponent({
       maxWidth: 1000, // 设置最小宽度
     };
   },
-  components: {Top},
+  components: { Top },
   mounted() {
     this.ready();
     //为保证页面渲染成功后调用函数，使用nextTick
@@ -657,13 +662,13 @@ export default defineComponent({
     showBasicThesis() {
       let that = this;
       getBasicThesis(that.id)
-          .then((res) => {
-            console.log("论文框架", res);
-            this.thesis = res.data;
-          })
-          .catch((err: any) => {
-            console.log(err);
-          });
+        .then((res) => {
+          console.log("论文框架", res);
+          this.thesis = res.data;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     //点击AI生成关键词和摘要按钮
     aiKeywordsClick() {
@@ -679,18 +684,18 @@ export default defineComponent({
       };
       console.log(that.thesis.content);
       getKeywordsAndBrief(data)
-          .then((res) => {
-            console.log("AI生成关键词和摘要", res);
-            this.thesis.keywords = res.data.keyword;
-            this.thesis.brief = res.data.abstract;
-            ElMessage({
-              message: "AI成功生成关键词和摘要！",
-              type: "success",
-            });
-          })
-          .catch((err: any) => {
-            console.log(err);
+        .then((res) => {
+          console.log("AI生成关键词和摘要", res);
+          this.thesis.keywords = res.data.keyword;
+          this.thesis.brief = res.data.abstract;
+          ElMessage({
+            message: "AI成功生成关键词和摘要！",
+            type: "success",
           });
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     //关键词标签
     handleClose(tag: string) {
@@ -725,107 +730,102 @@ export default defineComponent({
         part: this.sessionPart,
       };
       createSession(data)
-          .then((res: any) => {
-            console.log("create");
-            that.sessionKey = res.data;
-            that.inSession = true;
-            // if (that.inSession) {
-            //   that.chatAI(that.userMessage);
-            // }
-          })
-          .catch((err: any) => {
-            console.log(err);
-          });
+        .then((res: any) => {
+          console.log("create");
+          that.sessionKey = res.data;
+          that.inSession = true;
+          if (that.inSession) {
+            that.chatAI(that.userMessage);
+          }
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
 
     chatAI(message: any) {
       let that = this;
+      // let messageContent = 'dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasgbdyuiashgduiasd\n\n';
+      // let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, '<br />');
+      // this.conversations[this.conversationIndex++].ai = messageContent;
+      // this.userMessage = "";
       let data = {
         content: message,
         sessionKey: that.sessionKey,
       };
       chat(data)
-          .then((res: any) => {
-            console.log("chat");
-            console.log(res);
-            let aiResponse = res.msg;
-            console.log(that.conversations);
-            console.log(this.conversationIndex);
-            this.conversations[this.conversationIndex++].ai = aiResponse;
-            this.userMessage = "";
-            //接收ai的回应
-          })
-          .catch((err: any) => {
-            console.log(err);
-          });
+        .then((res: any) => {
+          console.log("chat");
+          console.log(res);
+          let aiResponse = res.msg.replace(/(\r\n|\n|\r)/gm, '<br />');
+          console.log(that.conversations);
+          this.conversations[this.conversationIndex++].ai = aiResponse;
+          this.userMessage = "";
+          //接收ai的回应
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
 
     refreash() {
       let that = this;
       if (that.inSession) {
         refreshSession(that.sessionKey)
-            .then((res: any) => {
-              console.log("refresh");
-              that.conversationIndex = 0;
-              that.conversations = [];
-            })
-            .catch((err: any) => {
-              console.log(err);
-            });
+          .then((res: any) => {
+            console.log("refresh");
+            that.conversationIndex = 0;
+            that.conversations = [];
+          })
+          .catch((err: any) => {
+            console.log(err);
+          });
       }
     },
     otherPart() {
       let that = this;
       deleteSession(that.sessionKey)
-          .then((res: any) => {
-            console.log("otherPart");
-            this.inSession = false;
-            that.create();
-          })
-          .catch((err: any) => {
-            console.log(err);
-          });
+        .then((res: any) => {
+          console.log("otherPart");
+          this.inSession = false;
+          that.create();
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     close(next: any) {
       let that = this;
       deleteSession(that.sessionKey)
-          .then((res: any) => {
-            console.log("delete");
-            that.conversations = [];
-            next();
-          })
-          .catch((err: any) => {
-            console.log(err);
-          });
+        .then((res: any) => {
+          console.log("delete");
+          that.conversations = [];
+          next();
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
     sendMessage() {
       let that = this;
       console.log(this.userMessage);
-      if(this.userMessage==''||this.userMessage==null){
-
-        ElMessage({
-          message: "发送内容不能为空！",
-          type: "error",
+      this.conversations.push({
+        user: this.userMessage,
+        ai: "waiting...",
+      });
+      console.log(this.conversations);
+      if (this.inSession) {
+        //会话已开启
+        this.chatAI(this.userMessage);
+      } else {
+        //会话未开启
+        let start = new Promise(function (resolve, reject) {
+          that.create();
+          resolve("会话开启");
         });
-      }else{
-        this.conversations.push({
-          user: this.userMessage,
-          ai: "waiting...",
+        start.then(function () {
+          that.chatAI(that.userMessage);
         });
-        console.log(this.conversations);
-        if (this.inSession) {
-          //会话已开启
-          this.chatAI(this.userMessage);
-        } else {
-          //会话未开启
-          let start = new Promise(function (resolve, reject) {
-            that.create();
-            resolve("会话开启");
-          });
-          start.then(function () {
-            that.chatAI(that.userMessage);
-          });
-        }
       }
     },
     //回到试题页面
@@ -904,21 +904,19 @@ export default defineComponent({
       const containerRect = event.target.getBoundingClientRect();
       const borderWidth = 2; // 边框宽度，根据实际情况调整
       const isBorderClicked =
-          Math.abs(event.clientX - containerRect.left) <= borderWidth;
+        Math.abs(event.clientX - containerRect.left) <= borderWidth;
 
       if (isBorderClicked) {
         this.isMouseOver = true;
-        console.log("true");
       } else {
         this.isMouseOver = false;
-        console.log("false");
       }
     },
     startResize(event: any) {
       const containerRect = event.target.getBoundingClientRect();
       const borderWidth = 2; // 边框宽度，根据实际情况调整
       const isBorderClicked =
-          Math.abs(event.clientX - containerRect.left) <= borderWidth;
+        Math.abs(event.clientX - containerRect.left) <= borderWidth;
 
       if (isBorderClicked) {
         this.isResizing = true;
