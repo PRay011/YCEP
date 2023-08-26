@@ -392,7 +392,7 @@
                   />
                 </el-form-item>
               </el-form>
-              <button class="next" @click="currentTitleNav=2;currentNav=7">预览论文</button>
+              <button class="next" @click="nextStep(7)">预览论文</button>
             </div>
             <div class="paper-content" v-if="currentNav == 7" id="printDiv">
               <div class="block1">
@@ -408,7 +408,6 @@
                 <p class="text3">（{{ thesis.address }}）</p>
               </div>
               <br />
-
               <div class="block3">
                 <p class="text1">摘要：</p>
                 <p class="text2">{{ thesis.brief }}</p>
@@ -688,6 +687,10 @@ export default defineComponent({
     //下一步
     nextStep(nav: number) {
       this.leftNavClick(nav);
+      if(nav == 7){
+        this.currentTitleNav=2;
+        this.leftNavClick(7);
+      }
     },
     leftNavClick(index: any) {
       this.currentNav = index;
@@ -757,6 +760,10 @@ export default defineComponent({
     },
     //点击AI生成关键词和摘要按钮
     aiKeywordsClick() {
+      ElMessage({
+        message: "正在生成，请稍后...",
+        type: "info",
+      });
       this.showKeywordAndBrief();
     },
     //AI生成关键词和摘要
@@ -830,32 +837,34 @@ export default defineComponent({
 
     chatAI(message: any) {
       let that = this;
-      let messageContent = 'dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasdhsjadhjkasdhashdaskjdhjasksgbdyuiashgduiasd\nsdgjhasgdjhasgdhasdajh\n';
-      //将文本按每段存放入数组中，便于后续缩进2em
-      Reflect.set(this.conversations[this.conversationIndex], 'aiMessageArray', messageContent.split("\n").map(item => item.trim()));
-      console.log('this.conversationIndex:'+this.conversationIndex)
+      // let messageContent = 'dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasdhsjadhjkasdhashdaskjdhjasksgbdyuiashgduiasd\nsdgjhasgdjhasgdhasdajh\n';
+      // console.log('this.conversationIndex:'+this.conversationIndex)
       // this.conversations[this.conversationIndex++].aiMessageArray = messageContent.split("\n").map(item => item.trim());
       // let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, '&emsp;&emsp;<br />');
-      this.conversations[this.conversationIndex].ai = messageContent;
-      this.conversationIndex++;
+      // this.conversations[this.conversationIndex].ai = messageContent;
+      // this.conversationIndex++;
       this.userMessage = "";
       let data = {
         content: message,
         sessionKey: that.sessionKey,
       };
-      // chat(data)
-      //   .then((res: any) => {
-      //     console.log("chat");
-      //     console.log(res);
-      //     let aiResponse = res.msg.replace(/(\r\n|\n|\r)/gm, '<br />');
-      //     console.log(that.conversations);
-      //     this.conversations[this.conversationIndex++].ai = aiResponse;
-      //     this.userMessage = "";
-      //     //接收ai的回应
-      //   })
-      //   .catch((err: any) => {
-      //     console.log(err);
-      //   });
+      chat(data)
+        .then((res: any) => {
+          console.log("chat");
+          console.log(res);
+          // let aiResponse = res.msg.replace(/(\r\n|\n|\r)/gm, '<br />');
+          let aiResponse = res.msg;
+          console.log(that.conversations);
+          //将文本按每段存放入数组中，便于后续缩进2em
+          Reflect.set(this.conversations[this.conversationIndex], 'aiMessageArray', aiResponse.split("\n").map(item => item.trim()));
+          this.conversations[this.conversationIndex].ai = aiResponse;
+          this.userMessage = "";
+          //接收ai的回应
+          this.conversationIndex++;
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     },
 
     refreash() {
