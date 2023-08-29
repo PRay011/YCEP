@@ -482,11 +482,12 @@
                     <p>你：{{ conversation.user }}</p>
                   </div>
                 </div>
-                <div class="message-container ai"
-                     v-if="conversation.ai !== null && conversation.ai !== 'waiting...'">
-                  <div class="message ai">
-                    <!--                 <p>AI: {{ conversation.ai }}</p>-->
-                    <span>AI：<p class="chapter" v-for="p in conversation.aiMessageArray">{{ p }}</p></span>
+                <div class="message-container ai">
+                  <div
+                      class="message ai"
+                      v-if="conversation.ai !== null && conversation.ai !== 'waiting...'"
+                  >
+                    <span>AI：<p class="chapter" style="white-space: pre-wrap; color:black" v-html="conversation.ai"></p></span>
                   </div>
                 </div>
                 <div class="message-container ai" v-else>
@@ -827,11 +828,10 @@ export default defineComponent({
       createSession(data)
         .then((res: any) => {
           console.log("create");
+          console.log(res);
           that.sessionKey = res.data;
+          console.log(res.data);
           that.inSession = true;
-          if (that.inSession) {
-            that.chatAI(that.userMessage);
-          }
         })
         .catch((err: any) => {
           console.log(err);
@@ -840,13 +840,12 @@ export default defineComponent({
 
     chatAI(message: any) {
       let that = this;
-      // let messageContent = 'dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasdhsjadhjkasdhashdaskjdhjasksgbdyuiashgduiasd\nsdgjhasgdjhasgdhasdajh\n';
-      // console.log('this.conversationIndex:'+this.conversationIndex)
-      // this.conversations[this.conversationIndex++].aiMessageArray = messageContent.split("\n").map(item => item.trim());
-      // let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, '&emsp;&emsp;<br />');
-      // this.conversations[this.conversationIndex].ai = messageContent;
-      // this.conversationIndex++;
-      this.userMessage = "";
+      // let messageContent =
+      //   "dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasgbdyuiashgduiaasdfafassfasfsafsd\n\nasdafafafafafafasfasfasf";
+      // let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, "<br />");
+      // this.conversations[this.conversationIndex++].ai = messageContent;
+      // this.userMessage = "";
+
       let data = {
         content: message,
         sessionKey: that.sessionKey,
@@ -855,11 +854,11 @@ export default defineComponent({
         .then((res: any) => {
           console.log("chat");
           console.log(res);
-          // let aiResponse = res.msg.replace(/(\r\n|\n|\r)/gm, '<br />');
-          let aiResponse = res.msg;
+          let aiResponse = res.msg.replace(/(\r\n|\n|\r|\\n)/gm, "<br>  ");
+          aiResponse = '  '+ aiResponse;
           console.log(that.conversations);
           //将文本按每段存放入数组中，便于后续缩进2em
-          Reflect.set(this.conversations[this.conversationIndex], 'aiMessageArray', aiResponse.split("\n").map(item => item.trim()));
+          // Reflect.set(this.conversations[this.conversationIndex], 'aiMessageArray', aiResponse.split("\n").map(item => item.trim()));
           this.conversations[this.conversationIndex].ai = aiResponse;
           this.userMessage = "";
           //接收ai的回应
@@ -910,7 +909,7 @@ export default defineComponent({
     },
     sendMessage() {
       let that = this;
-      console.log(this.userMessage);
+      console.log(this.inSession);
       if (this.userMessage == "" || this.userMessage == null) {
         ElMessage({
           message: "发送的内容不能为空！",
@@ -921,19 +920,47 @@ export default defineComponent({
           user: this.userMessage,
           ai: "waiting...",
         });
-        console.log(this.conversations);
         if (this.inSession) {
           //会话已开启
           this.chatAI(this.userMessage);
         } else {
           //会话未开启
-          let start = new Promise(function (resolve, reject) {
-            that.create();
-            resolve("会话开启");
-          });
-          start.then(function () {
-            that.chatAI(that.userMessage);
-          });
+          let data = {
+            theme: that.thesis.title,
+            part: that.sessionPart,
+          };
+          createSession(data)
+            .then((res: any) => {
+              console.log("create");
+              console.log(res);
+              that.sessionKey = res.data;
+              that.inSession = true;
+              that.chatAI(that.userMessage);
+            })
+            .catch((err: any) => {
+              console.log(err);
+            });
+          // let start = new Promise(function (resolve, reject) {
+          //   // resolve 在外部函数的回调中调用
+          //   let data = {
+          //     theme: that.thesis.title,
+          //     part: that.sessionPart,
+          //   };
+          //   createSession(data)
+          //     .then((res: any) => {
+          //       console.log("create");
+          //       console.log(res);
+          //       that.sessionKey = res.data;
+          //       that.inSession = true;
+          //       resolve("会话开启");
+          //     })
+          //     .catch((err: any) => {
+          //       console.log(err);
+          //     });
+          // });
+          // start.then(function () {
+          //   that.chatAI(that.userMessage);
+          // });
         }
       }
     },
