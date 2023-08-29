@@ -482,13 +482,16 @@
                     <p>你：{{ conversation.user }}</p>
                   </div>
                 </div>
-                <div class="message-container ai">
-                  <div
-                      class="message ai"
-                      v-if="conversation.ai !== null && conversation.ai !== 'waiting...'"
-                  >
+                <div class="message-container ai"
+                     v-if="conversation.ai !== null && conversation.ai !== 'waiting...'">
+                  <div class="message ai">
                     <!--                 <p>AI: {{ conversation.ai }}</p>-->
                     <span>AI：<p class="chapter" v-for="p in conversation.aiMessageArray">{{ p }}</p></span>
+                  </div>
+                </div>
+                <div class="message-container ai" v-else>
+                  <div class="message ai">
+                    <span>AI：请稍等...</span>
                   </div>
                 </div>
               </template>
@@ -622,7 +625,7 @@ export default defineComponent({
       userMessage: "",
       responseMessage: "",
       //开启会话
-      sessionPart: "研究背景",
+      sessionPart: "研究背景和必要性分析",
       inSession: false,
       sessionKey: "",
       introOption: {
@@ -671,7 +674,7 @@ export default defineComponent({
       this.$nextTick(() => {
         this.initGuide(); // 调用新手引导的方法
       });
-    }, 100);
+    }, 800);
   },
   methods: {
     ready() {
@@ -696,10 +699,10 @@ export default defineComponent({
       this.currentNav = index;
       switch (index) {
         case 1:
-          this.sessionPart = "研究背景";
+          this.sessionPart = "研究背景和必要性分析";
           break;
         case 2:
-          this.sessionPart = "背景&必要性";
+          this.sessionPart = "研究背景和必要性分析";
           break;
         case 3:
           this.sessionPart = "创意来源";
@@ -711,15 +714,15 @@ export default defineComponent({
           this.sessionPart = "创新点";
           break;
         case 6:
-          this.sessionPart = "摘要&关键词";
+          this.sessionPart = "研究背景和必要性分析";
           break;
         case 7:
-          this.sessionPart = "研究背景";
+          this.sessionPart = "研究背景和必要性分析";
           this.thesis.address = this.author.school + "，" + this.author.address + "，" + this.author.zip;
           this.convertToArray();
           break;
         default:
-          this.sessionPart = "研究背景";
+          this.sessionPart = "研究背景和必要性分析";
           break;
       }
       if (this.inSession) {
