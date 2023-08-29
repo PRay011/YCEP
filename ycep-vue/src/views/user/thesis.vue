@@ -64,20 +64,20 @@
             @click="confirmPaperBtnClick"
           >
             <el-icon size="32" color="#363636">
-              <DocumentChecked />
+              <CircleCheckFilled />
             </el-icon>
             <p>确认生成</p>
           </div>
-          <div
-            class="title-item level2"
-            v-if="currentTitleNav === 2"
-            @click="downloadThesis"
-          >
-            <el-icon size="32" color="#363636">
-              <CircleCheckFilled />
-            </el-icon>
-            <p>下载论文</p>
-          </div>
+<!--          <div-->
+<!--            class="title-item level2"-->
+<!--            v-if="currentTitleNav === 2"-->
+<!--            @click="downloadThesis"-->
+<!--          >-->
+<!--            <el-icon size="32" color="#363636">-->
+<!--              <DocumentChecked />-->
+<!--            </el-icon>-->
+<!--            <p>下载论文</p>-->
+<!--          </div>-->
         </div>
         <div class="actions">
           <!--          <button class="backToTest" @click="backToTestClick">回到试题</button>-->
@@ -189,45 +189,25 @@
               <div class="info">
                 <p class="text">① AI智能助手全程回答您的问题</p>
                 <div class="image">
-                  <img
-                    src="../../assets/images/thesis/img1.png"
-                    alt=""
-                    :width="350"
-                  />
+                  <img src="../../assets/images/thesis/img1.png" alt="" :width="350">
                 </div>
               </div>
               <div class="arrow">
-                <img
-                  src="../../assets/images/thesis/downarrow.png"
-                  alt=""
-                  :width="30"
-                />
+                <img src="../../assets/images/thesis/downarrow.png" alt="" :width="30">
               </div>
               <div class="info">
                 <p class="text">② 填写论文基本内容</p>
                 <div class="image">
-                  <img
-                    src="../../assets/images/thesis/img2.png"
-                    alt=""
-                    :width="800"
-                  />
+                  <img src="../../assets/images/thesis/img2.png" alt="" :width="800">
                 </div>
               </div>
               <div class="arrow">
-                <img
-                  src="../../assets/images/thesis/downarrow.png"
-                  alt=""
-                  :width="30"
-                />
+                <img src="../../assets/images/thesis/downarrow.png" alt="" :width="30">
               </div>
               <div class="info">
                 <p class="text">③ 论文预览</p>
                 <div class="image">
-                  <img
-                    src="../../assets/images/thesis/img3.png"
-                    alt=""
-                    :width="800"
-                  />
+                  <img src="../../assets/images/thesis/img3.png" alt="" :width="800">
                 </div>
               </div>
               <button @click="editPaperBtnClick">开始编辑论文</button>
@@ -364,9 +344,9 @@
                       />
                       <p class="text">AI生成</p>
                     </div>
-                    <!--                    <button class="aiBtn" @click="aiKeywordsClick">-->
-                    <!--                      AI生成-->
-                    <!--                    </button>-->
+<!--                    <button class="aiBtn" @click="aiKeywordsClick">-->
+<!--                      AI生成-->
+<!--                    </button>-->
                   </span>
                   <p class="desc">
                     在这里填写你要生成的论文的摘要和关键词，关键词可以有不止一个，摘要是整篇论文最核心的地方，字数不能过多，要抓住重点，AI可以根据前面你所写的内容来自动生成，不过仅限参考哦~
@@ -412,15 +392,7 @@
                   />
                 </el-form-item>
               </el-form>
-              <button
-                class="next"
-                @click="
-                  currentTitleNav = 2;
-                  currentNav = 7;
-                "
-              >
-                预览论文
-              </button>
+              <button class="next" @click="nextStep(7)">预览论文</button>
             </div>
             <div class="paper-content" v-if="currentNav == 7" id="printDiv">
               <div class="block1">
@@ -436,7 +408,6 @@
                 <p class="text3">（{{ thesis.address }}）</p>
               </div>
               <br />
-
               <div class="block3">
                 <p class="text1">摘要：</p>
                 <p class="text2">{{ thesis.brief }}</p>
@@ -497,8 +468,10 @@
             </div>
             <!-- 这里将显示聊天消息 -->
             <el-scrollbar height="600px">
-              <div class="message ai">
-                <p>AI： 有什么可以帮助您？</p>
+              <div class="message-container ai">
+                <div class="message ai">
+                  <p>AI：有什么可以帮助您？</p>
+                </div>
               </div>
               <template
                 v-for="(conversation, index) in conversations"
@@ -517,7 +490,11 @@
                   "
                 >
                   AI:
-                  <pre style="white-space: pre-wrap; color:black" v-html="conversation.ai"></pre>
+                  <pre class="chapter" style="white-space: pre-wrap; color:black" v-html="conversation.ai"></pre>
+
+                    <!--                 <p>AI: {{ conversation.ai }}</p>-->
+                    <!-- <span>AI：<p class="chapter" v-for="p in conversation.aiMessageArray">{{ p }}</p></span> -->
+
                 </div>
               </template>
             </el-scrollbar>
@@ -561,8 +538,11 @@
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="backToIndexClick">回到首页</el-button>
-            <el-button type="primary" @click="toSelfCenter">
-              个人主页
+<!--            <el-button type="primary" @click="toSelfCenter">-->
+<!--              个人主页-->
+<!--            </el-button>-->
+            <el-button type="primary" @click="downloadThesis">
+              下载论文
             </el-button>
           </span>
         </template>
@@ -618,17 +598,17 @@ export default defineComponent({
         content: [
           //一、
           "中小学生的综合素质教育需要注重培养学生的创新能力、问题解决能力和逻辑思维。电路教育作为实际应用领域，能够激发学生的兴趣。然而，传统的电路教育方式难以吸引学生。结合游戏设计，可以创造出一个更具趣味性和参与感的学习环境。\n" +
-            '"电路侦探" 游戏的成功设计为中小学生的电路教育提供了一种新的途径。类似的方法也可以应用于其他学科，提高学生的学习积极性和效果。未来，可以进一步优化游戏设计，开发更多关卡和题目，扩展游戏的教育价值。',
+          '"电路侦探" 游戏的成功设计为中小学生的电路教育提供了一种新的途径。类似的方法也可以应用于其他学科，提高学生的学习积极性和效果。未来，可以进一步优化游戏设计，开发更多关卡和题目，扩展游戏的教育价值。',
           //二、
           "游戏设计灵感来自于经典的侦探故事和电路故障排查过程。设计的目标是将学习与娱乐相结合，通过解决电路故障问题，锻炼学生的逻辑思维和判断能力。\n" +
-            "我们进行了一系列评估，包括问卷调查、知识测试和学生反馈，以评估创新方法在电路教育中的实际效果。结果表明，学生对于创新方法的学习体验更为积极，并且在知识掌握方面表现更优异。",
+          "我们进行了一系列评估，包括问卷调查、知识测试和学生反馈，以评估创新方法在电路教育中的实际效果。结果表明，学生对于创新方法的学习体验更为积极，并且在知识掌握方面表现更优异。",
           //三、
           "我们设计了一组实验，对比了传统课堂教学和创新方法的教育效果。结果显示，采用创新方法的学生在电路知识的理解和问题解决能力方面表现出更明显的提升。\n" +
-            "创新方法为中小学生电路教育带来了新的可能性。本研究的实验和评估结果表明，实际案例分析和互动式学习等方法能够有效地提升学生的学习兴趣和问题解决能力，为电路教育注入了新的活力。",
+          "创新方法为中小学生电路教育带来了新的可能性。本研究的实验和评估结果表明，实际案例分析和互动式学习等方法能够有效地提升学生的学习兴趣和问题解决能力，为电路教育注入了新的活力。",
           //四、
           "本研究提出了以下创新方法，以改善中小学生的电路教育：\n" +
-            "实际案例分析： 在课堂中引入实际电路故障案例，让学生从实际问题入手，深入理解电路原理和故障排除方法。\n" +
-            "互动式学习： 通过小组合作、讨论和实验，在学生之间创造积极互动的学习氛围，培养他们的团队合作和沟通能力。",
+          "实际案例分析： 在课堂中引入实际电路故障案例，让学生从实际问题入手，深入理解电路原理和故障排除方法。\n" +
+          "互动式学习： 通过小组合作、讨论和实验，在学生之间创造积极互动的学习氛围，培养他们的团队合作和沟通能力。",
         ],
       },
       chapter1: [],
@@ -712,6 +692,10 @@ export default defineComponent({
     //下一步
     nextStep(nav: number) {
       this.leftNavClick(nav);
+      if(nav == 7){
+        this.currentTitleNav=2;
+        this.leftNavClick(7);
+      }
     },
     leftNavClick(index: any) {
       this.currentNav = index;
@@ -736,12 +720,7 @@ export default defineComponent({
           break;
         case 7:
           this.sessionPart = "研究背景";
-          this.thesis.address =
-            this.author.school +
-            "，" +
-            this.author.address +
-            "，" +
-            this.author.zip;
+          this.thesis.address = this.author.school + "，" + this.author.address + "，" + this.author.zip;
           this.convertToArray();
           break;
         default:
@@ -754,18 +733,10 @@ export default defineComponent({
     },
     //将输入框中的文本按换行转换成数组
     convertToArray() {
-      this.chapter1 = this.thesis.content[0]
-        .split("\n")
-        .map((item) => item.trim());
-      this.chapter2 = this.thesis.content[1]
-        .split("\n")
-        .map((item) => item.trim());
-      this.chapter3 = this.thesis.content[2]
-        .split("\n")
-        .map((item) => item.trim());
-      this.chapter4 = this.thesis.content[3]
-        .split("\n")
-        .map((item) => item.trim());
+      this.chapter1 = this.thesis.content[0].split("\n").map(item => item.trim());
+      this.chapter2 = this.thesis.content[1].split("\n").map(item => item.trim());
+      this.chapter3 = this.thesis.content[2].split("\n").map(item => item.trim());
+      this.chapter4 = this.thesis.content[3].split("\n").map(item => item.trim());
     },
     titleItemNavClick(index: any) {
       this.currentTitleNav = index;
@@ -794,6 +765,10 @@ export default defineComponent({
     },
     //点击AI生成关键词和摘要按钮
     aiKeywordsClick() {
+      ElMessage({
+        message: "正在生成，请稍后...",
+        type: "info",
+      });
       this.showKeywordAndBrief();
     },
     //AI生成关键词和摘要
@@ -871,6 +846,7 @@ export default defineComponent({
       // let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, "<br />");
       // this.conversations[this.conversationIndex++].ai = messageContent;
       // this.userMessage = "";
+
       let data = {
         content: message,
         sessionKey: that.sessionKey,
@@ -883,9 +859,12 @@ export default defineComponent({
           let aiResponse = res.msg.replace(/(\r\n|\n|\r|\\n)/gm, "<br>  ");
           aiResponse = '  '+ aiResponse;
           console.log(that.conversations);
-          this.conversations[this.conversationIndex++].ai = aiResponse;
+          //将文本按每段存放入数组中，便于后续缩进2em
+          // Reflect.set(this.conversations[this.conversationIndex], 'aiMessageArray', aiResponse.split("\n").map(item => item.trim()));
+          this.conversations[this.conversationIndex].ai = aiResponse;
           this.userMessage = "";
           //接收ai的回应
+          this.conversationIndex++;
         })
         .catch((err: any) => {
           console.log(err);
@@ -1019,29 +998,25 @@ export default defineComponent({
           title: "系统使用指导",
           element: "#step1",
           position: "bottom",
-          intro:
-            "点击即可看到生成论文的三步流程，在AI的帮助下轻松生成一篇较为完善的论文。",
+          intro: "点击即可看到生成论文的三步流程，在AI的帮助下轻松生成一篇较为完善的论文。",
         },
         {
           title: "论文撰写",
           element: "#step2",
           position: "bottom",
-          intro:
-            "点击后进入一系列流程，你可以在右方AI的帮助下完成各部分的编写。",
+          intro: "点击后进入一系列流程，你可以在右方AI的帮助下完成各部分的编写。",
         },
         {
           title: "论文预览",
           element: "#step3",
           position: "bottom",
-          intro:
-            "点击此处，系统可以将先前所有内容制作成论文，进行初步预览，若有问题还可以继续返回编辑。",
+          intro: "点击此处，系统可以将先前所有内容制作成论文，进行初步预览，若有问题还可以继续返回编辑。",
         },
         {
           title: "AI助手",
           element: "#step4",
           position: "left",
-          intro:
-            "你可以在此处向AI提出你不懂的问题，可以重复提问选取你满意的回答。",
+          intro: "你可以在此处向AI提出你不懂的问题，可以重复提问选取你满意的回答。",
         },
       ];
       //在main.ts中已经声明过，报红可忽略

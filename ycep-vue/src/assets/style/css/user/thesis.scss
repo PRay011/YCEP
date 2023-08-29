@@ -324,6 +324,8 @@
           .block1 {
             width: 100%;
             height: 40px;
+            margin-bottom: 0;
+            padding-bottom: 0;
             display: flex;
             justify-content: space-between;
             .text1 {
@@ -417,22 +419,46 @@
         background-color: #fff;
         // box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         overflow-y: auto;
-        .message {
-          padding: 8px;
+        .message-container {
           margin-top: 10px;
-          border-width: 2px;
-          border-style: solid;
-          // border-image: linear-gradient(to right, #6157ff, #ee49fd) 1 round;
-          border-image: linear-gradient(to right, #103c17, #64e9ff) 1 round;
-          border-radius: 20px;
-          height: auto;
-        }
-        .message.ai {
-          // background-color: #e1f5fe;
-        }
-
-        .message.user {
-          // background-color: #bbdefb;
+          background-image: linear-gradient(to right, #103c17, #64e9ff);
+          padding: 4px;
+          &.user{
+            border-radius: 15px 15px 0 15px;
+          }
+          &.ai{
+            border-radius: 15px 15px 15px 0;
+          }
+          .message {
+            padding: 8px;
+            //border-width: 3px;
+            border: none;
+            background-color: #ffffff;
+            //border-image: linear-gradient(to right, #6157ff, #ee49fd) 1 round;
+            //border-image: linear-gradient(to right, #103c17, #64e9ff) 1 round;
+            height: auto;
+          }
+          .message.ai {
+            border-radius: 11px 11px 11px 0;
+            span{
+              width:100%;
+              white-space: pre-wrap;
+              word-break: break-word;
+              border-radius: 5px;
+              .chapter{
+                text-indent: 2em;
+              }
+            }
+          }
+          .message.user {
+            border-radius: 11px 11px 0 11px;
+            p{
+              width:100%;
+              white-space: pre-wrap;
+              word-break: break-word;
+              border-radius: 5px;
+            }
+          }
         }
       }
       .user-input {
