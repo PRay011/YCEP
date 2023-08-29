@@ -37,3 +37,11 @@ export function postInterest(data: any) {
         data: data
     })
 }
+
+//查看历史论文
+export function getHistoryThesis() {
+    return request({
+        url: '/ai/paper',
+        method: 'get'
+    })
+}
