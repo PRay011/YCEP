@@ -70,7 +70,7 @@ export function request(config: any) {
         let token = sessionStorage.getItem('token')
         if (token) {
 
-          window.location.href = "/knowledge/index"
+          // window.location.href = "/knowledge/index"
         }
         else {
 

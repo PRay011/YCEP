@@ -505,9 +505,10 @@
                 :key="index"
               >
                 <div class="message user">
-                  <p style="white-space: pre-wrap">
-                    你: {{ conversation.user }}
-                  </p>
+                  
+                  <p
+                    style="white-space: pre-wrap"
+                  >你：{{ conversation.user }}</p>
                 </div>
                 <div
                   class="message ai"
@@ -515,7 +516,8 @@
                     conversation.ai !== null && conversation.ai !== 'waiting...'
                   "
                 >
-                  <p style="white-space: pre-wrap">AI: {{ conversation.ai }}</p>
+                  AI:
+                  <pre style="white-space: pre-wrap; color:black" v-html="conversation.ai"></pre>
                 </div>
               </template>
             </el-scrollbar>
@@ -852,11 +854,10 @@ export default defineComponent({
       createSession(data)
         .then((res: any) => {
           console.log("create");
+          console.log(res);
           that.sessionKey = res.data;
+          console.log(res.data);
           that.inSession = true;
-          if (that.inSession) {
-            that.chatAI(that.userMessage);
-          }
         })
         .catch((err: any) => {
           console.log(err);
@@ -865,20 +866,22 @@ export default defineComponent({
 
     chatAI(message: any) {
       let that = this;
-      let messageContent =
-        "dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasgbdyuiashgduiaasdfafassfasfsafsd\n\nasdafafafafafafasfasfasf";
-      let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, "<br />");
-      this.conversations[this.conversationIndex++].ai = messageContent;
-      this.userMessage = "";
+      // let messageContent =
+      //   "dfsfaSDFAFAF\nASYUDFQUWTYDFsaduiyhasgfyuiasgbdyuiashgduiaasdfafassfasfsafsd\n\nasdafafafafafafasfasfasf";
+      // let messageTest = messageContent.replace(/(\r\n|\n|\r)/gm, "<br />");
+      // this.conversations[this.conversationIndex++].ai = messageContent;
+      // this.userMessage = "";
       let data = {
         content: message,
         sessionKey: that.sessionKey,
       };
+      console.log(data);
       chat(data)
         .then((res: any) => {
           console.log("chat");
           console.log(res);
-          let aiResponse = res.msg.replace(/(\r\n|\n|\r)/gm, "<br />");
+          let aiResponse = res.msg.replace(/(\r\n|\n|\r|\\n)/gm, "<br>  ");
+          aiResponse = '  '+ aiResponse;
           console.log(that.conversations);
           this.conversations[this.conversationIndex++].ai = aiResponse;
           this.userMessage = "";
@@ -929,7 +932,7 @@ export default defineComponent({
     },
     sendMessage() {
       let that = this;
-      console.log(this.userMessage);
+      console.log(this.inSession);
       if (this.userMessage == "" || this.userMessage == null) {
         ElMessage({
           message: "发送的内容不能为空！",
@@ -940,19 +943,47 @@ export default defineComponent({
           user: this.userMessage,
           ai: "waiting...",
         });
-        console.log(this.conversations);
         if (this.inSession) {
           //会话已开启
           this.chatAI(this.userMessage);
         } else {
           //会话未开启
-          let start = new Promise(function (resolve, reject) {
-            that.create();
-            resolve("会话开启");
-          });
-          start.then(function () {
-            that.chatAI(that.userMessage);
-          });
+          let data = {
+            theme: that.thesis.title,
+            part: that.sessionPart,
+          };
+          createSession(data)
+            .then((res: any) => {
+              console.log("create");
+              console.log(res);
+              that.sessionKey = res.data;
+              that.inSession = true;
+              that.chatAI(that.userMessage);
+            })
+            .catch((err: any) => {
+              console.log(err);
+            });
+          // let start = new Promise(function (resolve, reject) {
+          //   // resolve 在外部函数的回调中调用
+          //   let data = {
+          //     theme: that.thesis.title,
+          //     part: that.sessionPart,
+          //   };
+          //   createSession(data)
+          //     .then((res: any) => {
+          //       console.log("create");
+          //       console.log(res);
+          //       that.sessionKey = res.data;
+          //       that.inSession = true;
+          //       resolve("会话开启");
+          //     })
+          //     .catch((err: any) => {
+          //       console.log(err);
+          //     });
+          // });
+          // start.then(function () {
+          //   that.chatAI(that.userMessage);
+          // });
         }
       }
     },
