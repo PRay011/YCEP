@@ -487,6 +487,7 @@
           margin-left: 12%;
           padding-top: 5px;
           display: flex;
+          cursor: pointer;
           &:hover {
             transition: 0.5s;
             color: #fa4753;
@@ -496,6 +497,7 @@
           margin-left: 5%;
           padding-top: 5px;
           display: flex;
+          cursor: pointer;
           &:hover {
             transition: 0.5s;
             color: aqua;

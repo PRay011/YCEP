@@ -482,11 +482,8 @@
                     <p>你：{{ conversation.user }}</p>
                   </div>
                 </div>
-                <div class="message-container ai">
-                  <div
-                      class="message ai"
-                      v-if="conversation.ai !== null && conversation.ai !== 'waiting...'"
-                  >
+                <div class="message-container ai" v-if="conversation.ai !== null && conversation.ai !== 'waiting...'">
+                  <div class="message ai">
                     <span>AI：<p class="chapter" style="white-space: pre-wrap; color:black" v-html="conversation.ai"></p></span>
                   </div>
                 </div>
@@ -854,7 +851,8 @@ export default defineComponent({
         .then((res: any) => {
           console.log("chat");
           console.log(res);
-          let aiResponse = res.msg.replace(/(\r\n|\n|\r|\\n)/gm, "<br>  ");
+          let aiResponse = res.msg.replace(/(\r\n|\n|\r|\\n)/gm, "<br>  ").replace(/(\\)/gm,"");
+
           aiResponse = '  '+ aiResponse;
           console.log(that.conversations);
           //将文本按每段存放入数组中，便于后续缩进2em
