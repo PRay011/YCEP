@@ -37,3 +37,10 @@ export function postInterest(data: any) {
         data: data
     })
 }
+//获取历史论文
+export function getHistoryThesis(pageNum: any, pageSize: any) {
+    return request({
+        url: `/ai/paperList?pageNum=${pageNum}&pageSize=${pageSize}`,
+        method: 'get',
+    })
+}

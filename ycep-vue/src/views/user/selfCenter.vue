@@ -7,7 +7,7 @@
         <div class="self-card">
           <div class="card">
             <div class="card__img">
-              <img alt="背景图片" src="../../assets/images/techBack.jpg"/>
+              <img alt="背景图片" src="../../assets/images/触碰手指.jpg"/>
               <el-icon class="edit-bg" size="26">
                 <Edit/>
               </el-icon>
@@ -420,7 +420,7 @@
 import {defineComponent, getCurrentInstance} from "vue";
 import Top from "../../components/top.vue";
 import {ElMessage} from "element-plus";
-import {getInterest, getUserInfo} from "../../api/user/selfCenter";
+import {getInterest, getUserInfo, putUserInfo, getHistoryThesis} from "../../api/user/selfCenter";
 import {getCategory} from "@/api/knowledge/kind";
 import {postInterest} from "@/api/knowledge";
 import {getPdf} from "@/utils/htmlToPdf";
@@ -442,6 +442,13 @@ export default defineComponent({
       user: {
         account: 3,
         username: "pr",
+        sex: "男",
+        phone: "18312341234",
+        email: "asdfghhjkl@test.com",
+        school: "中南",
+        description: "无",
+      },
+      editUser: {
         sex: "男",
         phone: "18312341234",
         email: "asdfghhjkl@test.com",
@@ -747,6 +754,7 @@ export default defineComponent({
       let isSelectedInterest = sessionStorage.getItem("isSelectedInterest");
       this.isSelectedInterest = isSelectedInterest - 0; //字符串转数字
       this.showCategory();
+      this.showThesis();
     },
     editInfoClick() {
       this.leftNavClick(5);
@@ -759,19 +767,39 @@ export default defineComponent({
       let that = this;
       getUserInfo()
           .then((res: any) => {
-            console.log(res);
+            // console.log(res);
             that.user = res.data;
           })
           .catch((err: any) => {
             console.log(err);
           });
     },
+    //修改用户个人信息
+    userinfoEditClick() {
+      let data = {
+        sex: this.user.sex,
+        phone :this.user.phone,
+        email :this.user.email,
+        school :this.user.school,
+        description : this.user.description
+      }
+      putUserInfo(this.editUser).then((res: any) => {
+        console.log(res);
+        ElMessage({
+          message: "个人信息修改成功！",
+          type: "success",
+        });
+        this.showUserinfo();
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     showCategory() {
       let that = this;
       getCategory()
           .then((res: any) => {
-            console.log("interest");
-            console.log(res);
+            // console.log("interest");
+            // console.log(res);
             that.kindItemList = res.data;
             that.kindItemList.forEach((kind: any, i: any) => {
               kind.items.forEach((item: any, i: any) => {
@@ -801,7 +829,15 @@ export default defineComponent({
         });
       }
     },
+    showThesis() {
+      getHistoryThesis(this.paginationConfig.currentPage,this.paginationConfig.pageSize).then((res: any) => {
+        console.log('论文')
+        console.log(res.data);
 
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     // 翻页
     handlePageChange(val: number) {
       this.paginationConfig.currentPage = val;
@@ -822,13 +858,6 @@ export default defineComponent({
     interestItemClick(kindIndex: number, itemIndex: number) {
       let isSelected = this.kindItemList[kindIndex].items[itemIndex].isSelected;
       this.kindItemList[kindIndex].items[itemIndex].isSelected = !isSelected;
-    },
-    //修改用户个人信息
-    userinfoEditClick() {
-      ElMessage({
-        message: "个人信息修改成功！",
-        type: "success",
-      });
     },
     //修改感兴趣的知识点
     interestEditClick() {
