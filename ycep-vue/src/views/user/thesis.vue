@@ -851,7 +851,7 @@ export default defineComponent({
         .then((res: any) => {
           console.log("chat");
           console.log(res);
-          let aiResponse = res.msg.replace(/(\r\n|\n|\r|\\n)/gm, "<br>  ").replace(/(\\)/gm,"");
+          let aiResponse = res.msg.replace(/(\r\n|\n|\r|\\n)/gm, "<br>        ").replace(/(\\)/gm,"");
 
           aiResponse = '  '+ aiResponse;
           console.log(that.conversations);

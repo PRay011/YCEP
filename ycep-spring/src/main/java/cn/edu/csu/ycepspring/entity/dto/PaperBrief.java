@@ -1,29 +1,31 @@
-package cn.edu.csu.ycepspring.entity.po.mongo;
+package cn.edu.csu.ycepspring.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
-
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "paper")
-public class PaperDocument {
+public class PaperBrief {
     @Id
     private String id;
-    private int account;
-    private String time;
-    private String kind;
-    private String item;
+
+    @Field("title")
     private String title;
-    private String author;
-    private String address;
+
+    @Field("brief")
     private String brief;
+
+    @Field("keywords")
     private List<String> keywords;
-    private List<String> content;
+
+    @Field("time")
+    private String time;
 }
