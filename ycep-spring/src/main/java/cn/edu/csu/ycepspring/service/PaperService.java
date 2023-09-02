@@ -1,11 +1,13 @@
 package cn.edu.csu.ycepspring.service;
 
+import cn.edu.csu.ycepspring.entity.dto.PaperBrief;
 import cn.edu.csu.ycepspring.entity.po.mongo.PaperDocument;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface PaperService {
     void savePaper(PaperDocument paperDocument);
 
-    List<PaperDocument> getPapers(int account);
+    Page<PaperBrief> getPaperList(int account, int pageNum, int pageSize);
+
+    PaperDocument getPaper(String id);
 }

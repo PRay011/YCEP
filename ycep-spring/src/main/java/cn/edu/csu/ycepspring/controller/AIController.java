@@ -6,15 +6,16 @@ import cn.edu.csu.ycepspring.common.utils.TimeUtils;
 import cn.edu.csu.ycepspring.entity.dto.AiChat;
 import cn.edu.csu.ycepspring.entity.dto.AiParam;
 import cn.edu.csu.ycepspring.entity.dto.ArticleVO;
+import cn.edu.csu.ycepspring.entity.dto.PaperBrief;
 import cn.edu.csu.ycepspring.entity.po.mongo.PaperDocument;
 import cn.edu.csu.ycepspring.rpc.ThriftClient;
 import cn.edu.csu.ycepspring.service.PaperService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -119,15 +120,28 @@ public class AIController {
         int account = StpUtil.getLoginIdAsInt();
         paperDocument.setAccount(account);
         paperDocument.setTime(TimeUtils.getTimeNow());
+        System.out.println(paperDocument);
 
         paperService.savePaper(paperDocument);
         return CommonResponse.success("提交成功");
     }
 
-    @GetMapping("/paper")
-    public CommonResponse getPapers() {
+    /**
+     * @return id、title、keyword、brief、time（分页）
+     */
+    @GetMapping("/paperList")
+    public CommonResponse getPaperList(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
         int account = StpUtil.getLoginIdAsInt();
-        List<PaperDocument> paperDocuments = paperService.getPapers(account);
-        return CommonResponse.success(paperDocuments);
+        Page<PaperBrief> paperList = paperService.getPaperList(account, pageNum, pageSize);
+        return CommonResponse.success(paperList);
+    }
+
+    /**
+     * @return 论文详情
+     */
+    @GetMapping("/paper")
+    public CommonResponse getPaper(@RequestParam("id") String id) {
+        PaperDocument paperDocument = paperService.getPaper(id);
+        return CommonResponse.success(paperDocument);
     }
 }
