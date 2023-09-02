@@ -48,6 +48,7 @@ export function request(config: any) {
           break;
         case 401:
           alterMessage = "未登录";
+          sessionStorage.removeItem('token')
           break;
         case 403:
           alterMessage = "无权限";
@@ -69,8 +70,7 @@ export function request(config: any) {
         alert(alterMessage);
         let token = sessionStorage.getItem('token')
         if (token) {
-
-          // window.location.href = "/knowledge/index"
+          window.location.href = "/knowledge/index"
         }
         else {
 
