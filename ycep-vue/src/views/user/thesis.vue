@@ -10,7 +10,7 @@
             src="../../assets/images/thesis/论文插画0.png"
             style="cursor: pointer"
             alt=""
-            @click="currentNav = 0"
+            @click="backToIndexClick"
           />
           <!--          <p class="text">AI帮你写论文</p>-->
         </div>
@@ -813,6 +813,9 @@ export default defineComponent({
     },
     confirmPaperBtnClick() {
       this.confirmDialogVisible = true;
+
+
+
     },
 
     //创建会话

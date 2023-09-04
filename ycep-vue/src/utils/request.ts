@@ -16,6 +16,7 @@ export function request(config: any) {
   });
 
   instance.defaults.headers.post["Content-Type"] = "application/json";
+  instance.defaults.headers.put["Content-Type"] = "application/json";
   //------------------请求拦截-------------------//
   //------------在发送请求之前做些什么------------//
   instance.interceptors.request.use(
@@ -70,7 +71,7 @@ export function request(config: any) {
         alert(alterMessage);
         let token = sessionStorage.getItem('token')
         if (token) {
-          window.location.href = "/knowledge/index"
+          // window.location.href = "/knowledge/index"
         }
         else {
 

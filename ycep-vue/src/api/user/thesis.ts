@@ -8,6 +8,11 @@ export function getPaper() {
     })
 }
 
+//生成历史论文
+export function confirmThesis(data) {
+
+}
+
 //创建会话
 export function createSession(data: any) {
     return request({
