@@ -15,7 +15,7 @@ from rpc import AIService
 class RpcHandler:
     def __init__(self):
         # redis连接池
-        pool = redis.ConnectionPool(host='localhost', port=6379, db=6, password='123456', decode_responses=True)
+        pool = redis.ConnectionPool(host='localhost', port=6379, db=6,  decode_responses=True)
         self.redis = redis.Redis(connection_pool=pool)
 
     def __del__(self):
@@ -103,13 +103,24 @@ class RpcHandler:
 
 
 # 启动服务
+# if __name__ == '__main__':
+#     handler = RpcHandler()
+#     processor = AIService.Processor(handler)
+#     transport = TSocket.TServerSocket(host='127.0.0.1', port=12345)
+#     tfactory = TTransport.TBufferedTransportFactory()
+#     pfactory = TBinaryProtocol.TBinaryProtocolFactory()
+#
+#     server = TServer.TSimpleServer(processor, transport, tfactory, pfactory)
+#     print('Starting the Python server...')
+#     server.serve()
+
+
 if __name__ == '__main__':
     handler = RpcHandler()
-    processor = AIService.Processor(handler)
-    transport = TSocket.TServerSocket(host='127.0.0.1', port=12345)
-    tfactory = TTransport.TBufferedTransportFactory()
-    pfactory = TBinaryProtocol.TBinaryProtocolFactory()
-
-    server = TServer.TSimpleServer(processor, transport, tfactory, pfactory)
-    print('Starting the Python server...')
-    server.serve()
+    theme = '小学生'
+    part = '创意来源'
+    resp = handler.newSession(theme,part)
+    sessionKey = json.loads(resp)['sessionKey']
+    while True:
+        content = input("请输入对话:")
+        print(handler.chat(content, sessionKey))
