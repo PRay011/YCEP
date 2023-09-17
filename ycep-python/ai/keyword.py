@@ -21,7 +21,8 @@ def get_access_token():
 
 
 def get_prompt_keyword(abstract):
-    url = f"https://aip.baidubce.com/rest/2.0/wenxinworkshop/api/v1/template/info?id=2496&summary={abstract}&access_token={get_access_token()}"
+    # url = f"https://aip.baidubce.com/rest/2.0/wenxinworkshop/api/v1/template/info?id=2496&summary={abstract}&access_token={get_access_token()}"
+    url = f"https://aip.baidubce.com/rest/2.0/wenxinworkshop/api/v1/template/info?id=5367&summary={abstract}&access_token={get_access_token()}"
 
     payload = json.dumps("")
     headers = {

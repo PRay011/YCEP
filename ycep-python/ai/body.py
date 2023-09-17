@@ -8,7 +8,8 @@ def get_access_token():
     使用 API Key，Secret Key 获取access_token，替换下列示例中的应用API Key、应用Secret Key
     """
 
-    url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=RokDvGoFYK2fyzcPv1DGjaDQ&client_secret=VICRduW9W87mwamM0uNPe9MbgMybg6On"
+    # url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=RokDvGoFYK2fyzcPv1DGjaDQ&client_secret=VICRduW9W87mwamM0uNPe9MbgMybg6On"
+    url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=DZiAbDTv8NFUsby4Uw5nv3Qq&client_secret=eOrmOtgZQdGfvVLnxVXDHUlBI73prSnt"
 
     payload = json.dumps("")
     headers = {
@@ -22,7 +23,8 @@ def get_access_token():
 
 def get_prompt(theme, part):
     # 在模型上请求prompt模板，theme和part是可以更改的变量，这个函数返回请求到的prompt
-    url = f"https://aip.baidubce.com/rest/2.0/wenxinworkshop/api/v1/template/info?id=2429&theme={theme}&part={part}&access_token={get_access_token()}"
+    # url = f"https://aip.baidubce.com/rest/2.0/wenxinworkshop/api/v1/template/info?id=2429&theme={theme}&part={part}&access_token={get_access_token()}"
+    url = f"https://aip.baidubce.com/rest/2.0/wenxinworkshop/api/v1/template/info?id=5368&theme={theme}&part={part}&access_token={get_access_token()}"
 
     payload = json.dumps("")
     headers = {
@@ -71,3 +73,10 @@ def send(messages, content):
     }
     messages.append(chat_ai)
     return messages, response
+
+# if __name__ == '__main__':
+#     message = []
+#     prompt = get_prompt('小学生创新','创意来源')
+#     send(message, prompt)
+#     while True:
+

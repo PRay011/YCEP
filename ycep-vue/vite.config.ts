@@ -9,7 +9,8 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   server: {
     open: true, //是否自动弹出浏览器页面
-    host: "localhost",
+    // host: "localhost",
+    host: "172.20.10.4",
     port: 7878,
     https: false,
     proxy: {

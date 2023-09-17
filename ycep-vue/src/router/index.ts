@@ -72,6 +72,11 @@ const router = createRouter({
             path: '/user/thesis',
             name: 'thesis',
             component: () => import('../views/user/thesis.vue')
+        },
+        {
+            path: '/mobile',
+            name: 'mobile',
+            component: () => import('../views/mobileTest.vue')
         }
 
     ],

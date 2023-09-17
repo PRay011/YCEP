@@ -13,11 +13,11 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/ycep
     username: root
-    password: root
+    password: pr112358
   redis:
     host: 127.0.0.1
     port: 6379
-#    password: 123456
+    #    password: 123456
     database: 5
     timeout: 10s
     lettuce:
@@ -30,8 +30,8 @@ spring:
     mongodb:
       host: 127.0.0.1
       port: 27017
-#      username: Raymond
-#      password: "123456"
+      #      username: Raymond
+      #      password: "123456"
       database: ycep
       authentication-database: admin
 
