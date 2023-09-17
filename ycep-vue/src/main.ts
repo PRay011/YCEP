@@ -32,7 +32,9 @@ import 'intro.js/themes/introjs-modern.css' // introjs主题
 // 把intro.js加入到vue的prototype中，方便使用，就可以直接通过this.$intro()来调用了
 app.config.globalProperties.$intro = intro
 
-
+//手机端适配
+// import 'amfe-flexible';
+import "lib-flexible";
 
 
 
