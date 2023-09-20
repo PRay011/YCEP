@@ -78,6 +78,21 @@ const router = createRouter({
             name: 'mobile',
             component: () => import('../views/mobileTest.vue')
         }
+        {
+            path: '/mobile/index',
+            name: 'mobileIndex',
+            component: () => import('../views/mobile/thesis/index.vue')
+        }
+        {
+            path: '/mobile/login',
+            name: 'mobileLogin',
+            component: () => import('../views/mobile/user/login.vue')
+        }
+        {
+            path: '/mobile/selfcenter',
+            name: 'mobileSelfcenter',
+            component: () => import('../views/mobile/user/selfcenter.vue')
+        }
 
     ],
     scrollBehavior(to: any, from: any, savedPosition: any) {
