@@ -32,10 +32,10 @@ export default {
     },
   },
   mounted() {
-    if(this._isMobile()){
-        //手机端
-        this.$router.replace("/mobile")
-    }
+    // if(this._isMobile()){
+    //     //手机端
+    //     this.$router.replace("/mobile")
+    // }
   },
 
   methods: {

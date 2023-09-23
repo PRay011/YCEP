@@ -2,7 +2,7 @@
 /*全局应用样式*/
 ::-webkit-scrollbar { /*滚动条整体样式*/
     width: 8px;
-    height: 330px;
+    height: 8px;
     background-color: #EDEDED;
 }
 

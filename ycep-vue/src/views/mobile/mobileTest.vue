@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import Bottom from "../components/bottom.vue";
+import Bottom from "../../components/bottom.vue";
 
 export default {
   data() {
