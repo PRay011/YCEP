@@ -32,10 +32,11 @@ export default {
     },
   },
   mounted() {
-    // if(this._isMobile()){
-    //     //手机端
-    //     this.$router.replace("/mobile")
-    // }
+    let phone = sessionStorage.getItem("phone");
+    if(this._isMobile()&&!phone){
+        //手机端
+        this.$router.replace("/mobile/login")
+    }
   },
 
   methods: {
