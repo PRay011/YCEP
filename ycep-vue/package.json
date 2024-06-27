@@ -23,7 +23,7 @@
     "vue-axios": "^3.5.2",
     "vue-draggable-next": "^2.2.1",
     "vue-print-nb": "^1.7.5",
-    "vue-router": "^4.2.2",
+    "vue-router": "^4.3.2",
     "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
