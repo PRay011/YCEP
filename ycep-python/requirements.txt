@@ -1,5 +1,5 @@
 async-timeout==4.0.3
-certifi==2023.7.22
+certifi==2024.7.4
 charset-normalizer==3.2.0
 idna==3.4
 redis==4.6.0
